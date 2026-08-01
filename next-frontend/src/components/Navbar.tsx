@@ -96,7 +96,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
             <path d="M 40,54 L 67,37 L 40,75 Z" fill="#00B2FE" />
             <path d="M 40,54 L 40,75 L 29,61 Z" fill="#0080C5" />
           </svg>
-          <div className="flex flex-col leading-[0.85] font-header text-left">
+          <div className="flex flex-col leading-[0.95] font-header text-left">
             <span className="text-lg tracking-wider text-[#2196E8] uppercase font-bold">DHI</span>
             <span className="text-2xl tracking-widest text-[#4A72EB] uppercase font-bold flex items-center">
               GROWTH
