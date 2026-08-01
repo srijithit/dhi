@@ -10,14 +10,15 @@ import { SERVICES_DATA } from '@/data/servicesData';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 
 interface ServicePageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // Generate dynamic SEO metadata from the services data
 export async function generateMetadata({ params }: ServicePageProps) {
-  const service = SERVICES_DATA.find(s => s.id === params.slug);
+  const { slug } = await params;
+  const service = SERVICES_DATA.find(s => s.id === slug);
   if (!service) {
     return {
       title: "Service Not Found | DhiGrowth",
@@ -39,8 +40,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function ServiceDetailPage({ params }: ServicePageProps) {
-  const service = SERVICES_DATA.find(s => s.id === params.slug);
+export default async function ServiceDetailPage({ params }: ServicePageProps) {
+  const { slug } = await params;
+  const service = SERVICES_DATA.find(s => s.id === slug);
 
   if (!service) {
     notFound();
