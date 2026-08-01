@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Zen+Dots&display=swap');
+
+:root {
+  --color-primary-bright: #2196E8;
+  --color-primary-brand: #4A72EB;
+  --color-secondary-light: #A9C0F5;
+  --color-neutral-dark: #05070c;
+  --color-neutral-card: #0d111c;
+  --color-neutral-card-hover: #141b2d;
+  --color-neutral-gray: #1e2436;
+  --color-border: rgba(169, 192, 245, 0.12);
+  --color-border-glow: rgba(33, 150, 232, 0.35);
+
+  --font-header: 'Bebas Neue', sans-serif;
+  --font-numeric: 'Zen Dots', cursive;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-body);
+  background-color: var(--color-neutral-dark);
+  color: #ffffff;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--color-neutral-dark);
+  color: #f1f5f9;
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* Font utility classes */
+.font-header {
+  font-family: var(--font-header);
+  letter-spacing: 0.04em;
+}
+
+.font-numeric {
+  font-family: var(--font-numeric);
+  letter-spacing: 0.02em;
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* Watermark background outline text */
+.watermark-text {
+  font-family: var(--font-header);
+  -webkit-text-stroke: 1px rgba(169, 192, 245, 0.08);
+  color: transparent;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Glow effects */
+.glow-blue {
+  box-shadow: 0 0 35px rgba(33, 150, 232, 0.25);
+}
+
+.glow-blue-lg {
+  box-shadow: 0 0 60px rgba(74, 114, 235, 0.35);
+}
+
+.glow-border {
+  border: 1px solid var(--color-border);
+  transition: all 0.3s ease;
+}
+
+.glow-border:hover {
+  border-color: var(--color-primary-bright);
+  box-shadow: 0 0 20px rgba(33, 150, 232, 0.2);
+}
+
+/* Dot pattern background */
+.bg-dot-matrix {
+  background-image: radial-gradient(rgba(169, 192, 245, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Custom buttons matching design guide */
+.btn-primary {
+  background-color: #1E65FF;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.85rem 2rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(30, 101, 255, 0.4);
+  text-transform: uppercase;
+  font-family: var(--font-header);
+  font-size: 1.15rem;
+  cursor: pointer;
+  border: 1px solid #3b82f6;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(30, 101, 255, 0.6);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1.5px solid rgba(169, 192, 245, 0.4);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.85rem 2rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  font-family: var(--font-header);
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  border-color: #2196E8;
+  color: #2196E8;
+  background-color: rgba(33, 150, 232, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Glassmorphism panel */
+.glass-card {
+  background: rgba(13, 17, 28, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(169, 192, 245, 0.1);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(33, 150, 232, 0.4);
+  transform: translateY(-4px);
+  background: rgba(20, 27, 45, 0.9);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05070c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(74, 114, 235, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(33, 150, 232, 0.6);
+}
+
+/* Text Highlights */
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #a9c0f5 50%, #2196e8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(90deg, #2196e8 0%, #4a72eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Keyframe Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s infinite ease-in-out;
+}

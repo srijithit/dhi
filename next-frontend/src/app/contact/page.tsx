@@ -1,0 +1,143 @@
+"use client";
+import React, { useEffect, useState } from 'react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import CustomCursor from '@/components/CustomCursor';
+import FloatingWhatsApp from '@/components/FloatingWhatsApp';
+import AuditCalculator from '@/components/AuditCalculator';
+import { MapPin, Mail, Phone, Clock, Sparkles } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
+
+export default function ContactPage() {
+  const [isApplyMode, setIsApplyMode] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('apply') === 'true') {
+        setIsApplyMode(true);
+      }
+    }
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-white dark:bg-[#000000] text-slate-900 dark:text-white selection:bg-[#2196E8] selection:text-white font-body transition-colors duration-300">
+      <CustomCursor />
+      
+      <Navbar />
+
+      <main className="subpage-padding-top">
+        
+        {/* Page Hero */}
+        <section className="relative py-24 bg-[#000000] text-white overflow-hidden bg-dot-matrix border-b border-slate-900">
+          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/10 rounded-full blur-[130px] pointer-events-none" />
+          
+          <div className="max-w-6xl mx-auto px-6 relative z-10 text-center space-y-6">
+            <span className="text-[#2196E8] font-body text-xs font-semibold uppercase tracking-widest block">
+              Get in Touch
+            </span>
+            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider uppercase leading-none">
+              CONTACT &amp; <span className="text-brand-bright">CONSULTATION</span>
+            </h1>
+            <p className="text-slate-350 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+              Have a project in mind, want a digital performance audit, or looking to join the DhiGrowth team? Connect with us today.
+            </p>
+          </div>
+        </section>
+
+        {/* Contact Info Grid */}
+        <section className="py-24 bg-white dark:bg-[#000000] transition-colors">
+          <div className="max-w-7xl mx-auto px-6">
+            
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+              
+              {/* Left Column: Details */}
+              <div className="lg:col-span-5 space-y-10">
+                
+                <div className="space-y-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/20 text-[#2196E8] text-xs font-bold uppercase tracking-wider font-body">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Office Location</span>
+                  </div>
+                  <h2 className="font-header text-4xl sm:text-5xl uppercase tracking-wider text-slate-900 dark:text-white leading-none">
+                    DhiGrowth Coimbatore
+                  </h2>
+                  <p className="text-slate-600 dark:text-slate-350 text-sm leading-relaxed max-w-md font-body">
+                    Visit our office or get in touch for custom website designs, AI automations, and search result domination campaigns.
+                  </p>
+                </div>
+
+                <div className="space-y-6 font-body">
+                  <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm">
+                    <MapPin className="w-6 h-6 text-[#2196E8] shrink-0 mt-1" />
+                    <div>
+                      <h4 className="font-bold text-slate-900 dark:text-white text-base">Office Address</h4>
+                      <p className="text-slate-600 dark:text-slate-350 text-sm mt-1 leading-relaxed">
+                        Avinashi Road, Peelamedu, Coimbatore, Tamil Nadu 641004
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm">
+                    <Mail className="w-6 h-6 text-[#2196E8] shrink-0 mt-1" />
+                    <div>
+                      <h4 className="font-bold text-slate-900 dark:text-white text-base">General Inquiries</h4>
+                      <p className="text-slate-600 dark:text-slate-350 text-sm mt-1">
+                        hello@dhigrowth.com
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm">
+                    <Phone className="w-6 h-6 text-[#2196E8] shrink-0 mt-1" />
+                    <div>
+                      <h4 className="font-bold text-slate-900 dark:text-white text-base">Call / WhatsApp</h4>
+                      <p className="text-slate-600 dark:text-slate-350 text-sm mt-1">
+                        +91 93610 88012
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm">
+                    <Clock className="w-6 h-6 text-[#2196E8] shrink-0 mt-1" />
+                    <div>
+                      <h4 className="font-bold text-slate-900 dark:text-white text-base">Working Hours</h4>
+                      <p className="text-slate-600 dark:text-slate-350 text-sm mt-1">
+                        Monday - Saturday: 9:30 AM - 6:30 PM
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Right Column: Dynamic Form */}
+              <div className="lg:col-span-7">
+                {isApplyMode && (
+                  <div className="p-6 mb-6 rounded-2xl bg-[#2196E8]/10 border border-[#2196E8]/20 text-[#2196E8] text-sm font-semibold flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 shrink-0" />
+                    <span>Recruitment Notice: Fill out the audit calculator form below or email your resume to hello@dhigrowth.com with the subject line 'Application: [Job Title]'.</span>
+                  </div>
+                )}
+
+                {/* We render the AuditCalculator directly for visual uniformity and functionality */}
+                <div className="scale-100 lg:-mt-24">
+                  <AuditCalculator onOpenWhatsApp={() => {
+                    const message = encodeURIComponent("Hello DhiGrowth! I would like to book a free consultation.");
+                    window.open(`https://wa.me/919361088012?text=${message}`, '_blank');
+                  }} />
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+
+      <Footer />
+      <FloatingWhatsApp />
+    </div>
+  );
+}

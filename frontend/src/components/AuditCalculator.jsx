@@ -1,0 +1,322 @@
+import React, { useState, useEffect } from 'react';
+import { PhoneCall, MessageCircle, Calculator, CheckCircle2, ArrowRight, Sparkles, RefreshCw, BarChart, AlertTriangle } from 'lucide-react';
+
+export default function AuditCalculator({ onOpenWhatsApp }) {
+  const [budget, setBudget] = useState(25000);
+  const [auditState, setAuditState] = useState('form'); // 'form' | 'scanning' | 'results'
+  const [scanStep, setScanStep] = useState(0);
+
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    businessName: '',
+    auditType: 'Website & SEO Audit'
+  });
+
+  const scanSteps = [
+    "Connecting to business servers...",
+    "Auditing HTML semantic hierarchy & tags...",
+    "Measuring page load speed and latency...",
+    "Scanning competitor search terms overlap...",
+    "Generating growth recommendation roadmap..."
+  ];
+
+  useEffect(() => {
+    if (auditState === 'scanning') {
+      const interval = setInterval(() => {
+        setScanStep((prev) => {
+          if (prev < scanSteps.length - 1) {
+            return prev + 1;
+          } else {
+            clearInterval(interval);
+            setAuditState('results');
+            return 0;
+          }
+        });
+      }, 900);
+      return () => clearInterval(interval);
+    }
+  }, [auditState]);
+
+  // Simple dynamic calculation logic for estimated leads
+  const estimatedReach = Math.round(budget * 2.8);
+  const estimatedLeads = Math.round(budget * 0.008);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setAuditState('scanning');
+    setScanStep(0);
+  };
+
+  return (
+    <section className="py-24 bg-[#070a12] relative overflow-hidden border-t border-[#a9c0f5]/15">
+      
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-[#2196E8]/10 to-[#4A72EB]/15 rounded-full blur-[160px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Banner Card */}
+        <div className="glass-card p-8 sm:p-14 border border-[#a9c0f5]/25 bg-gradient-to-br from-[#0d1322] to-[#12182b] relative overflow-hidden shadow-2xl animate-fadeIn">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            {/* Left Content */}
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/30 text-xs font-semibold uppercase text-[#2196E8] mb-6">
+                <Sparkles className="w-4 h-4" />
+                <span>Zero Cost • High Value</span>
+              </div>
+
+              <h2 className="font-header text-4xl sm:text-6xl text-white uppercase tracking-wide mb-6 leading-tight">
+                READY TO GROW YOUR BUSINESS <br />
+                <span className="text-[#2196E8]">IN COIMBATORE?</span>
+              </h2>
+
+              <p className="text-slate-300 text-base sm:text-lg leading-relaxed mb-8 font-body">
+                Talk to our digital growth experts today. Get a free audit of your website, ads, or social media — and a custom roadmap to scale your business faster.
+              </p>
+
+              {/* Interactive ROI Quick Estimator */}
+              <div className="p-6 rounded-2xl bg-[#090d18] border border-slate-800 mb-8 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs uppercase font-bold text-slate-400 tracking-wider flex items-center gap-2 font-body">
+                    <Calculator className="w-4 h-4 text-[#2196E8]" />
+                    Growth Budget Calculator (₹/Month)
+                  </span>
+                  <span className="font-numeric font-bold text-[#2196E8] text-lg">
+                    ₹{budget.toLocaleString('en-IN')}
+                  </span>
+                </div>
+
+                <input 
+                  type="range" 
+                  min="10000" 
+                  max="200000" 
+                  step="5000" 
+                  value={budget} 
+                  onChange={(e) => setBudget(Number(e.target.value))}
+                  className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-[#2196E8]"
+                />
+
+                <div className="grid grid-cols-2 gap-4 pt-2 text-center font-body">
+                  <div className="bg-[#121829] p-3 rounded-xl border border-slate-800">
+                    <span className="text-xs text-slate-400 block mb-1">Est. Monthly Reach</span>
+                    <span className="font-numeric font-bold text-white text-xl">
+                      {estimatedReach.toLocaleString('en-IN')}
+                    </span>
+                  </div>
+                  <div className="bg-[#121829] p-3 rounded-xl border border-slate-800">
+                    <span className="text-xs text-slate-400 block mb-1">Est. Qualified Leads</span>
+                    <span className="font-numeric font-bold text-[#2196E8] text-xl">
+                      {estimatedLeads}+ /mo
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* CTA Buttons matching prompt */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                <a 
+                  href="#free-audit-form"
+                  className="btn-primary flex items-center gap-2"
+                >
+                  <PhoneCall className="w-5 h-5" />
+                  <span>Book a Free Consultation</span>
+                </a>
+
+                <button 
+                  onClick={onOpenWhatsApp}
+                  className="btn-secondary !border-emerald-500/40 hover:!border-emerald-400 !text-emerald-400 hover:!bg-emerald-500/10 flex items-center gap-2"
+                >
+                  <MessageCircle className="w-5 h-5 text-emerald-400" />
+                  <span>WhatsApp Us Now</span>
+                </button>
+              </div>
+
+            </div>
+
+            {/* Right Form Card with Scanning State & Detailed Scorecard */}
+            <div id="free-audit-form" className="lg:col-span-5 bg-[#090d18] p-8 rounded-3xl border border-[#a9c0f5]/20 shadow-2xl min-h-[460px] flex flex-col justify-between">
+              
+              {auditState === 'form' && (
+                <div className="space-y-4 animate-fadeIn">
+                  <h3 className="font-header text-3xl text-white uppercase tracking-wide mb-2">
+                    Request Free Audit & Roadmap
+                  </h3>
+                  <p className="text-slate-400 text-xs mb-6 font-body">
+                    Receive a detailed technical breakdown of your website, Google ranking opportunities, and competitor ad strategies.
+                  </p>
+
+                  <form onSubmit={handleFormSubmit} className="space-y-4 font-body">
+                    <div>
+                      <label className="block text-xs font-semibold uppercase text-slate-300 mb-1">Your Name *</label>
+                      <input 
+                        type="text" 
+                        required
+                        placeholder="e.g. Anand Kumar"
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8]"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold uppercase text-slate-300 mb-1">Mobile / WhatsApp *</label>
+                      <input 
+                        type="tel" 
+                        required
+                        placeholder="+91 98765 43210"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8]"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold uppercase text-slate-300 mb-1">Company / Website</label>
+                      <input 
+                        type="text" 
+                        placeholder="e.g. MyBrand.com or Business Name"
+                        value={formData.businessName}
+                        onChange={(e) => setFormData({...formData, businessName: e.target.value})}
+                        className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8]"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold uppercase text-slate-300 mb-1">Audit Type</label>
+                      <select 
+                        value={formData.auditType}
+                        onChange={(e) => setFormData({...formData, auditType: e.target.value})}
+                        className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8]"
+                      >
+                        <option value="Website & SEO Audit">Website & SEO Audit</option>
+                        <option value="Meta & Google Ads Audit">Meta & Google Ads Audit</option>
+                        <option value="AI Automation Assessment">AI Automation Assessment</option>
+                        <option value="WhatsApp Marketing Campaign">WhatsApp Marketing Campaign</option>
+                      </select>
+                    </div>
+
+                    <button 
+                      type="submit" 
+                      className="btn-primary w-full !py-3.5 mt-2 flex items-center justify-center gap-2"
+                    >
+                      <span>Claim Free Audit Roadmap</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </form>
+                </div>
+              )}
+
+              {auditState === 'scanning' && (
+                <div className="flex flex-col items-center justify-center py-16 text-center space-y-6 animate-pulse">
+                  <div className="w-16 h-16 rounded-full border-4 border-t-[#2196E8] border-slate-800 animate-spin" />
+                  <div>
+                    <h4 className="font-header text-2xl text-white uppercase tracking-wide">
+                      Analyzing {formData.businessName || "Your Business"}
+                    </h4>
+                    <p className="text-xs text-[#2196E8] font-numeric mt-1 uppercase tracking-widest">
+                      Step {scanStep + 1} of 5
+                    </p>
+                  </div>
+                  <p className="text-slate-400 text-sm italic font-body max-w-xs transition-all duration-300">
+                    "{scanSteps[scanStep]}"
+                  </p>
+                </div>
+              )}
+
+              {auditState === 'results' && (
+                <div className="space-y-6 animate-fadeIn font-body">
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-header text-3xl text-white uppercase tracking-wide">
+                      Your Audit Report
+                    </h3>
+                    <button 
+                      onClick={() => setAuditState('form')}
+                      className="text-xs text-slate-400 hover:text-white flex items-center gap-1"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5" />
+                      Re-scan
+                    </button>
+                  </div>
+
+                  {/* Audit Score Card */}
+                  <div className="p-5 rounded-2xl bg-[#0d1222] border border-[#a9c0f5]/15 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold text-slate-300">Overall Digital Score</span>
+                      <span className="font-numeric text-2xl font-bold text-amber-400">62/100</span>
+                    </div>
+
+                    {/* Simple Bar Metrics */}
+                    <div className="space-y-2.5 text-xs text-slate-400">
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span>SEO Optimization</span>
+                          <span className="text-white font-semibold">58%</span>
+                        </div>
+                        <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                          <div className="bg-amber-400 h-full rounded-full" style={{ width: '58%' }} />
+                        </div>
+                      </div>
+
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span>Page Load Speed</span>
+                          <span className="text-white font-semibold">45%</span>
+                        </div>
+                        <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                          <div className="bg-red-500 h-full rounded-full" style={{ width: '45%' }} />
+                        </div>
+                      </div>
+
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span>Mobile Usability</span>
+                          <span className="text-white font-semibold">78%</span>
+                        </div>
+                        <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                          <div className="bg-emerald-500 h-full rounded-full" style={{ width: '78%' }} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Recommendations */}
+                  <div className="space-y-2">
+                    <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+                      Critical Action Recommendations:
+                    </span>
+                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-xs text-slate-300 flex items-start gap-2.5">
+                      <AlertTriangle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                      <span>Slow page load speeds are causing an estimated 32% drop in ad conversion rates.</span>
+                    </div>
+                    <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-slate-300 flex items-start gap-2.5">
+                      <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                      <span>Missing Schema markup and Local keywords for Coimbatore search index optimization.</span>
+                    </div>
+                  </div>
+
+                  {/* Submit Consultation Trigger */}
+                  <div className="pt-2 border-t border-slate-800">
+                    <button 
+                      onClick={onOpenWhatsApp}
+                      className="btn-primary w-full !py-3 flex items-center justify-center gap-2"
+                    >
+                      <PhoneCall className="w-4 h-4" />
+                      <span>Get Free Advisory Call</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
