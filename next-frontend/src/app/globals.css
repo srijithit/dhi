@@ -307,12 +307,12 @@ body {
 
 /* Custom bulletproof layout offsets */
 .hero-padding-top {
-  padding-top: 180px !important;
+  padding-top: 110px !important;
 }
 
 @media (min-width: 1024px) {
   .hero-padding-top {
-    padding-top: 260px !important;
+    padding-top: 150px !important;
   }
 }
 
