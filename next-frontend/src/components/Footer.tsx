@@ -26,7 +26,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
   };
 
   return (
-    <footer className="bg-slate-100 dark:bg-[#030508] border-t border-slate-200 dark:border-slate-900 pt-16 pb-12 text-slate-600 dark:text-slate-400 font-body transition-colors duration-300">
+    <footer className="bg-slate-100 dark:bg-[#030508] border-t-2 border-slate-200 dark:border-slate-900 rounded-t-[48px] md:rounded-t-[80px] pt-24 pb-12 mt-16 md:mt-28 text-slate-600 dark:text-slate-400 font-body transition-colors duration-300 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-slate-200 dark:border-slate-900">

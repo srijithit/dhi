@@ -23,14 +23,14 @@ export default function TestimonialsSection() {
   const displayTestimonials = TESTIMONIALS_DATA.slice(0, 3);
 
   return (
-    <section id="testimonials" className="py-24 bg-slate-50 dark:bg-[#080b11] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
+    <section id="testimonials" className="py-28 md:py-36 bg-slate-50 dark:bg-[#080b11] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
       
       <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-[#2196E8]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
         
         {/* Header */}
-        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-16 w-full">
+        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-20 w-full">
           <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-body text-center">
             Social Proof &amp; Proven ROI
           </span>
@@ -44,7 +44,7 @@ export default function TestimonialsSection() {
 
         {/* Testimonials Grid (Dark cards with blue quote icon) */}
         <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-10"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

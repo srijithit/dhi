@@ -47,7 +47,7 @@ export default function WhyChooseUs() {
   };
 
   return (
-    <section id="why-us" className="py-24 bg-white dark:bg-[#000000] relative overflow-hidden border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
+    <section id="why-us" className="py-28 md:py-36 bg-white dark:bg-[#000000] relative overflow-hidden border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
       
       {/* Decorative Blur Background elements */}
       <div className="absolute top-1/2 right-1/4 w-80 h-80 bg-[#2196E8]/5 rounded-full blur-[130px] pointer-events-none" />
@@ -55,7 +55,7 @@ export default function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
         
         {/* Header */}
-        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-16 w-full">
+        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-20 w-full">
           <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-body text-center">
             The DhiGrowth Advantage
           </span>
@@ -69,7 +69,7 @@ export default function WhyChooseUs() {
 
         {/* Grid */}
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

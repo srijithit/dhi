@@ -46,14 +46,14 @@ export default function ProcessSection() {
   };
 
   return (
-    <section id="process" className="py-24 bg-slate-50 dark:bg-[#080b11] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
+    <section id="process" className="py-28 md:py-36 bg-slate-50 dark:bg-[#080b11] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
       
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl h-64 bg-[#2196E8]/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-16 w-full">
+        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-20 w-full">
           <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-body text-center">
             How We Deliver Results
           </span>
@@ -71,7 +71,7 @@ export default function ProcessSection() {
           <div className="hidden lg:block absolute left-12 right-12 top-[60px] h-[3px] border-t-2 border-dashed border-[#A9C0F5]/50 z-0 pointer-events-none" />
           
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10 font-body"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 relative z-10 font-body"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"

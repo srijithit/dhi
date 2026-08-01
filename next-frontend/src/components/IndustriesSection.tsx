@@ -58,7 +58,7 @@ export default function IndustriesSection({ onOpenAudit }: IndustriesSectionProp
   };
 
   return (
-    <section id="industries" className="py-24 bg-white dark:bg-[#000000] relative overflow-hidden border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
+    <section id="industries" className="py-28 md:py-36 bg-white dark:bg-[#000000] relative overflow-hidden border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
         
         {/* Header */}

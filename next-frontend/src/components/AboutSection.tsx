@@ -39,7 +39,7 @@ export default function AboutSection() {
   ];
 
   return (
-    <section className="py-24 bg-white dark:bg-[#000000] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
+    <section className="py-28 md:py-36 bg-white dark:bg-[#000000] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
       
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#2196E8]/5 rounded-full blur-[140px] pointer-events-none" />
 
@@ -47,7 +47,7 @@ export default function AboutSection() {
         
         {/* Section Header */}
         <motion.div 
-          className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-16 w-full"
+          className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-20 w-full"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -66,7 +66,7 @@ export default function AboutSection() {
 
         {/* Value Pillars */}
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 font-body"
+          className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 font-body"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}

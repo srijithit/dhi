@@ -48,14 +48,14 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="py-24 bg-slate-50 dark:bg-[#080b11] relative overflow-hidden transition-colors duration-300 border-y border-slate-200 dark:border-slate-900">
+    <section id="services" className="py-28 md:py-36 bg-slate-50 dark:bg-[#080b11] relative overflow-hidden transition-colors duration-300 border-y border-slate-200 dark:border-slate-900">
       
       <div className="absolute top-1/3 right-0 w-96 h-96 bg-[#4A72EB]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6">
           <div>
             <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-numeric">
               Our End-to-End Capabilities
@@ -64,34 +64,28 @@ export default function ServicesSection() {
               13<span className="text-[#2196E8]">+</span> DIGITAL GROWTH SOLUTIONS
             </h2>
           </div>
-          <p className="text-slate-600 dark:text-slate-300 text-base max-w-md font-body">
-            Everything your business needs to build, automate, and scale online — delivered by Coimbatore's premier digital agency.
-          </p>
-        </div>
-
-        {/* Filters */}
-        <div className="flex flex-wrap gap-3 mb-12 font-body">
-          {(['all', 'tech', 'ai', 'marketing', 'creative'] as const).map((cat) => (
-            <button 
-              key={cat}
-              onClick={() => setFilter(cat)}
-              className={`px-5 py-2.5 rounded-xl font-medium text-sm transition-all cursor-pointer ${
-                filter === cat 
-                  ? 'bg-[#2196E8] text-white shadow-lg shadow-[#2196E8]/25' 
-                  : 'bg-white dark:bg-[#0d1220] text-slate-700 dark:text-slate-350 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-800 shadow-sm'
-              }`}
-            >
-              {cat === 'all' ? 'All Services (13)' : 
-               cat === 'tech' ? 'Web & App' : 
-               cat === 'ai' ? 'AI & Automation' : 
-               cat === 'marketing' ? 'Marketing & Ads' : 'Media Production'}
-            </button>
-          ))}
+          
+          {/* Service Filters */}
+          <div className="flex flex-wrap gap-2.5 max-w-xl">
+            {['all', 'tech', 'ai', 'marketing', 'creative'].map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setFilter(cat as any)}
+                className={`px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${
+                  filter === cat
+                    ? 'bg-[#2196E8] text-white border-[#2196E8] shadow-md shadow-[#2196E8]/20'
+                    : 'bg-white dark:bg-[#0b0f19] text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-900'
+                }`}
+              >
+                {cat === 'all' ? 'All Services (13)' : cat}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Services Grid */}
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-body"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 font-body"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
