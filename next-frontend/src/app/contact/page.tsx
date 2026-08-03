@@ -94,15 +94,20 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm">
-                    <Phone className="w-6 h-6 text-[#2196E8] shrink-0 mt-1" />
+                  <a 
+                    href="https://api.whatsapp.com/send?phone=919361088012&text=Hi%20DhiGrowth%2C%20I%20want%20to%20grow%20my%20business%20in%20India%21"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm hover:border-[#2196E8] transition-colors group"
+                  >
+                    <Phone className="w-6 h-6 text-[#2196E8] shrink-0 mt-1 group-hover:scale-110 transition-transform" />
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white text-base">Call / WhatsApp</h4>
+                      <h4 className="font-bold text-slate-900 dark:text-white text-base group-hover:text-[#2196E8] transition-colors">Call / WhatsApp</h4>
                       <p className="text-slate-600 dark:text-slate-350 text-sm mt-1">
                         +91 93610 88012
                       </p>
                     </div>
-                  </div>
+                  </a>
 
                   <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm">
                     <Clock className="w-6 h-6 text-[#2196E8] shrink-0 mt-1" />
