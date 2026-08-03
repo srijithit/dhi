@@ -57,7 +57,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
           <motion.div variants={itemVariants} className="lg:col-span-2 space-y-6">
             <Link href="/" className="flex items-center group">
               <img 
-                src="/logo.webp" 
+                src="/logo.png" 
                 alt="DhiGrowth Logo" 
                 className="h-10 w-auto object-contain transition-transform group-hover:scale-[1.02] dark:brightness-110"
               />

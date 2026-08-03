@@ -82,7 +82,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
         {/* Logo */}
         <Link href="/" className="flex items-center group">
           <img 
-            src="/logo.webp" 
+            src="/logo.png" 
             alt="DhiGrowth Logo" 
             className="h-10 w-auto object-contain transition-transform group-hover:scale-[1.02] dark:brightness-110"
           />
