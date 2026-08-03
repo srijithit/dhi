@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Bebas_Neue, Zen_Dots, Inter } from 'next/font/google';
+import { Bebas_Neue, Zen_Dots, Plus_Jakarta_Sans } from 'next/font/google';
 
 const bebasNeue = Bebas_Neue({
   weight: '400',
@@ -15,14 +15,14 @@ const zenDots = Zen_Dots({
   display: 'swap',
 });
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-plus-jakarta-sans',
   display: 'swap',
 });
 
 export const metadata = {
-  title: "DhiGrowth — Digital Agency in Coimbatore | Web, AI & Marketing",
+  title: "DhiGrowth — India's Leading Digital Growth Partner",
   description: "DhiGrowth is Coimbatore's top digital agency offering website development, AI solutions, SEO, Meta & Google Ads, social media, and business automation services.",
   keywords: "Digital Agency Coimbatore, Website Development Coimbatore, Mobile App Development Coimbatore, AI Development Coimbatore, WhatsApp Marketing, SEO Coimbatore, Google Ads",
   robots: "index, follow",
@@ -34,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${bebasNeue.variable} ${zenDots.variable} ${inter.variable} scroll-smooth`}>
+    <html lang="en" className={`${bebasNeue.variable} ${zenDots.variable} ${plusJakartaSans.variable} scroll-smooth`}>
       <body className="bg-white dark:bg-[#000000] text-slate-900 dark:text-white font-body antialiased selection:bg-[#2196E8] selection:text-white">
         {children}
       </body>

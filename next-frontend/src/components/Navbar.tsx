@@ -33,7 +33,8 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     { name: 'Services', path: '/services' },
     { name: 'About', path: '/about' },
     { name: 'Case Studies', path: '/#testimonials' },
-    { name: 'Careers', path: '/contact' },
+    { name: 'Free Audit', path: '/#free-audit-form' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   const handleApplyClick = () => {
@@ -44,7 +45,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       } else {
-        window.location.href = '/contact?apply=true';
+        window.location.href = '/contact?audit=true';
       }
     }
   };
@@ -79,34 +80,16 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between relative z-10">
         
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <svg className="w-10 h-10 group-hover:scale-105 transition-transform shrink-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="logo-gradient-nav" x1="0%" y1="100%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#2196E8" />
-                <stop offset="100%" stopColor="#4A72EB" />
-              </linearGradient>
-            </defs>
-            <circle cx="50" cy="50" r="45" fill="url(#logo-gradient-nav)" />
-            {/* Curved arrow wrapping right side */}
-            <path d="M 20,85 A 38,38 0 0,0 83,48 L 88,52 L 86,37 L 72,41 L 76,45 A 33,33 0 0,1 23,80 Z" fill="#00E5FF" />
-            {/* Stylized person / arrow symbol */}
-            <circle cx="43" cy="35" r="7.5" fill="#00E5FF" />
-            <path d="M 18,52 L 67,37 L 40,54 Z" fill="#FFFFFF" />
-            <path d="M 40,54 L 67,37 L 40,75 Z" fill="#00B2FE" />
-            <path d="M 40,54 L 40,75 L 29,61 Z" fill="#0080C5" />
-          </svg>
-          <div className="flex flex-col leading-[0.95] font-header text-left">
-            <span className="text-lg tracking-wider text-[#2196E8] uppercase font-bold">DHI</span>
-            <span className="text-2xl tracking-widest text-[#4A72EB] uppercase font-bold flex items-center">
-              GROWTH
-              <span className="text-[10px] ml-0.5 font-sans align-top relative -top-1.5">®</span>
-            </span>
-          </div>
+        <Link href="/" className="flex items-center group">
+          <img 
+            src="/logo.webp" 
+            alt="DhiGrowth Logo" 
+            className="h-10 w-auto object-contain transition-transform group-hover:scale-[1.02] dark:brightness-110"
+          />
         </Link>
 
         {/* Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 font-body text-sm font-semibold">
+        <nav className="hidden md:flex items-center gap-6 lg:gap-8 font-body text-sm font-semibold">
           {navLinks.map((link) => {
             const isLinkHome = link.path === '/';
             const isActive = isLinkHome ? pathname === '/' : pathname === link.path;
@@ -127,9 +110,9 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
         <div className="hidden md:flex items-center gap-4">
           <button 
             onClick={handleApplyClick}
-            className="btn-primary !py-2.5 !px-5 !text-sm text-white font-bold rounded-lg hover:bg-brand-bright transition-colors uppercase tracking-wider font-body bg-[#4A72EB]"
+            className="btn-primary !py-3 !px-6 !text-sm text-white font-bold rounded-2xl hover:bg-brand-bright transition-all shadow-md hover:shadow-lg uppercase tracking-wider font-body bg-[#4A72EB] cursor-pointer"
           >
-            Apply to Join
+            CLAIM FREE AUDIT
           </button>
         </div>
 
@@ -165,9 +148,9 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
           <div className="pt-4 border-t border-slate-200">
             <button 
               onClick={() => { setMobileMenuOpen(false); handleApplyClick(); }}
-              className="btn-primary w-full text-center py-3 uppercase tracking-wider text-sm font-semibold font-body"
+              className="btn-primary w-full text-center py-3 uppercase tracking-wider text-sm font-bold font-body rounded-2xl cursor-pointer"
             >
-              Apply to Join
+              CLAIM FREE AUDIT
             </button>
           </div>
         </div>

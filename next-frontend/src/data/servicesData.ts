@@ -31,6 +31,10 @@ export interface Testimonial {
   location: string;
   text: string;
   rating: number;
+  avatarUrl?: string;
+  linkedinUrl?: string;
+  websiteUrl?: string;
+  logoLetter?: string;
 }
 
 export interface Industry {
@@ -348,7 +352,11 @@ export const TESTIMONIALS_DATA: Testimonial[] = [
     company: "Veda Tex & Fabrics",
     location: "Coimbatore",
     text: "DhiGrowth transformed our traditional textile business into a digital powerhouse. Their custom website and targeted Google Ads campaign increased our wholesale inquiry volume by 320% within 4 months. Best digital agency in Coimbatore!",
-    rating: 5
+    rating: 5,
+    avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    linkedinUrl: "https://linkedin.com/in/karthik-raja-vedatex",
+    websiteUrl: "https://vedatexfabrics.com",
+    logoLetter: "V"
   },
   {
     id: 2,
@@ -357,7 +365,11 @@ export const TESTIMONIALS_DATA: Testimonial[] = [
     company: "Aura Dental Speciality Hospital",
     location: "Coimbatore",
     text: "We needed local patient inquiries and high search rankings in Coimbatore. DhiGrowth's SEO and WhatsApp marketing integration automated our appointment booking pipeline completely. Exceptional quality and transparent reporting.",
-    rating: 5
+    rating: 5,
+    avatarUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
+    linkedinUrl: "https://linkedin.com/in/dr-ananya-sundaram",
+    websiteUrl: "https://auradentalcoimbatore.com",
+    logoLetter: "A"
   },
   {
     id: 3,
@@ -366,7 +378,11 @@ export const TESTIMONIALS_DATA: Testimonial[] = [
     company: "NexGen Precision Engineering",
     location: "Peelamedu, Coimbatore",
     text: "The AI automation system built by DhiGrowth automated our entire lead qualification and quotation workflow. Tasks that took 3 hours now run in seconds. Their tech capability is truly world-class.",
-    rating: 5
+    rating: 5,
+    avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+    linkedinUrl: "https://linkedin.com/in/santhosh-kumar-nexgen",
+    websiteUrl: "https://nexgenprecision.com",
+    logoLetter: "N"
   },
   {
     id: 4,
@@ -375,7 +391,11 @@ export const TESTIMONIALS_DATA: Testimonial[] = [
     company: "Covai Organic Foods",
     location: "Coimbatore",
     text: "Their ad films and Meta ad campaigns gave our organic brand massive visibility across South India. Return on ad spend (ROAS) reached 5.4x consistently! Highly recommended growth partner.",
-    rating: 5
+    rating: 5,
+    avatarUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+    linkedinUrl: "https://linkedin.com/in/priya-varma-covai",
+    websiteUrl: "https://covaiorganicfoods.com",
+    logoLetter: "C"
   }
 ];
 

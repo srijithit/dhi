@@ -46,8 +46,21 @@ export default function ProcessSection() {
   };
 
   return (
-    <section id="process" className="py-28 md:py-36 bg-slate-50 dark:bg-[#080b11] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
+    <section id="process" className="py-32 md:py-40 bg-slate-50 dark:bg-[#080b11] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
       
+      {/* Styles for animated SVG arrows */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes flowDash {
+          to {
+            stroke-dashoffset: -20;
+          }
+        }
+        .animated-arrow-flow {
+          stroke-dasharray: 6 4;
+          animation: flowDash 1.2s linear infinite;
+        }
+      `}} />
+
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl h-64 bg-[#2196E8]/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -67,8 +80,23 @@ export default function ProcessSection() {
 
         {/* Timeline Grid */}
         <div className="relative">
-          {/* Horizontal line for desktop connecting timeline dots */}
-          <div className="hidden lg:block absolute left-12 right-12 top-[60px] h-[3px] border-t-2 border-dashed border-[#A9C0F5]/50 z-0 pointer-events-none" />
+          
+          {/* Animated Flow Arrows between columns (hidden on mobile, visible on desktop) */}
+          <div className="hidden lg:flex absolute left-[22%] top-[54px] w-[6%] justify-center items-center z-20 pointer-events-none">
+            <svg className="w-12 h-6 text-[#2196E8]" viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H52 L44 4 M52 10 L44 16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="animated-arrow-flow" />
+            </svg>
+          </div>
+          <div className="hidden lg:flex absolute left-[47%] top-[54px] w-[6%] justify-center items-center z-20 pointer-events-none">
+            <svg className="w-12 h-6 text-[#2196E8]" viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H52 L44 4 M52 10 L44 16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="animated-arrow-flow" />
+            </svg>
+          </div>
+          <div className="hidden lg:flex absolute left-[72%] top-[54px] w-[6%] justify-center items-center z-20 pointer-events-none">
+            <svg className="w-12 h-6 text-[#2196E8]" viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H52 L44 4 M52 10 L44 16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="animated-arrow-flow" />
+            </svg>
+          </div>
           
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 relative z-10 font-body"
@@ -99,7 +127,7 @@ export default function ProcessSection() {
                     <h3 className="font-header text-2xl text-slate-900 dark:text-white uppercase tracking-wide mb-3 group-hover:text-[#2196E8] transition-colors duration-300">
                       {step.title}
                     </h3>
-                    <p className="text-slate-605 dark:text-slate-350 text-sm leading-relaxed">
+                    <p className="text-slate-650 dark:text-slate-350 text-sm leading-relaxed">
                       {step.desc}
                     </p>
                   </div>

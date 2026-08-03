@@ -4,10 +4,10 @@ import { AnimatedCounter } from './AnimatedCounter';
 
 export default function StatsBar() {
   const stats = [
-    { target: 100, suffix: "+", label: "Projects delivered" },
-    { target: 50, suffix: "+", label: "Clients in Coimbatore" },
-    { target: 5, suffix: "+", label: "Years of expertise" },
-    { target: 13, suffix: "+", label: "Services offered" },
+    { target: 100, suffix: "+", label: "Projects Delivered", sublabel: "Since 2021" },
+    { target: 50, suffix: "+", label: "Coimbatore Brands", sublabel: "Served Locally" },
+    { target: 5, suffix: "+", label: "Years of Agency", sublabel: "Growth Expertise" },
+    { target: 13, suffix: "+", label: "Client Solutions", sublabel: "Under One Roof" },
   ];
 
   return (
@@ -23,8 +23,11 @@ export default function StatsBar() {
                 <AnimatedCounter value={stat.target} />
                 <span>{stat.suffix}</span>
               </div>
-              <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-ink-700 dark:text-slate-400 font-body">
+              <div className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-800 dark:text-white font-body">
                 {stat.label}
+              </div>
+              <div className="text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 font-body mt-0.5">
+                {stat.sublabel}
               </div>
             </div>
           ))}

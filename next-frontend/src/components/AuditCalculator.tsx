@@ -15,7 +15,8 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
     name: '',
     phone: '',
     businessName: '',
-    auditType: 'Website & SEO Audit'
+    auditType: 'Website & SEO Audit',
+    marketingBudget: 'Small Business (< 50K)'
   });
 
   const scanSteps = [
@@ -53,11 +54,11 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
   };
 
   return (
-    <section id="free-audit-form" className="py-28 md:py-36 bg-white dark:bg-[#000000] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
+    <section id="free-audit-form" className="py-32 md:py-40 bg-white dark:bg-[#000000] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
       
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-[#2196E8]/5 to-[#4A72EB]/5 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
         
         {/* Banner Card */}
         <div className="glass-card p-8 sm:p-14 border border-slate-200 dark:border-slate-800/80 bg-slate-50/50 dark:bg-gradient-to-br dark:from-[#0d1322] dark:to-[#12182b] relative overflow-hidden shadow-xl dark:shadow-2xl animate-fadeIn">
@@ -75,7 +76,7 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
                 <span className="text-[#2196E8]">IN COIMBATORE?</span>
               </h2>
 
-              <p className="text-slate-600 dark:text-slate-355 text-base sm:text-lg leading-relaxed mb-8 font-body max-w-xl">
+              <p className="text-slate-650 dark:text-slate-355 text-base sm:text-lg leading-relaxed mb-8 font-body max-w-xl">
                 Talk to our digital growth experts today. Get a free audit of your website, ads, or social media — and a custom roadmap to scale your business faster.
               </p>
 
@@ -120,10 +121,10 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-4 w-full max-w-xl">
                 <button 
                   onClick={handleFormSubmit}
-                  className="btn-primary flex items-center justify-center gap-2 cursor-pointer"
+                  className="btn-primary flex items-center justify-center gap-2 cursor-pointer !rounded-2xl shadow-md hover:shadow-lg"
                 >
                   <PhoneCall className="w-5 h-5" />
-                  <span>Book a Free Consultation</span>
+                  <span>CLAIM FREE AUDIT</span>
                 </button>
 
                 <button 
@@ -138,7 +139,7 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
             </div>
 
             {/* Right Card Form */}
-            <div className="lg:col-span-5 bg-white dark:bg-[#090d18] p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl min-h-[460px] flex flex-col justify-between max-w-md mx-auto w-full">
+            <div className="lg:col-span-5 bg-white dark:bg-[#090d18] p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl min-h-[500px] flex flex-col justify-between max-w-md mx-auto w-full">
               
               {auditState === 'form' && (
                 <div className="space-y-4 animate-fadeIn font-body text-left">
@@ -163,7 +164,7 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase text-slate-600 dark:text-slate-350 mb-1">WhatsApp Number *</label>
+                      <label className="block text-xs font-semibold uppercase text-slate-600 dark:text-slate-355 mb-1">WhatsApp Number *</label>
                       <input 
                         type="tel" 
                         required
@@ -185,25 +186,42 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold uppercase text-slate-600 dark:text-slate-355 mb-1">Audit Type</label>
-                      <select 
-                        value={formData.auditType}
-                        onChange={(e) => setFormData({...formData, auditType: e.target.value})}
-                        className="w-full px-4 py-3 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:border-[#2196E8]"
-                      >
-                        <option value="Website & SEO Audit">Website &amp; SEO Audit</option>
-                        <option value="Meta & Google Ads Audit">Meta &amp; Google Ads Audit</option>
-                        <option value="AI Automation Assessment">AI Automation Assessment</option>
-                        <option value="WhatsApp Marketing Campaign">WhatsApp Marketing Campaign</option>
-                      </select>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold uppercase text-slate-600 dark:text-slate-355 mb-1">Audit Type</label>
+                        <select 
+                          value={formData.auditType}
+                          onChange={(e) => setFormData({...formData, auditType: e.target.value})}
+                          className="w-full px-3 py-3 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs focus:outline-none focus:border-[#2196E8]"
+                        >
+                          <option value="Website & SEO Audit">Website &amp; SEO Audit</option>
+                          <option value="Meta & Google Ads Audit">Meta &amp; Ads Audit</option>
+                          <option value="AI Automation Assessment">AI Assessment</option>
+                          <option value="WhatsApp Marketing Campaign">WhatsApp Campaign</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold uppercase text-slate-600 dark:text-slate-355 mb-1">Marketing Budget</label>
+                        <select 
+                          value={formData.marketingBudget}
+                          onChange={(e) => setFormData({...formData, marketingBudget: e.target.value})}
+                          className="w-full px-3 py-3 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs focus:outline-none focus:border-[#2196E8]"
+                        >
+                          <option value="Small Business (< 50K)">Small (&lt; 50K)</option>
+                          <option value="50K+">50K+</option>
+                          <option value="1L+">1L+</option>
+                          <option value="5L+">5L+</option>
+                          <option value="Enterprise">Enterprise</option>
+                        </select>
+                      </div>
                     </div>
 
                     <button 
                       type="submit" 
-                      className="btn-primary w-full !py-3.5 mt-2 flex items-center justify-center gap-2 cursor-pointer"
+                      className="btn-primary w-full !py-3.5 mt-2 flex items-center justify-center gap-2 cursor-pointer !rounded-2xl shadow-md hover:shadow-lg"
                     >
-                      <span>Claim Free Audit Roadmap</span>
+                      <span>CLAIM FREE AUDIT</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </form>
@@ -285,11 +303,11 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
                     <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 tracking-wider block">
                       Critical Action Recommendations:
                     </span>
-                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-slate-650 dark:text-slate-300 flex items-start gap-2.5">
+                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-slate-650 dark:text-slate-350 flex items-start gap-2.5">
                       <AlertTriangle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                       <span>Slow page load speeds are causing an estimated 32% drop in ad conversion rates.</span>
                     </div>
-                    <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-slate-650 dark:text-slate-300 flex items-start gap-2.5">
+                    <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-slate-650 dark:text-slate-350 flex items-start gap-2.5">
                       <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                       <span>Missing Schema markup and Local keywords for Coimbatore search index optimization.</span>
                     </div>
@@ -298,10 +316,10 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
                   <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
                     <button 
                       onClick={onOpenWhatsApp}
-                      className="btn-primary w-full !py-3 flex items-center justify-center gap-2 cursor-pointer"
+                      className="btn-primary w-full !py-3 flex items-center justify-center gap-2 cursor-pointer !rounded-2xl shadow-md hover:shadow-lg"
                     >
                       <PhoneCall className="w-4 h-4" />
-                      <span>Get Free Advisory Call</span>
+                      <span>CLAIM FREE AUDIT</span>
                     </button>
                   </div>
                 </div>

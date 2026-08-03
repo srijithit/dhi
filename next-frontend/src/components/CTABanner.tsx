@@ -52,10 +52,10 @@ export default function CTABanner({ onOpenAudit }: CTABannerProps) {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
           <button 
             onClick={handleConsultationClick}
-            className="btn-primary w-full sm:w-auto px-8 py-4 bg-brand text-white font-bold rounded-lg hover:bg-brand-bright transition-colors duration-250 flex items-center justify-center gap-2 text-base uppercase tracking-wider"
+            className="btn-primary w-full sm:w-auto px-8 py-4 bg-brand text-white font-bold rounded-2xl hover:bg-brand-bright transition-colors duration-250 flex items-center justify-center gap-2 text-base uppercase tracking-wider shadow-md hover:shadow-lg cursor-pointer"
           >
             <PhoneCall className="w-5 h-5" />
-            <span>Book a Free Consultation</span>
+            <span>CLAIM FREE AUDIT</span>
           </button>
           
           <button 
