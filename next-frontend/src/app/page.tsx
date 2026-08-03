@@ -57,7 +57,7 @@ export default function Home() {
                 "name": "DhiGrowth Digital Agency",
                 "image": "https://dhigrowth.com/icon.svg",
                 "telephone": "+91 93610 88012",
-                "email": "hello@dhigrowth.com",
+                "email": "dhinesh@dhigrowth.com",
                 "address": {
                   "@type": "PostalAddress",
                   "streetAddress": "Avinashi Road, Peelamedu",

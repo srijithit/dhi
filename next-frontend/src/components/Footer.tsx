@@ -74,7 +74,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-[#2196E8] shrink-0" />
-                <span>hello@dhigrowth.com</span>
+                <span>dhinesh@dhigrowth.com</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-[#2196E8] shrink-0" />

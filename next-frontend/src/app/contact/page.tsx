@@ -83,7 +83,7 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-bold text-slate-900 dark:text-white text-base">General Inquiries</h4>
                       <p className="text-slate-600 dark:text-slate-350 text-sm mt-1">
-                        hello@dhigrowth.com
+                        dhinesh@dhigrowth.com
                       </p>
                     </div>
                   </div>
@@ -116,7 +116,7 @@ export default function ContactPage() {
                 {isApplyMode && (
                   <div className="p-6 mb-6 rounded-2xl bg-[#2196E8]/10 border border-[#2196E8]/20 text-[#2196E8] text-sm font-semibold flex items-center gap-2">
                     <Sparkles className="w-5 h-5 shrink-0" />
-                    <span>Recruitment Notice: Fill out the audit calculator form below or email your resume to hello@dhigrowth.com with the subject line 'Application: [Job Title]'.</span>
+                    <span>Recruitment Notice: Fill out the audit calculator form below or email your resume to dhinesh@dhigrowth.com with the subject line 'Application: [Job Title]'.</span>
                   </div>
                 )}
 
