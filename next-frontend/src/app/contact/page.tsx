@@ -68,15 +68,21 @@ export default function ContactPage() {
                 </div>
 
                 <div className="space-y-6 font-body">
-                  <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm">
-                    <MapPin className="w-6 h-6 text-[#2196E8] shrink-0 mt-1" />
+                  <a 
+                    href="https://www.google.com/maps/place/Dhigrowth+Business+Pvt+Ltd/@11.0485934,77.0421634,19z/data=!3m1!4b1!4m6!3m5!1s0x3ba85700608f4393:0x7a612ef883b16359!8m2!3d11.0485934!4d77.0428071!16s%2Fg%2F11njtdfg3_"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm hover:border-[#2196E8] transition-colors group"
+                  >
+                    <MapPin className="w-6 h-6 text-[#2196E8] shrink-0 mt-1 group-hover:scale-110 transition-transform" />
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white text-base">Office Address</h4>
+                      <h4 className="font-bold text-slate-900 dark:text-white text-base group-hover:text-[#2196E8] transition-colors">Office Address</h4>
                       <p className="text-slate-600 dark:text-slate-350 text-sm mt-1 leading-relaxed">
                         Avinashi Road, Peelamedu, Coimbatore, Tamil Nadu 641004
                       </p>
+                      <span className="text-xs text-[#2196E8] font-bold mt-2 inline-block">Get Directions on Google Maps →</span>
                     </div>
-                  </div>
+                  </a>
 
                   <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm">
                     <Mail className="w-6 h-6 text-[#2196E8] shrink-0 mt-1" />

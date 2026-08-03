@@ -68,10 +68,15 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
             </p>
 
             <div className="space-y-3 text-sm text-slate-700 dark:text-slate-350 font-medium">
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-[#2196E8] shrink-0 mt-0.5" />
-                <span>Avinashi Road, Peelamedu, Coimbatore, Tamil Nadu 641004</span>
-              </div>
+              <a 
+                href="https://www.google.com/maps/place/Dhigrowth+Business+Pvt+Ltd/@11.0485934,77.0421634,19z/data=!3m1!4b1!4m6!3m5!1s0x3ba85700608f4393:0x7a612ef883b16359!8m2!3d11.0485934!4d77.0428071!16s%2Fg%2F11njtdfg3_"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 hover:text-slate-900 dark:hover:text-white transition-colors group"
+              >
+                <MapPin className="w-5 h-5 text-[#2196E8] shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                <span className="underline decoration-dotted decoration-slate-400 group-hover:decoration-current">Avinashi Road, Peelamedu, Coimbatore, Tamil Nadu 641004</span>
+              </a>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-[#2196E8] shrink-0" />
                 <span>dhinesh@dhigrowth.com</span>

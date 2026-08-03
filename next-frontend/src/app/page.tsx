@@ -54,7 +54,7 @@ export default function Home() {
               {
                 "@type": "LocalBusiness",
                 "@id": "https://dhigrowth.com/#localbusiness",
-                "name": "DhiGrowth Digital Agency",
+                "name": "Dhigrowth Business Pvt Ltd",
                 "image": "https://dhigrowth.com/icon.svg",
                 "telephone": "+91 93610 88012",
                 "email": "dhinesh@dhigrowth.com",
@@ -68,9 +68,10 @@ export default function Home() {
                 },
                 "geo": {
                   "@type": "GeoCoordinates",
-                  "latitude": 11.0253,
-                  "longitude": 77.0142
+                  "latitude": 11.0485934,
+                  "longitude": 77.0428071
                 },
+                "hasMap": "https://www.google.com/maps/place/Dhigrowth+Business+Pvt+Ltd/@11.0485934,77.0421634,19z/data=!3m1!4b1!4m6!3m5!1s0x3ba85700608f4393:0x7a612ef883b16359!8m2!3d11.0485934!4d77.0428071!16s%2Fg%2F11njtdfg3_",
                 "url": "https://dhigrowth.com",
                 "priceRange": "$$",
                 "areaServed": ["Coimbatore", "Tamil Nadu", "India"],
