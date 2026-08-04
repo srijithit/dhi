@@ -16,10 +16,7 @@ export default function App() {
   const [selectedService, setSelectedService] = useState(null);
 
   const handleOpenAudit = () => {
-    const el = document.getElementById('free-audit-form');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    window.open("https://api.whatsapp.com/send?phone=919361088012&text=Hi%20DhiGrowth%2C%20I%20want%20to%20claim%20a%20free%20digital%20performance%20audit%20for%20my%20business%21", "_blank");
   };
 
   const handleWhatsAppClick = () => {
