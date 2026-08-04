@@ -49,7 +49,7 @@ export default function ContactPage() {
         <section className="py-24 bg-white dark:bg-[#000000] transition-colors">
           <div className="max-w-7xl mx-auto px-6">
             
-            <div className="max-w-3xl mx-auto space-y-10">
+            <div className="max-w-5xl mx-auto space-y-10">
               
               {isApplyMode && (
                 <div className="p-6 mb-6 rounded-2xl bg-[#2196E8]/10 border border-[#2196E8]/20 text-[#2196E8] text-sm font-semibold flex items-center gap-2">
@@ -74,7 +74,7 @@ export default function ContactPage() {
                   </p>
                 </div>
 
-                <div className="space-y-6 font-body">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-body">
                   <a 
                     href="https://www.google.com/maps/place/Dhigrowth+Business+Pvt+Ltd/@11.0485934,77.0421634,19z/data=!3m1!4b1!4m6!3m5!1s0x3ba85700608f4393:0x7a612ef883b16359!8m2!3d11.0485934!4d77.0428071!16s%2Fg%2F11njtdfg3_"
                     target="_blank"
