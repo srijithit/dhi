@@ -117,20 +117,12 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
 
               {/* CTA Buttons matching prompt */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                <a 
-                  href="#free-audit-form"
-                  className="btn-primary flex items-center gap-2"
-                >
-                  <PhoneCall className="w-5 h-5" />
-                  <span>Book a Free Consultation</span>
-                </a>
-
                 <button 
                   onClick={onOpenWhatsApp}
-                  className="btn-secondary !border-emerald-500/40 hover:!border-emerald-400 !text-emerald-400 hover:!bg-emerald-500/10 flex items-center gap-2"
+                  className="bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-3.5 px-8 rounded-2xl flex items-center justify-center gap-2.5 transition-all shadow-md hover:shadow-lg cursor-pointer uppercase tracking-wider font-body text-sm"
                 >
-                  <MessageCircle className="w-5 h-5 text-emerald-400" />
-                  <span>WhatsApp Us Now</span>
+                  <MessageCircle className="w-5 h-5" />
+                  <span>WHATSAPP US NOW</span>
                 </button>
               </div>
 

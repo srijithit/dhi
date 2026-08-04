@@ -120,19 +120,11 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-4 w-full max-w-xl">
                 <button 
-                  onClick={handleFormSubmit}
-                  className="btn-primary flex items-center justify-center gap-2 cursor-pointer !rounded-2xl shadow-md hover:shadow-lg"
+                  onClick={() => onOpenWhatsApp(budget, estimatedReach, estimatedLeads)}
+                  className="bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-3.5 px-8 rounded-2xl flex items-center justify-center gap-2.5 transition-all shadow-md hover:shadow-lg cursor-pointer uppercase tracking-wider font-body text-sm"
                 >
                   <MessageCircle className="w-5 h-5" />
-                  <span>CLAIM FREE AUDIT</span>
-                </button>
-
-                <button 
-                  onClick={() => onOpenWhatsApp(budget, estimatedReach, estimatedLeads)}
-                  className="btn-secondary !border-emerald-500/40 hover:!border-emerald-450 !text-emerald-500 dark:!text-emerald-450 hover:!bg-emerald-500/10 flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <MessageCircle className="w-5 h-5 text-emerald-500" />
-                  <span>WhatsApp Us Now</span>
+                  <span>WHATSAPP US NOW</span>
                 </button>
               </div>
 
