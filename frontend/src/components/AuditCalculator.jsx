@@ -9,8 +9,10 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    email: '',
     businessName: '',
-    auditType: 'Website & SEO Audit'
+    service: 'Application Development',
+    goals: ''
   });
 
   const scanSteps = [
@@ -44,8 +46,8 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    setAuditState('scanning');
-    setScanStep(0);
+    const message = `👤 *Name:* ${formData.name}\n📞 *Phone:* ${formData.phone}\n✉️ *Email:* ${formData.email}\n🏢 *Company:* ${formData.businessName}\n🛠️ *Service:* ${formData.service}\n🎯 *Goals:* ${formData.goals}`;
+    window.open(`https://api.whatsapp.com/send?phone=919361088012&text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (
@@ -140,9 +142,9 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
                     Receive a detailed technical breakdown of your website, Google ranking opportunities, and competitor ad strategies.
                   </p>
 
-                  <form onSubmit={handleFormSubmit} className="space-y-4 font-body">
+                  <form onSubmit={handleFormSubmit} className="space-y-4 font-body text-white">
                     <div>
-                      <label className="block text-xs font-semibold uppercase text-slate-300 mb-1">Your Name *</label>
+                      <label className="block text-xs font-bold uppercase text-slate-300 mb-1">Your Name *</label>
                       <input 
                         type="text" 
                         required
@@ -153,23 +155,38 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold uppercase text-slate-300 mb-1">Mobile / WhatsApp *</label>
-                      <input 
-                        type="tel" 
-                        required
-                        placeholder="+91 98765 43210"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8]"
-                      />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase text-slate-300 mb-1">WhatsApp Number *</label>
+                        <input 
+                          type="tel" 
+                          required
+                          placeholder="e.g. +91 93610 88012"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                          className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8]"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold uppercase text-slate-300 mb-1">Email Address *</label>
+                        <input 
+                          type="email" 
+                          required
+                          placeholder="e.g. hello@company.com"
+                          value={formData.email}
+                          onChange={(e) => setFormData({...formData, email: e.target.value})}
+                          className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8]"
+                        />
+                      </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase text-slate-300 mb-1">Company / Website</label>
+                      <label className="block text-xs font-bold uppercase text-slate-300 mb-1">Company / Business Name *</label>
                       <input 
                         type="text" 
-                        placeholder="e.g. MyBrand.com or Business Name"
+                        required
+                        placeholder="e.g. My Brand Pvt Ltd"
                         value={formData.businessName}
                         onChange={(e) => setFormData({...formData, businessName: e.target.value})}
                         className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8]"
@@ -177,24 +194,37 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase text-slate-300 mb-1">Audit Type</label>
+                      <label className="block text-xs font-bold uppercase text-slate-300 mb-1">Required Service *</label>
                       <select 
-                        value={formData.auditType}
-                        onChange={(e) => setFormData({...formData, auditType: e.target.value})}
+                        value={formData.service}
+                        onChange={(e) => setFormData({...formData, service: e.target.value})}
                         className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8]"
                       >
-                        <option value="Website & SEO Audit">Website & SEO Audit</option>
-                        <option value="Meta & Google Ads Audit">Meta & Google Ads Audit</option>
-                        <option value="AI Automation Assessment">AI Automation Assessment</option>
-                        <option value="WhatsApp Marketing Campaign">WhatsApp Marketing Campaign</option>
+                        <option value="Website Development">Website Development</option>
+                        <option value="Application Development">Application Development</option>
+                        <option value="AI Automation">AI Automation</option>
+                        <option value="Search Engine Optimization">Search Engine Optimization</option>
+                        <option value="Performance Marketing">Performance Marketing</option>
                       </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold uppercase text-slate-300 mb-1">Goals / Requirements *</label>
+                      <textarea 
+                        required
+                        rows={3}
+                        placeholder="e.g. Build an iOS/Android e-commerce app with WhatsApp integrations."
+                        value={formData.goals}
+                        onChange={(e) => setFormData({...formData, goals: e.target.value})}
+                        className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8] resize-none"
+                      />
                     </div>
 
                     <button 
                       type="submit" 
-                      className="btn-primary w-full !py-3.5 mt-2 flex items-center justify-center gap-2"
+                      className="btn-primary w-full !py-3.5 mt-2 flex items-center justify-center gap-2 font-bold"
                     >
-                      <span>Claim Free Audit Roadmap</span>
+                      <span>SUBMIT TO WHATSAPP</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </form>
