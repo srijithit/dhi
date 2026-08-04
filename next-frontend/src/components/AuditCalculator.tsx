@@ -4,9 +4,10 @@ import { PhoneCall, MessageCircle, Calculator, ArrowRight, Sparkles, RefreshCw, 
 
 interface AuditCalculatorProps {
   onOpenWhatsApp: (budget: number, reach: number, leads: number) => void;
+  onlyForm?: boolean;
 }
 
-export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps) {
+export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: AuditCalculatorProps) {
   const [budget, setBudget] = useState(25000);
   const [auditState, setAuditState] = useState<'form' | 'scanning' | 'results'>('form');
   const [scanStep, setScanStep] = useState(0);
@@ -53,6 +54,108 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
     const message = `*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Email:* ${formData.email}\n*Company:* ${formData.businessName}\n*Service:* ${formData.service}\n*Goals:* ${formData.goals}`;
     window.open(`https://api.whatsapp.com/send?phone=919361088012&text=${encodeURIComponent(message)}`, '_blank');
   };
+
+  if (onlyForm) {
+    return (
+      <div className="bg-white dark:bg-[#090d18] p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl min-h-[500px] flex flex-col justify-between max-w-2xl mx-auto w-full">
+        <div className="space-y-4 animate-fadeIn font-body text-left">
+          <h3 className="font-header text-3xl text-slate-900 dark:text-white uppercase tracking-wide mb-2">
+            Request Free Audit &amp; Roadmap
+          </h3>
+          <p className="text-slate-500 dark:text-slate-400 text-xs mb-6 font-body leading-relaxed">
+            Receive a detailed technical breakdown of your website, Google ranking opportunities, and competitor ad strategies.
+          </p>
+
+          <form onSubmit={handleFormSubmit} className="space-y-4 text-slate-900 dark:text-white">
+            <div>
+              <label className="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Your Name *</label>
+              <input 
+                type="text" 
+                required
+                placeholder="e.g. Anand Kumar"
+                value={formData.name}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                className="w-full px-4 py-3 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:border-[#2196E8]"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">WhatsApp Number *</label>
+                <input 
+                  type="tel" 
+                  required
+                  placeholder="e.g. +91 93610 88012"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:border-[#2196E8]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Email Address *</label>
+                <input 
+                  type="email" 
+                  required
+                  placeholder="e.g. hello@company.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:border-[#2196E8]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Company / Business Name *</label>
+              <input 
+                type="text" 
+                required
+                placeholder="e.g. My Brand Pvt Ltd"
+                value={formData.businessName}
+                onChange={(e) => setFormData({...formData, businessName: e.target.value})}
+                className="w-full px-4 py-3 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:border-[#2196E8]"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Required Service *</label>
+              <select 
+                value={formData.service}
+                onChange={(e) => setFormData({...formData, service: e.target.value})}
+                className="w-full px-4 py-3 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:border-[#2196E8]"
+              >
+                <option value="Website Development">Website Development</option>
+                <option value="Application Development">Application Development</option>
+                <option value="AI Automation">AI Automation</option>
+                <option value="Search Engine Optimization">Search Engine Optimization</option>
+                <option value="Performance Marketing">Performance Marketing</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Goals / Requirements *</label>
+              <textarea 
+                required
+                rows={4}
+                placeholder="e.g. Build an iOS/Android e-commerce app with WhatsApp integrations."
+                value={formData.goals}
+                onChange={(e) => setFormData({...formData, goals: e.target.value})}
+                className="w-full px-4 py-3 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:border-[#2196E8] resize-none font-body"
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              className="btn-primary w-full !py-3.5 mt-2 flex items-center justify-center gap-2 cursor-pointer !rounded-2xl shadow-md hover:shadow-lg font-bold"
+            >
+              <span>SUBMIT TO WHATSAPP</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <section id="free-audit-form" className="py-32 md:py-40 bg-white dark:bg-[#000000] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
