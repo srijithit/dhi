@@ -50,7 +50,7 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `👤 *Name:* ${formData.name}\n📞 *Phone:* ${formData.phone}\n✉️ *Email:* ${formData.email}\n🏢 *Company:* ${formData.businessName}\n🛠️ *Service:* ${formData.service}\n🎯 *Goals:* ${formData.goals}`;
+    const message = `*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Email:* ${formData.email}\n*Company:* ${formData.businessName}\n*Service:* ${formData.service}\n*Goals:* ${formData.goals}`;
     window.open(`https://api.whatsapp.com/send?phone=919361088012&text=${encodeURIComponent(message)}`, '_blank');
   };
 
