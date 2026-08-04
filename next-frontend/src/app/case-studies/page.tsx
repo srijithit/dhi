@@ -1,0 +1,44 @@
+"use client";
+import React from 'react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import CustomCursor from '@/components/CustomCursor';
+import FloatingWhatsApp from '@/components/FloatingWhatsApp';
+import TestimonialsSection from '@/components/TestimonialsSection';
+
+export default function CaseStudiesPage() {
+  return (
+    <div className="min-h-screen bg-white dark:bg-[#000000] text-slate-900 dark:text-white selection:bg-[#2196E8] selection:text-white font-body transition-colors duration-300">
+      <CustomCursor />
+      
+      <Navbar />
+
+      <main className="subpage-padding-top">
+        
+        {/* Page Hero */}
+        <section className="relative py-24 bg-[#000000] text-white overflow-hidden bg-dot-matrix border-b border-slate-900">
+          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/10 rounded-full blur-[130px] pointer-events-none" />
+          
+          <div className="max-w-6xl mx-auto px-6 relative z-10 text-center space-y-6">
+            <span className="text-[#2196E8] font-body text-xs font-semibold uppercase tracking-widest block">
+              Coimbatore Digital Agency
+            </span>
+            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider uppercase leading-none">
+              CASE STUDIES &amp; <span className="text-[#2196E8]">CLIENT RESULTS</span>
+            </h1>
+            <p className="text-slate-355 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed font-body">
+              See how we help businesses in Coimbatore and across India scale their traffic, leads, and sales through custom digital marketing campaigns.
+            </p>
+          </div>
+        </section>
+
+        {/* Case Studies Section */}
+        <TestimonialsSection showAll={true} />
+
+      </main>
+
+      <Footer />
+      <FloatingWhatsApp />
+    </div>
+  );
+}

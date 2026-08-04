@@ -11,7 +11,11 @@ const LinkedInIcon = (props: any) => (
   </svg>
 );
 
-export default function TestimonialsSection() {
+interface TestimonialsSectionProps {
+  showAll?: boolean;
+}
+
+export default function TestimonialsSection({ showAll = false }: TestimonialsSectionProps) {
   const containerVariants = {
     hidden: {},
     visible: {
@@ -26,7 +30,7 @@ export default function TestimonialsSection() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
 
-  const displayTestimonials = TESTIMONIALS_DATA.slice(0, 3);
+  const displayTestimonials = showAll ? TESTIMONIALS_DATA : TESTIMONIALS_DATA.slice(0, 3);
 
   return (
     <section id="testimonials" className="py-32 md:py-40 bg-slate-50 dark:bg-[#080b11] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
