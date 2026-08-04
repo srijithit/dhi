@@ -49,12 +49,19 @@ export default function ContactPage() {
         <section className="py-24 bg-white dark:bg-[#000000] transition-colors">
           <div className="max-w-7xl mx-auto px-6">
             
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="max-w-3xl mx-auto space-y-10">
               
-              {/* Left Column: Details */}
-              <div className="lg:col-span-5 space-y-10">
+              {isApplyMode && (
+                <div className="p-6 mb-6 rounded-2xl bg-[#2196E8]/10 border border-[#2196E8]/20 text-[#2196E8] text-sm font-semibold flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 shrink-0" />
+                  <span>Recruitment Notice: Email your resume to dhinesh@dhigrowth.com with the subject line 'Application: [Job Title]'.</span>
+                </div>
+              )}
+
+              {/* Details Column */}
+              <div className="space-y-10">
                 
-                <div className="space-y-4">
+                <div className="space-y-4 text-center">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/20 text-[#2196E8] text-xs font-bold uppercase tracking-wider font-body">
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>Office Location</span>
@@ -62,7 +69,7 @@ export default function ContactPage() {
                   <h2 className="font-header text-4xl sm:text-5xl uppercase tracking-wider text-slate-900 dark:text-white leading-none">
                     DhiGrowth Coimbatore
                   </h2>
-                  <p className="text-slate-600 dark:text-slate-350 text-sm leading-relaxed max-w-md font-body">
+                  <p className="text-slate-600 dark:text-slate-355 text-sm leading-relaxed max-w-md mx-auto font-body">
                     Visit our office or get in touch for custom website designs, AI automations, and search result domination campaigns.
                   </p>
                 </div>
@@ -120,25 +127,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-              </div>
-
-              {/* Right Column: Dynamic Form */}
-              <div className="lg:col-span-7">
-                {isApplyMode && (
-                  <div className="p-6 mb-6 rounded-2xl bg-[#2196E8]/10 border border-[#2196E8]/20 text-[#2196E8] text-sm font-semibold flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 shrink-0" />
-                    <span>Recruitment Notice: Fill out the audit calculator form below or email your resume to dhinesh@dhigrowth.com with the subject line 'Application: [Job Title]'.</span>
-                  </div>
-                )}
-
-                {/* We render the AuditCalculator directly for visual uniformity and functionality */}
-                  <AuditCalculator 
-                    onlyForm={true}
-                    onOpenWhatsApp={(budget, reach, leads) => {
-                      const message = encodeURIComponent(`Hi DhiGrowth, I want to claim a free digital performance audit for my business! Selected Monthly Budget: ₹${budget.toLocaleString('en-IN')}, Est. Monthly Reach: ${reach.toLocaleString('en-IN')}, Est. Qualified Leads: ${leads}+/mo.`);
-                      window.open(`https://api.whatsapp.com/send?phone=919361088012&text=${message}`, '_blank');
-                    }} 
-                  />
               </div>
 
             </div>
