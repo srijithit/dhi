@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { PhoneCall, MessageCircle, Calculator, ArrowRight, Sparkles, RefreshCw, AlertTriangle } from 'lucide-react';
 
 interface AuditCalculatorProps {
-  onOpenWhatsApp: () => void;
+  onOpenWhatsApp: (budget: number, reach: number, leads: number) => void;
 }
 
 export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps) {
@@ -123,12 +123,12 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
                   onClick={handleFormSubmit}
                   className="btn-primary flex items-center justify-center gap-2 cursor-pointer !rounded-2xl shadow-md hover:shadow-lg"
                 >
-                  <PhoneCall className="w-5 h-5" />
+                  <MessageCircle className="w-5 h-5" />
                   <span>CLAIM FREE AUDIT</span>
                 </button>
 
                 <button 
-                  onClick={onOpenWhatsApp}
+                  onClick={() => onOpenWhatsApp(budget, estimatedReach, estimatedLeads)}
                   className="btn-secondary !border-emerald-500/40 hover:!border-emerald-450 !text-emerald-500 dark:!text-emerald-450 hover:!bg-emerald-500/10 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <MessageCircle className="w-5 h-5 text-emerald-500" />
@@ -315,10 +315,10 @@ export default function AuditCalculator({ onOpenWhatsApp }: AuditCalculatorProps
 
                   <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
                     <button 
-                      onClick={onOpenWhatsApp}
+                      onClick={() => onOpenWhatsApp(budget, estimatedReach, estimatedLeads)}
                       className="btn-primary w-full !py-3 flex items-center justify-center gap-2 cursor-pointer !rounded-2xl shadow-md hover:shadow-lg"
                     >
-                      <PhoneCall className="w-4 h-4" />
+                      <MessageCircle className="w-4 h-4" />
                       <span>CLAIM FREE AUDIT</span>
                     </button>
                   </div>

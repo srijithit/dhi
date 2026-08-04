@@ -133,9 +133,9 @@ export default function ContactPage() {
 
                 {/* We render the AuditCalculator directly for visual uniformity and functionality */}
                 <div className="scale-100 lg:-mt-24">
-                  <AuditCalculator onOpenWhatsApp={() => {
-                    const message = encodeURIComponent("Hello DhiGrowth! I would like to book a free consultation.");
-                    window.open(`https://wa.me/919361088012?text=${message}`, '_blank');
+                  <AuditCalculator onOpenWhatsApp={(budget, reach, leads) => {
+                    const message = encodeURIComponent(`Hi DhiGrowth, I want to claim a free digital performance audit for my business! Selected Monthly Budget: ₹${budget.toLocaleString('en-IN')}, Est. Monthly Reach: ${reach.toLocaleString('en-IN')}, Est. Qualified Leads: ${leads}+/mo.`);
+                    window.open(`https://api.whatsapp.com/send?phone=919361088012&text=${message}`, '_blank');
                   }} />
                 </div>
               </div>

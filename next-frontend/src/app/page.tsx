@@ -146,9 +146,9 @@ export default function Home() {
         <FAQSection />
 
         {/* Interactive Audit & Budget Calculator Section */}
-        <AuditCalculator onOpenWhatsApp={() => {
-          const msg = encodeURIComponent("Hello DhiGrowth! I would like to book a free consultation for my business.");
-          window.open(`https://wa.me/919361088012?text=${msg}`, '_blank');
+        <AuditCalculator onOpenWhatsApp={(budget, reach, leads) => {
+          const msg = encodeURIComponent(`Hi DhiGrowth, I want to claim a free digital performance audit for my business! Selected Monthly Budget: ₹${budget.toLocaleString('en-IN')}, Est. Monthly Reach: ${reach.toLocaleString('en-IN')}, Est. Qualified Leads: ${leads}+/mo.`);
+          window.open(`https://api.whatsapp.com/send?phone=919361088012&text=${msg}`, '_blank');
         }} />
 
         {/* Ready to Grow CTA Banner */}
