@@ -20,11 +20,9 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
   };
 
   const handleAuditClick = (e: React.MouseEvent) => {
-    e.preventDefault();
     if (onOpenAudit) {
+      e.preventDefault();
       onOpenAudit();
-    } else {
-      window.open("https://api.whatsapp.com/send?phone=919361088012&text=Hi%20DhiGrowth%2C%20I%20want%20to%20claim%20a%20free%20digital%20performance%20audit%20for%20my%20business%21", "_blank");
     }
   };
 
