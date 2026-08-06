@@ -207,7 +207,7 @@ function ClientLogos() {
               <img 
                 src={logo.src} 
                 alt={logo.alt} 
-                className={`${logo.className} w-auto object-contain mix-blend-multiply dark:mix-blend-screen dark:invert dark:opacity-85 select-none pointer-events-none hover:opacity-100 transition-opacity duration-300`}
+                className={`${logo.className} w-auto object-contain dark:invert dark:opacity-85 select-none pointer-events-none hover:opacity-100 transition-opacity duration-300`}
               />
             </div>
           ))}
