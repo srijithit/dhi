@@ -5,7 +5,7 @@ import { MessageCircle } from 'lucide-react';
 export default function FloatingWhatsApp() {
   const handleClick = () => {
     const message = encodeURIComponent("Hello DhiGrowth team! I'm interested in digital growth solutions for my business in Coimbatore.");
-    window.open(`https://wa.me/919361088012?text=${message}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=919361088012&text=${message}`, '_blank');
   };
 
   return (
