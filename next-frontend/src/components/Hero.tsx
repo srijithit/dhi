@@ -246,19 +246,13 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
             >
               <X className="w-6 h-6" />
             </button>
-            <div className="relative aspect-video flex flex-col justify-center items-center text-center p-8 bg-slate-950">
-              <div className="w-20 h-20 rounded-full bg-[#2196E8]/20 border-2 border-[#2196E8] flex items-center justify-center text-[#2196E8] mb-6 animate-pulse">
-                <Play className="w-8 h-8 fill-[#2196E8]" />
-              </div>
-              <h3 className="font-header text-3xl sm:text-5xl text-white uppercase mb-3">
-                DhiGrowth Digital Agency
-              </h3>
-              <p className="text-slate-400 font-body text-base max-w-lg mb-4">
-                We combine website development, AI automation, and paid ad strategies in Coimbatore to scale your business. Watch our 45s introduction.
-              </p>
-              <div className="text-xs text-[#2196E8] font-mono tracking-widest uppercase py-1 px-3 border border-[#2196E8]/30 rounded-full bg-[#2196E8]/5">
-                Corporate Showreel 2026
-              </div>
+            <div className="relative aspect-video w-full bg-black">
+              <video 
+                src="/videos/intro.mp4" 
+                controls 
+                autoPlay 
+                className="w-full h-full object-contain"
+              />
             </div>
           </div>
         </div>
