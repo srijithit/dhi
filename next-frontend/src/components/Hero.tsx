@@ -46,11 +46,11 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="max-w-4xl w-full">
           
-          {/* Left Column - Content */}
+          {/* Content Column */}
           <motion.div 
-            className="lg:col-span-7 space-y-6 text-left flex flex-col items-start justify-start"
+            className="space-y-6 text-left flex flex-col items-start justify-start w-full"
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
@@ -111,126 +111,6 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
             </motion.div>
  
           </motion.div>
-
-          {/* Right Column - Premium Animated Dashboard Mockup */}
-          <motion.div 
-            className="lg:col-span-5 relative flex justify-center items-center w-full"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            {/* Dashboard Container mimicking a premium SaaS screen */}
-            <div className="relative w-full max-w-[480px] rounded-3xl border border-slate-200/80 bg-white/80 backdrop-blur-md shadow-2xl p-4 overflow-hidden select-none">
-              
-              {/* Window Header */}
-              <div className="flex items-center justify-between border-b border-slate-200/60 pb-3 mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-400" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                  <div className="w-3 h-3 rounded-full bg-green-400" />
-                  <span className="text-[10px] font-semibold text-slate-400 ml-2 font-mono">dhigrowth-workspace</span>
-                </div>
-                <span className="text-[9px] font-bold text-[#2196E8] bg-[#2196E8]/10 px-2 py-0.5 rounded-full uppercase tracking-wider font-body animate-pulse">
-                  System Active
-                </span>
-              </div>
-
-              {/* Grid content inside the Mockup Dashboard */}
-              <div className="space-y-4 font-body">
-                
-                {/* Visual 1: Analytics & Conversion Growth */}
-                <div className="bg-slate-900 text-white rounded-2xl p-4 border border-slate-800 relative overflow-hidden shadow-lg">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-[#2196E8]/10 rounded-bl-full blur-xl pointer-events-none" />
-                  
-                  <div className="flex items-center justify-between mb-3">
-                    <div>
-                      <span className="text-[10px] font-bold text-[#A9C0F5] uppercase tracking-wider block">Conversion Campaign</span>
-                      <h4 className="text-xl font-bold font-numeric text-white">+430% <span className="text-emerald-400 text-sm font-sans">▲</span></h4>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-[9px] text-slate-400 block">ROI Multiplier</span>
-                      <span className="text-xs font-bold text-brand-bright">8.4x ROAS</span>
-                    </div>
-                  </div>
-
-                  {/* SVG Chart showing growth */}
-                  <div className="h-16 w-full flex items-end">
-                    <svg className="w-full h-full" viewBox="0 0 300 60" fill="none">
-                      <defs>
-                        <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="#2196E8" stopOpacity="0.4" />
-                          <stop offset="100%" stopColor="#2196E8" stopOpacity="0" />
-                        </linearGradient>
-                      </defs>
-                      <path d="M 0 55 Q 50 48 90 35 T 180 18 T 240 8 L 300 3" stroke="#2196E8" strokeWidth="3" strokeLinecap="round" />
-                      <path d="M 0 55 Q 50 48 90 35 T 180 18 T 240 8 L 300 3 L 300 60 L 0 60 Z" fill="url(#chart-grad)" />
-                      {/* Animating glow pulse point */}
-                      <circle cx="300" cy="3" r="4" fill="#00E5FF" className="animate-ping" />
-                      <circle cx="300" cy="3" r="3" fill="#2196E8" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Split grid for Web Mock & AI Bot */}
-                <div className="grid grid-cols-2 gap-4">
-                  
-                  {/* Visual 2: Website / App Mock (Left) */}
-                  <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-3 flex flex-col justify-between shadow-sm">
-                    <div className="flex items-center gap-1.5 mb-2">
-                      <Globe className="w-3.5 h-3.5 text-[#4A72EB]" />
-                      <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Web &amp; App Dev</span>
-                    </div>
-                    <div className="space-y-1.5">
-                      <div className="h-2 w-11/12 bg-slate-200 rounded-full" />
-                      <div className="h-2 w-7/12 bg-slate-200 rounded-full" />
-                      <div className="h-2 w-9/12 bg-slate-200 rounded-full" />
-                    </div>
-                    <div className="mt-3 flex items-center justify-between border-t border-slate-200/60 pt-2 text-[10px] font-bold text-[#4A72EB]">
-                      <span>Next.js v16</span>
-                      <span>100% Speed</span>
-                    </div>
-                  </div>
-
-                  {/* Visual 3: AI Chat Autoreply (Right) */}
-                  <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-3 flex flex-col justify-between shadow-sm">
-                    <div className="flex items-center gap-1.5 mb-2">
-                      <MessageSquare className="w-3.5 h-3.5 text-emerald-500" />
-                      <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">AI Lead Automation</span>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="bg-slate-200/70 p-1.5 rounded-lg rounded-tl-none max-w-[85%]">
-                        <div className="h-1.5 w-10 bg-slate-400 rounded-full mb-1" />
-                        <div className="h-1 w-14 bg-slate-350 rounded-full" />
-                      </div>
-                      <div className="bg-emerald-500 text-white p-1.5 rounded-lg rounded-tr-none max-w-[85%] ml-auto text-right">
-                        <div className="h-1.5 w-10 bg-emerald-250 rounded-full mb-1 ml-auto" />
-                        <div className="h-1 w-12 bg-emerald-200 rounded-full ml-auto" />
-                      </div>
-                    </div>
-                    <span className="text-[8px] font-bold text-slate-400 mt-2 block text-center uppercase tracking-wider">Response in 0.2s</span>
-                  </div>
-
-                </div>
-
-                {/* Visual 4: Growth Outcomes Metric Bar */}
-                <div className="bg-gradient-to-r from-[#2196E8]/10 to-[#4A72EB]/10 rounded-2xl p-3 border border-[#2196E8]/20 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-5 h-5 text-[#2196E8] shrink-0" />
-                    <div>
-                      <span className="text-[9px] text-slate-500 uppercase font-semibold block">Google &amp; Meta Partners</span>
-                      <span className="text-xs font-bold text-slate-800">Verified Business Outcomes</span>
-                    </div>
-                  </div>
-                  <div className="font-numeric text-xs font-bold text-[#4A72EB] bg-white px-2.5 py-1 rounded-lg border border-[#4A72EB]/20 shadow-sm shrink-0">
-                    9.8/10 SCORE
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </motion.div>
-
         </div>
 
       </div>
