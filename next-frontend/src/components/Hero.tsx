@@ -97,15 +97,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.button>
  
-              <motion.button 
-                onClick={onExploreServices}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="btn-secondary !py-3.5 !px-8 !border-brand-bright/40 hover:!border-brand-bright !text-brand-bright hover:!bg-brand-bright/10 cursor-pointer w-full sm:w-auto"
-              >
-                <span>See Our Work</span>
-              </motion.button>
- 
+
               <motion.button
                 onClick={() => setShowVideoModal(true)}
                 whileHover={{ scale: 1.05 }}
