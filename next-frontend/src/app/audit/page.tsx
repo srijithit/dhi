@@ -36,7 +36,7 @@ export default function AuditPage() {
         <div className="bg-white dark:bg-[#000000]">
           <AuditCalculator onOpenWhatsApp={(budget, reach, leads) => {
             const message = encodeURIComponent(`*Name:* (Audit Calculator Submission)\n*Budget:* ₹${budget.toLocaleString('en-IN')}\n*Est. Reach:* ${reach.toLocaleString('en-IN')}\n*Est. Leads:* ${leads}+/mo.`);
-            window.open(`https://api.whatsapp.com/send?phone=919361088012&text=${message}`, '_blank');
+            window.location.href = `https://api.whatsapp.com/send?phone=919361088012&text=${message}`;
           }} />
         </div>
 

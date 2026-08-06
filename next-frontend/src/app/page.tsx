@@ -153,7 +153,7 @@ export default function Home() {
         {/* Interactive Audit & Budget Calculator Section */}
         <AuditCalculator onOpenWhatsApp={(budget, reach, leads) => {
           const msg = encodeURIComponent(`Hi DhiGrowth, I want to claim a free digital performance audit for my business! Selected Monthly Budget: ₹${budget.toLocaleString('en-IN')}, Est. Monthly Reach: ${reach.toLocaleString('en-IN')}, Est. Qualified Leads: ${leads}+/mo.`);
-          window.open(`https://api.whatsapp.com/send?phone=919361088012&text=${msg}`, '_blank');
+          window.location.href = `https://api.whatsapp.com/send?phone=919361088012&text=${msg}`;
         }} />
 
         {/* Ready to Grow CTA Banner */}
