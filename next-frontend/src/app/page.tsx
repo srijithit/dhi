@@ -173,13 +173,41 @@ export default function Home() {
 // Sub-Component: Trusted Brands Logos
 function ClientLogos() {
   return (
-    <section className="py-10 bg-slate-50 border-y border-slate-200/60 dark:bg-[#070910] dark:border-slate-900">
-      <div className="max-w-5xl mx-auto px-6 flex justify-center items-center">
-        <img 
-          src="/images/trusted_clients.png" 
-          alt="Our Trusted Clients" 
-          className="w-full max-w-[720px] h-auto object-contain dark:invert dark:brightness-150 select-none pointer-events-none transition-all duration-300 opacity-80 dark:opacity-75"
-        />
+    <section className="py-10 bg-slate-50 border-y border-slate-200/60 dark:bg-[#070910] dark:border-slate-900 overflow-hidden select-none">
+      <div className="max-w-7xl mx-auto px-6 text-center mb-8">
+        <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 tracking-widest block">
+          OUR TRUSTED CLIENTS
+        </span>
+      </div>
+      
+      {/* Infinite Horizontal Scrolling Ticker Container */}
+      <div className="relative w-full overflow-hidden flex [mask-image:_linear-gradient(to_right,_transparent_0,_black_128px,_black_calc(100%_-_128px),_transparent_100%)]">
+        <motion.div 
+          animate={{ x: [0, -1072] }}
+          transition={{ 
+            duration: 18, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+          className="flex items-center gap-12 shrink-0 py-2"
+        >
+          {/* Render instances of the logo image consecutively to ensure continuous loop flow */}
+          <img 
+            src="/images/trusted_clients_clean.png" 
+            alt="Trusted Client Logos" 
+            className="h-10 md:h-12 w-[1024px] object-contain mix-blend-multiply dark:mix-blend-screen dark:invert dark:opacity-85 select-none pointer-events-none"
+          />
+          <img 
+            src="/images/trusted_clients_clean.png" 
+            alt="Trusted Client Logos" 
+            className="h-10 md:h-12 w-[1024px] object-contain mix-blend-multiply dark:mix-blend-screen dark:invert dark:opacity-85 select-none pointer-events-none"
+          />
+          <img 
+            src="/images/trusted_clients_clean.png" 
+            alt="Trusted Client Logos" 
+            className="h-10 md:h-12 w-[1024px] object-contain mix-blend-multiply dark:mix-blend-screen dark:invert dark:opacity-85 select-none pointer-events-none"
+          />
+        </motion.div>
       </div>
     </section>
   );
