@@ -1,11 +1,124 @@
 "use client";
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Play, X, TrendingUp, MessageSquare, ShieldCheck, Cpu, Smartphone, Globe } from 'lucide-react';
+import { ArrowRight, Sparkles, Play, X, TrendingUp, MessageSquare, ShieldCheck, Cpu, Smartphone, Globe, Target } from 'lucide-react';
 
 interface HeroProps {
   onOpenAudit: () => void;
   onExploreServices: () => void;
+}
+
+function TechAnimation() {
+  return (
+    <div className="relative w-full max-w-[480px] h-[400px] flex items-center justify-center select-none overflow-visible">
+      {/* Glow effects */}
+      <div className="absolute w-72 h-72 bg-[#2196E8]/10 rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute w-48 h-48 bg-[#4A72EB]/5 rounded-full blur-[50px] pointer-events-none" />
+
+      {/* Central Growth Nucleus */}
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.08, 1],
+          boxShadow: ["0 0 20px rgba(33, 150, 232, 0.2)", "0 0 40px rgba(33, 150, 232, 0.5)", "0 0 20px rgba(33, 150, 232, 0.2)"]
+        }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        className="relative z-10 w-24 h-24 rounded-full bg-gradient-to-br from-[#2196E8] to-[#4A72EB] flex flex-col items-center justify-center text-white border-2 border-white/20 shadow-2xl"
+      >
+        <span className="text-[10px] uppercase font-bold tracking-widest text-[#a8d3ff] mb-1">DHI</span>
+        <span className="text-sm font-extrabold uppercase tracking-wide">GROWTH</span>
+        {/* Pulsing ring */}
+        <div className="absolute -inset-4 rounded-full border border-[#2196E8]/30 animate-ping opacity-45 pointer-events-none" style={{ animationDuration: '3s' }} />
+      </motion.div>
+
+      {/* Connection Lines (SVG) */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 480 400" fill="none">
+        {/* Web link */}
+        <motion.path 
+          d="M 240 200 L 100 100" 
+          stroke="#2196E8" 
+          strokeWidth="1.5" 
+          strokeDasharray="6 4"
+          animate={{ strokeDashoffset: [0, -20] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+        />
+        {/* App link */}
+        <motion.path 
+          d="M 240 200 L 380 100" 
+          stroke="#2196E8" 
+          strokeWidth="1.5" 
+          strokeDasharray="6 4"
+          animate={{ strokeDashoffset: [0, -20] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+        />
+        {/* AI link */}
+        <motion.path 
+          d="M 240 200 L 380 300" 
+          stroke="#2196E8" 
+          strokeWidth="1.5" 
+          strokeDasharray="6 4"
+          animate={{ strokeDashoffset: [0, -20] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+        />
+        {/* Ads link */}
+        <motion.path 
+          d="M 240 200 L 100 300" 
+          stroke="#2196E8" 
+          strokeWidth="1.5" 
+          strokeDasharray="6 4"
+          animate={{ strokeDashoffset: [0, -20] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+        />
+      </svg>
+
+      {/* Orbiting Satellite Node 1: Web Development (Top-Left) */}
+      <motion.div 
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 }}
+        className="absolute top-[60px] left-[60px] flex flex-col items-center gap-1.5"
+      >
+        <div className="w-14 h-14 rounded-2xl bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-800 flex items-center justify-center text-[#2196E8] shadow-lg group hover:border-[#2196E8] hover:shadow-2xl hover:shadow-[#2196E8]/10 transition-all duration-300">
+          <Globe className="w-6 h-6" />
+        </div>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-550 dark:text-slate-400">Web Dev</span>
+      </motion.div>
+
+      {/* Orbiting Satellite Node 2: Mobile App Development (Top-Right) */}
+      <motion.div 
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        className="absolute top-[60px] right-[60px] flex flex-col items-center gap-1.5"
+      >
+        <div className="w-14 h-14 rounded-2xl bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-800 flex items-center justify-center text-[#2196E8] shadow-lg group hover:border-[#2196E8] hover:shadow-2xl hover:shadow-[#2196E8]/10 transition-all duration-300">
+          <Smartphone className="w-6 h-6" />
+        </div>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-550 dark:text-slate-400">App Dev</span>
+      </motion.div>
+
+      {/* Orbiting Satellite Node 3: AI Development (Bottom-Right) */}
+      <motion.div 
+        animate={{ y: [0, -12, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute bottom-[60px] right-[60px] flex flex-col items-center gap-1.5"
+      >
+        <div className="w-14 h-14 rounded-2xl bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-800 flex items-center justify-center text-[#2196E8] shadow-lg group hover:border-[#2196E8] hover:shadow-2xl hover:shadow-[#2196E8]/10 transition-all duration-300">
+          <Cpu className="w-6 h-6" />
+        </div>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-550 dark:text-slate-400">AI Tech</span>
+      </motion.div>
+
+      {/* Orbiting Satellite Node 4: Performance Marketing (Bottom-Left) */}
+      <motion.div 
+        animate={{ y: [0, -9, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+        className="absolute bottom-[60px] left-[60px] flex flex-col items-center gap-1.5"
+      >
+        <div className="w-14 h-14 rounded-2xl bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-800 flex items-center justify-center text-[#2196E8] shadow-lg group hover:border-[#2196E8] hover:shadow-2xl hover:shadow-[#2196E8]/10 transition-all duration-300">
+          <Target className="w-6 h-6" />
+        </div>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-550 dark:text-slate-400">Paid Ads</span>
+      </motion.div>
+    </div>
+  );
 }
 
 export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
@@ -46,11 +159,11 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         
-        <div className="max-w-4xl w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Content Column */}
+          {/* Left Column - Content */}
           <motion.div 
-            className="space-y-6 text-left flex flex-col items-start justify-start w-full"
+            className="lg:col-span-7 space-y-6 text-left flex flex-col items-start justify-start"
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
@@ -110,6 +223,16 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
               </motion.button>
             </motion.div>
  
+          </motion.div>
+
+          {/* Right Column - Tech Animation */}
+          <motion.div 
+            className="lg:col-span-5 relative flex justify-center items-center w-full"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <TechAnimation />
           </motion.div>
         </div>
 
