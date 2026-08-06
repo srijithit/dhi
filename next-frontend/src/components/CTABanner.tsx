@@ -9,7 +9,7 @@ interface CTABannerProps {
 export default function CTABanner({ onOpenAudit }: CTABannerProps) {
   const handleWhatsAppClick = () => {
     const message = encodeURIComponent("Hello DhiGrowth! I would like to book a free consultation for my business.");
-    window.open(`https://api.whatsapp.com/send?phone=919361088012&text=${message}`, '_blank');
+    window.location.href = `https://api.whatsapp.com/send?phone=919361088012&text=${message}`;
   };
 
   const handleConsultationClick = () => {
