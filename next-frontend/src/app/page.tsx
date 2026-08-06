@@ -172,32 +172,14 @@ export default function Home() {
 
 // Sub-Component: Trusted Brands Logos
 function ClientLogos() {
-  const brands = [
-    { name: "SNS Group", field: "Education" },
-    { name: "Kovai Medical", field: "Healthcare" },
-    { name: "Veda Fabrics", field: "Textile" },
-    { name: "Aura Dental", field: "Healthcare" },
-    { name: "NexGen Precision", field: "Manufacturing" }
-  ];
-
   return (
-    <section className="py-8 bg-slate-50 border-y border-slate-200/60 dark:bg-[#070910] dark:border-slate-900">
-      <div className="max-w-7xl mx-auto px-6 text-center">
-        <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 tracking-widest block mb-4">
-          Trusted By Leading Brands in Coimbatore &amp; Tamil Nadu
-        </span>
-        <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16 lg:gap-24 opacity-50 dark:opacity-40">
-          {brands.map((brand, idx) => (
-            <div key={idx} className="flex flex-col items-center select-none cursor-default group hover:opacity-100 transition-opacity duration-300">
-              <span className="font-header text-xl sm:text-2xl text-slate-900 dark:text-white uppercase font-bold tracking-wider">
-                {brand.name}
-              </span>
-              <span className="text-[7px] font-mono uppercase text-slate-400 dark:text-slate-600 block leading-none">
-                {brand.field || "Corp Partner"}
-              </span>
-            </div>
-          ))}
-        </div>
+    <section className="py-10 bg-slate-50 border-y border-slate-200/60 dark:bg-[#070910] dark:border-slate-900">
+      <div className="max-w-5xl mx-auto px-6 flex justify-center items-center">
+        <img 
+          src="/images/trusted_clients.png" 
+          alt="Our Trusted Clients" 
+          className="w-full max-w-[720px] h-auto object-contain dark:invert dark:brightness-150 select-none pointer-events-none transition-all duration-300 opacity-80 dark:opacity-75"
+        />
       </div>
     </section>
   );
