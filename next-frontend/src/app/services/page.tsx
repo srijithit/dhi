@@ -99,41 +99,42 @@ export default function ServicesPage() {
                 const IconComponent = ICON_MAP[service.iconName] || Globe;
 
                 return (
-                  <motion.div 
-                    key={service.id}
-                    variants={cardVariants}
-                    className="bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-800/80 hover:border-[#2196E8] rounded-3xl flex flex-col justify-between shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 relative group overflow-hidden"
-                  >
-                    {/* Top image */}
-                    <div className="relative h-48 w-full overflow-hidden">
-                      <img 
-                        src={SERVICE_IMAGE_MAP[service.id] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=80"} 
-                        alt={service.name} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute top-4 left-4 bg-white/95 dark:bg-[#090d18]/95 backdrop-blur-md p-2.5 rounded-xl border border-slate-200 dark:border-slate-850 shadow-md">
-                        <IconComponent className="w-5 h-5 text-[#2196E8]" />
-                      </div>
-                      {service.badge && (
-                        <span className="absolute top-4 right-4 text-[9px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-[#2196E8] text-white shadow-md">
-                          {service.badge}
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="p-6 sm:p-8 flex flex-col justify-between flex-grow space-y-4">
-                      <div>
-                        <h3 className="font-header text-2xl text-slate-900 dark:text-white uppercase tracking-wider group-hover:text-[#2196E8] transition-colors duration-300">
-                          {service.name}
-                        </h3>
-
-                        <p className="text-slate-650 dark:text-slate-350 text-sm leading-relaxed line-clamp-3">
-                          {service.shortCopy}
-                        </p>
+                  <Link key={service.id} href={`/services/${service.id}`} className="flex w-full">
+                    <motion.div 
+                      variants={cardVariants}
+                      className="bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-800/80 hover:border-[#2196E8] rounded-3xl flex flex-col justify-between shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 relative group overflow-hidden w-full cursor-pointer"
+                    >
+                      {/* Top image */}
+                      <div className="relative h-48 w-full overflow-hidden">
+                        <img 
+                          src={SERVICE_IMAGE_MAP[service.id] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=80"} 
+                          alt={service.name} 
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute top-4 left-4 bg-white/95 dark:bg-[#090d18]/95 backdrop-blur-md p-2.5 rounded-xl border border-slate-200 dark:border-slate-850 shadow-md">
+                          <IconComponent className="w-5 h-5 text-[#2196E8]" />
+                        </div>
+                        {service.badge && (
+                          <span className="absolute top-4 right-4 text-[9px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-[#2196E8] text-white shadow-md">
+                            {service.badge}
+                          </span>
+                        )}
                       </div>
 
-                    </div>
-                  </motion.div>
+                      <div className="p-6 sm:p-8 flex flex-col justify-between flex-grow space-y-4">
+                        <div>
+                          <h3 className="font-header text-2xl text-slate-900 dark:text-white uppercase tracking-wider group-hover:text-[#2196E8] transition-colors duration-300">
+                            {service.name}
+                          </h3>
+
+                          <p className="text-slate-650 dark:text-slate-350 text-sm leading-relaxed line-clamp-3">
+                            {service.shortCopy}
+                          </p>
+                        </div>
+
+                      </div>
+                    </motion.div>
+                  </Link>
                 );
               })}
             </motion.div>

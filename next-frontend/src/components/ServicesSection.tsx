@@ -103,35 +103,36 @@ export default function ServicesSection() {
           {visibleServices.map((service) => {
             const IconComponent = ICON_MAP[service.iconName] || Globe;
 
-            return (
-              <motion.div 
-                key={service.id}
-                variants={itemVariants}
-                className="bg-white dark:bg-[#0d111c] border border-slate-200/80 dark:border-slate-900/60 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:border-[#2196E8] shadow-sm hover:shadow-md group"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-[#2196E8] group-hover:scale-105 transition-transform duration-300">
-                      <IconComponent className="w-5 h-5" />
-                    </div>
-                    {service.badge && (
-                      <span className="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 text-slate-500 dark:text-[#a9c0f5]">
-                        {service.badge}
-                      </span>
-                    )}
-                  </div>
+             return (
+               <Link key={service.id} href={`/services/${service.id}`} className="flex w-full">
+                 <motion.div 
+                   variants={itemVariants}
+                   className="bg-white dark:bg-[#0d111c] border border-slate-200/80 dark:border-slate-900/60 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:border-[#2196E8] shadow-sm hover:shadow-md group w-full cursor-pointer"
+                 >
+                   <div>
+                     <div className="flex items-center justify-between mb-4">
+                       <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-[#2196E8] group-hover:scale-105 transition-transform duration-300">
+                         <IconComponent className="w-5 h-5" />
+                       </div>
+                       {service.badge && (
+                         <span className="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 text-slate-500 dark:text-[#a9c0f5]">
+                           {service.badge}
+                         </span>
+                       )}
+                     </div>
 
-                  <h3 className="font-header text-xl text-slate-900 dark:text-white uppercase tracking-wide mb-2 group-hover:text-[#2196E8] transition-colors duration-300">
-                    {service.name}
-                  </h3>
+                     <h3 className="font-header text-xl text-slate-900 dark:text-white uppercase tracking-wide mb-2 group-hover:text-[#2196E8] transition-colors duration-300">
+                       {service.name}
+                     </h3>
 
-                  <p className="text-slate-650 dark:text-slate-350 text-[13px] leading-relaxed mb-4">
-                    {service.shortCopy}
-                  </p>
-                </div>
+                     <p className="text-slate-650 dark:text-slate-350 text-[13px] leading-relaxed mb-4">
+                       {service.shortCopy}
+                     </p>
+                   </div>
 
-              </motion.div>
-            );
+                 </motion.div>
+               </Link>
+             );
           })}
         </motion.div>
 
