@@ -172,6 +172,17 @@ export default function Home() {
 
 // Sub-Component: Trusted Brands Logos
 function ClientLogos() {
+  const logos = [
+    { src: "/images/client_sanika.png", alt: "Sanika's Indian Cuisine", className: "h-8 md:h-10" },
+    { src: "/images/client_karisal.png", alt: "Karisal", className: "h-14 md:h-18" },
+    { src: "/images/client_thooriga.png", alt: "ThoorigaI", className: "h-8 md:h-10" },
+    { src: "/images/client_gigabull.png", alt: "Gigabull", className: "h-8 md:h-10" },
+    { src: "/images/client_ruts.png", alt: "Ruts N Rides", className: "h-14 md:h-18" }
+  ];
+
+  // Duplicate the array 4 times to ensure continuous marquee scrolling space
+  const duplicatedLogos = [...logos, ...logos, ...logos, ...logos];
+
   return (
     <section className="py-10 bg-slate-50 border-y border-slate-200/60 dark:bg-[#070910] dark:border-slate-900 overflow-hidden select-none">
       <div className="max-w-7xl mx-auto px-6 text-center mb-8">
@@ -183,30 +194,23 @@ function ClientLogos() {
       {/* Infinite Horizontal Scrolling Ticker Container */}
       <div className="relative w-full overflow-hidden flex [mask-image:_linear-gradient(to_right,_transparent_0,_black_128px,_black_calc(100%_-_128px),_transparent_100%)]">
         <motion.div 
-          animate={{ x: [0, -1072] }}
+          animate={{ x: ["0%", "-50%"] }}
           transition={{ 
-            duration: 18, 
+            duration: 25, 
             repeat: Infinity, 
             ease: "linear" 
           }}
-          className="flex items-center gap-12 shrink-0 py-2"
+          className="flex items-center gap-16 md:gap-24 shrink-0 py-2"
         >
-          {/* Render instances of the logo image consecutively to ensure continuous loop flow */}
-          <img 
-            src="/images/trusted_clients_clean.png" 
-            alt="Trusted Client Logos" 
-            className="h-10 md:h-12 w-[1024px] object-contain mix-blend-multiply dark:mix-blend-screen dark:invert dark:opacity-85 select-none pointer-events-none"
-          />
-          <img 
-            src="/images/trusted_clients_clean.png" 
-            alt="Trusted Client Logos" 
-            className="h-10 md:h-12 w-[1024px] object-contain mix-blend-multiply dark:mix-blend-screen dark:invert dark:opacity-85 select-none pointer-events-none"
-          />
-          <img 
-            src="/images/trusted_clients_clean.png" 
-            alt="Trusted Client Logos" 
-            className="h-10 md:h-12 w-[1024px] object-contain mix-blend-multiply dark:mix-blend-screen dark:invert dark:opacity-85 select-none pointer-events-none"
-          />
+          {duplicatedLogos.map((logo, idx) => (
+            <div key={idx} className="flex items-center justify-center shrink-0">
+              <img 
+                src={logo.src} 
+                alt={logo.alt} 
+                className={`${logo.className} w-auto object-contain mix-blend-multiply dark:mix-blend-screen dark:invert dark:opacity-85 select-none pointer-events-none hover:opacity-100 transition-opacity duration-300`}
+              />
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>
