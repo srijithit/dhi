@@ -82,7 +82,7 @@ export default function WhyChooseUs() {
               <motion.div 
                 key={idx}
                 variants={cardVariants}
-                className={`glass-card h-full flex flex-col min-h-[220px] p-8 border border-slate-200 dark:border-slate-900 hover:border-[#2196E8] bg-slate-50/50 dark:bg-[#0d111c]/60 hover:bg-white dark:hover:bg-[#141b2d] shadow-sm hover:shadow-lg relative group transition-all duration-300 ${
+                className={`glass-card md:h-[220px] h-auto flex flex-col p-8 border border-slate-200 dark:border-slate-900 hover:border-[#2196E8] bg-slate-50/50 dark:bg-[#0d111c]/60 hover:bg-white dark:hover:bg-[#141b2d] shadow-sm hover:shadow-lg relative group transition-all duration-300 ${
                   idx === 0 ? 'lg:col-span-2' : ''
                 }`}
               >
