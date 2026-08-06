@@ -52,7 +52,7 @@ export default function CTABanner({ onOpenAudit }: CTABannerProps) {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
           <button 
             onClick={handleConsultationClick}
-            className="btn-primary w-full sm:w-auto px-8 py-4 bg-brand text-white font-bold rounded-2xl hover:bg-brand-bright transition-colors duration-250 flex items-center justify-center gap-2 text-base uppercase tracking-wider shadow-md hover:shadow-lg cursor-pointer"
+            className="w-full sm:w-auto px-8 py-4 bg-[#4A72EB] hover:bg-[#2196E8] text-white font-bold rounded-2xl border-2 border-transparent hover:shadow-lg transition-all duration-250 flex items-center justify-center gap-2 text-base uppercase tracking-wider shadow-md cursor-pointer"
           >
             <PhoneCall className="w-5 h-5" />
             <span>CLAIM FREE AUDIT</span>
@@ -60,7 +60,7 @@ export default function CTABanner({ onOpenAudit }: CTABannerProps) {
           
           <button 
             onClick={handleWhatsAppClick}
-            className="w-full sm:w-auto px-8 py-4 border-2 border-emerald-500 text-emerald-500 font-bold rounded-lg hover:bg-emerald-500 hover:text-white transition-colors duration-250 flex items-center justify-center gap-2 text-base uppercase tracking-wider bg-transparent"
+            className="w-full sm:w-auto px-8 py-4 border-2 border-emerald-500 text-emerald-500 font-bold rounded-2xl hover:bg-emerald-500 hover:text-white transition-colors duration-250 flex items-center justify-center gap-2 text-base uppercase tracking-wider bg-transparent cursor-pointer"
           >
             <MessageCircle className="w-5 h-5 shrink-0" />
             <span>WhatsApp Us Now</span>

@@ -50,7 +50,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
           
           {/* Left Column - Content */}
           <motion.div 
-            className="lg:col-span-7 space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start justify-center"
+            className="lg:col-span-7 space-y-6 text-left flex flex-col items-start justify-start"
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
@@ -65,27 +65,27 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
                 Coimbatore's Premier Digital Growth Agency
               </span>
             </motion.div>
-
+ 
             <motion.h1 
               variants={fadeInUp}
-              className="font-header text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide uppercase text-slate-955 text-center lg:text-left leading-[1.05] mb-2"
+              className="font-header text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide uppercase text-slate-955 text-left leading-[1.05] mb-2"
             >
               COIMBATORE'S LEADING <span className="text-[#2196E8]">DIGITAL GROWTH</span> PARTNER <br />
               <span className="text-[#4A72EB] text-2xl sm:text-3xl md:text-4xl block mt-2 font-semibold">
                 WEB, APP, AI &amp; PERFORMANCE MARKETING
               </span>
             </motion.h1>
-
+ 
             <motion.p 
               variants={fadeInUp}
-              className="text-lg sm:text-xl text-slate-700 font-medium leading-relaxed font-body text-center lg:text-left max-w-2xl"
+              className="text-lg sm:text-xl text-slate-700 font-medium leading-relaxed font-body text-left max-w-2xl"
             >
               We help businesses grow through Websites, Apps, AI Automation and Performance Marketing.
             </motion.p>
-
+ 
             <motion.div 
               variants={fadeInUp}
-              className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full sm:w-auto"
+              className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 w-full sm:w-auto"
             >
               <motion.button 
                 onClick={onOpenAudit}
@@ -96,7 +96,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
                 <span>CLAIM FREE AUDIT</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.button>
-
+ 
               <motion.button 
                 onClick={onExploreServices}
                 whileHover={{ scale: 1.02 }}
@@ -105,11 +105,11 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
               >
                 <span>See Our Work</span>
               </motion.button>
-
+ 
               <motion.button
                 onClick={() => setShowVideoModal(true)}
                 whileHover={{ scale: 1.05 }}
-                className="inline-flex items-center gap-2 px-2 py-1 text-sm font-bold text-slate-700 dark:text-slate-200 hover:text-[#2196E8] transition-colors cursor-pointer shrink-0"
+                className="inline-flex items-center justify-start gap-2 px-2 py-1 text-sm font-bold text-slate-700 dark:text-slate-200 hover:text-[#2196E8] transition-colors cursor-pointer shrink-0"
               >
                 <span className="w-10 h-10 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/30 flex items-center justify-center text-[#2196E8] transition-transform">
                   <Play className="w-4 h-4 fill-[#2196E8]" />
@@ -117,7 +117,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
                 <span>Watch Video (45s)</span>
               </motion.button>
             </motion.div>
-
+ 
           </motion.div>
 
           {/* Right Column - Premium Animated Dashboard Mockup */}

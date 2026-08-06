@@ -22,17 +22,17 @@ export default function AboutPage() {
       <main className="subpage-padding-top">
         
         {/* Page Hero */}
-        <section className="relative py-24 bg-[#000000] text-white overflow-hidden bg-dot-matrix border-b border-slate-900">
-          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/10 rounded-full blur-[130px] pointer-events-none" />
+        <section className="relative py-24 bg-slate-50 dark:bg-[#0b0f19] text-slate-900 dark:text-white overflow-hidden bg-dot-matrix border-b border-slate-200 dark:border-slate-800">
+          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/5 rounded-full blur-[130px] pointer-events-none" />
           
           <div className="max-w-6xl mx-auto px-6 relative z-10 text-center space-y-6">
             <span className="text-[#2196E8] font-body text-xs font-semibold uppercase tracking-widest block">
               Coimbatore Digital Agency
             </span>
             <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider uppercase leading-none">
-              WHO WE ARE &amp; <span className="text-brand-bright">OUR PURPOSE</span>
+              WHO WE ARE &amp; <span className="text-[#2196E8]">OUR PURPOSE</span>
             </h1>
-            <p className="text-slate-350 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed font-body">
               We combine cutting-edge technology, creative designs, and performance marketing to guide local businesses towards global standards.
             </p>
           </div>
@@ -106,21 +106,24 @@ export default function AboutPage() {
               </motion.div>
 
               <motion.div 
-                className="lg:col-span-6 flex justify-center"
+                className="lg:col-span-6 relative flex justify-center w-full"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
               >
-                {/* Visual placeholder badge card */}
-                <div className="w-full max-w-[420px] p-8 rounded-3xl bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
-                  <div className="h-1 bg-[#2196E8] w-20 rounded-full" />
-                  <blockquote className="text-slate-700 dark:text-slate-300 italic font-body text-base">
-                    "Deep local roots coupled with global technical benchmarks form the core foundation of our service delivery framework."
-                  </blockquote>
-                  <p className="text-xs uppercase tracking-wider font-bold text-slate-500 font-numeric">
-                    — The DhiGrowth Ethos
-                  </p>
+                <div className="relative w-full max-w-[480px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800/80 group">
+                  <img 
+                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80" 
+                    alt="DhiGrowth Team Story" 
+                    className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6">
+                    <p className="text-xs font-bold uppercase tracking-widest text-[#2196E8] mb-1 font-numeric">The DhiGrowth Ethos</p>
+                    <blockquote className="text-white italic font-body text-sm sm:text-base leading-relaxed">
+                      "Deep local roots coupled with global technical benchmarks form the core foundation of our service delivery framework."
+                    </blockquote>
+                  </div>
                 </div>
               </motion.div>
 
@@ -134,17 +137,24 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               
               <motion.div 
-                className="lg:col-span-6 order-last lg:order-first flex justify-center"
+                className="lg:col-span-6 order-last lg:order-first flex justify-center w-full"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
               >
-                <div className="w-full max-w-[420px] p-8 rounded-3xl bg-slate-50 dark:bg-[#0d111c] border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
-                  <div className="h-1 bg-[#4A72EB] w-20 rounded-full" />
-                  <p className="text-slate-700 dark:text-slate-300 text-sm font-body">
-                    Deploying custom APIs, recommendation algorithms, high-conversion landing pages, and AI automations to transform daily client revenue streams.
-                  </p>
+                <div className="relative w-full max-w-[480px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800/80 group">
+                  <img 
+                    src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&auto=format&fit=crop&q=80" 
+                    alt="DhiGrowth Technical Vision" 
+                    className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6">
+                    <p className="text-xs font-bold uppercase tracking-widest text-[#2196E8] mb-1 font-numeric">Future Horizon</p>
+                    <blockquote className="text-white italic font-body text-sm sm:text-base leading-relaxed">
+                      "Deploying custom APIs, recommendation algorithms, high-conversion landing pages, and AI automations to transform client revenue streams."
+                    </blockquote>
+                  </div>
                 </div>
               </motion.div>
 
@@ -210,17 +220,24 @@ export default function AboutPage() {
               </motion.div>
 
               <motion.div 
-                className="lg:col-span-6 flex justify-center"
+                className="lg:col-span-6 flex justify-center w-full"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
               >
-                <div className="w-full max-w-[420px] p-8 rounded-3xl bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
-                  <div className="h-1 bg-[#A9C0F5] w-20 rounded-full" />
-                  <blockquote className="text-slate-700 dark:text-slate-300 italic font-body text-base">
-                    "Data-backed choices, creative scripts, high performance infrastructure. That is our commitment to Coimbatore and global businesses."
-                  </blockquote>
+                <div className="relative w-full max-w-[480px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800/80 group">
+                  <img 
+                    src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&auto=format&fit=crop&q=80" 
+                    alt="DhiGrowth Technical Mission" 
+                    className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6">
+                    <p className="text-xs font-bold uppercase tracking-widest text-[#2196E8] mb-1 font-numeric">Daily Execution</p>
+                    <blockquote className="text-white italic font-body text-sm sm:text-base leading-relaxed">
+                      "Data-backed choices, creative scripts, high performance infrastructure. That is our commitment to Coimbatore and global businesses."
+                    </blockquote>
+                  </div>
                 </div>
               </motion.div>
 

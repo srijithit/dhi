@@ -16,8 +16,8 @@ export default function AuditPage() {
       <main className="subpage-padding-top">
         
         {/* Page Hero */}
-        <section className="relative py-24 bg-[#000000] text-white overflow-hidden bg-dot-matrix border-b border-slate-900">
-          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/10 rounded-full blur-[130px] pointer-events-none" />
+        <section className="relative py-24 bg-slate-50 dark:bg-[#0b0f19] text-slate-900 dark:text-white overflow-hidden bg-dot-matrix border-b border-slate-200 dark:border-slate-800">
+          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/5 rounded-full blur-[130px] pointer-events-none" />
           
           <div className="max-w-6xl mx-auto px-6 relative z-10 text-center space-y-6">
             <span className="text-[#2196E8] font-body text-xs font-semibold uppercase tracking-widest block">
@@ -26,7 +26,7 @@ export default function AuditPage() {
             <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider uppercase leading-none">
               FREE DIGITAL &amp; <span className="text-[#2196E8]">ROADMAP AUDIT</span>
             </h1>
-            <p className="text-slate-350 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed font-body">
+            <p className="text-slate-600 dark:text-slate-300 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed font-body">
               Get a detailed technical breakdown of your website performance, SEO keyword rankings, and competitor advertising strategies.
             </p>
           </div>

@@ -63,7 +63,7 @@ export default function ServicesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-20 gap-6">
           <div>
             <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-numeric">
               Our End-to-End Capabilities
@@ -74,7 +74,7 @@ export default function ServicesSection() {
           </div>
           
           {/* Service Filters */}
-          <div className="flex flex-wrap gap-2.5 max-w-xl">
+          <div className="flex flex-wrap gap-2.5 max-w-xl md:justify-end">
             {['all', 'tech', 'ai', 'marketing', 'creative'].map((cat) => (
               <button
                 key={cat}
@@ -130,15 +130,6 @@ export default function ServicesSection() {
                   </p>
                 </div>
 
-                <div className="pt-2">
-                  <Link 
-                    href={`/services/${service.id}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#2196E8] hover:text-[#4A72EB] transition-colors duration-300"
-                  >
-                    <span>Learn More</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
               </motion.div>
             );
           })}

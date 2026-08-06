@@ -29,17 +29,17 @@ export default function ContactPage() {
       <main className="subpage-padding-top">
         
         {/* Page Hero */}
-        <section className="relative py-24 bg-[#000000] text-white overflow-hidden bg-dot-matrix border-b border-slate-900">
-          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/10 rounded-full blur-[130px] pointer-events-none" />
+        <section className="relative py-24 bg-slate-50 dark:bg-[#0b0f19] text-slate-900 dark:text-white overflow-hidden bg-dot-matrix border-b border-slate-200 dark:border-slate-800">
+          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/5 rounded-full blur-[130px] pointer-events-none" />
           
           <div className="max-w-6xl mx-auto px-6 relative z-10 text-center space-y-6">
             <span className="text-[#2196E8] font-body text-xs font-semibold uppercase tracking-widest block">
               Get in Touch
             </span>
             <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider uppercase leading-none">
-              CONTACT &amp; <span className="text-brand-bright">CONSULTATION</span>
+              CONTACT &amp; <span className="text-[#2196E8]">CONSULTATION</span>
             </h1>
-            <p className="text-slate-350 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed font-body">
               Have a project in mind, want a digital performance audit, or looking to join the DhiGrowth team? Connect with us today.
             </p>
           </div>
