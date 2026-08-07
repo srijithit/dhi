@@ -60,7 +60,7 @@ export default function Home() {
                 "email": "dhinesh@dhigrowth.com",
                 "address": {
                   "@type": "PostalAddress",
-                  "streetAddress": "Avinashi Road, Peelamedu",
+                  "streetAddress": "Door No. 119, First Floor, Kovai Thirunagar, Kalapatti Main Road, Nehru Nagar West",
                   "addressLocality": "Coimbatore",
                   "addressRegion": "Tamil Nadu",
                   "postalCode": "641004",

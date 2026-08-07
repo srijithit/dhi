@@ -85,7 +85,7 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-bold text-slate-900 dark:text-white text-base group-hover:text-[#2196E8] transition-colors">Office Address</h4>
                       <p className="text-slate-600 dark:text-slate-350 text-sm mt-1 leading-relaxed">
-                        Avinashi Road, Peelamedu, Coimbatore, Tamil Nadu 641004
+                        Door No. 119, First Floor, Kovai Thirunagar, Kalapatti Main Road, Nehru Nagar West, Coimbatore, Tamil Nadu
                       </p>
                       <span className="text-xs text-[#2196E8] font-bold mt-2 inline-block">Get Directions on Google Maps →</span>
                     </div>

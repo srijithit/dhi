@@ -75,7 +75,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
                 className="flex items-start gap-3 hover:text-slate-900 dark:hover:text-white transition-colors group"
               >
                 <MapPin className="w-5 h-5 text-[#2196E8] shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-                <span className="underline decoration-dotted decoration-slate-400 group-hover:decoration-current">Avinashi Road, Peelamedu, Coimbatore, Tamil Nadu 641004</span>
+                <span className="underline decoration-dotted decoration-slate-400 group-hover:decoration-current">Door No. 119, First Floor, Kovai Thirunagar, Kalapatti Main Road, Nehru Nagar West, Coimbatore, Tamil Nadu</span>
               </a>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-[#2196E8] shrink-0" />
