@@ -29,8 +29,8 @@ export default function AboutPage() {
             <span className="text-[#2196E8] font-body text-xs font-semibold uppercase tracking-widest block">
               Coimbatore Digital Agency
             </span>
-            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider uppercase leading-none">
-              WHO WE ARE &amp; <span className="text-[#2196E8]">OUR PURPOSE</span>
+            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider leading-none">
+              Who We Are &amp; <span className="text-[#2196E8]">Our Purpose</span>
             </h1>
             <p className="text-slate-600 dark:text-slate-300 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed font-body">
               We combine cutting-edge technology, creative designs, and performance marketing to guide local businesses towards global standards.
@@ -51,13 +51,13 @@ export default function AboutPage() {
               Company Profile
             </motion.span>
             <motion.h2 
-              className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wider leading-none"
+              className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wider leading-none"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeInUp}
             >
-              ABOUT DHIGROWTH
+              About DhiGrowth
             </motion.h2>
             <motion.p 
               className="text-slate-700 dark:text-slate-300 text-lg sm:text-xl leading-relaxed font-normal"

@@ -76,7 +76,7 @@ export default function ServicesPage() {
             <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block font-body">
               Coimbatore Digital Agency
             </span>
-            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wide uppercase leading-none">
+            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wide leading-none">
               Explore Our <span className="text-[#2196E8]">13+ Core Services</span>
             </h1>
             <p className="text-slate-600 dark:text-slate-300 text-lg sm:text-xl max-w-2xl mx-auto font-body">

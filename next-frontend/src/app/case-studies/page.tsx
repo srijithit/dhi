@@ -23,8 +23,8 @@ export default function CaseStudiesPage() {
             <span className="text-[#2196E8] font-body text-xs font-semibold uppercase tracking-widest block">
               Coimbatore Digital Agency
             </span>
-            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider uppercase leading-none">
-              CASE STUDIES &amp; <span className="text-[#2196E8]">CLIENT RESULTS</span>
+            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider leading-none">
+              Case Studies &amp; <span className="text-[#2196E8]">Client Results</span>
             </h1>
             <p className="text-slate-600 dark:text-slate-300 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed font-body">
               See how we help businesses in Coimbatore and across India scale their traffic, leads, and sales through custom digital marketing campaigns.

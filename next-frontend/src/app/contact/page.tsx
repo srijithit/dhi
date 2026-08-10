@@ -38,8 +38,8 @@ export default function ContactPage() {
             <span className="text-[#2196E8] font-body text-xs font-semibold uppercase tracking-widest block">
               Get in Touch
             </span>
-            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider uppercase leading-none">
-              CONTACT &amp; <span className="text-[#2196E8]">CONSULTATION</span>
+            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider leading-none">
+              Contact &amp; <span className="text-[#2196E8]">Consultation</span>
             </h1>
             <p className="text-slate-600 dark:text-slate-300 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed font-body">
               Have a project in mind, want a digital performance audit, or looking to join the DhiGrowth team? Connect with us today.

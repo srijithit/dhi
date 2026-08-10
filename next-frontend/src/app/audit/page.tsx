@@ -23,8 +23,8 @@ export default function AuditPage() {
             <span className="text-[#2196E8] font-body text-xs font-semibold uppercase tracking-widest block">
               Coimbatore Digital Agency
             </span>
-            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider uppercase leading-none">
-              FREE DIGITAL &amp; <span className="text-[#2196E8]">ROADMAP AUDIT</span>
+            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider leading-none">
+              Free Digital &amp; <span className="text-[#2196E8]">Roadmap Audit</span>
             </h1>
             <p className="text-slate-600 dark:text-slate-300 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed font-body">
               Get a detailed technical breakdown of your website performance, SEO keyword rankings, and competitor advertising strategies.
