@@ -59,7 +59,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
     return (
       <div className="bg-white dark:bg-[#090d18] p-5 sm:p-10 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl min-h-[520px] flex flex-col justify-between max-w-3xl mx-auto w-full">
         <div className="space-y-6 animate-fadeIn font-body text-left">
-          <h3 className="font-header text-3xl sm:text-4xl md:text-5xl text-slate-900 dark:text-white uppercase tracking-wide mb-2 leading-tight">
+          <h3 className="font-header text-3xl sm:text-4xl md:text-5xl text-slate-900 dark:text-white tracking-wide mb-2 leading-tight">
             Request Free Audit &amp; Roadmap
           </h3>
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base mb-6 font-body leading-relaxed">
@@ -175,9 +175,9 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
                 <span>Zero Cost • High Value</span>
               </div>
 
-              <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wide mb-6 leading-none">
-                READY TO GROW YOUR BUSINESS <br />
-                <span className="text-[#2196E8]">IN COIMBATORE?</span>
+              <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 leading-none">
+                Ready to Grow Your Business <br />
+                <span className="text-[#2196E8]">In Coimbatore?</span>
               </h2>
 
               <p className="text-slate-650 dark:text-slate-355 text-base sm:text-lg leading-relaxed mb-8 font-body max-w-xl">
@@ -239,7 +239,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
               
               {auditState === 'form' && (
                 <div className="space-y-5 animate-fadeIn font-body text-left">
-                  <h3 className="font-header text-3xl sm:text-4xl text-slate-900 dark:text-white uppercase tracking-wide mb-2 leading-tight">
+                  <h3 className="font-header text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-wide mb-2 leading-tight">
                     Request Free Audit &amp; Roadmap
                   </h3>
                   <p className="text-slate-600 dark:text-slate-300 text-sm mb-6 leading-relaxed">
@@ -339,7 +339,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
                 <div className="flex flex-col items-center justify-center py-16 text-center space-y-6 animate-pulse">
                   <div className="w-16 h-16 rounded-full border-4 border-t-[#2196E8] border-slate-200 dark:border-slate-800 animate-spin" />
                   <div>
-                    <h4 className="font-header text-2xl text-slate-900 dark:text-white uppercase tracking-wide">
+                    <h4 className="font-header text-2xl text-slate-900 dark:text-white tracking-wide">
                       Analyzing {formData.businessName || "Your Business"}
                     </h4>
                     <p className="text-xs text-[#2196E8] font-numeric mt-1 uppercase tracking-widest">
@@ -355,7 +355,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
               {auditState === 'results' && (
                 <div className="space-y-6 animate-fadeIn font-body text-left">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-header text-3xl text-slate-900 dark:text-white uppercase tracking-wide">
+                    <h3 className="font-header text-3xl text-slate-900 dark:text-white tracking-wide">
                       Your Audit Report
                     </h3>
                     <button 

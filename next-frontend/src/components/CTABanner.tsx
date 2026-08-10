@@ -41,8 +41,8 @@ export default function CTABanner({ onOpenAudit }: CTABannerProps) {
           <TrendingUp className="w-8 h-8" />
         </div>
 
-        <h2 className="font-header text-5xl sm:text-7xl uppercase tracking-wider max-w-3xl mx-auto leading-none">
-          Ready to grow your business in <span className="text-[#2196E8]">Coimbatore?</span>
+        <h2 className="font-header text-5xl sm:text-7xl tracking-wider max-w-3xl mx-auto leading-none">
+          Ready to Grow Your Business in <span className="text-[#2196E8]">Coimbatore?</span>
         </h2>
 
         <p className="font-body text-slate-350 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
