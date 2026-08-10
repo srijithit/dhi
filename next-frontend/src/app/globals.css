@@ -37,6 +37,7 @@
 * {
   box-sizing: border-box;
   transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  text-transform: lowercase !important;
 }
 
 html {
@@ -51,6 +52,11 @@ body {
   font-family: var(--font-body);
   line-height: 1.7;
   font-size: 1.125rem;
+  text-transform: lowercase !important;
+}
+
+input, button, select, textarea, input::placeholder, textarea::placeholder {
+  text-transform: lowercase !important;
 }
 
 /* Font utility classes mapping display, numeric and body */

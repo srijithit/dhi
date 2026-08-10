@@ -74,7 +74,7 @@ export default function ServicesSection() {
           </div>
           
           {/* Service Filters */}
-          <div className="flex flex-wrap md:flex-nowrap gap-2 sm:gap-2.5 items-center justify-start md:justify-end shrink-0">
+          <div className="flex flex-nowrap gap-1.5 sm:gap-2.5 items-center justify-start md:justify-end shrink-0 overflow-x-auto max-w-full pb-1 md:pb-0">
             {['all', 'tech', 'ai', 'marketing', 'creative'].map((cat) => (
               <button
                 key={cat}
