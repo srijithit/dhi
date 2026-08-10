@@ -29,11 +29,11 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
   }, []);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
-    { name: 'About', path: '/about' },
-    { name: 'Case Studies', path: '/case-studies' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'home', path: '/' },
+    { name: 'services', path: '/services' },
+    { name: 'about', path: '/about' },
+    { name: 'case studies', path: '/case-studies' },
+    { name: 'contact', path: '/contact' },
   ];
 
   const handleApplyClick = () => {
@@ -109,9 +109,9 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
         <div className="hidden md:flex items-center gap-4">
           <button 
             onClick={handleApplyClick}
-            className="btn-primary !py-3 !px-6 !text-sm text-white font-bold rounded-2xl hover:bg-brand-bright transition-all shadow-md hover:shadow-lg uppercase tracking-wider font-body bg-[#4A72EB] cursor-pointer"
+            className="btn-primary !py-3 !px-6 !text-sm text-white font-bold rounded-2xl hover:bg-brand-bright transition-all shadow-md hover:shadow-lg lowercase tracking-wider font-body bg-[#4A72EB] cursor-pointer"
           >
-            CLAIM FREE AUDIT
+            claim free audit
           </button>
         </div>
 
@@ -147,9 +147,9 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
           <div className="pt-4 border-t border-slate-200">
             <button 
               onClick={() => { setMobileMenuOpen(false); handleApplyClick(); }}
-              className="btn-primary w-full text-center py-3 uppercase tracking-wider text-sm font-bold font-body rounded-2xl cursor-pointer"
+              className="btn-primary w-full text-center py-3 lowercase tracking-wider text-sm font-bold font-body rounded-2xl cursor-pointer"
             >
-              CLAIM FREE AUDIT
+              claim free audit
             </button>
           </div>
         </div>
