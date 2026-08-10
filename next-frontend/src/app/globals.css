@@ -55,20 +55,21 @@ body {
   text-transform: lowercase;
 }
 
-input, select, textarea, input::placeholder, textarea::placeholder, label, a, li, td, th, blockquote {
-  text-transform: lowercase !important;
+input, select, textarea, input::placeholder, textarea::placeholder, label, li, td, th, blockquote {
+  text-transform: lowercase;
 }
 
-/* Paragraphs & Buttons - Sentence Case (first letter capitalized) */
-p, button, .btn-primary, .btn-secondary {
-  text-transform: lowercase !important;
+/* Paragraphs - Sentence Case (first letter capitalized) */
+p {
+  text-transform: lowercase;
 }
 
-p::first-letter, button::first-letter, button *::first-letter, .btn-primary::first-letter, .btn-secondary::first-letter {
+p::first-letter {
   text-transform: uppercase !important;
 }
 
-/* Heading tags (h1-h6) - capitalize the first letter of each word */
+/* Navigation, Buttons, Badges, and Headings - Capitalize First Letter of Each Word (Title Case) */
+nav a, header a, button, .btn-primary, .btn-secondary,
 h1, h2, h3, h4, h5, h6,
 h1 *, h2 *, h3 *, h4 *, h5 *, h6 *,
 .font-header, .font-header * {
