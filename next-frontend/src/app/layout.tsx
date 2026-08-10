@@ -26,6 +26,11 @@ export const metadata = {
   description: "DhiGrowth is Coimbatore's top digital agency offering website development, AI solutions, SEO, Meta & Google Ads, social media, and business automation services.",
   keywords: "Digital Agency Coimbatore, Website Development Coimbatore, Mobile App Development Coimbatore, AI Development Coimbatore, WhatsApp Marketing, SEO Coimbatore, Google Ads",
   robots: "index, follow",
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({
