@@ -206,7 +206,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
                 whileTap={{ scale: 0.98 }}
                 className="btn-primary group !py-3.5 !px-8 cursor-pointer w-full sm:w-auto !rounded-2xl shadow-md hover:shadow-lg"
               >
-                <span>claim free audit</span>
+                <span>Claim Free Audit</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.button>
  
@@ -219,7 +219,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
                 <span className="w-10 h-10 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/30 flex items-center justify-center text-[#2196E8] transition-transform">
                   <Play className="w-4 h-4 fill-[#2196E8]" />
                 </span>
-                <span>watch video (45s)</span>
+                <span>Watch Video (45s)</span>
               </motion.button>
             </motion.div>
  

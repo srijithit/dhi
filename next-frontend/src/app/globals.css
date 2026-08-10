@@ -69,7 +69,7 @@ p::first-letter {
 }
 
 /* Navigation, Buttons, Badges, and Headings - Capitalize First Letter of Each Word (Title Case) */
-nav a, header a, button, .btn-primary, .btn-secondary,
+nav a, header a, button, button *, .btn-primary, .btn-primary *, .btn-secondary, .btn-secondary *,
 h1, h2, h3, h4, h5, h6,
 h1 *, h2 *, h3 *, h4 *, h5 *, h6 *,
 .font-header, .font-header * {

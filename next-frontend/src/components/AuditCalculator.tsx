@@ -426,7 +426,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
                       className="btn-primary w-full !py-3 flex items-center justify-center gap-2 cursor-pointer !rounded-2xl shadow-md hover:shadow-lg"
                     >
                       <MessageCircle className="w-4 h-4" />
-                      <span>CLAIM FREE AUDIT</span>
+                      <span>Claim Free Audit</span>
                     </button>
                   </div>
                 </div>
