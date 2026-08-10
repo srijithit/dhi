@@ -74,12 +74,12 @@ export default function ServicesSection() {
           </div>
           
           {/* Service Filters */}
-          <div className="flex flex-wrap gap-2.5 max-w-xl md:justify-end">
+          <div className="flex flex-wrap md:flex-nowrap gap-2 sm:gap-2.5 items-center justify-start md:justify-end shrink-0">
             {['all', 'tech', 'ai', 'marketing', 'creative'].map((cat) => (
               <button
                 key={cat}
                 onClick={() => handleFilterChange(cat as any)}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${
+                className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-300 border whitespace-nowrap shrink-0 ${
                   filter === cat
                     ? 'bg-[#2196E8] text-white border-[#2196E8] shadow-sm shadow-[#2196E8]/20'
                     : 'bg-white dark:bg-[#0b0f19] text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-900'
