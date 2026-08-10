@@ -5,11 +5,13 @@ import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import AuditCalculator from '@/components/AuditCalculator';
+import EmailModal from '@/components/EmailModal';
 import { MapPin, Mail, Phone, Clock, Sparkles } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 
 export default function ContactPage() {
   const [isApplyMode, setIsApplyMode] = useState(false);
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -91,18 +93,18 @@ export default function ContactPage() {
                     </div>
                   </a>
 
-                  <a 
-                    href="mailto:dinesh@dhigrowth.com"
-                    className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm hover:border-[#2196E8] transition-colors group"
+                  <button 
+                    onClick={() => setIsEmailModalOpen(true)}
+                    className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm hover:border-[#2196E8] transition-colors group text-left cursor-pointer w-full"
                   >
                     <Mail className="w-6 h-6 text-[#2196E8] shrink-0 mt-1 group-hover:scale-110 transition-transform" />
                     <div>
                       <h4 className="font-bold text-slate-900 dark:text-white text-base group-hover:text-[#2196E8] transition-colors">General Inquiries</h4>
                       <p className="text-slate-600 dark:text-slate-350 text-sm mt-1 group-hover:underline">
-                        dinesh@dhigrowth.com
+                        dinesh@dhigrowth.com — Click to Send Mail →
                       </p>
                     </div>
-                  </a>
+                  </button>
 
                   <a 
                     href="https://api.whatsapp.com/send?phone=919361088012&text=Hi%20DhiGrowth%2C%20I%20want%20to%20grow%20my%20business%20in%20India%21"
@@ -141,6 +143,7 @@ export default function ContactPage() {
 
       <Footer />
       <FloatingWhatsApp />
+      <EmailModal isOpen={isEmailModalOpen} onClose={() => setIsEmailModalOpen(false)} />
     </div>
   );
 }
