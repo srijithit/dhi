@@ -157,7 +157,7 @@ export default function IndustriesSection({ onOpenAudit }: IndustriesSectionProp
                     </div>
                   </div>
                   
-                  <h3 className="font-header text-2xl text-slate-900 dark:text-white uppercase tracking-wide mb-3">
+                  <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wide mb-3">
                     {ind.title}
                   </h3>
                   <p className="text-slate-600 dark:text-slate-350 text-xs sm:text-sm leading-relaxed mb-6">

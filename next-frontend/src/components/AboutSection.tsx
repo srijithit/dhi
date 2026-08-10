@@ -83,7 +83,7 @@ export default function AboutSection() {
                 <div className={`w-14 h-14 rounded-2xl ${pillar.bgClass} border flex items-center justify-center ${pillar.colorClass.split(' ')[2]} mb-6 group-hover:scale-110 transition-transform duration-300`}>
                   <IconComponent className="w-7 h-7" />
                 </div>
-                <h3 className="font-header text-2xl text-slate-900 dark:text-white uppercase tracking-wide mb-3">
+                <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wide mb-3">
                   {pillar.title}
                 </h3>
                 <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">

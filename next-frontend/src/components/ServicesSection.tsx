@@ -125,7 +125,7 @@ export default function ServicesSection() {
                        )}
                      </div>
 
-                     <h3 className="font-header text-xl text-slate-900 dark:text-white uppercase tracking-wide mb-2 group-hover:text-[#2196E8] transition-colors duration-300">
+                     <h3 className="font-header text-xl text-slate-900 dark:text-white tracking-wide mb-2 group-hover:text-[#2196E8] transition-colors duration-300">
                        {service.name}
                      </h3>
 

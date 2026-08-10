@@ -368,7 +368,7 @@ function TeamSection() {
               </div>
               <div className="flex items-end justify-between gap-3">
                 <div>
-                  <h4 className="font-header text-xl text-slate-900 dark:text-white uppercase tracking-wide">
+                  <h4 className="font-header text-xl text-slate-900 dark:text-white tracking-wide">
                     {m.name}
                   </h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
@@ -449,7 +449,7 @@ function BlogSection() {
                   {art.tag}
                 </span>
                 
-                <h3 className="font-header text-2xl text-slate-900 dark:text-white uppercase tracking-wide mb-4 line-clamp-2 group-hover:text-[#2196E8] transition-colors duration-300">
+                <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wide mb-4 line-clamp-2 group-hover:text-[#2196E8] transition-colors duration-300">
                   {art.title}
                 </h3>
               </div>

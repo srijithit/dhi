@@ -90,7 +90,7 @@ export default function WhyChooseUs() {
                   <IconComponent className="w-7 h-7" />
                 </div>
 
-                <h3 className="font-header text-2xl text-slate-900 dark:text-white uppercase tracking-wide mb-3 group-hover:text-[#2196E8] transition-colors duration-300">
+                <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wide mb-3 group-hover:text-[#2196E8] transition-colors duration-300">
                   {diff.title}
                 </h3>
 

@@ -105,7 +105,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
 
           {/* Quick Links Column */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-header text-xl text-slate-900 dark:text-white uppercase tracking-wide mb-4">
+            <h4 className="font-header text-xl text-slate-900 dark:text-white tracking-wide mb-4">
               Company
             </h4>
             <ul className="space-y-2.5 text-sm">
@@ -119,7 +119,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
 
           {/* Tech & AI Services Column */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-header text-xl text-slate-900 dark:text-white uppercase tracking-wide mb-4">
+            <h4 className="font-header text-xl text-slate-900 dark:text-white tracking-wide mb-4">
               Tech &amp; AI
             </h4>
             <ul className="space-y-2 text-sm">
@@ -138,7 +138,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
 
           {/* Marketing & Media Column */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-header text-xl text-slate-900 dark:text-white uppercase tracking-wide mb-4">
+            <h4 className="font-header text-xl text-slate-900 dark:text-white tracking-wide mb-4">
               Marketing &amp; Media
             </h4>
             <ul className="space-y-2 text-sm">

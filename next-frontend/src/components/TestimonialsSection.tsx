@@ -96,7 +96,7 @@ export default function TestimonialsSection({ showAll = false }: TestimonialsSec
                     />
                   )}
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-header text-lg text-white uppercase tracking-wide truncate">
+                    <h4 className="font-header text-lg text-white tracking-wide truncate">
                       {testimonial.name}
                     </h4>
                     <p className="text-xs text-slate-400 font-medium truncate">
