@@ -62,8 +62,9 @@ input, button, select, textarea, input::placeholder, textarea::placeholder,
 
 /* Font utility classes mapping display, numeric and body */
 .font-header {
-  font-family: var(--font-display);
-  letter-spacing: 0.04em;
+  font-family: var(--font-body);
+  font-weight: 800;
+  letter-spacing: -0.02em;
   line-height: 1.15;
 }
 
