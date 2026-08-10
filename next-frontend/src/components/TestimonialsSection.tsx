@@ -44,8 +44,8 @@ export default function TestimonialsSection({ showAll = false }: TestimonialsSec
           <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-body text-center">
             Social Proof &amp; Proven ROI
           </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wide mb-6 text-center">
-            WHAT OUR CLIENTS IN COIMBATORE <span className="text-[#2196E8]">SAY ABOUT DHIGROWTH</span>
+          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">
+            What Our Clients In Coimbatore <span className="text-[#2196E8]">Say About DhiGrowth</span>
           </h2>
           <p className="text-slate-655 dark:text-slate-300 text-base sm:text-lg text-center">
             Real outcomes, transparent partnerships, and compounding digital growth across Coimbatore's leading brands.

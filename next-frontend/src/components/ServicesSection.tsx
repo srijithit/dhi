@@ -68,8 +68,8 @@ export default function ServicesSection() {
             <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-numeric">
               Our End-to-End Capabilities
             </span>
-            <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wide">
-              13<span className="text-[#2196E8]">+</span> DIGITAL GROWTH SOLUTIONS
+            <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide">
+              13<span className="text-[#2196E8]">+</span> Digital Growth Solutions
             </h2>
           </div>
           

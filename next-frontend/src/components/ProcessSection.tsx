@@ -70,8 +70,8 @@ export default function ProcessSection() {
           <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-body text-center">
             How We Deliver Results
           </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wide mb-6 text-center">
-            OUR PROCESS — SIMPLE, TRANSPARENT, <span className="text-[#2196E8]">RESULTS-DRIVEN</span>
+          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">
+            Our Process — Simple, Transparent, <span className="text-[#2196E8]">Results-Driven</span>
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg font-body text-center">
             A battle-tested 4-step framework designed to eliminate guesswork and turn digital investments into business growth.

@@ -252,8 +252,8 @@ function MetricsSection() {
           <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 text-center">
             Proven Outcomes
           </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wide mb-6 text-center">
-            OUTCOMES THAT SPEAK FOR <span className="text-[#2196E8]">THEMSELVES</span>
+          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">
+            Outcomes That Speak For <span className="text-[#2196E8]">Themselves</span>
           </h2>
           <p className="text-slate-605 dark:text-slate-300 text-base sm:text-lg text-center">
             We don't sell layouts, configurations, or traffic. We design digital engines that deliver real business outcomes.
@@ -344,8 +344,8 @@ function TeamSection() {
           <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 text-center">
             Our Professionals
           </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wide mb-6 text-center">
-            MEET COIMBATORE'S DIGITAL <span className="text-[#2196E8]">EXPERTS</span>
+          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">
+            Meet Coimbatore's Digital <span className="text-[#2196E8]">Experts</span>
           </h2>
           <p className="text-slate-650 dark:text-slate-300 text-base sm:text-lg text-center">
             A cohesive team of developers, performance marketers, and creative designers dedicated to your business success.
@@ -429,8 +429,8 @@ function BlogSection() {
           <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 text-center">
             Insights &amp; Strategy
           </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wide mb-6 text-center">
-            LATEST INSIGHTS <span className="text-[#2196E8]">&amp; STRATEGIES</span>
+          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">
+            Latest Insights <span className="text-[#2196E8]">&amp; Strategies</span>
           </h2>
           <p className="text-slate-650 dark:text-slate-350 text-base sm:text-lg text-center">
             Actionable strategies to optimize your search rankings, automate workflows, and double your digital ROAS.
@@ -529,8 +529,8 @@ function FAQSection() {
           <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 text-center">
             Got Questions?
           </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wide text-center">
-            FREQUENTLY ASKED <span className="text-[#2196E8]">QUESTIONS</span>
+          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide text-center">
+            Frequently Asked <span className="text-[#2196E8]">Questions</span>
           </h2>
         </div>
 

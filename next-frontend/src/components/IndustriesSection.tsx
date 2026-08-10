@@ -125,8 +125,8 @@ export default function IndustriesSection({ onOpenAudit }: IndustriesSectionProp
           <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-body text-center">
             Custom Industry Solutions
           </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wide mb-6 text-center">
-            INDUSTRIES WE <span className="text-[#2196E8]">SERVE IN COIMBATORE</span>
+          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">
+            Industries We <span className="text-[#2196E8]">Serve In Coimbatore</span>
           </h2>
           <p className="text-slate-650 dark:text-slate-300 text-base sm:text-lg text-center">
             We work with businesses across Coimbatore and India — from B2B manufacturing and local healthcare to e-commerce, real estate, and education.

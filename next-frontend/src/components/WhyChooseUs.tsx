@@ -59,8 +59,8 @@ export default function WhyChooseUs() {
           <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-body text-center">
             The DhiGrowth Advantage
           </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wide mb-6 text-center">
-            WHY COIMBATORE BUSINESSES <span className="text-[#2196E8]">CHOOSE DHIGROWTH</span>
+          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">
+            Why Coimbatore Businesses <span className="text-[#2196E8]">Choose DhiGrowth</span>
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg text-center">
             We build scalable technology, run high-converting ad campaigns, and deliver tangible business revenue.
