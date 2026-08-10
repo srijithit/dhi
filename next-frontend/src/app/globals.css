@@ -55,7 +55,8 @@ body {
   text-transform: lowercase !important;
 }
 
-input, button, select, textarea, input::placeholder, textarea::placeholder {
+input, button, select, textarea, input::placeholder, textarea::placeholder,
+.uppercase, .capitalize, [class*="uppercase"], [class*="capitalize"] {
   text-transform: lowercase !important;
 }
 

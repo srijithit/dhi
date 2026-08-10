@@ -174,18 +174,18 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/20 mb-2 backdrop-blur-md shadow-md shadow-[#2196E8]/5"
             >
               <Sparkles className="w-4 h-4 text-[#2196E8] animate-spin" style={{ animationDuration: '8s' }} />
-              <span className="text-xs sm:text-sm font-semibold tracking-wide text-[#2196E8] uppercase font-body">
-                Coimbatore's Premier Digital Growth Agency
+              <span className="text-xs sm:text-sm font-semibold tracking-wide text-[#2196E8] lowercase font-body">
+                coimbatore's premier digital growth agency
               </span>
             </motion.div>
  
             <motion.h1 
               variants={fadeInUp}
-              className="font-header text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide uppercase text-slate-955 text-left leading-[1.05] mb-2"
+              className="font-header text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide lowercase text-slate-955 text-left leading-[1.05] mb-2"
             >
-              COIMBATORE'S LEADING <span className="text-[#2196E8]">DIGITAL GROWTH</span> PARTNER <br />
+              coimbatore's leading <span className="text-[#2196E8]">digital growth</span> partner <br />
               <span className="text-[#4A72EB] text-2xl sm:text-3xl md:text-4xl block mt-2 font-semibold">
-                WEB, APP, AI &amp; PERFORMANCE MARKETING
+                web, app, ai &amp; performance marketing
               </span>
             </motion.h1>
  
@@ -193,7 +193,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
               variants={fadeInUp}
               className="text-lg sm:text-xl text-slate-700 font-medium leading-relaxed font-body text-left max-w-2xl"
             >
-              We help businesses grow through Websites, Apps, AI Automation and Performance Marketing.
+              we help businesses grow through websites, apps, ai automation and performance marketing.
             </motion.p>
  
             <motion.div 
@@ -206,7 +206,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
                 whileTap={{ scale: 0.98 }}
                 className="btn-primary group !py-3.5 !px-8 cursor-pointer w-full sm:w-auto !rounded-2xl shadow-md hover:shadow-lg"
               >
-                <span>CLAIM FREE AUDIT</span>
+                <span>claim free audit</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.button>
  
@@ -219,7 +219,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
                 <span className="w-10 h-10 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/30 flex items-center justify-center text-[#2196E8] transition-transform">
                   <Play className="w-4 h-4 fill-[#2196E8]" />
                 </span>
-                <span>Watch Video (45s)</span>
+                <span>watch video (45s)</span>
               </motion.button>
             </motion.div>
  
