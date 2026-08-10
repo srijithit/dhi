@@ -86,8 +86,8 @@ export default function AboutPage() {
                 <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block font-numeric">
                   How We Started
                 </span>
-                <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wider leading-none">
-                  OUR STORY
+                <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wider leading-none">
+                  Our Story
                 </h2>
                 <h3 className="font-body font-bold text-slate-800 dark:text-slate-200 text-lg">
                   Building Coimbatore's Digital Future
@@ -168,8 +168,8 @@ export default function AboutPage() {
                 <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block font-numeric">
                   Future Horizon
                 </span>
-                <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wider leading-none">
-                  OUR VISION
+                <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wider leading-none">
+                  Our Vision
                 </h2>
                 <h3 className="font-body font-bold text-slate-800 dark:text-slate-200 text-lg">
                   Our Vision for Business Growth
@@ -203,8 +203,8 @@ export default function AboutPage() {
                 <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block font-numeric">
                   Daily Execution
                 </span>
-                <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white uppercase tracking-wider leading-none">
-                  OUR MISSION
+                <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wider leading-none">
+                  Our Mission
                 </h2>
                 <h3 className="font-body font-bold text-slate-800 dark:text-slate-200 text-lg">
                   Our Mission &amp; Commitment
