@@ -54,7 +54,7 @@ export default function ContactPage() {
               {isApplyMode && (
                 <div className="p-6 mb-6 rounded-2xl bg-[#2196E8]/10 border border-[#2196E8]/20 text-[#2196E8] text-sm font-semibold flex items-center gap-2">
                   <Sparkles className="w-5 h-5 shrink-0" />
-                  <span>Recruitment Notice: Email your resume to dhinesh@dhigrowth.com with the subject line 'Application: [Job Title]'.</span>
+                  <span>Recruitment Notice: Email your resume to dinesh@dhigrowth.com with the subject line 'Application: [Job Title]'.</span>
                 </div>
               )}
 
@@ -91,15 +91,18 @@ export default function ContactPage() {
                     </div>
                   </a>
 
-                  <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm">
-                    <Mail className="w-6 h-6 text-[#2196E8] shrink-0 mt-1" />
+                  <a 
+                    href="mailto:dinesh@dhigrowth.com"
+                    className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm hover:border-[#2196E8] transition-colors group"
+                  >
+                    <Mail className="w-6 h-6 text-[#2196E8] shrink-0 mt-1 group-hover:scale-110 transition-transform" />
                     <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white text-base">General Inquiries</h4>
-                      <p className="text-slate-600 dark:text-slate-350 text-sm mt-1">
-                        dhinesh@dhigrowth.com
+                      <h4 className="font-bold text-slate-900 dark:text-white text-base group-hover:text-[#2196E8] transition-colors">General Inquiries</h4>
+                      <p className="text-slate-600 dark:text-slate-350 text-sm mt-1 group-hover:underline">
+                        dinesh@dhigrowth.com
                       </p>
                     </div>
-                  </div>
+                  </a>
 
                   <a 
                     href="https://api.whatsapp.com/send?phone=919361088012&text=Hi%20DhiGrowth%2C%20I%20want%20to%20grow%20my%20business%20in%20India%21"

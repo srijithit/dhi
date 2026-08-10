@@ -57,7 +57,7 @@ export default function Home() {
                 "name": "Dhigrowth Business Pvt Ltd",
                 "image": "https://dhigrowth.com/icon.svg",
                 "telephone": "+91 93610 88012",
-                "email": "dhinesh@dhigrowth.com",
+                "email": "dinesh@dhigrowth.com",
                 "address": {
                   "@type": "PostalAddress",
                   "streetAddress": "Door No. 119, First Floor, Kovai Thirunagar, Kalapatti Main Road, Nehru Nagar West",
@@ -310,13 +310,13 @@ function MetricsSection() {
 function TeamSection() {
   const members = [
     {
-      name: "Srijith Kumar",
+      name: "Dhinesh",
       role: "Founder & Chief Growth Officer",
       avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=300&fit=crop&crop=face",
       linkedin: "https://linkedin.com"
     },
     {
-      name: "Manoj Dev",
+      name: "Mathanraj Murugesan",
       role: "Head of Web Architecture",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
       linkedin: "https://linkedin.com"
@@ -402,7 +402,7 @@ function BlogSection() {
       title: "How Coimbatore Manufacturers are Automating Lead Qualification with AI Agents",
       date: "Aug 02, 2026",
       read: "5 Min Read",
-      author: "Srijith Kumar"
+      author: "Dhinesh"
     },
     {
       tag: "Search SEO",
@@ -416,7 +416,7 @@ function BlogSection() {
       title: "Why Traditional Textile Brands Need to Migrate to Custom Headless E-Commerce Platforms",
       date: "Jul 15, 2026",
       read: "7 Min Read",
-      author: "Manoj Dev"
+      author: "Mathanraj Murugesan"
     }
   ];
 
