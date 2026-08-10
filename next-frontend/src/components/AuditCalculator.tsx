@@ -57,9 +57,9 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
 
   if (onlyForm) {
     return (
-      <div className="bg-white dark:bg-[#090d18] p-6 sm:p-10 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl min-h-[520px] flex flex-col justify-between max-w-3xl mx-auto w-full">
+      <div className="bg-white dark:bg-[#090d18] p-5 sm:p-10 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl min-h-[520px] flex flex-col justify-between max-w-3xl mx-auto w-full">
         <div className="space-y-6 animate-fadeIn font-body text-left">
-          <h3 className="font-header text-3xl sm:text-4xl text-slate-900 dark:text-white uppercase tracking-wide mb-2">
+          <h3 className="font-header text-3xl sm:text-4xl md:text-5xl text-slate-900 dark:text-white uppercase tracking-wide mb-2 leading-tight">
             Request Free Audit &amp; Roadmap
           </h3>
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base mb-6 font-body leading-relaxed">
@@ -146,10 +146,10 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
 
             <button 
               type="submit" 
-              className="btn-primary w-full !py-4 mt-3 flex items-center justify-center gap-2 cursor-pointer !rounded-2xl shadow-lg font-bold text-base"
+              className="btn-primary w-full !py-4.5 sm:!py-5 mt-4 flex items-center justify-center gap-3 cursor-pointer !rounded-2xl sm:!rounded-3xl shadow-xl font-bold text-base sm:text-lg min-h-[58px]"
             >
               <span>Submit to WhatsApp</span>
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           </form>
         </div>
@@ -158,11 +158,11 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
   }
 
   return (
-    <section id="free-audit-form" className="py-32 md:py-40 bg-white dark:bg-[#000000] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
+    <section id="free-audit-form" className="py-20 sm:py-32 md:py-40 bg-white dark:bg-[#000000] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
       
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-[#2196E8]/5 to-[#4A72EB]/5 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10 font-body">
         
         {/* Banner Card */}
         <div className="glass-card p-8 sm:p-14 border border-slate-200 dark:border-slate-800/80 bg-slate-50/50 dark:bg-gradient-to-br dark:from-[#0d1322] dark:to-[#12182b] relative overflow-hidden shadow-xl dark:shadow-2xl animate-fadeIn">
@@ -235,11 +235,11 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
             </div>
 
             {/* Right Card Form */}
-            <div className="lg:col-span-5 bg-white dark:bg-[#090d18] p-6 sm:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl min-h-[520px] flex flex-col justify-between max-w-xl mx-auto w-full">
+            <div className="lg:col-span-5 bg-white dark:bg-[#090d18] p-5 sm:p-8 md:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl min-h-[520px] flex flex-col justify-between max-w-full sm:max-w-xl mx-auto w-full">
               
               {auditState === 'form' && (
                 <div className="space-y-5 animate-fadeIn font-body text-left">
-                  <h3 className="font-header text-3xl sm:text-4xl text-slate-900 dark:text-white uppercase tracking-wide mb-2">
+                  <h3 className="font-header text-3xl sm:text-4xl text-slate-900 dark:text-white uppercase tracking-wide mb-2 leading-tight">
                     Request Free Audit &amp; Roadmap
                   </h3>
                   <p className="text-slate-600 dark:text-slate-300 text-sm mb-6 leading-relaxed">
@@ -326,10 +326,10 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
 
                     <button 
                       type="submit" 
-                      className="btn-primary w-full !py-4 mt-2 flex items-center justify-center gap-2 cursor-pointer !rounded-2xl shadow-lg font-bold text-base"
+                      className="btn-primary w-full !py-4.5 sm:!py-5 mt-4 flex items-center justify-center gap-3 cursor-pointer !rounded-2xl sm:!rounded-3xl shadow-xl font-bold text-base sm:text-lg min-h-[58px]"
                     >
                       <span>Submit to WhatsApp</span>
-                      <ArrowRight className="w-5 h-5" />
+                      <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
                     </button>
                   </form>
                 </div>
