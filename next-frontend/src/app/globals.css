@@ -55,8 +55,17 @@ body {
   text-transform: lowercase;
 }
 
-p, button, input, select, textarea, input::placeholder, textarea::placeholder, label, a, li, td, th, blockquote {
+input, select, textarea, input::placeholder, textarea::placeholder, label, a, li, td, th, blockquote {
   text-transform: lowercase !important;
+}
+
+/* Paragraphs & Buttons - Sentence Case (first letter capitalized) */
+p, button, .btn-primary, .btn-secondary {
+  text-transform: lowercase !important;
+}
+
+p::first-letter, button::first-letter, button *::first-letter, .btn-primary::first-letter, .btn-secondary::first-letter {
+  text-transform: uppercase !important;
 }
 
 /* Heading tags (h1-h6) - capitalize the first letter of each word */
