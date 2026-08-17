@@ -11,7 +11,7 @@ export default function InteractiveCapabilities() {
       id: 1,
       badge: "01 • TECH & DEV",
       title: "High-Performance Engineering",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=80",
+      image: "/images/natural_tech.png",
       desc: "Custom web applications, mobile apps, and enterprise cloud software engineered for sub-second speed, 99.9% uptime, and frictionless user experiences.",
       icon: Code
     },
@@ -19,7 +19,7 @@ export default function InteractiveCapabilities() {
       id: 2,
       badge: "02 • MARKETING",
       title: "Data-Driven Growth & ROAS",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80",
+      image: "/images/natural_marketing.png",
       desc: "Targeted Meta & Google Ad campaigns, search engine optimization (SEO), and high-converting funnel architectures designed to maximize customer acquisition.",
       icon: TrendingUp
     },
@@ -27,7 +27,7 @@ export default function InteractiveCapabilities() {
       id: 3,
       badge: "03 • AUTOMATION",
       title: "AI Workflows & Business Systems",
-      image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&auto=format&fit=crop&q=80",
+      image: "/images/natural_ai.png",
       desc: "Automated WhatsApp marketing pipelines, CRM integrations, and custom AI agents that eliminate manual overhead and turn lead inquiries into sales.",
       icon: Cpu
     }
