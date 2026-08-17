@@ -1,10 +1,11 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Code, TrendingUp, Cpu } from 'lucide-react';
 
 export default function InteractiveCapabilities() {
   const [activeIndex, setActiveIndex] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
 
   const capabilities = [
     {
@@ -33,16 +34,35 @@ export default function InteractiveCapabilities() {
     }
   ];
 
+  // Auto-next coverflow rotation timer (4.5 seconds)
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % capabilities.length);
+    }, 4500);
+
+    return () => clearInterval(timer);
+  }, [isPaused, capabilities.length]);
+
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % capabilities.length);
+    setIsPaused(true);
+    setTimeout(() => setIsPaused(false), 8000);
   };
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev - 1 + capabilities.length) % capabilities.length);
+    setIsPaused(true);
+    setTimeout(() => setIsPaused(false), 8000);
   };
 
   return (
-    <section className="py-24 bg-slate-50 dark:bg-[#070911] border-y border-slate-200 dark:border-slate-850 overflow-hidden select-none transition-colors">
+    <section 
+      className="py-24 bg-slate-50 dark:bg-[#070911] border-y border-slate-200 dark:border-slate-850 overflow-hidden select-none transition-colors"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div className="max-w-6xl mx-auto px-6 font-body">
         
         {/* Header */}
@@ -54,7 +74,7 @@ export default function InteractiveCapabilities() {
             INTERACTIVE GROWTH CAPABILITIES
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
-            Drag or click the 3D coverflow cards below to explore our core execution capabilities live.
+            Drag or swipe the 3D coverflow cards below to explore our core execution capabilities live.
           </p>
         </div>
 
@@ -86,7 +106,11 @@ export default function InteractiveCapabilities() {
               return (
                 <motion.div
                   key={item.id}
-                  onClick={() => setActiveIndex(idx)}
+                  onClick={() => {
+                    setActiveIndex(idx);
+                    setIsPaused(true);
+                    setTimeout(() => setIsPaused(false), 8000);
+                  }}
                   animate={{
                     x: xOffset,
                     scale: scale,

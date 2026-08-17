@@ -1,10 +1,11 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check } from 'lucide-react';
 
 export default function ProcessSection() {
-  const [activeStep, setActiveStep] = useState(3); // Default or selectable step matching user's GROW screenshot
+  const [activeStep, setActiveStep] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const steps = [
     {
@@ -33,17 +34,37 @@ export default function ProcessSection() {
     }
   ];
 
+  // Auto-next step switcher interval (4.2 seconds)
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % steps.length);
+    }, 4200);
+
+    return () => clearInterval(timer);
+  }, [isPaused, steps.length]);
+
+  const handleStepClick = (idx: number) => {
+    setActiveStep(idx);
+    setIsPaused(true);
+    // Resume auto-next after 8 seconds of inactivity
+    setTimeout(() => setIsPaused(false), 8000);
+  };
+
   return (
     <section 
       id="process" 
       className="scroll-mt-24 pt-28 pb-16 md:pt-32 md:pb-24 bg-white dark:bg-[#04060c] relative overflow-hidden transition-colors duration-300 border-t border-slate-200/80 dark:border-slate-900 font-body"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
       {/* Decorative Glow Accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1360px] h-64 bg-[#2196E8]/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10 font-body">
         
-        {/* Section Header with navbar clearance padding */}
+        {/* Section Header */}
         <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mb-12 sm:mb-16 w-full">
           <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block mb-2 font-body text-center">
             Seamless Journey
@@ -59,7 +80,7 @@ export default function ProcessSection() {
         {/* 2-Column Responsive Split Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column (5 Cols): Clean Interactive Step List */}
+          {/* Left Column (5 Cols): Clean Interactive Auto-Switching Step List */}
           <div className="lg:col-span-5 space-y-4">
             {steps.map((step, idx) => {
               const isActive = activeStep === idx;
@@ -68,10 +89,10 @@ export default function ProcessSection() {
               return (
                 <div
                   key={step.num}
-                  onClick={() => setActiveStep(idx)}
+                  onClick={() => handleStepClick(idx)}
                   className={`group p-4 sm:p-5 rounded-2xl transition-all duration-300 cursor-pointer flex items-start gap-4 ${
                     isActive
-                      ? 'opacity-100'
+                      ? 'opacity-100 bg-slate-50/80 dark:bg-[#0c111d]/60 border border-slate-200/80 dark:border-slate-800/80 shadow-md'
                       : isCompleted
                       ? 'opacity-65 hover:opacity-100'
                       : 'opacity-40 hover:opacity-80'
@@ -110,13 +131,17 @@ export default function ProcessSection() {
                       {step.desc}
                     </p>
 
-                    {/* Active Blue Indicator Line */}
+                    {/* Active Auto Progress Line */}
                     {isActive && (
-                      <motion.div
-                        layoutId="activeProcessBar"
-                        className="h-[3px] bg-[#2196E8] rounded-full mt-3 w-full max-w-[280px]"
-                        transition={{ duration: 0.3 }}
-                      />
+                      <div className="relative h-[3px] bg-slate-200 dark:bg-slate-800 rounded-full mt-3 w-full max-w-[280px] overflow-hidden">
+                        <motion.div
+                          key={`progress-${activeStep}-${isPaused}`}
+                          initial={{ width: "0%" }}
+                          animate={{ width: isPaused ? "100%" : "100%" }}
+                          transition={{ duration: isPaused ? 0.3 : 4.2, ease: "linear" }}
+                          className="h-full bg-[#2196E8] rounded-full"
+                        />
+                      </div>
                     )}
                   </div>
                 </div>
@@ -124,7 +149,7 @@ export default function ProcessSection() {
             })}
           </div>
 
-          {/* Right Column (7 Cols): Showcase Image Card with Fluid Responsive Sizing */}
+          {/* Right Column (7 Cols): Showcase Image Card matching reference site size */}
           <div className="lg:col-span-7 flex justify-center lg:justify-end w-full">
             <AnimatePresence mode="wait">
               <motion.div
@@ -132,7 +157,7 @@ export default function ProcessSection() {
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="relative w-full max-w-[650px] aspect-[4/3] sm:h-[450px] lg:h-[490px] rounded-[28px] sm:rounded-[36px] overflow-hidden shadow-2xl border border-slate-200/80 dark:border-slate-800/80 bg-slate-900 group"
               >
                 <img
