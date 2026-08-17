@@ -192,7 +192,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
         
         <div className="max-w-7xl mx-auto px-6 relative z-10 flex items-center justify-between gap-4 text-[10px] sm:text-xs font-bold uppercase tracking-wider font-body">
           <p>© {new Date().getFullYear()} DHI GROWTH. ALL RIGHTS RESERVED.</p>
-          <div className="flex items-center">
+          <div className="flex items-center gap-3">
             <a 
               href="https://instagram.com/dhigrowth" 
               target="_blank" 
@@ -211,6 +211,22 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </motion.svg>
+            </a>
+
+            <a 
+              href="https://www.linkedin.com/company/dhigrowth/posts/?feedView=all" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-white hover:text-slate-200 transition-colors p-1"
+              aria-label="LinkedIn"
+            >
+              <motion.svg 
+                whileHover={{ scale: 1.15, rotate: 10 }}
+                className="w-5 h-5 fill-current" 
+                viewBox="0 0 24 24"
+              >
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.8v8.37h2.8v-4.67c0-.25.02-.5.1-.68a1.14 1.14 0 0 1 1-.77c.76 0 1 .58 1 1.42v4.7h2.8M6.5 8.37a1.37 1.37 0 0 0 1.3-1.37A1.32 1.32 0 0 0 6.5 5.6a1.37 1.37 0 0 0-1.3 1.37A1.32 1.32 0 0 0 6.5 8.37m1.4 10.13V10.13h-2.8v8.37h2.8z"/>
               </motion.svg>
             </a>
           </div>
