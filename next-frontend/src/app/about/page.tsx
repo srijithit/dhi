@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import CTABanner from '@/components/CTABanner';
 import CustomCursor from '@/components/CustomCursor';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
+import InteractiveCapabilities from '@/components/InteractiveCapabilities';
 import { motion } from 'framer-motion';
 
 export default function AboutPage() {
@@ -71,8 +72,11 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Section 2: Our Story (Alternating block - Left Image / Text Right or Alternating blocks) */}
-        <section className="py-28 bg-slate-50 dark:bg-[#080b11] border-y border-slate-200 dark:border-slate-900 transition-colors">
+        {/* Section 2: 3D Coverflow Interactive Capabilities */}
+        <InteractiveCapabilities />
+
+        {/* Section 3: Our Story */}
+        <section className="py-28 bg-slate-50 dark:bg-[#080b11] border-b border-slate-200 dark:border-slate-900 transition-colors">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               
@@ -131,117 +135,80 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Section 3: Our Vision (Alternating block) */}
+        {/* Section 4: Side-by-Side OUR VISION & OUR MISSION Cards */}
         <section className="py-28 bg-white dark:bg-[#000000] transition-colors">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="max-w-6xl mx-auto px-6 font-body">
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
               
+              {/* OUR VISION Card */}
               <motion.div 
-                className="lg:col-span-6 order-last lg:order-first flex justify-center w-full"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                className="bg-white dark:bg-[#0b0f19] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 group flex flex-col justify-between"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
+                transition={{ duration: 0.6 }}
               >
-                <div className="relative w-full max-w-[480px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800/80 group">
-                  <img 
-                    src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&auto=format&fit=crop&q=80" 
-                    alt="DhiGrowth Technical Vision" 
-                    className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6">
-                    <p className="text-xs font-bold uppercase tracking-widest text-[#2196E8] mb-1 font-numeric">Future Horizon</p>
-                    <blockquote className="text-white italic font-body text-sm sm:text-base leading-relaxed">
-                      "Deploying custom APIs, recommendation algorithms, high-conversion landing pages, and AI automations to transform client revenue streams."
-                    </blockquote>
+                <div>
+                  {/* Top Hero Image */}
+                  <div className="w-full h-60 sm:h-64 rounded-2xl overflow-hidden mb-6 border border-slate-200/60 dark:border-slate-800/60">
+                    <img 
+                      src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80" 
+                      alt="Our Vision" 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+
+                  <h3 className="font-header text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-wide mb-4">
+                    OUR VISION
+                  </h3>
+
+                  <div className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed space-y-4 font-normal">
+                    <p>
+                      To become South India's most trusted digital agency and technology partner by delivering transparent, sustainable, and value-driven business solutions.
+                    </p>
+                    <p>
+                      We measure success not by the number of deals we close, but by the long-term value, revenue growth, and confidence we create for the clients who choose us.
+                    </p>
                   </div>
                 </div>
               </motion.div>
 
+              {/* OUR MISSION Card */}
               <motion.div 
-                className="lg:col-span-6 space-y-6"
-                initial="hidden"
-                whileInView="visible"
+                className="bg-white dark:bg-[#0b0f19] border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 group flex flex-col justify-between"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                variants={fadeInUp}
+                transition={{ duration: 0.6, delay: 0.15 }}
               >
-                <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block font-numeric">
-                  Future Horizon
-                </span>
-                <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wider leading-none">
-                  Our Vision
-                </h2>
-                <h3 className="font-body font-bold text-slate-800 dark:text-slate-200 text-lg">
-                  Our Vision for Business Growth
-                </h3>
-                <div className="text-slate-600 dark:text-slate-350 text-base leading-relaxed space-y-4">
-                  <p>
-                    To be the most trusted digital growth partner for businesses in Coimbatore and across India — empowering every brand to thrive in the digital age.
-                  </p>
-                  <p>
-                    We envision a future where every business in Coimbatore, regardless of size or industry, has access to world-class digital tools, AI-powered solutions, and marketing expertise. DhiGrowth is building that future, one client at a time.
-                  </p>
-                </div>
-              </motion.div>
+                <div>
+                  {/* Top Hero Image */}
+                  <div className="w-full h-60 sm:h-64 rounded-2xl overflow-hidden mb-6 border border-slate-200/60 dark:border-slate-800/60">
+                    <img 
+                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80" 
+                      alt="Our Mission" 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
 
-            </div>
-          </div>
-        </section>
+                  <h3 className="font-header text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-wide mb-4">
+                    OUR MISSION
+                  </h3>
 
-        {/* Section 4: Our Mission */}
-        <section className="py-28 bg-slate-50 dark:bg-[#080b11] border-t border-slate-200 dark:border-slate-900 transition-colors">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              
-              <motion.div 
-                className="lg:col-span-6 space-y-6"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeInUp}
-              >
-                <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block font-numeric">
-                  Daily Execution
-                </span>
-                <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wider leading-none">
-                  Our Mission
-                </h2>
-                <h3 className="font-body font-bold text-slate-800 dark:text-slate-200 text-lg">
-                  Our Mission &amp; Commitment
-                </h3>
-                <div className="text-slate-600 dark:text-slate-350 text-base leading-relaxed space-y-4">
-                  <p>
-                    To deliver innovative, result-oriented digital solutions that help businesses grow faster, operate smarter, and connect deeper with their customers.
-                  </p>
-                  <p>
-                    We build with purpose, market with data, and grow with integrity because your success is the only metric that matters to us.
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="lg:col-span-6 flex justify-center w-full"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-              >
-                <div className="relative w-full max-w-[480px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800/80 group">
-                  <img 
-                    src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&auto=format&fit=crop&q=80" 
-                    alt="DhiGrowth Technical Mission" 
-                    className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6">
-                    <p className="text-xs font-bold uppercase tracking-widest text-[#2196E8] mb-1 font-numeric">Daily Execution</p>
-                    <blockquote className="text-white italic font-body text-sm sm:text-base leading-relaxed">
-                      "Data-backed choices, creative scripts, high performance infrastructure. That is our commitment to Coimbatore and global businesses."
-                    </blockquote>
+                  <div className="text-slate-600 dark:text-slate-350 text-sm sm:text-base leading-relaxed space-y-4 font-normal">
+                    <p>
+                      Provide end-to-end digital solutions — from web engineering and mobile app development to performance marketing, valuation, and ongoing management, all under one roof.
+                    </p>
+                    <p>
+                      Offer hassle-free growth strategies for local and global clients — so business owners can rely on secure, transparent, fully reported digital expansion.
+                    </p>
                   </div>
                 </div>
               </motion.div>
 
             </div>
+
           </div>
         </section>
 
