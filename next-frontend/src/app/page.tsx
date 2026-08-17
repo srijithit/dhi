@@ -173,11 +173,11 @@ export default function Home() {
 // Sub-Component: Trusted Brands Logos
 function ClientLogos() {
   const logos = [
-    { src: "/images/client_sanika.png", alt: "Sanika's Indian Cuisine", className: "h-8 md:h-10" },
-    { src: "/images/client_karisal.png", alt: "Karisal", className: "h-14 md:h-18" },
-    { src: "/images/client_thooriga.png", alt: "ThoorigaI", className: "h-8 md:h-10" },
-    { src: "/images/client_gigabull.png", alt: "Gigabull", className: "h-8 md:h-10" },
-    { src: "/images/client_ruts.png", alt: "Ruts N Rides", className: "h-14 md:h-18" }
+    { src: "/images/client_ruts.svg", alt: "Ruts N Rides", className: "h-10 md:h-12" },
+    { src: "/images/client_sanika.svg", alt: "Sanika's Indian Cuisine", className: "h-10 md:h-12" },
+    { src: "/images/client_karisal.webp", alt: "Karisal", className: "h-12 md:h-14" },
+    { src: "/images/client_thooriga.png", alt: "Thoorigai", className: "h-10 md:h-12" },
+    { src: "/images/client_gigabull.webp", alt: "Gigabull", className: "h-10 md:h-12" }
   ];
 
   // Duplicate the array 4 times to ensure continuous marquee scrolling space
@@ -187,7 +187,7 @@ function ClientLogos() {
     <section className="py-10 bg-slate-50 border-y border-slate-200/60 dark:bg-[#070910] dark:border-slate-900 overflow-hidden select-none">
       <div className="max-w-7xl mx-auto px-6 text-center mb-8">
         <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 tracking-widest block">
-          OUR TRUSTED CLIENTS
+          Our Trusted Clients
         </span>
       </div>
       
@@ -207,7 +207,7 @@ function ClientLogos() {
               <img 
                 src={logo.src} 
                 alt={logo.alt} 
-                className={`${logo.className} w-auto object-contain dark:invert dark:opacity-85 select-none pointer-events-none hover:opacity-100 transition-opacity duration-300`}
+                className={`${logo.className} w-auto object-contain select-none pointer-events-none opacity-90 hover:opacity-100 dark:brightness-110 transition-opacity duration-300`}
               />
             </div>
           ))}
