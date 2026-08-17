@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check } from 'lucide-react';
 
@@ -12,25 +12,29 @@ export default function ProcessSection() {
       num: 1,
       title: "DISCOVER",
       desc: "We learn about your business, goals, and competition to build a tailored growth plan that truly fits your needs.",
-      image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1000&auto=format&fit=crop&q=80"
+      // Step 1: Corporate conference room discovery discussion with laptop
+      image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&auto=format&fit=crop&q=80"
     },
     {
       num: 2,
       title: "STRATEGISE",
       desc: "Our team crafts a data-backed digital strategy aligned to your industry and target audience for maximum ROI.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1000&auto=format&fit=crop&q=80"
+      // Step 2: Wall-mounted analytics strategy dashboard with team analyzing growth charts
+      image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1200&auto=format&fit=crop&q=80"
     },
     {
       num: 3,
       title: "EXECUTE",
       desc: "From development to campaigns — we build, launch, and manage with precision and full accountability.",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1000&auto=format&fit=crop&q=80"
+      // Step 3: Software developers working at multi-monitor code workstation
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&auto=format&fit=crop&q=80"
     },
     {
       num: 4,
       title: "GROW",
       desc: "We monitor, optimise, and scale — continuously improving your results month after month.",
-      image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1000&auto=format&fit=crop&q=80"
+      // Step 4: Exponential business growth analytics monitor presentation with executive
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80"
     }
   ];
 
@@ -48,7 +52,6 @@ export default function ProcessSection() {
   const handleStepClick = (idx: number) => {
     setActiveStep(idx);
     setIsPaused(true);
-    // Resume auto-next after 8 seconds of inactivity
     setTimeout(() => setIsPaused(false), 8000);
   };
 
@@ -77,10 +80,10 @@ export default function ProcessSection() {
           </p>
         </div>
 
-        {/* 2-Column Responsive Split Section */}
+        {/* 2-Column Responsive Split Section matching video recording */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column (5 Cols): Clean Interactive Auto-Switching Step List */}
+          {/* Left Column (5 Cols): Clean Interactive Step List */}
           <div className="lg:col-span-5 space-y-4">
             {steps.map((step, idx) => {
               const isActive = activeStep === idx;
@@ -131,7 +134,7 @@ export default function ProcessSection() {
                       {step.desc}
                     </p>
 
-                    {/* Active Auto Progress Line */}
+                    {/* Active Blue Indicator Line */}
                     {isActive && (
                       <div className="relative h-[3px] bg-slate-200 dark:bg-slate-800 rounded-full mt-3 w-full max-w-[280px] overflow-hidden">
                         <motion.div
@@ -149,7 +152,7 @@ export default function ProcessSection() {
             })}
           </div>
 
-          {/* Right Column (7 Cols): Showcase Image Card matching reference site size */}
+          {/* Right Column (7 Cols): Showcase Image Card matching exact video frames */}
           <div className="lg:col-span-7 flex justify-center lg:justify-end w-full">
             <AnimatePresence mode="wait">
               <motion.div
