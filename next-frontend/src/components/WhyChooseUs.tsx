@@ -1,141 +1,173 @@
 "use client";
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Layers, Bot, Eye, MapPin, CheckCircle, ShieldCheck } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function WhyChooseUs() {
+  const [currentIdx, setCurrentIdx] = useState(0);
+
   const differentiators = [
     {
       badge: "01 • INTEGRATED AGENCY",
-      title: "One Agency, Every Solution",
+      title: "ONE AGENCY, EVERY SOLUTION",
       desc: "From logo to landing page to lead generation — we handle it all under one roof.",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=80",
-      icon: Layers
+      image: "/images/natural_tech.png"
     },
     {
       badge: "02 • FUTURE READY",
-      title: "AI-Powered Edge",
+      title: "AI-POWERED EDGE",
       desc: "We integrate AI into your business before your competitors even consider it.",
-      image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&auto=format&fit=crop&q=80",
-      icon: Bot
+      image: "/images/natural_marketing.png"
     },
     {
       badge: "03 • TRANSPARENT DATA",
-      title: "Transparent Reporting",
+      title: "TRANSPARENT REPORTING",
       desc: "Real-time dashboards and monthly reports — you always know where your money goes.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80",
-      icon: Eye
+      image: "/images/natural_ai.png"
     },
     {
-      badge: "04 • LOCAL EXPERTISE",
-      title: "Coimbatore-Focused Strategy",
+      badge: "04 • LOCAL INSIGHT",
+      title: "COIMBATORE-FOCUSED STRATEGY",
       desc: "We understand the local market, culture, and audience better than any remote agency.",
-      image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&auto=format&fit=crop&q=80",
-      icon: MapPin
+      image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&auto=format&fit=crop&q=80"
     },
     {
-      badge: "05 • FULL ACCOUNTABILITY",
-      title: "End-to-End Ownership",
+      badge: "05 • ACCOUNTABILITY",
+      title: "END-TO-END OWNERSHIP",
       desc: "From strategy to execution to optimisation — we own the entire journey.",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80",
-      icon: CheckCircle
-    },
-    {
-      badge: "06 • DEDICATED SUPPORT",
-      title: "Dedicated Strategic Support",
-      desc: "Direct communication with senior specialists to ensure quick turnaround and zero friction.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80",
-      icon: ShieldCheck
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80"
     }
   ];
 
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+  const handleNext = () => {
+    setCurrentIdx((prev) => (prev + 1) % (differentiators.length - 1));
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } }
+  const handlePrev = () => {
+    setCurrentIdx((prev) => (prev - 1 + (differentiators.length - 1)) % (differentiators.length - 1));
   };
 
   return (
-    <section id="why-us" className="py-24 md:py-32 bg-white dark:bg-[#000000] relative overflow-hidden border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
+    <section id="why-us" className="py-20 md:py-28 bg-[#0b0f19] text-white relative overflow-hidden transition-colors border-t border-slate-850 font-body">
       
-      {/* Decorative Blur Background elements */}
-      <div className="absolute top-1/2 right-1/4 w-80 h-80 bg-[#2196E8]/5 rounded-full blur-[130px] pointer-events-none" />
+      {/* Background Hero Architecture Glow Image */}
+      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+        <img 
+          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&auto=format&fit=crop&q=80" 
+          alt="Modern Architecture" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0b0f19] via-[#0b0f19]/90 to-transparent" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10 font-body">
         
-        {/* Header */}
-        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-16 w-full">
-          <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-body text-center">
-            The DhiGrowth Advantage
-          </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-4 text-center">
-            Why Coimbatore Businesses <span className="text-[#2196E8]">Choose DhiGrowth</span>
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg text-center">
-            We build scalable technology, run high-converting ad campaigns, and deliver tangible business revenue.
-          </p>
-        </div>
+        {/* 2-Column Split Section matching reference video (00:37) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          
+          {/* Left Column (5 Cols): Text + Badge + CTA Button */}
+          <div className="lg:col-span-5 space-y-6">
+            <span className="text-slate-400 font-mono text-xs uppercase tracking-widest block">
+              02 • OUR EDGE
+            </span>
+            
+            <h2 className="font-header text-4xl sm:text-6xl text-white tracking-wide leading-none uppercase">
+              WHY COIMBATORE BUSINESSES CHOOSE DHIGROWTH.
+            </h2>
+            
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+              We combine local Coimbatore expertise with world-class tech, data-driven performance marketing, and AI automation to deliver unmatched digital growth for your brand.
+            </p>
 
-        {/* Equal-Sized Image Card Grid */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-        >
-          {differentiators.map((diff, idx) => {
-            const IconComponent = diff.icon;
-
-            return (
-              <motion.div 
-                key={idx}
-                variants={cardVariants}
-                className="glass-card h-full flex flex-col justify-between rounded-3xl border border-slate-200 dark:border-slate-850 overflow-hidden hover:border-[#2196E8] bg-slate-50/50 dark:bg-[#0d111c]/60 hover:bg-white dark:hover:bg-[#141b2d] shadow-sm hover:shadow-xl relative group transition-all duration-300"
+            <div className="pt-2">
+              <Link 
+                href="/about" 
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm font-semibold transition-all hover:scale-105"
               >
-                <div>
-                  {/* Top Image Banner */}
-                  <div className="w-full h-48 sm:h-52 relative overflow-hidden bg-slate-200 dark:bg-slate-800">
-                    <img
-                      src={diff.image}
-                      alt={diff.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
-                      <span className="text-[10px] uppercase font-bold text-white tracking-wider bg-black/50 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 font-mono">
-                        {diff.badge}
-                      </span>
-                    </div>
-                  </div>
+                <span>Explore Our Edge</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
 
-                  <div className="p-6 sm:p-7">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-[#2196E8]/10 border border-[#2196E8]/20 flex items-center justify-center text-[#2196E8] group-hover:scale-110 transition-transform duration-300">
-                        <IconComponent className="w-5 h-5" />
+          {/* Right Column (7 Cols): Horizontal Carousel Cards matching reference site */}
+          <div className="lg:col-span-7 space-y-6">
+            
+            {/* Cards Carousel Container */}
+            <div className="relative overflow-hidden py-2">
+              <motion.div 
+                className="flex gap-6 transition-transform duration-500 ease-out"
+                animate={{ x: -currentIdx * 320 }}
+              >
+                {differentiators.map((diff, idx) => (
+                  <div 
+                    key={idx}
+                    className="w-[290px] sm:w-[320px] shrink-0 bg-white text-slate-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between group"
+                  >
+                    <div>
+                      {/* Top Header Image */}
+                      <div className="w-full h-44 relative overflow-hidden bg-slate-100">
+                        <img 
+                          src={diff.image} 
+                          alt={diff.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
                       </div>
-                      <h3 className="font-header text-xl sm:text-2xl text-slate-900 dark:text-white tracking-wide group-hover:text-[#2196E8] transition-colors duration-300">
-                        {diff.title}
-                      </h3>
-                    </div>
 
-                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                      {diff.desc}
-                    </p>
+                      {/* Card Content */}
+                      <div className="p-6 space-y-3">
+                        <span className="text-[11px] font-mono font-bold text-[#2196E8] uppercase tracking-wider block">
+                          {diff.badge}
+                        </span>
+                        
+                        <h3 className="font-header text-xl text-slate-900 tracking-wide leading-snug uppercase">
+                          {diff.title}
+                        </h3>
+
+                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                          {diff.desc}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </motion.div>
-            );
-          })}
-        </motion.div>
+            </div>
+
+            {/* Slider Nav Controls matching reference video */}
+            <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+              {/* Progress Line */}
+              <div className="flex-1 max-w-[200px] h-[3px] bg-slate-800 rounded-full overflow-hidden">
+                <motion.div 
+                  className="h-full bg-[#2196E8] rounded-full"
+                  animate={{ width: `${((currentIdx + 1) / (differentiators.length - 1)) * 100}%` }}
+                  transition={{ duration: 0.3 }}
+                />
+              </div>
+
+              {/* Navigation Arrow Buttons */}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handlePrev}
+                  className="w-10 h-10 rounded-full border border-slate-700 flex items-center justify-center text-white hover:border-[#2196E8] hover:text-[#2196E8] transition-all cursor-pointer bg-white/5"
+                  aria-label="Previous card"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="w-10 h-10 rounded-full border border-slate-700 flex items-center justify-center text-white hover:border-[#2196E8] hover:text-[#2196E8] transition-all cursor-pointer bg-white/5"
+                  aria-label="Next card"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
 
       </div>
     </section>

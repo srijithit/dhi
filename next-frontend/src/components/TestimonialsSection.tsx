@@ -1,149 +1,148 @@
 "use client";
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Star, Quote, MapPin, Globe } from 'lucide-react';
-import { TESTIMONIALS_DATA } from '../data/servicesData';
-
-// Custom robust SVG LinkedIn icon to prevent Lucide React version mismatch errors
-const LinkedInIcon = (props: any) => (
-  <svg className={props.className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.8v8.37h2.8v-4.67c0-.25.02-.5.1-.68a1.14 1.14 0 0 1 1-.77c.76 0 1 .58 1 1.42v4.7h2.8M6.5 8.37a1.37 1.37 0 0 0 1.3-1.37A1.32 1.32 0 0 0 6.5 5.6a1.37 1.37 0 0 0-1.3 1.37A1.32 1.32 0 0 0 6.5 8.37m1.4 10.13V10.13h-2.8v8.37h2.8z" />
-  </svg>
-);
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 
 interface TestimonialsSectionProps {
   showAll?: boolean;
 }
 
 export default function TestimonialsSection({ showAll = false }: TestimonialsSectionProps) {
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.15
-      }
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  const testimonials = [
+    {
+      id: 1,
+      category: "03. AI AUTOMATION SOLUTIONS",
+      quote: "The AI automation system DhiGrowth built for us saves 40+ hours of manual work every week. Best investment we've made for our business this year.",
+      author: "Arun Venkatesh",
+      role: "Director, All Healthcare"
+    },
+    {
+      id: 2,
+      category: "01. WEBSITE & APP DEVELOPMENT",
+      quote: "DhiGrowth rebuilt our brand portal and custom web app with sub-second page speed. Our online inbound inquiries doubled within 30 days of launch.",
+      author: "Karthik Raja",
+      role: "Founder, Karisal Industries"
+    },
+    {
+      id: 3,
+      category: "02. PERFORMANCE MARKETING & SEO",
+      quote: "Their targeted Meta & Google ad campaigns brought down our cost per acquisition by 45%. Outstanding transparency and weekly ROI reporting.",
+      author: "Priya Sundaram",
+      role: "Head of Marketing, Sanika's Group"
     }
+  ];
+
+  const displayList = showAll ? testimonials : testimonials;
+
+  const handleNext = () => {
+    setActiveIdx((prev) => (prev + 1) % displayList.length);
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  const handlePrev = () => {
+    setActiveIdx((prev) => (prev - 1 + displayList.length) % displayList.length);
   };
-
-  const displayTestimonials = showAll ? TESTIMONIALS_DATA : TESTIMONIALS_DATA.slice(0, 3);
 
   return (
-    <section id="testimonials" className="py-32 md:py-40 bg-slate-50 dark:bg-[#080b11] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
+    <section id="testimonials" className="py-20 md:py-28 bg-slate-50 dark:bg-[#070911] relative overflow-hidden transition-colors border-t border-slate-200/80 dark:border-slate-900 font-body">
       
-      <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-[#2196E8]/5 rounded-full blur-[140px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10 font-body">
         
         {/* Header */}
-        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-20 w-full">
-          <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-body text-center">
-            Social Proof &amp; Proven ROI
+        <div className="text-center max-w-4xl mx-auto mb-14 space-y-3">
+          <span className="text-[#2196E8] font-bold text-xs uppercase tracking-widest block font-numeric">
+            SOCIAL PROOF
           </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">
-            What Our Clients In Coimbatore <span className="text-[#2196E8]">Say About DhiGrowth</span>
+          <h2 className="font-header text-3xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white tracking-wide leading-tight uppercase">
+            WHAT OUR CLIENTS IN COIMBATORE SAY ABOUT DHIGROWTH
           </h2>
-          <p className="text-slate-655 dark:text-slate-300 text-base sm:text-lg text-center">
-            Real outcomes, transparent partnerships, and compounding digital growth across Coimbatore's leading brands.
+          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+            Trust is built through transparency and results, and that is exactly how DhiGrowth operates. When you scale your business with us, you receive:
           </p>
         </div>
 
-        {/* Testimonials Grid (Rich credentials cards) */}
-        <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-3 gap-10"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {displayTestimonials.map((testimonial) => (
-            <motion.div 
-              key={testimonial.id}
-              variants={cardVariants}
-              className="bg-[#0b0d16] text-white p-8 sm:p-10 rounded-3xl border border-slate-800 flex flex-col justify-between relative shadow-xl hover:border-[#2196E8] transition-all duration-350 hover:-translate-y-1.5 group"
+        {/* Testimonial Box Card matching reference site */}
+        <div className="max-w-4xl mx-auto bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 rounded-3xl p-8 sm:p-12 shadow-xl relative min-h-[300px] flex flex-col justify-between">
+          
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIdx}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-6"
             >
-              {/* Blue Quote Icon */}
-              <Quote className="w-10 h-10 text-[#2196E8] absolute top-6 right-8 opacity-45 group-hover:scale-110 transition-transform duration-300" />
+              {/* Category Pill */}
+              <span className="inline-block px-3.5 py-1 rounded-full bg-[#2196E8]/10 text-[#2196E8] border border-[#2196E8]/20 text-xs font-bold font-mono tracking-wider">
+                {displayList[activeIdx].category}
+              </span>
 
-              <div>
-                {/* Visual Rating stars */}
-                <div className="flex items-center gap-1 mb-6 text-amber-400">
-                  {[...Array(testimonial.rating)].map((_, i) => (
+              {/* Quote */}
+              <blockquote className="text-slate-800 dark:text-slate-100 text-lg sm:text-2xl font-body leading-relaxed italic">
+                "{displayList[activeIdx].quote}"
+              </blockquote>
+
+              {/* Rating & Author */}
+              <div className="pt-4 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between">
+                <div>
+                  <h4 className="font-header text-xl text-slate-900 dark:text-white">
+                    {displayList[activeIdx].author}
+                  </h4>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                    {displayList[activeIdx].role}
+                  </p>
+                </div>
+
+                {/* 5 Stars */}
+                <div className="flex items-center gap-1 text-amber-400">
+                  {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-current" />
                   ))}
-                  <span className="text-xs font-bold text-slate-400 ml-2">5.0 Star Rating</span>
                 </div>
-
-                <p className="text-slate-200 italic leading-relaxed mb-8 text-sm sm:text-base">
-                  "{testimonial.text}"
-                </p>
-              </div>
-
-              {/* Authorrow with avatar, LinkedIn, Web link & local badge */}
-              <div className="pt-6 border-t border-slate-850 flex flex-col gap-4">
-                
-                {/* Profile Avatar & Info */}
-                <div className="flex items-center gap-3">
-                  {testimonial.avatarUrl && (
-                    <img 
-                      src={testimonial.avatarUrl} 
-                      alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover border border-slate-800 shrink-0 group-hover:border-[#2196E8] transition-colors"
-                    />
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-header text-lg text-white tracking-wide truncate">
-                      {testimonial.name}
-                    </h4>
-                    <p className="text-xs text-slate-400 font-medium truncate">
-                      {testimonial.role} — <span className="text-[#2196E8]">{testimonial.company}</span>
-                    </p>
-                  </div>
-                </div>
-
-                {/* Badges & Links Row */}
-                <div className="flex items-center justify-between gap-3 text-slate-450 border-t border-slate-900 pt-3">
-                  
-                  {/* Trust link indicators */}
-                  <div className="flex items-center gap-3">
-                    {testimonial.linkedinUrl && (
-                      <a 
-                        href={testimonial.linkedinUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="hover:text-[#2196E8] transition-colors p-1 bg-slate-900 rounded-lg border border-slate-800/80" 
-                        aria-label="LinkedIn profile"
-                      >
-                        <LinkedInIcon className="w-4 h-4" />
-                      </a>
-                    )}
-                    {testimonial.websiteUrl && (
-                      <a 
-                        href={testimonial.websiteUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="hover:text-[#2196E8] transition-colors p-1 bg-slate-900 rounded-lg border border-slate-800/80" 
-                        aria-label="Company website"
-                      >
-                        <Globe className="w-4 h-4" />
-                      </a>
-                    )}
-                  </div>
-
-                  <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-900 border border-slate-800/60 text-[9px] font-bold text-slate-400 shrink-0 uppercase tracking-wider">
-                    <MapPin className="w-3 h-3 text-[#2196E8]" />
-                    <span>{testimonial.location}</span>
-                  </div>
-                </div>
-
               </div>
             </motion.div>
-          ))}
-        </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation Controls */}
+          <div className="flex items-center justify-between pt-8 mt-6 border-t border-slate-200/60 dark:border-slate-850">
+            {/* Pagination Dots */}
+            <div className="flex items-center gap-2">
+              {displayList.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveIdx(idx)}
+                  className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${
+                    activeIdx === idx
+                      ? 'bg-[#2196E8] w-8'
+                      : 'bg-slate-300 dark:bg-slate-700 hover:bg-slate-400'
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Arrows */}
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handlePrev}
+                className="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200 hover:text-[#2196E8] hover:border-[#2196E8] transition-all cursor-pointer bg-slate-50 dark:bg-[#111625]"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={handleNext}
+                className="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200 hover:text-[#2196E8] hover:border-[#2196E8] transition-all cursor-pointer bg-slate-50 dark:bg-[#111625]"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+        </div>
 
       </div>
     </section>
