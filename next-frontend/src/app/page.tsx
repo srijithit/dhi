@@ -17,6 +17,8 @@ import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import CustomCursor from '@/components/CustomCursor';
 
+import LoadingScreen from '@/components/LoadingScreen';
+
 // Custom robust SVG LinkedIn icon to prevent Lucide React version mismatch errors
 const LinkedInIcon = (props: any) => (
   <svg className={props.className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -43,6 +45,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#000000] text-slate-900 dark:text-white selection:bg-[#2196E8] selection:text-white font-body transition-colors duration-300">
+      <LoadingScreen />
       
       {/* Local Business & Review JSON-LD Schema Markups */}
       <script
