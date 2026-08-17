@@ -160,46 +160,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
 
         </motion.div>
 
-        {/* Accredited Partners & Trust Badges Section */}
-        <div className="py-8 border-b border-slate-200 dark:border-slate-900 flex flex-wrap items-center justify-center lg:justify-between gap-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
-          
-          <div className="flex items-center gap-2 border border-slate-250 dark:border-slate-800 rounded-xl px-4 py-2 bg-white/60 dark:bg-[#0a0d16] text-slate-800 dark:text-slate-200 shadow-sm text-xs font-semibold">
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block animate-pulse shrink-0" />
-            <span className="font-header text-sm tracking-wide font-bold">Google Partner</span>
-          </div>
 
-          <div className="flex items-center gap-2 border border-slate-250 dark:border-slate-800 rounded-xl px-4 py-2 bg-white/60 dark:bg-[#0a0d16] text-slate-800 dark:text-slate-200 shadow-sm text-xs font-semibold">
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block animate-pulse shrink-0" />
-            <span className="font-header text-sm tracking-wide font-bold">Meta Partner</span>
-          </div>
-
-          <div className="flex items-center gap-2 border border-slate-250 dark:border-slate-800 rounded-xl px-4 py-2 bg-white/60 dark:bg-[#0a0d16] text-slate-800 dark:text-slate-200 shadow-sm text-xs font-semibold">
-            <div className="flex text-amber-400 gap-0.5 shrink-0">
-              <Star className="w-3 h-3 fill-current" />
-              <Star className="w-3 h-3 fill-current" />
-              <Star className="w-3 h-3 fill-current" />
-              <Star className="w-3 h-3 fill-current" />
-              <Star className="w-3 h-3 fill-current" />
-            </div>
-            <span className="font-header text-sm tracking-wide font-bold">Clutch 4.9★</span>
-          </div>
-
-          <div className="flex items-center gap-2 border border-slate-250 dark:border-slate-800 rounded-xl px-4 py-2 bg-white/60 dark:bg-[#0a0d16] text-slate-800 dark:text-slate-200 shadow-sm text-xs font-semibold">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-            <span className="font-header text-sm tracking-wide font-bold">GoodFirms Verified</span>
-          </div>
-
-          <div className="flex items-center gap-2 border border-slate-250 dark:border-slate-800 rounded-xl px-4 py-2 bg-white/60 dark:bg-[#0a0d16] text-slate-800 dark:text-slate-200 shadow-sm text-xs font-semibold">
-            <Award className="w-3.5 h-3.5 text-orange-500 shrink-0" />
-            <span className="font-header text-sm tracking-wide font-bold">Startup India Registered</span>
-          </div>
-
-          <div className="flex items-center gap-2 border border-slate-250 dark:border-slate-800 rounded-xl px-4 py-2 bg-white/60 dark:bg-[#0a0d16] text-slate-800 dark:text-slate-200 shadow-sm text-xs font-semibold">
-            <ShieldCheck className="w-3.5 h-3.5 text-brand shrink-0" />
-            <span className="font-header text-sm tracking-wide font-bold">MSME Certified</span>
-          </div>
-
-        </div>
 
       </div>
 
