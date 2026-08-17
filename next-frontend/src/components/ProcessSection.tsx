@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Check } from 'lucide-react';
 
 export default function ProcessSection() {
-  const [activeStep, setActiveStep] = useState(1); // Default to Step 2 (STRATEGISE) matching reference screenshot
+  const [activeStep, setActiveStep] = useState(3); // Default or selectable step matching user's GROW screenshot
 
   const steps = [
     {
@@ -34,15 +34,17 @@ export default function ProcessSection() {
   ];
 
   return (
-    <section id="process" className="py-16 md:py-24 bg-white dark:bg-[#04060c] relative overflow-hidden transition-colors duration-300 border-t border-slate-200/80 dark:border-slate-900 font-body">
-      
+    <section 
+      id="process" 
+      className="scroll-mt-24 pt-28 pb-16 md:pt-32 md:pb-24 bg-white dark:bg-[#04060c] relative overflow-hidden transition-colors duration-300 border-t border-slate-200/80 dark:border-slate-900 font-body"
+    >
       {/* Decorative Glow Accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1360px] h-64 bg-[#2196E8]/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10 font-body">
         
-        {/* Section Header */}
-        <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mb-14 w-full">
+        {/* Section Header with navbar clearance padding */}
+        <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mb-12 sm:mb-16 w-full">
           <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block mb-2 font-body text-center">
             Seamless Journey
           </span>
@@ -54,7 +56,7 @@ export default function ProcessSection() {
           </p>
         </div>
 
-        {/* 2-Column Split Section Matching Reference Site Viewport Ratio */}
+        {/* 2-Column Responsive Split Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column (5 Cols): Clean Interactive Step List */}
@@ -122,7 +124,7 @@ export default function ProcessSection() {
             })}
           </div>
 
-          {/* Right Column (7 Cols): Large Showcase Image Card matching reference site size */}
+          {/* Right Column (7 Cols): Showcase Image Card with Fluid Responsive Sizing */}
           <div className="lg:col-span-7 flex justify-center lg:justify-end w-full">
             <AnimatePresence mode="wait">
               <motion.div
@@ -131,7 +133,7 @@ export default function ProcessSection() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="relative w-full max-w-[650px] h-[340px] sm:h-[440px] lg:h-[480px] rounded-[32px] overflow-hidden shadow-2xl border border-slate-200/80 dark:border-slate-800/80 bg-slate-900 group"
+                className="relative w-full max-w-[650px] aspect-[4/3] sm:h-[450px] lg:h-[490px] rounded-[28px] sm:rounded-[36px] overflow-hidden shadow-2xl border border-slate-200/80 dark:border-slate-800/80 bg-slate-900 group"
               >
                 <img
                   src={steps[activeStep].image}
