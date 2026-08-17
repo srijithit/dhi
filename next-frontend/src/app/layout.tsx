@@ -27,9 +27,12 @@ export const metadata = {
   keywords: "Digital Agency Coimbatore, Website Development Coimbatore, Mobile App Development Coimbatore, AI Development Coimbatore, WhatsApp Marketing, SEO Coimbatore, Google Ads",
   robots: "index, follow",
   icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    shortcut: '/icon.svg',
+    apple: '/icon.png',
   },
 };
 
