@@ -151,9 +151,9 @@ export default function AboutPage() {
               >
                 <div>
                   {/* Top Hero Image */}
-                  <div className="w-full h-60 sm:h-64 rounded-2xl overflow-hidden mb-6 border border-slate-200/60 dark:border-slate-800/60">
+                  <div className="w-full h-60 sm:h-64 rounded-2xl overflow-hidden mb-6 border border-slate-200/60 dark:border-slate-800/60 bg-slate-100 dark:bg-slate-900">
                     <img 
-                      src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80" 
+                      src="/images/vision-dart.png" 
                       alt="Our Vision" 
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
@@ -184,9 +184,9 @@ export default function AboutPage() {
               >
                 <div>
                   {/* Top Hero Image */}
-                  <div className="w-full h-60 sm:h-64 rounded-2xl overflow-hidden mb-6 border border-slate-200/60 dark:border-slate-800/60">
+                  <div className="w-full h-60 sm:h-64 rounded-2xl overflow-hidden mb-6 border border-slate-200/60 dark:border-slate-800/60 bg-slate-100 dark:bg-slate-900">
                     <img 
-                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80" 
+                      src="/images/mission-board.png" 
                       alt="Our Mission" 
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
