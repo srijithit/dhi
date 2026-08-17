@@ -95,10 +95,13 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
               </a>
             </div>
 
-            {/* Social Icons - Keep Only Instagram */}
+            {/* Social Icons - Instagram & LinkedIn */}
             <div className="flex items-center gap-4 text-slate-500 dark:text-slate-400">
-              <a href="https://instagram.com/dhigrowth" target="_blank" rel="noopener noreferrer" className="hover:text-[#2196E8] transition-colors" aria-label="Instagram">
+              <a href="https://instagram.com/dhigrowth" target="_blank" rel="noopener noreferrer" className="hover:text-[#2196E8] transition-colors p-2 bg-slate-200/60 dark:bg-slate-900 rounded-xl border border-slate-300/60 dark:border-slate-800" aria-label="Instagram">
                 <svg className="w-5 h-5 stroke-current fill-none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/company/dhigrowth/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="hover:text-[#2196E8] transition-colors p-2 bg-slate-200/60 dark:bg-slate-900 rounded-xl border border-slate-300/60 dark:border-slate-800" aria-label="LinkedIn">
+                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.8v8.37h2.8v-4.67c0-.25.02-.5.1-.68a1.14 1.14 0 0 1 1-.77c.76 0 1 .58 1 1.42v4.7h2.8M6.5 8.37a1.37 1.37 0 0 0 1.3-1.37A1.32 1.32 0 0 0 6.5 5.6a1.37 1.37 0 0 0-1.3 1.37A1.32 1.32 0 0 0 6.5 8.37m1.4 10.13V10.13h-2.8v8.37h2.8z"/></svg>
               </a>
             </div>
           </motion.div>

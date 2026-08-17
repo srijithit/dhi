@@ -130,6 +130,23 @@ export default function ContactPage() {
                       </p>
                     </div>
                   </div>
+
+                  <a 
+                    href="https://www.linkedin.com/company/dhigrowth/posts/?feedView=all"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 shadow-sm hover:border-[#2196E8] transition-colors group"
+                  >
+                    <div className="w-6 h-6 text-[#2196E8] shrink-0 mt-1 group-hover:scale-110 transition-transform">
+                      <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.8v8.37h2.8v-4.67c0-.25.02-.5.1-.68a1.14 1.14 0 0 1 1-.77c.76 0 1 .58 1 1.42v4.7h2.8M6.5 8.37a1.37 1.37 0 0 0 1.3-1.37A1.32 1.32 0 0 0 6.5 5.6a1.37 1.37 0 0 0-1.3 1.37A1.32 1.32 0 0 0 6.5 8.37m1.4 10.13V10.13h-2.8v8.37h2.8z"/></svg>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 dark:text-white text-base group-hover:text-[#2196E8] transition-colors">Official LinkedIn</h4>
+                      <p className="text-slate-600 dark:text-slate-350 text-sm mt-1">
+                        Follow DhiGrowth on LinkedIn for updates &amp; posts →
+                      </p>
+                    </div>
+                  </a>
                 </div>
 
               </div>
