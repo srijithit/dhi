@@ -34,19 +34,19 @@ export default function ProcessSection() {
   ];
 
   return (
-    <section id="process" className="py-24 md:py-36 bg-white dark:bg-[#04060c] relative overflow-hidden transition-colors duration-300 border-t border-slate-200/80 dark:border-slate-900">
+    <section id="process" className="py-16 md:py-24 bg-white dark:bg-[#04060c] relative overflow-hidden transition-colors duration-300 border-t border-slate-200/80 dark:border-slate-900 font-body">
       
       {/* Decorative Glow Accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl h-64 bg-[#2196E8]/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1360px] h-64 bg-[#2196E8]/5 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10 font-body">
         
         {/* Section Header */}
-        <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mb-16 w-full">
+        <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mb-14 w-full">
           <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block mb-2 font-body text-center">
             Seamless Journey
           </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-4 text-center">
+          <h2 className="font-header text-3xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white tracking-wide mb-3 text-center">
             OUR PROCESS — SIMPLE, TRANSPARENT, <span className="text-[#2196E8]">RESULTS-DRIVEN</span>
           </h2>
           <p className="text-slate-500 dark:text-slate-400 text-sm sm:text-base font-body text-center">
@@ -54,11 +54,11 @@ export default function ProcessSection() {
           </p>
         </div>
 
-        {/* 2-Column Split Section Matching Reference Screenshot Size */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        {/* 2-Column Split Section Matching Reference Site Viewport Ratio */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column (5 Cols): Clean Interactive Step List */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-4">
             {steps.map((step, idx) => {
               const isActive = activeStep === idx;
               const isCompleted = idx < activeStep;
@@ -76,7 +76,7 @@ export default function ProcessSection() {
                   }`}
                 >
                   {/* Step Indicator Circle */}
-                  <div className={`w-11 h-11 rounded-full flex items-center justify-center font-bold text-sm shrink-0 transition-all duration-300 ${
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0 transition-all duration-300 ${
                     isActive
                       ? 'bg-[#2196E8] text-white shadow-lg shadow-[#2196E8]/30 scale-105'
                       : isCompleted
@@ -100,7 +100,7 @@ export default function ProcessSection() {
                       {step.num}. {step.title}
                     </h3>
 
-                    <p className={`text-sm sm:text-base leading-relaxed mt-1.5 transition-colors ${
+                    <p className={`text-sm leading-relaxed mt-1 transition-colors ${
                       isActive
                         ? 'text-slate-700 dark:text-slate-200 font-normal'
                         : 'text-slate-500 dark:text-slate-500 font-normal'
@@ -122,7 +122,7 @@ export default function ProcessSection() {
             })}
           </div>
 
-          {/* Right Column (7 Cols): Large Prominent Showcase Image Card Sized to Match Screenshot */}
+          {/* Right Column (7 Cols): Large Showcase Image Card matching reference site size */}
           <div className="lg:col-span-7 flex justify-center lg:justify-end w-full">
             <AnimatePresence mode="wait">
               <motion.div
@@ -131,7 +131,7 @@ export default function ProcessSection() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="relative w-full max-w-[640px] h-[360px] sm:h-[460px] md:h-[500px] lg:h-[520px] rounded-[32px] sm:rounded-[36px] overflow-hidden shadow-2xl border border-slate-200/80 dark:border-slate-800/80 bg-slate-900 group"
+                className="relative w-full max-w-[650px] h-[340px] sm:h-[440px] lg:h-[480px] rounded-[32px] overflow-hidden shadow-2xl border border-slate-200/80 dark:border-slate-800/80 bg-slate-900 group"
               >
                 <img
                   src={steps[activeStep].image}
