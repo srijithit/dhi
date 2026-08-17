@@ -13,10 +13,10 @@ export default function LoadingScreen() {
       return;
     }
 
-    // Auto-dismiss safety timer after 3.2s
+    // Safety fallback timer (7.0s) in case onEnded is delayed by browser policy
     const timer = setTimeout(() => {
       handleComplete();
-    }, 3200);
+    }, 7000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -43,6 +43,7 @@ export default function LoadingScreen() {
               autoPlay
               muted
               playsInline
+              preload="auto"
               onEnded={handleComplete}
               className="w-full h-full object-cover sm:object-contain opacity-95"
             />
