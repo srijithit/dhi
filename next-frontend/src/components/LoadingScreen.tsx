@@ -36,7 +36,7 @@ export default function LoadingScreen() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="fixed inset-0 z-[99999] bg-[#030712] flex items-center justify-center overflow-hidden select-none"
         >
-          {/* Full Screen Video Animation */}
+          {/* Edge-to-Edge Full Screen Video Animation */}
           <div className="relative w-full h-full flex items-center justify-center">
             <video
               src="/videos/rocket_left_fly_final.mp4"
@@ -45,11 +45,11 @@ export default function LoadingScreen() {
               playsInline
               preload="auto"
               onEnded={handleComplete}
-              className="w-full h-full object-cover sm:object-contain opacity-95"
+              className="w-full h-full object-cover opacity-100"
             />
 
             {/* Glowing Brand Accent Backdrop */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-[#030712]/60 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-[#030712]/40 pointer-events-none" />
 
             {/* Skip Button */}
             <button
