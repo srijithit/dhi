@@ -6,34 +6,46 @@ import { Layers, Bot, Eye, MapPin, CheckCircle, ShieldCheck } from 'lucide-react
 export default function WhyChooseUs() {
   const differentiators = [
     {
-      icon: Layers,
+      badge: "01 • INTEGRATED AGENCY",
       title: "One Agency, Every Solution",
-      desc: "From logo to landing page to lead generation — we handle it all under one roof."
+      desc: "From logo to landing page to lead generation — we handle it all under one roof.",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=80",
+      icon: Layers
     },
     {
-      icon: Bot,
+      badge: "02 • FUTURE READY",
       title: "AI-Powered Edge",
-      desc: "We integrate AI into your business before your competitors even consider it."
+      desc: "We integrate AI into your business before your competitors even consider it.",
+      image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&auto=format&fit=crop&q=80",
+      icon: Bot
     },
     {
-      icon: Eye,
+      badge: "03 • TRANSPARENT DATA",
       title: "Transparent Reporting",
-      desc: "Real-time dashboards and monthly reports — you always know where your money goes."
+      desc: "Real-time dashboards and monthly reports — you always know where your money goes.",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80",
+      icon: Eye
     },
     {
-      icon: MapPin,
+      badge: "04 • LOCAL EXPERTISE",
       title: "Coimbatore-Focused Strategy",
-      desc: "We understand the local market, culture, and audience better than any remote agency."
+      desc: "We understand the local market, culture, and audience better than any remote agency.",
+      image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&auto=format&fit=crop&q=80",
+      icon: MapPin
     },
     {
-      icon: CheckCircle,
+      badge: "05 • FULL ACCOUNTABILITY",
       title: "End-to-End Ownership",
-      desc: "From strategy to execution to optimisation — we own the entire journey."
+      desc: "From strategy to execution to optimisation — we own the entire journey.",
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80",
+      icon: CheckCircle
     },
     {
-      icon: ShieldCheck,
+      badge: "06 • DEDICATED SUPPORT",
       title: "Dedicated Strategic Support",
-      desc: "Direct communication with senior specialists to ensure quick turnaround and zero friction."
+      desc: "Direct communication with senior specialists to ensure quick turnaround and zero friction.",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80",
+      icon: ShieldCheck
     }
   ];
 
@@ -72,7 +84,7 @@ export default function WhyChooseUs() {
           </p>
         </div>
 
-        {/* Equal-Sized Grid */}
+        {/* Equal-Sized Image Card Grid */}
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
           variants={containerVariants}
@@ -87,20 +99,38 @@ export default function WhyChooseUs() {
               <motion.div 
                 key={idx}
                 variants={cardVariants}
-                className="glass-card h-full min-h-[220px] flex flex-col justify-between p-7 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-850 hover:border-[#2196E8] bg-slate-50/50 dark:bg-[#0d111c]/60 hover:bg-white dark:hover:bg-[#141b2d] shadow-sm hover:shadow-xl relative group transition-all duration-300"
+                className="glass-card h-full flex flex-col justify-between rounded-3xl border border-slate-200 dark:border-slate-850 overflow-hidden hover:border-[#2196E8] bg-slate-50/50 dark:bg-[#0d111c]/60 hover:bg-white dark:hover:bg-[#141b2d] shadow-sm hover:shadow-xl relative group transition-all duration-300"
               >
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-[#2196E8]/10 border border-[#2196E8]/20 flex items-center justify-center text-[#2196E8] mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <IconComponent className="w-7 h-7" />
+                  {/* Top Image Banner */}
+                  <div className="w-full h-48 sm:h-52 relative overflow-hidden bg-slate-200 dark:bg-slate-800">
+                    <img
+                      src={diff.image}
+                      alt={diff.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
+                      <span className="text-[10px] uppercase font-bold text-white tracking-wider bg-black/50 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 font-mono">
+                        {diff.badge}
+                      </span>
+                    </div>
                   </div>
 
-                  <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wide mb-3 group-hover:text-[#2196E8] transition-colors duration-300">
-                    {diff.title}
-                  </h3>
+                  <div className="p-6 sm:p-7">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-xl bg-[#2196E8]/10 border border-[#2196E8]/20 flex items-center justify-center text-[#2196E8] group-hover:scale-110 transition-transform duration-300">
+                        <IconComponent className="w-5 h-5" />
+                      </div>
+                      <h3 className="font-header text-xl sm:text-2xl text-slate-900 dark:text-white tracking-wide group-hover:text-[#2196E8] transition-colors duration-300">
+                        {diff.title}
+                      </h3>
+                    </div>
 
-                  <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                    {diff.desc}
-                  </p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                      {diff.desc}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             );
