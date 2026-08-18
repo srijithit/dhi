@@ -69,7 +69,7 @@ export default function ProcessSection() {
         
         {/* Section Header */}
         <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-6 w-full">
-          <span className="text-[#2196E8] font-bold text-xs uppercase tracking-widest block mb-2 font-body text-center">
+          <span className="text-[#2196E8] font-bold text-xs tracking-widest block mb-2 font-body text-center">
             Seamless Journey
           </span>
           <h2 className="font-header text-2xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-white tracking-wide mb-2.5 text-center leading-tight">

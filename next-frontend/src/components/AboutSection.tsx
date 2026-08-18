@@ -53,7 +53,7 @@ export default function AboutSection() {
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeInUp}
         >
-          <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-body">
+          <span className="text-[#2196E8] font-bold text-xs tracking-widest block mb-2 font-body">
             Who We Are
           </span>
           <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6">

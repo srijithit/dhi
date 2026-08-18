@@ -34,7 +34,7 @@ export default function AboutPage() {
           <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/5 rounded-full blur-[130px] pointer-events-none" />
           
           <div className="max-w-6xl mx-auto px-6 relative z-10 text-center space-y-6">
-            <span className="text-[#2196E8] font-body text-xs font-semibold uppercase tracking-widest block">
+            <span className="text-[#2196E8] font-body text-xs font-bold tracking-widest block">
               Coimbatore Digital Agency
             </span>
             <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider leading-none">
@@ -50,7 +50,7 @@ export default function AboutPage() {
         <section className="py-28 bg-white dark:bg-[#000000] transition-colors">
           <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
             <motion.span 
-              className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block font-numeric"
+              className="text-[#2196E8] font-bold text-xs tracking-widest block font-body"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -130,7 +130,7 @@ export default function AboutPage() {
                     className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6">
-                    <p className="text-xs font-bold uppercase tracking-widest text-[#2196E8] mb-1 font-numeric">The DhiGrowth Ethos</p>
+                    <p className="text-xs font-bold tracking-widest text-[#2196E8] mb-1 font-body">The DhiGrowth Ethos</p>
                     <blockquote className="text-white italic font-body text-sm sm:text-base leading-relaxed">
                       "Deep local roots coupled with global technical benchmarks form the core foundation of our service delivery framework."
                     </blockquote>

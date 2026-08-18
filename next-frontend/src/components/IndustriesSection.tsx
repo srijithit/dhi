@@ -122,7 +122,7 @@ export default function IndustriesSection({ onOpenAudit }: IndustriesSectionProp
         
         {/* Header */}
         <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-6 w-full">
-          <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-body text-center">
+          <span className="text-[#2196E8] font-bold text-xs tracking-widest block mb-2 font-body text-center">
             Custom Industry Solutions
           </span>
           <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">

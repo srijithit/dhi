@@ -10,7 +10,7 @@ export default function InteractiveCapabilities() {
   const capabilities = [
     {
       id: 1,
-      badge: "01 • TECH & DEV",
+      badge: "01 • Tech & Dev",
       title: "High-Performance Engineering",
       image: "/images/natural_tech.png",
       desc: "Custom web applications, mobile apps, and enterprise cloud software engineered for sub-second speed, 99.9% uptime, and frictionless user experiences.",
@@ -18,7 +18,7 @@ export default function InteractiveCapabilities() {
     },
     {
       id: 2,
-      badge: "02 • MARKETING",
+      badge: "02 • Marketing",
       title: "Data-Driven Growth & ROAS",
       image: "/images/natural_marketing.png",
       desc: "Targeted Meta & Google Ad campaigns, search engine optimization (SEO), and high-converting funnel architectures designed to maximize customer acquisition.",
@@ -26,7 +26,7 @@ export default function InteractiveCapabilities() {
     },
     {
       id: 3,
-      badge: "03 • AUTOMATION",
+      badge: "03 • Automation",
       title: "AI Workflows & Business Systems",
       image: "/images/natural_ai.png",
       desc: "Automated WhatsApp marketing pipelines, CRM integrations, and custom AI agents that eliminate manual overhead and turn lead inquiries into sales.",

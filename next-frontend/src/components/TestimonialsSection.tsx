@@ -13,21 +13,21 @@ export default function TestimonialsSection({ showAll = false }: TestimonialsSec
   const testimonials = [
     {
       id: 1,
-      category: "03. AI AUTOMATION SOLUTIONS",
+      category: "03. AI Automation Solutions",
       quote: "The AI automation system DhiGrowth built for us saves 40+ hours of manual work every week. Best investment we've made for our business this year.",
       author: "Arun Venkatesh",
       role: "Director, All Healthcare"
     },
     {
       id: 2,
-      category: "01. WEBSITE & APP DEVELOPMENT",
+      category: "01. Website & App Development",
       quote: "DhiGrowth rebuilt our brand portal and custom web app with sub-second page speed. Our online inbound inquiries doubled within 30 days of launch.",
       author: "Karthik Raja",
       role: "Founder, Karisal Industries"
     },
     {
       id: 3,
-      category: "02. PERFORMANCE MARKETING & SEO",
+      category: "02. Performance Marketing & SEO",
       quote: "Their targeted Meta & Google ad campaigns brought down our cost per acquisition by 45%. Outstanding transparency and weekly ROI reporting.",
       author: "Priya Sundaram",
       role: "Head of Marketing, Sanika's Group"

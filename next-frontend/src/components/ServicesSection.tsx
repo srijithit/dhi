@@ -65,7 +65,7 @@ export default function ServicesSection() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-20 gap-6">
           <div>
-            <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-numeric">
+            <span className="text-[#2196E8] font-bold text-xs tracking-widest block mb-2 font-body">
               Our End-to-End Capabilities
             </span>
             <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide">
@@ -74,7 +74,7 @@ export default function ServicesSection() {
           </div>
           
           {/* Service Filters */}
-          <div className="flex flex-nowrap gap-2 sm:gap-2.5 items-center justify-start md:justify-end shrink-0 overflow-x-auto no-scrollbar scroll-smooth max-w-full pb-1 md:pb-0">
+          <div className="flex flex-nowrap gap-2 sm:gap-2.5 items-center justify-start md:justify-end shrink-0 overflow-x-auto no-scrollbar scroll-smooth max-w-full pb-1 md:pb-0 font-body">
             {['all', 'tech', 'ai', 'marketing', 'creative'].map((cat) => (
               <motion.button
                 key={cat}
@@ -83,7 +83,7 @@ export default function ServicesSection() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-300 border whitespace-nowrap shrink-0 cursor-pointer ${
+                className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-semibold tracking-wider transition-all duration-300 border whitespace-nowrap shrink-0 cursor-pointer ${
                   filter === cat
                     ? 'bg-[#2196E8] text-white border-[#2196E8] shadow-sm shadow-[#2196E8]/20'
                     : 'bg-white dark:bg-[#0b0f19] text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-900'
