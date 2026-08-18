@@ -129,7 +129,7 @@ export default function Hero({ onOpenAudit }: HeroProps) {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="relative w-full max-w-[340px] sm:max-w-[380px] mx-auto rounded-[32px] overflow-hidden border-2 border-slate-200/80 dark:border-slate-800 bg-slate-950 shadow-2xl group transition-all duration-300 hover:border-[#2196E8]/60">
+            <div className="relative w-full max-w-[240px] sm:max-w-[270px] mx-auto rounded-[28px] overflow-hidden border-2 border-slate-200/80 dark:border-slate-800 bg-slate-950 shadow-xl group transition-all duration-300 hover:border-[#2196E8]/60">
               
               {/* Top floating pill badge */}
               <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider font-body">
