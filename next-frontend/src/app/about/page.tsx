@@ -87,7 +87,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 variants={fadeInUp}
               >
-                <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block font-numeric">
+                <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
                   How We Started
                 </span>
                 <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wider leading-none">
@@ -160,7 +160,7 @@ export default function AboutPage() {
                   </div>
 
                   <h3 className="font-header text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-wide mb-4">
-                    OUR VISION
+                    Our Vision
                   </h3>
 
                   <div className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed space-y-4 font-normal">
@@ -193,7 +193,7 @@ export default function AboutPage() {
                   </div>
 
                   <h3 className="font-header text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-wide mb-4">
-                    OUR MISSION
+                    Our Mission
                   </h3>
 
                   <div className="text-slate-600 dark:text-slate-350 text-sm sm:text-base leading-relaxed space-y-4 font-normal">

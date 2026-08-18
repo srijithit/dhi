@@ -67,7 +67,7 @@ export default function InteractiveCapabilities() {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-6 space-y-3">
-          <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block font-numeric">
+          <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
             Core Competencies
           </span>
           <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wider leading-none">

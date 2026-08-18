@@ -73,7 +73,7 @@ export default function ServicesPage() {
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#2196E8]/5 rounded-full blur-[120px] pointer-events-none" />
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
-            <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block font-body">
+            <span className="text-[#2196E8] font-bold text-sm tracking-widest block font-body">
               Coimbatore Digital Agency
             </span>
             <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wide leading-none">

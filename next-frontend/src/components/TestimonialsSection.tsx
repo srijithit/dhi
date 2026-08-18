@@ -51,7 +51,7 @@ export default function TestimonialsSection({ showAll = false }: TestimonialsSec
         
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-6 space-y-3">
-          <span className="text-[#2196E8] font-bold text-xs uppercase tracking-widest block font-numeric">
+          <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
             Social Proof &amp; Client Results
           </span>
           <h2 className="font-header text-3xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white tracking-wide leading-tight">
