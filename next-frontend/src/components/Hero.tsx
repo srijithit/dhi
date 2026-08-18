@@ -1,17 +1,37 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Play, X, TrendingUp, MessageSquare, ShieldCheck, Cpu, Smartphone, Globe, Target } from 'lucide-react';
+import { ArrowRight, Sparkles, Play, Pause, Maximize2, X, Volume2, VolumeX } from 'lucide-react';
 
 interface HeroProps {
   onOpenAudit: () => void;
   onExploreServices: () => void;
 }
 
-import TechAnimation from '@/components/TechAnimation';
-
-export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
+export default function Hero({ onOpenAudit }: HeroProps) {
   const [showVideoModal, setShowVideoModal] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play();
+        setIsPlaying(true);
+      }
+    }
+  };
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
 
   // Animation presets
   const fadeInUp = {
@@ -48,11 +68,11 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
           
           {/* Left Column - Content */}
           <motion.div 
-            className="lg:col-span-7 space-y-6 text-left flex flex-col items-start justify-start"
+            className="lg:col-span-6 space-y-6 text-left flex flex-col items-start justify-start"
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
@@ -98,30 +118,80 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
                 <span>Claim Free Audit</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.button>
- 
-
-              <motion.button
-                onClick={() => setShowVideoModal(true)}
-                whileHover={{ scale: 1.05 }}
-                className="inline-flex items-center justify-start gap-2 px-2 py-1 text-sm font-bold text-slate-700 dark:text-slate-200 hover:text-[#2196E8] transition-colors cursor-pointer shrink-0"
-              >
-                <span className="w-10 h-10 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/30 flex items-center justify-center text-[#2196E8] transition-transform">
-                  <Play className="w-4 h-4 fill-[#2196E8]" />
-                </span>
-                <span>Watch Video (45s)</span>
-              </motion.button>
             </motion.div>
  
           </motion.div>
 
-          {/* Right Column - Tech Animation */}
+          {/* Right Column - Inline Video Showcase Player */}
           <motion.div 
-            className="lg:col-span-5 relative flex justify-center items-center w-full"
+            className="lg:col-span-6 relative flex justify-center items-center w-full"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <TechAnimation />
+            <div className="relative w-full rounded-3xl overflow-hidden border-2 border-slate-200/80 dark:border-slate-800 bg-slate-900 shadow-2xl group transition-all duration-300 hover:border-[#2196E8]/60">
+              
+              {/* Top floating pill badge */}
+              <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider font-body">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                <span>DhiGrowth Agency Showcase • 45s</span>
+              </div>
+
+              {/* Top Right Expand Button */}
+              <button
+                onClick={() => setShowVideoModal(true)}
+                className="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-slate-900/80 hover:bg-[#2196E8] text-white border border-white/20 backdrop-blur-md transition-all duration-300 cursor-pointer hover:scale-105"
+                title="Expand Full Screen Video"
+              >
+                <Maximize2 className="w-4 h-4" />
+              </button>
+
+              {/* Embedded Video Element */}
+              <div className="relative aspect-video w-full bg-slate-950 overflow-hidden">
+                <video 
+                  ref={videoRef}
+                  src="/videos/intro.mp4" 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline 
+                  className="w-full h-full object-cover"
+                />
+
+                {/* Bottom Video Controls Overlay */}
+                <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent flex items-center justify-between z-20">
+                  <button
+                    onClick={togglePlay}
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md text-xs font-bold transition-all cursor-pointer"
+                  >
+                    {isPlaying ? (
+                      <>
+                        <Pause className="w-4 h-4 text-[#2196E8]" />
+                        <span>Pause</span>
+                      </>
+                    ) : (
+                      <>
+                        <Play className="w-4 h-4 text-[#2196E8] fill-[#2196E8]" />
+                        <span>Play Video</span>
+                      </>
+                    )}
+                  </button>
+
+                  <button
+                    onClick={toggleMute}
+                    className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer"
+                    title={isMuted ? "Unmute Sound" : "Mute Sound"}
+                  >
+                    {isMuted ? (
+                      <VolumeX className="w-4 h-4 text-slate-300" />
+                    ) : (
+                      <Volume2 className="w-4 h-4 text-emerald-400" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+            </div>
           </motion.div>
         </div>
 
@@ -133,7 +203,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
           <div className="relative w-full max-w-4xl bg-slate-900 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl">
             <button 
               onClick={() => setShowVideoModal(false)}
-              className="absolute top-4 right-4 bg-black/60 hover:bg-black text-white hover:text-[#2196E8] p-2 rounded-full z-10 transition-colors"
+              className="absolute top-4 right-4 bg-black/60 hover:bg-black text-white hover:text-[#2196E8] p-2 rounded-full z-10 transition-colors cursor-pointer"
               aria-label="Close Video"
             >
               <X className="w-6 h-6" />
