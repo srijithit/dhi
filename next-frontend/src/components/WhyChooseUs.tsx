@@ -117,7 +117,7 @@ export default function WhyChooseUs() {
 
                       {/* Card Content */}
                       <div className="p-6 space-y-3">
-                        <span className="text-[11px] font-mono font-bold text-[#2196E8] uppercase tracking-wider block">
+                        <span className="text-[11px] font-mono font-bold text-[#2196E8] tracking-wider block">
                           {diff.badge}
                         </span>
                         
