@@ -38,13 +38,13 @@ export default function ProcessSection() {
     }
   ];
 
-  // Auto-next step switcher interval (4.2 seconds)
+  // Auto-next step switcher interval (2.5 seconds)
   useEffect(() => {
     if (isPaused) return;
 
     const timer = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % steps.length);
-    }, 4200);
+    }, 2500);
 
     return () => clearInterval(timer);
   }, [isPaused, steps.length]);
