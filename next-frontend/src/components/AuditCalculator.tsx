@@ -68,7 +68,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
 
           <form onSubmit={handleFormSubmit} className="space-y-5 text-slate-900 dark:text-white">
             <div>
-              <label className="block text-sm font-bold uppercase text-slate-700 dark:text-slate-200 mb-1.5">Your Name *</label>
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1.5 font-body">Your Name *</label>
               <input 
                 type="text" 
                 required
@@ -81,7 +81,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-sm font-bold uppercase text-slate-700 dark:text-slate-200 mb-1.5">WhatsApp Number *</label>
+                <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1.5 font-body">WhatsApp Number *</label>
                 <input 
                   type="tel" 
                   required
@@ -93,7 +93,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
               </div>
 
               <div>
-                <label className="block text-sm font-bold uppercase text-slate-700 dark:text-slate-200 mb-1.5">Email Address *</label>
+                <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1.5 font-body">Email Address *</label>
                 <input 
                   type="email" 
                   required
@@ -106,7 +106,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
             </div>
 
             <div>
-              <label className="block text-sm font-bold uppercase text-slate-700 dark:text-slate-200 mb-1.5">Company / Business Name *</label>
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1.5 font-body">Company / Business Name *</label>
               <input 
                 type="text" 
                 required
@@ -118,7 +118,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
             </div>
 
             <div>
-              <label className="block text-sm font-bold uppercase text-slate-700 dark:text-slate-200 mb-1.5">Required Service *</label>
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1.5 font-body">Required Service *</label>
               <select 
                 value={formData.service}
                 onChange={(e) => setFormData({...formData, service: e.target.value})}
@@ -133,7 +133,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
             </div>
 
             <div>
-              <label className="block text-sm font-bold uppercase text-slate-700 dark:text-slate-200 mb-1.5">Goals / Requirements *</label>
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1.5 font-body">Goals / Requirements *</label>
               <textarea 
                 required
                 rows={4}
@@ -170,7 +170,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/30 text-xs font-semibold uppercase text-[#2196E8] mb-4 font-body">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/30 text-xs font-semibold text-[#2196E8] mb-4 font-body">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Zero Cost • High Value</span>
               </div>
@@ -187,7 +187,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
               {/* Calculator Box */}
               <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#090d18] border border-slate-200 dark:border-slate-800 mb-6 space-y-3 shadow-sm w-full max-w-xl text-left">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs uppercase font-bold text-slate-500 dark:text-slate-400 tracking-wider flex items-center gap-2 font-body">
+                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-wider flex items-center gap-2 font-body">
                     <Calculator className="w-4 h-4 text-[#2196E8]" />
                     Growth Budget Calculator (₹/Month)
                   </span>
@@ -230,10 +230,10 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-4 w-full max-w-xl">
                 <button 
                   onClick={() => onOpenWhatsApp(budget, estimatedReach, estimatedLeads)}
-                  className="bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg cursor-pointer uppercase tracking-wider font-body text-xs sm:text-sm"
+                  className="bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg cursor-pointer tracking-wider font-body text-xs sm:text-sm"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>WHATSAPP US NOW</span>
+                  <span>WhatsApp Us Now</span>
                 </button>
               </div>
 
@@ -347,7 +347,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
                     <h4 className="font-header text-2xl text-slate-900 dark:text-white tracking-wide">
                       Analyzing {formData.businessName || "Your Business"}
                     </h4>
-                    <p className="text-xs text-[#2196E8] font-numeric mt-1 uppercase tracking-widest">
+                    <p className="text-xs text-[#2196E8] font-body mt-1 tracking-widest font-bold">
                       Step {scanStep + 1} of 5
                     </p>
                   </div>
@@ -412,7 +412,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
                   </div>
 
                   <div className="space-y-2">
-                    <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 tracking-wider block">
+                    <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 tracking-wider block font-body">
                       Critical Action Recommendations:
                     </span>
                     <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-slate-650 dark:text-slate-350 flex items-start gap-2.5">

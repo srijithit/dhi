@@ -122,7 +122,7 @@ export default function LeadPopupModal({ isOpen, onClose }: LeadPopupModalProps)
               <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#4A72EB]/15 rounded-full blur-[100px] pointer-events-none" />
 
               <div className="relative z-10 space-y-5">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#2196E8]/20 border border-[#2196E8]/40 text-[#2196E8] text-[11px] font-bold uppercase tracking-wider font-body">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#2196E8]/20 border border-[#2196E8]/40 text-[#2196E8] text-[11px] font-bold tracking-wider font-body">
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>AI Consultation</span>
                 </div>
@@ -193,8 +193,8 @@ export default function LeadPopupModal({ isOpen, onClose }: LeadPopupModalProps)
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 my-auto">
                   <div className="space-y-1">
-                    <span className="text-[#2196E8] font-bold text-xs uppercase tracking-wider block font-body">
-                      TELL US ABOUT YOUR TECH GOALS
+                    <span className="text-[#2196E8] font-bold text-xs tracking-wider block font-body">
+                      Tell Us About Your Tech Goals
                     </span>
                     <h3 className="font-header text-2xl sm:text-3xl text-slate-900 dark:text-white tracking-wide leading-tight">
                       We'll craft an intelligent proposal.
@@ -258,7 +258,7 @@ export default function LeadPopupModal({ isOpen, onClose }: LeadPopupModalProps)
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#2196E8] to-[#4A72EB] hover:from-[#1b84cf] hover:to-[#3b5fd4] text-white font-bold text-sm tracking-wider uppercase shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
+                    className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#2196E8] to-[#4A72EB] hover:from-[#1b84cf] hover:to-[#3b5fd4] text-white font-bold text-sm tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75 font-body"
                   >
                     {isSubmitting ? (
                       <>
@@ -267,7 +267,7 @@ export default function LeadPopupModal({ isOpen, onClose }: LeadPopupModalProps)
                       </>
                     ) : (
                       <>
-                        <span>SUBMIT</span>
+                        <span>Submit</span>
                         <ArrowRight className="w-4 h-4" />
                       </>
                     )}

@@ -23,7 +23,7 @@ export default function StatsBar() {
                 <AnimatedCounter value={stat.target} />
                 <span>{stat.suffix}</span>
               </div>
-              <div className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-800 dark:text-white font-body">
+              <div className="text-xs sm:text-sm font-bold tracking-wider text-slate-800 dark:text-white font-body">
                 {stat.label}
               </div>
               <div className="text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 font-body mt-0.5">

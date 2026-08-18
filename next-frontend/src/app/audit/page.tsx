@@ -20,7 +20,7 @@ export default function AuditPage() {
           <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/5 rounded-full blur-[130px] pointer-events-none" />
           
           <div className="max-w-6xl mx-auto px-6 relative z-10 text-center space-y-6">
-            <span className="text-[#2196E8] font-body text-xs font-semibold uppercase tracking-widest block">
+            <span className="text-[#2196E8] font-body text-xs font-bold tracking-widest block">
               Coimbatore Digital Agency
             </span>
             <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider leading-none">

@@ -181,7 +181,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6 text-left">
-                    <p className="text-xs font-bold uppercase tracking-widest text-[#2196E8] mb-1 font-numeric">The DhiGrowth Commitment</p>
+                    <p className="text-xs font-bold tracking-widest text-[#2196E8] mb-1 font-body">The DhiGrowth Commitment</p>
                     <blockquote className="text-white italic font-body text-xs sm:text-sm leading-relaxed">
                       "{SERVICE_QUOTE_MAP[service.id] || "We build custom, fast, and high-converting systems for your brand in Coimbatore."}"
                     </blockquote>
@@ -329,7 +329,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               {industries.map((ind) => (
                 <span 
                   key={ind}
-                  className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0d111c] text-slate-700 dark:text-slate-300 font-semibold text-xs uppercase tracking-wider"
+                  className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0d111c] text-slate-700 dark:text-slate-300 font-semibold text-xs tracking-wider font-body"
                 >
                   {ind}
                 </span>
