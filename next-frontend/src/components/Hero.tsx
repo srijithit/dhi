@@ -66,13 +66,13 @@ export default function Hero({ onOpenAudit }: HeroProps) {
       {/* Decorative dot-grid pattern top-right */}
       <div className="absolute top-0 right-0 w-[350px] h-[350px] bg-dot-matrix opacity-25 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
           {/* Left Column - Content */}
           <motion.div 
-            className="lg:col-span-6 space-y-6 text-left flex flex-col items-start justify-start"
+            className="lg:col-span-6 space-y-5 text-left flex flex-col items-start justify-start"
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
@@ -80,56 +80,56 @@ export default function Hero({ onOpenAudit }: HeroProps) {
             
             <motion.div 
               variants={fadeInUp}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/20 mb-2 backdrop-blur-md shadow-md shadow-[#2196E8]/5"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/20 mb-1 backdrop-blur-md shadow-md shadow-[#2196E8]/5"
             >
               <Sparkles className="w-4 h-4 text-[#2196E8] animate-spin" style={{ animationDuration: '8s' }} />
-              <span className="text-xs sm:text-sm font-semibold tracking-wide text-[#2196E8] font-body">
+              <span className="text-xs sm:text-xs md:text-sm font-semibold tracking-wide text-[#2196E8] font-body">
                 Coimbatore's Premier Digital Growth Agency
               </span>
             </motion.div>
  
             <motion.h1 
               variants={fadeInUp}
-              className="font-header text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide text-slate-900 dark:text-white text-left leading-[1.05] mb-2"
+              className="font-header text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide text-slate-900 dark:text-white text-left leading-[1.08] mb-1"
             >
               Coimbatore's Leading <span className="text-[#2196E8]">Digital Growth</span> Partner <br />
-              <span className="text-[#4A72EB] text-2xl sm:text-3xl md:text-4xl block mt-2 font-semibold">
+              <span className="text-[#4A72EB] text-xl sm:text-2xl md:text-3xl block mt-2 font-semibold">
                 Web, App, AI &amp; Performance Marketing
               </span>
             </motion.h1>
  
             <motion.p 
               variants={fadeInUp}
-              className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 font-medium leading-relaxed font-body text-left max-w-2xl"
+              className="text-base sm:text-lg text-slate-700 dark:text-slate-300 font-medium leading-relaxed font-body text-left max-w-xl"
             >
               We help businesses grow through high-performance websites, mobile apps, AI automation, and performance marketing.
             </motion.p>
  
             <motion.div 
               variants={fadeInUp}
-              className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 w-full sm:w-auto"
+              className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 w-full sm:w-auto"
             >
               <motion.button 
                 onClick={onOpenAudit}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="btn-primary group !py-3.5 !px-8 cursor-pointer w-full sm:w-auto !rounded-2xl shadow-md hover:shadow-lg"
+                className="btn-primary group !py-3 !px-7 cursor-pointer w-full sm:w-auto !rounded-xl shadow-md hover:shadow-lg text-sm"
               >
                 <span>Claim Free Audit</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </motion.button>
             </motion.div>
  
           </motion.div>
 
-          {/* Right Column - Portrait Video Showcase Player */}
+          {/* Right Column - Portrait Video Showcase Player matching 90% zoom proportion */}
           <motion.div 
             className="lg:col-span-6 relative flex justify-center items-center w-full"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="relative w-full max-w-[240px] sm:max-w-[270px] mx-auto rounded-[28px] overflow-hidden border-2 border-slate-200/80 dark:border-slate-800 bg-slate-950 shadow-xl group transition-all duration-300 hover:border-[#2196E8]/60">
+            <div className="relative w-full max-w-[280px] sm:max-w-[310px] mx-auto rounded-[32px] overflow-hidden border-2 border-slate-200/80 dark:border-slate-800 bg-slate-950 shadow-2xl group transition-all duration-300 hover:border-[#2196E8]/60">
               
               {/* Top floating pill badge */}
               <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider font-body">
