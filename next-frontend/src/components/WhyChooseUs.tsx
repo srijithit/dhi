@@ -121,7 +121,7 @@ export default function WhyChooseUs() {
                           {diff.badge}
                         </span>
                         
-                        <h3 className="font-header text-xl text-slate-900 tracking-wide leading-snug uppercase">
+                        <h3 className="font-header text-xl text-slate-900 tracking-wide leading-snug">
                           {diff.title}
                         </h3>
 
