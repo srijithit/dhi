@@ -58,7 +58,7 @@ export default function ProcessSection() {
   return (
     <section 
       id="process" 
-      className="scroll-mt-24 pt-28 pb-16 md:pt-32 md:pb-24 bg-white dark:bg-[#04060c] relative overflow-hidden transition-colors duration-300 border-t border-slate-200/80 dark:border-slate-900 font-body"
+      className="scroll-mt-24 py-10 md:py-14 bg-white dark:bg-[#04060c] relative overflow-hidden transition-colors duration-300 border-t border-slate-200/80 dark:border-slate-900 font-body"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -68,7 +68,7 @@ export default function ProcessSection() {
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10 font-body">
         
         {/* Section Header */}
-        <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mb-12 sm:mb-16 w-full">
+        <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mb-6 w-full">
           <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block mb-2 font-body text-center">
             Seamless Journey
           </span>

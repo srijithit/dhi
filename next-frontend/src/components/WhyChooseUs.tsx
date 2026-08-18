@@ -49,7 +49,7 @@ export default function WhyChooseUs() {
   };
 
   return (
-    <section id="why-us" className="py-20 md:py-28 bg-[#0b0f19] text-white relative overflow-hidden transition-colors border-t border-slate-850 font-body">
+    <section id="why-us" className="py-10 md:py-14 bg-[#0b0f19] text-white relative overflow-hidden transition-colors border-t border-slate-850 font-body">
       
       {/* Background Hero Architecture Glow Image */}
       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">

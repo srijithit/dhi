@@ -45,12 +45,12 @@ export default function TestimonialsSection({ showAll = false }: TestimonialsSec
   };
 
   return (
-    <section id="testimonials" className="py-20 md:py-28 bg-slate-50 dark:bg-[#070911] relative overflow-hidden transition-colors border-t border-slate-200/80 dark:border-slate-900 font-body">
+    <section id="testimonials" className="py-10 md:py-14 bg-slate-50 dark:bg-[#070911] relative overflow-hidden transition-colors border-t border-slate-200/80 dark:border-slate-900 font-body">
       
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10 font-body">
         
         {/* Header */}
-        <div className="text-center max-w-4xl mx-auto mb-14 space-y-3">
+        <div className="text-center max-w-4xl mx-auto mb-6 space-y-3">
           <span className="text-[#2196E8] font-bold text-xs uppercase tracking-widest block font-numeric">
             Social Proof &amp; Client Results
           </span>

@@ -26,7 +26,7 @@ export default function CTABanner({ onOpenAudit }: CTABannerProps) {
   };
 
   return (
-    <section className="py-24 bg-[#000000] text-white relative overflow-hidden border-t border-slate-900">
+    <section className="py-10 md:py-14 bg-[#000000] text-white relative overflow-hidden border-t border-slate-900">
       {/* Decorative dot matrix */}
       <div className="absolute inset-0 bg-dot-matrix opacity-20 pointer-events-none" />
       

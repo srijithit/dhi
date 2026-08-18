@@ -56,7 +56,7 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="py-32 md:py-40 bg-slate-50 dark:bg-[#080b11] relative overflow-hidden transition-colors duration-300 border-y border-slate-200 dark:border-slate-900">
+    <section id="services" className="py-10 md:py-14 bg-slate-50 dark:bg-[#080b11] relative overflow-hidden transition-colors duration-300 border-y border-slate-200 dark:border-slate-900">
       
       <div className="absolute top-1/3 right-0 w-96 h-96 bg-[#4A72EB]/5 rounded-full blur-[140px] pointer-events-none" />
 

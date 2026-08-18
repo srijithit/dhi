@@ -41,7 +41,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
   };
 
   return (
-    <footer className="bg-slate-100 dark:bg-[#030508] border-t-2 border-slate-200 dark:border-slate-900 rounded-t-[48px] md:rounded-t-[80px] pt-24 pb-0 mt-16 md:mt-28 text-slate-650 dark:text-slate-400 font-body transition-colors duration-300 relative z-10 overflow-hidden">
+    <footer className="bg-slate-100 dark:bg-[#030508] border-t-2 border-slate-200 dark:border-slate-900 rounded-t-[48px] md:rounded-t-[80px] pt-12 pb-0 mt-6 md:mt-10 text-slate-650 dark:text-slate-400 font-body transition-colors duration-300 relative z-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-body">
         
         {/* Animated main columns */}

@@ -11,7 +11,7 @@ export default function StatsBar() {
   ];
 
   return (
-    <section className="bg-slate-50 dark:bg-[#080b11] border-y border-slate-200 dark:border-slate-800/80 py-12 relative z-10">
+    <section className="bg-slate-50 dark:bg-[#080b11] border-y border-slate-200 dark:border-slate-800/80 py-6 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, idx) => (

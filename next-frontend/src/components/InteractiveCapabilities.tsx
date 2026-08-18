@@ -59,14 +59,14 @@ export default function InteractiveCapabilities() {
 
   return (
     <section 
-      className="py-24 bg-slate-50 dark:bg-[#070911] border-y border-slate-200 dark:border-slate-850 overflow-hidden select-none transition-colors"
+      className="py-10 md:py-14 bg-slate-50 dark:bg-[#070911] border-y border-slate-200 dark:border-slate-850 overflow-hidden select-none transition-colors"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className="max-w-6xl mx-auto px-6 font-body">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <div className="text-center max-w-3xl mx-auto mb-6 space-y-3">
           <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block font-numeric">
             Core Competencies
           </span>

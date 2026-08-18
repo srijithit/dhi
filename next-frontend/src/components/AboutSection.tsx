@@ -39,7 +39,7 @@ export default function AboutSection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-[#000000] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
+    <section className="py-8 md:py-12 bg-white dark:bg-[#000000] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
       
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#2196E8]/5 rounded-full blur-[140px] pointer-events-none" />
 
@@ -47,7 +47,7 @@ export default function AboutSection() {
         
         {/* Section Header */}
         <motion.div 
-          className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-12 w-full"
+          className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-6 w-full"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
