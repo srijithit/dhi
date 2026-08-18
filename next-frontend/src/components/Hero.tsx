@@ -122,19 +122,19 @@ export default function Hero({ onOpenAudit }: HeroProps) {
  
           </motion.div>
 
-          {/* Right Column - Inline Video Showcase Player */}
+          {/* Right Column - Portrait Video Showcase Player */}
           <motion.div 
             className="lg:col-span-6 relative flex justify-center items-center w-full"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="relative w-full rounded-3xl overflow-hidden border-2 border-slate-200/80 dark:border-slate-800 bg-slate-900 shadow-2xl group transition-all duration-300 hover:border-[#2196E8]/60">
+            <div className="relative w-full max-w-[340px] sm:max-w-[380px] mx-auto rounded-[32px] overflow-hidden border-2 border-slate-200/80 dark:border-slate-800 bg-slate-950 shadow-2xl group transition-all duration-300 hover:border-[#2196E8]/60">
               
               {/* Top floating pill badge */}
               <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider font-body">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>DhiGrowth Agency Showcase • 45s</span>
+                <span>Showcase • 45s</span>
               </div>
 
               {/* Top Right Expand Button */}
@@ -146,8 +146,8 @@ export default function Hero({ onOpenAudit }: HeroProps) {
                 <Maximize2 className="w-4 h-4" />
               </button>
 
-              {/* Embedded Video Element */}
-              <div className="relative aspect-video w-full bg-slate-950 overflow-hidden">
+              {/* Embedded Portrait Video Container (9:16 Aspect Ratio) */}
+              <div className="relative aspect-[9/16] w-full bg-slate-950 overflow-hidden">
                 <video 
                   ref={videoRef}
                   src="/videos/intro.mp4" 
@@ -197,23 +197,23 @@ export default function Hero({ onOpenAudit }: HeroProps) {
 
       </div>
 
-      {/* Video Modal Trigger Popup */}
+      {/* Portrait Video Modal Trigger Popup */}
       {showVideoModal && (
         <div className="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center z-50 p-4">
-          <div className="relative w-full max-w-4xl bg-slate-900 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl">
+          <div className="relative w-full max-w-md aspect-[9/16] max-h-[85vh] bg-slate-950 rounded-[32px] overflow-hidden border border-slate-800 shadow-2xl">
             <button 
               onClick={() => setShowVideoModal(false)}
-              className="absolute top-4 right-4 bg-black/60 hover:bg-black text-white hover:text-[#2196E8] p-2 rounded-full z-10 transition-colors cursor-pointer"
+              className="absolute top-4 right-4 bg-black/60 hover:bg-black text-white hover:text-[#2196E8] p-2.5 rounded-full z-20 transition-colors cursor-pointer"
               aria-label="Close Video"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
-            <div className="relative aspect-video w-full bg-black">
+            <div className="relative w-full h-full bg-black">
               <video 
                 src="/videos/intro.mp4" 
                 controls 
                 autoPlay 
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
