@@ -115,7 +115,7 @@ export default function Hero({ onOpenAudit }: HeroProps) {
                 whileTap={{ scale: 0.98 }}
                 className="btn-primary group !py-3 !px-7 cursor-pointer w-full sm:w-auto !rounded-xl shadow-md hover:shadow-lg text-sm"
               >
-                <span>Claim Free Audit</span>
+                <span>Book a Call</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </motion.button>
             </motion.div>

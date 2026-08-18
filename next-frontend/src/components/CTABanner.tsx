@@ -55,7 +55,7 @@ export default function CTABanner({ onOpenAudit }: CTABannerProps) {
             className="w-full sm:w-auto px-8 py-4 bg-[#4A72EB] hover:bg-[#2196E8] text-white font-bold rounded-2xl border-2 border-transparent hover:shadow-lg transition-all duration-250 flex items-center justify-center gap-2 text-base tracking-wider shadow-md cursor-pointer"
           >
             <PhoneCall className="w-5 h-5" />
-            <span>Claim Free Audit</span>
+            <span>Book a Call</span>
           </button>
           
           <button 

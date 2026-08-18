@@ -111,7 +111,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
             onClick={handleApplyClick}
             className="btn-primary !py-3 !px-6 !text-sm text-white font-bold rounded-2xl hover:bg-brand-bright transition-all shadow-md hover:shadow-lg capitalize tracking-wider font-body bg-[#4A72EB] cursor-pointer"
           >
-            Claim Free Audit
+            Book a Call
           </button>
         </div>
 
@@ -149,7 +149,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
               onClick={() => { setMobileMenuOpen(false); handleApplyClick(); }}
               className="btn-primary w-full text-center py-3 capitalize tracking-wider text-sm font-bold font-body rounded-2xl cursor-pointer"
             >
-              Claim Free Audit
+              Book a Call
             </button>
           </div>
         </div>

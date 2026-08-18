@@ -116,7 +116,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
               <li><Link href="/services" className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455">Services</Link></li>
               <li><Link href="/about" className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455">About Us</Link></li>
               <li><Link href="/contact" className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455">Contact &amp; Support</Link></li>
-              <li><Link href="/audit" className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455">Get Free Audit</Link></li>
+              <li><button onClick={onOpenAudit} className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455 text-left cursor-pointer">Book a Call</button></li>
             </ul>
           </motion.div>
 
