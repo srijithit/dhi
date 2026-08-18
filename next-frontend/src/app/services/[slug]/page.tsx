@@ -127,10 +127,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/5 rounded-full blur-[130px] pointer-events-none" />
           
           <div className="max-w-6xl mx-auto px-6 relative z-10 text-center space-y-6">
-            <span className="text-[#2196E8] font-body text-xs font-semibold uppercase tracking-widest block">
+            <span className="text-[#2196E8] font-body text-xs font-bold tracking-widest block">
               Coimbatore Digital Agency
             </span>
-            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider uppercase leading-none">
+            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider leading-none">
               {service.heroTitle || service.name}
             </h1>
             <p className="text-slate-600 dark:text-slate-300 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
@@ -160,10 +160,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               
               <div className="lg:col-span-7 space-y-6 text-left">
-                <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block font-numeric">
+                <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
                   Core Expertise
                 </span>
-                <h2 className="font-header text-4xl sm:text-5xl uppercase tracking-wider text-[#4A72EB] leading-none">
+                <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-[#4A72EB] leading-none">
                   Leading {service.name} Company in Coimbatore
                 </h2>
                 <p className="text-slate-700 dark:text-slate-350 text-base sm:text-lg leading-relaxed font-body">
@@ -197,10 +197,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             <div className="max-w-7xl mx-auto px-6">
               
               <div className="text-center max-w-3xl mx-auto mb-16">
-                <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-numeric">
+                <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
                   Core Offerings
                 </span>
-                <h2 className="font-header text-4xl sm:text-5xl uppercase tracking-wider text-slate-900 dark:text-white">
+                <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
                   Our {service.name} Sub-Services
                 </h2>
               </div>
@@ -211,7 +211,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     key={idx}
                     className="glass-card p-8 bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-900 hover:border-[#2196E8] rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300"
                   >
-                    <h3 className="font-header text-2xl text-slate-900 dark:text-white uppercase tracking-wider mb-3">
+                    <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wider mb-3">
                       {item.title}
                     </h3>
                     <p className="text-slate-600 dark:text-slate-350 text-sm leading-relaxed">
@@ -230,10 +230,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <div className="max-w-5xl mx-auto px-6">
             
             <div className="text-center mb-16">
-              <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-numeric">
+              <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
                 Our Guarantee
               </span>
-              <h2 className="font-header text-4xl sm:text-5xl uppercase tracking-wider text-slate-900 dark:text-white">
+              <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
                 Why Coimbatore Businesses Trust DhiGrowth
               </h2>
             </div>
@@ -271,10 +271,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <div className="max-w-5xl mx-auto px-6">
             
             <div className="text-center mb-16">
-              <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-numeric">
+              <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
                 Methodology
               </span>
-              <h2 className="font-header text-4xl sm:text-5xl uppercase tracking-wider text-slate-900 dark:text-white">
+              <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
                 How We Build
               </h2>
             </div>
@@ -313,10 +313,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         {/* For Every Industry Tag Grid */}
         <section className="py-24 bg-white dark:bg-[#000000] transition-colors border-t border-slate-200 dark:border-slate-900">
           <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
-            <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block font-numeric">
+            <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
               Versatility
             </span>
-            <h2 className="font-header text-4xl sm:text-5xl uppercase tracking-wider text-slate-900 dark:text-white">
+            <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
               For Every Industry
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
