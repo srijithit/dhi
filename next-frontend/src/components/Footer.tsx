@@ -46,7 +46,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
         
         {/* Animated main columns */}
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-slate-200 dark:border-slate-900"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-6 border-b border-slate-200 dark:border-slate-900"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -170,7 +170,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="mt-16 bg-[#4A72EB] text-white py-8 relative overflow-hidden"
+        className="mt-4 bg-[#4A72EB] text-white py-6 relative overflow-hidden"
       >
         {/* Animating center watermark background text */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0">
