@@ -190,8 +190,8 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
           </motion.span>
         </div>
         
-        <div className="max-w-7xl mx-auto px-6 relative z-10 flex items-center justify-between gap-4 text-[10px] sm:text-xs font-bold uppercase tracking-wider font-body">
-          <p>© {new Date().getFullYear()} DHI GROWTH. ALL RIGHTS RESERVED.</p>
+        <div className="max-w-7xl mx-auto px-6 relative z-10 flex items-center justify-between gap-4 text-[10px] sm:text-xs font-bold tracking-wider font-body">
+          <p>© {new Date().getFullYear()} DhiGrowth. All Rights Reserved.</p>
           <div className="flex items-center gap-3">
             <a 
               href="https://instagram.com/dhigrowth" 

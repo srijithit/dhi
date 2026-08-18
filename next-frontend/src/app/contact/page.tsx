@@ -35,7 +35,7 @@ export default function ContactPage() {
           <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/5 rounded-full blur-[130px] pointer-events-none" />
           
           <div className="max-w-6xl mx-auto px-6 relative z-10 text-center space-y-6">
-            <span className="text-[#2196E8] font-body text-xs font-semibold uppercase tracking-widest block">
+            <span className="text-[#2196E8] font-body text-xs font-bold tracking-widest block">
               Get in Touch
             </span>
             <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider leading-none">
@@ -64,11 +64,11 @@ export default function ContactPage() {
               <div className="space-y-10">
                 
                 <div className="space-y-4 text-center">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/20 text-[#2196E8] text-xs font-bold uppercase tracking-wider font-body">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/20 text-[#2196E8] text-xs font-bold tracking-wider font-body">
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>Office Location</span>
                   </div>
-                  <h2 className="font-header text-4xl sm:text-5xl uppercase tracking-wider text-slate-900 dark:text-white leading-none">
+                  <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white leading-none">
                     DhiGrowth Coimbatore
                   </h2>
                   <p className="text-slate-600 dark:text-slate-355 text-sm leading-relaxed max-w-md mx-auto font-body">
