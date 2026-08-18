@@ -117,11 +117,11 @@ export default function IndustriesSection({ onOpenAudit }: IndustriesSectionProp
   };
 
   return (
-    <section id="industries" className="py-32 md:py-40 bg-white dark:bg-[#000000] relative overflow-hidden border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
+    <section id="industries" className="py-10 md:py-14 bg-white dark:bg-[#000000] relative overflow-hidden border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
         
         {/* Header */}
-        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-20 w-full">
+        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-6 w-full">
           <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 font-body text-center">
             Custom Industry Solutions
           </span>
