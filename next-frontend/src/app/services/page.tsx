@@ -123,7 +123,7 @@ export default function ServicesPage() {
 
                       <div className="p-6 sm:p-8 flex flex-col justify-between flex-grow space-y-4">
                         <div>
-                          <h3 className="font-header text-2xl text-slate-900 dark:text-white uppercase tracking-wider group-hover:text-[#2196E8] transition-colors duration-300">
+                          <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wider group-hover:text-[#2196E8] transition-colors duration-300">
                             {service.name}
                           </h3>
 
