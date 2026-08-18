@@ -30,7 +30,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
   };
 
   return (
-    <section className="relative pt-36 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-gradient-to-b from-slate-100 via-white to-slate-50 bg-dot-matrix">
+    <section className="relative pt-28 pb-14 md:pt-32 md:pb-16 overflow-hidden bg-gradient-to-b from-slate-100 via-white to-slate-50 bg-dot-matrix">
       
       {/* Background outline watermark */}
       <div className="absolute top-16 left-1/2 -translate-x-1/2 w-full text-center pointer-events-none select-none z-0 overflow-hidden">
