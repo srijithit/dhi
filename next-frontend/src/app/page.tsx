@@ -18,6 +18,7 @@ import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import CustomCursor from '@/components/CustomCursor';
 
 import LoadingScreen from '@/components/LoadingScreen';
+import LeadPopupModal from '@/components/LeadPopupModal';
 
 // Custom robust SVG LinkedIn icon to prevent Lucide React version mismatch errors
 const LinkedInIcon = (props: any) => (
@@ -27,13 +28,10 @@ const LinkedInIcon = (props: any) => (
 );
 
 export default function Home() {
+  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+
   const handleOpenAudit = () => {
-    const el = document.getElementById('free-audit-form');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      window.location.href = '/contact';
-    }
+    setIsLeadModalOpen(true);
   };
 
   const handleExploreServices = () => {
@@ -165,6 +163,12 @@ export default function Home() {
 
       {/* WhatsApp Quick chat floating widget */}
       <FloatingWhatsApp />
+
+      {/* Lead Proposal Popup Modal */}
+      <LeadPopupModal 
+        isOpen={isLeadModalOpen} 
+        onClose={() => setIsLeadModalOpen(false)} 
+      />
 
     </div>
   );

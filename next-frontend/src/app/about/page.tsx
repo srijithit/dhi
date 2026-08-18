@@ -1,14 +1,21 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CTABanner from '@/components/CTABanner';
 import CustomCursor from '@/components/CustomCursor';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import InteractiveCapabilities from '@/components/InteractiveCapabilities';
+import LeadPopupModal from '@/components/LeadPopupModal';
 import { motion } from 'framer-motion';
 
 export default function AboutPage() {
+  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+
+  const handleOpenAudit = () => {
+    setIsLeadModalOpen(true);
+  };
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 35 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
@@ -18,7 +25,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-white dark:bg-[#000000] text-slate-900 dark:text-white selection:bg-[#2196E8] selection:text-white font-body transition-colors duration-300">
       <CustomCursor />
       
-      <Navbar />
+      <Navbar onOpenAudit={handleOpenAudit} />
 
       <main className="subpage-padding-top">
         
@@ -217,8 +224,18 @@ export default function AboutPage() {
 
       </main>
 
-      <Footer />
+      {/* Footer */}
+      <Footer onOpenAudit={handleOpenAudit} />
+
+      {/* WhatsApp Quick chat floating widget */}
       <FloatingWhatsApp />
+
+      {/* Lead Proposal Popup Modal */}
+      <LeadPopupModal 
+        isOpen={isLeadModalOpen} 
+        onClose={() => setIsLeadModalOpen(false)} 
+      />
+
     </div>
   );
 }
