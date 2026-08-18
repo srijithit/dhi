@@ -155,7 +155,10 @@ export default function Hero({ onOpenAudit }: HeroProps) {
                   loop 
                   muted 
                   playsInline 
-                  className="w-full h-full object-cover"
+                  controls={false}
+                  controlsList="nodownload no-remote-playback noremoteplayback no-fullscreen"
+                  disablePictureInPicture
+                  className="w-full h-full object-cover pointer-events-none"
                 />
 
                 {/* Bottom Video Controls Overlay */}
@@ -211,9 +214,13 @@ export default function Hero({ onOpenAudit }: HeroProps) {
             <div className="relative w-full h-full bg-black">
               <video 
                 src="/videos/intro.mp4" 
-                controls 
                 autoPlay 
-                className="w-full h-full object-cover"
+                loop
+                playsInline
+                controls={false}
+                controlsList="nodownload no-remote-playback noremoteplayback no-fullscreen"
+                disablePictureInPicture
+                className="w-full h-full object-cover pointer-events-none"
               />
             </div>
           </div>

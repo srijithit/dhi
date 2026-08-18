@@ -44,6 +44,19 @@ html {
   font-family: var(--font-body);
 }
 
+/* Hide native HTML5 video player media controls & three dots menu */
+video::-webkit-media-controls,
+video::-webkit-media-controls-enclosure,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-overlay-play-button,
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-timeline,
+video::-webkit-media-controls-overflow-menu-list-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+}
+
 body {
   overflow-x: hidden;
   background-color: var(--bg-main);
