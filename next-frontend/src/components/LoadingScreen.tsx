@@ -69,7 +69,7 @@ export default function LoadingScreen() {
             {/* Skip Intro Button */}
             <button
               onClick={handleComplete}
-              className="absolute bottom-8 right-8 z-20 px-5 py-2.5 rounded-full bg-slate-900/80 hover:bg-slate-900 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all duration-300 hover:scale-105 cursor-pointer font-body shadow-2xl"
+              className="absolute bottom-8 right-8 z-20 px-5 py-2.5 rounded-full bg-slate-900/80 hover:bg-slate-900 backdrop-blur-md border border-white/20 text-white text-xs font-bold tracking-wider flex items-center gap-2 transition-all duration-300 hover:scale-105 cursor-pointer font-body shadow-2xl"
             >
               <span>Skip Intro</span>
               <SkipForward className="w-4 h-4" />
