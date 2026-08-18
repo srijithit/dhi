@@ -142,13 +142,13 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link 
                 href="/contact"
-                className="btn-primary w-full sm:w-auto px-8 py-3.5 bg-brand text-white font-bold rounded-lg hover:bg-brand-bright transition-colors uppercase tracking-wider text-sm"
+                className="btn-primary w-full sm:w-auto px-8 py-3.5 bg-brand text-white font-bold rounded-lg hover:bg-brand-bright transition-colors tracking-wider text-sm font-body"
               >
                 Get a Free Consultation
               </Link>
               <Link 
                 href="/services"
-                className="btn-secondary w-full sm:w-auto px-8 py-3.5 !border-slate-800 text-white hover:bg-slate-900 transition-colors uppercase tracking-wider text-sm"
+                className="btn-secondary w-full sm:w-auto px-8 py-3.5 !border-slate-800 text-white hover:bg-slate-900 transition-colors tracking-wider text-sm font-body"
               >
                 View Our Portfolio
               </Link>

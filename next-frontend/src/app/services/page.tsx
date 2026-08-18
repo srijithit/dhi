@@ -115,7 +115,7 @@ export default function ServicesPage() {
                           <IconComponent className="w-5 h-5 text-[#2196E8]" />
                         </div>
                         {service.badge && (
-                          <span className="absolute top-4 right-4 text-[9px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-[#2196E8] text-white shadow-md">
+                          <span className="absolute top-4 right-4 text-[9px] font-bold tracking-wider px-2.5 py-1 rounded-full bg-[#2196E8] text-white shadow-md font-body">
                             {service.badge}
                           </span>
                         )}
