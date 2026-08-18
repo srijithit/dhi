@@ -34,9 +34,9 @@ export default function LoadingScreen() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[99999] bg-[#030712] flex items-center justify-center overflow-hidden select-none"
+          className="fixed inset-0 z-[99999] bg-black flex items-center justify-center overflow-hidden select-none"
         >
-          {/* Edge-to-Edge Full Screen Video Animation */}
+          {/* Edge-to-Edge Clean Full Screen Video (No Dark Vignette Overlay) */}
           <div className="relative w-full h-full flex items-center justify-center">
             <video
               src="/videos/rocket_left_fly_final.mp4"
@@ -48,13 +48,10 @@ export default function LoadingScreen() {
               className="w-full h-full object-cover opacity-100"
             />
 
-            {/* Glowing Brand Accent Backdrop */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-[#030712]/40 pointer-events-none" />
-
             {/* Skip Button */}
             <button
               onClick={handleComplete}
-              className="absolute bottom-8 right-8 z-10 px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:scale-105 cursor-pointer font-body"
+              className="absolute bottom-8 right-8 z-10 px-5 py-2 rounded-full bg-slate-900/60 hover:bg-slate-900 backdrop-blur-md border border-white/20 text-white text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:scale-105 cursor-pointer font-body shadow-lg"
             >
               Skip Intro →
             </button>
