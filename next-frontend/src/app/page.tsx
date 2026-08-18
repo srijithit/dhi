@@ -344,7 +344,7 @@ function BlogSection() {
         
         {/* Header */}
         <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-6 w-full">
-          <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 text-center">
+          <span className="text-[#2196E8] font-bold text-xs tracking-widest block mb-2 text-center font-body">
             Insights &amp; Strategy
           </span>
           <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">
@@ -363,7 +363,7 @@ function BlogSection() {
               className="bg-white dark:bg-[#0d111c] border border-slate-200/80 dark:border-slate-900/60 rounded-3xl p-6 flex flex-col justify-between hover:border-[#2196E8] shadow-sm hover:shadow-lg transition-all duration-300 group"
             >
               <div>
-                <span className="text-[10px] uppercase font-bold text-[#2196E8] tracking-wider block mb-3 bg-[#2196E8]/10 px-3 py-1 rounded-full w-fit">
+                <span className="text-[10px] font-bold text-[#2196E8] tracking-wider block mb-3 bg-[#2196E8]/10 px-3 py-1 rounded-full w-fit font-body">
                   {art.tag}
                 </span>
                 
@@ -444,7 +444,7 @@ function FAQSection() {
         
         {/* Header */}
         <div className="flex flex-col items-center justify-center text-center mb-6 w-full">
-          <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 text-center">
+          <span className="text-[#2196E8] font-semibold text-sm tracking-widest block mb-2 text-center">
             Got Questions?
           </span>
           <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide text-center">
