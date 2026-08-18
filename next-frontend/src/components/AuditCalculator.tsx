@@ -158,7 +158,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
   }
 
   return (
-    <section id="free-audit-form" className="py-16 sm:py-32 md:py-40 bg-white dark:bg-[#000000] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
+    <section id="free-audit-form" className="py-8 md:py-12 bg-white dark:bg-[#000000] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
       
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-[#2196E8]/5 to-[#4A72EB]/5 rounded-full blur-[160px] pointer-events-none" />
 
