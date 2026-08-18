@@ -135,9 +135,6 @@ export default function Home() {
         {/* Why Choose Us Section */}
         <WhyChooseUs />
 
-        {/* 3. Meet the Team Section */}
-        <TeamSection />
-
         {/* Process Timeline Section */}
         <ProcessSection />
 
@@ -309,93 +306,7 @@ function MetricsSection() {
   );
 }
 
-// Sub-Component: Team Section
-function TeamSection() {
-  const members = [
-    {
-      name: "Dhinesh",
-      role: "Founder & Chief Growth Officer",
-      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=300&fit=crop&crop=face",
-      linkedin: "https://linkedin.com"
-    },
-    {
-      name: "Mathanraj Murugesan",
-      role: "Head of Web Architecture",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-      linkedin: "https://linkedin.com"
-    },
-    {
-      name: "Aiswarya R.",
-      role: "Creative Director",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop&crop=face",
-      linkedin: "https://linkedin.com"
-    },
-    {
-      name: "Arun Prasath",
-      role: "Director of Performance Marketing",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-      linkedin: "https://linkedin.com"
-    }
-  ];
 
-  return (
-    <section className="py-32 md:py-40 bg-white dark:bg-[#000000] relative overflow-hidden border-t border-slate-200/80 dark:border-slate-900 transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
-        
-        {/* Header */}
-        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-20 w-full">
-          <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 text-center">
-            Our Professionals
-          </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">
-            Meet Coimbatore's Digital <span className="text-[#2196E8]">Experts</span>
-          </h2>
-          <p className="text-slate-650 dark:text-slate-300 text-base sm:text-lg text-center">
-            A cohesive team of developers, performance marketers, and creative designers dedicated to your business success.
-          </p>
-        </div>
-
-        {/* Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {members.map((m, idx) => (
-            <div 
-              key={idx}
-              className="bg-slate-50/50 dark:bg-[#0b0e17] border border-slate-200/80 dark:border-slate-850 rounded-3xl p-5 flex flex-col justify-between hover:border-[#2196E8] shadow-sm hover:shadow-lg transition-all duration-300 group"
-            >
-              <div className="relative aspect-square w-full rounded-2xl overflow-hidden mb-5 border border-slate-200 dark:border-slate-900">
-                <img 
-                  src={m.avatar} 
-                  alt={m.name} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="flex items-end justify-between gap-3">
-                <div>
-                  <h4 className="font-header text-xl text-slate-900 dark:text-white tracking-wide">
-                    {m.name}
-                  </h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                    {m.role}
-                  </p>
-                </div>
-                <a 
-                  href={m.linkedin} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-[#2196E8] transition-colors p-2 bg-white dark:bg-[#121726] border border-slate-200 dark:border-slate-800 rounded-xl"
-                  aria-label="LinkedIn profile"
-                >
-                  <LinkedInIcon className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-
-      </div>
-    </section>
-  );
-}
 
 // Sub-Component: Blog & Insights
 function BlogSection() {
