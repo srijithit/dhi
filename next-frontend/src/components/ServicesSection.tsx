@@ -145,7 +145,7 @@ export default function ServicesSection() {
           <div className="flex justify-center mt-12">
             <button 
               onClick={() => setShowAll(!showAll)}
-              className="btn-primary !px-8 !py-3.5 bg-[#4A72EB] text-white font-bold rounded-xl uppercase tracking-wider font-body text-xs cursor-pointer hover:bg-[#2196E8] transition-all duration-300 hover:scale-102"
+              className="btn-primary !px-8 !py-3.5 bg-[#4A72EB] text-white font-bold rounded-xl tracking-wider font-body text-xs cursor-pointer hover:bg-[#2196E8] transition-all duration-300 hover:scale-102"
             >
               {showAll ? 'Show Less Services' : 'View All Services (13+)'}
             </button>
