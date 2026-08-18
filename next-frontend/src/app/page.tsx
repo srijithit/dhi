@@ -190,7 +190,7 @@ function ClientLogos() {
   return (
     <section className="py-10 bg-slate-50 border-y border-slate-200/60 dark:bg-[#070910] dark:border-slate-900 overflow-hidden select-none">
       <div className="max-w-7xl mx-auto px-6 text-center mb-8">
-        <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 tracking-widest block">
+        <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-wider block font-body">
           Our Trusted Clients
         </span>
       </div>
@@ -253,7 +253,7 @@ function MetricsSection() {
         
         {/* Header */}
         <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-6 w-full">
-          <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2 text-center">
+          <span className="text-[#2196E8] font-bold text-xs tracking-widest block mb-2 text-center font-body">
             Proven Outcomes
           </span>
           <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">
@@ -283,10 +283,10 @@ function MetricsSection() {
                     </div>
                   </div>
                   
-                  <h3 className="font-header text-2xl text-slate-900 dark:text-white uppercase tracking-wide mb-1">
+                  <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wide mb-1">
                     {m.label}
                   </h3>
-                  <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest block mb-4">
+                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 tracking-wider block mb-4 font-body">
                     Client: {m.client}
                   </span>
                   <p className="text-slate-600 dark:text-slate-355 text-sm leading-relaxed mb-6">
