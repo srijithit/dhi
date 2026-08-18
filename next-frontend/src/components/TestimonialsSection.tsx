@@ -52,10 +52,10 @@ export default function TestimonialsSection({ showAll = false }: TestimonialsSec
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-14 space-y-3">
           <span className="text-[#2196E8] font-bold text-xs uppercase tracking-widest block font-numeric">
-            SOCIAL PROOF
+            Social Proof &amp; Client Results
           </span>
-          <h2 className="font-header text-3xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white tracking-wide leading-tight uppercase">
-            WHAT OUR CLIENTS IN COIMBATORE SAY ABOUT DHIGROWTH
+          <h2 className="font-header text-3xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white tracking-wide leading-tight">
+            What Our Clients In Coimbatore Say About DhiGrowth
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
             Trust is built through transparency and results, and that is exactly how DhiGrowth operates. When you scale your business with us, you receive:

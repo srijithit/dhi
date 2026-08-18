@@ -63,26 +63,26 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/20 mb-2 backdrop-blur-md shadow-md shadow-[#2196E8]/5"
             >
               <Sparkles className="w-4 h-4 text-[#2196E8] animate-spin" style={{ animationDuration: '8s' }} />
-              <span className="text-xs sm:text-sm font-semibold tracking-wide text-[#2196E8] lowercase font-body">
-                coimbatore's premier digital growth agency
+              <span className="text-xs sm:text-sm font-semibold tracking-wide text-[#2196E8] font-body">
+                Coimbatore's Premier Digital Growth Agency
               </span>
             </motion.div>
  
             <motion.h1 
               variants={fadeInUp}
-              className="font-header text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide lowercase text-slate-955 text-left leading-[1.05] mb-2"
+              className="font-header text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide text-slate-900 dark:text-white text-left leading-[1.05] mb-2"
             >
-              coimbatore's leading <span className="text-[#2196E8]">digital growth</span> partner <br />
+              Coimbatore's Leading <span className="text-[#2196E8]">Digital Growth</span> Partner <br />
               <span className="text-[#4A72EB] text-2xl sm:text-3xl md:text-4xl block mt-2 font-semibold">
-                web, app, ai &amp; performance marketing
+                Web, App, AI &amp; Performance Marketing
               </span>
             </motion.h1>
  
             <motion.p 
               variants={fadeInUp}
-              className="text-lg sm:text-xl text-slate-700 font-medium leading-relaxed font-body text-left max-w-2xl"
+              className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 font-medium leading-relaxed font-body text-left max-w-2xl"
             >
-              we help businesses grow through websites, apps, ai automation and performance marketing.
+              We help businesses grow through high-performance websites, mobile apps, AI automation, and performance marketing.
             </motion.p>
  
             <motion.div 

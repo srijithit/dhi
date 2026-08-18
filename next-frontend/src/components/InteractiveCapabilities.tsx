@@ -71,7 +71,7 @@ export default function InteractiveCapabilities() {
             Core Competencies
           </span>
           <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wider leading-none">
-            INTERACTIVE GROWTH CAPABILITIES
+            Interactive Growth Capabilities
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
             Drag or swipe the 3D coverflow cards below to explore our core execution capabilities live.

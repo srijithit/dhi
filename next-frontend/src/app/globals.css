@@ -37,7 +37,6 @@
 * {
   box-sizing: border-box;
   transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-  text-transform: lowercase;
 }
 
 html {
@@ -52,28 +51,6 @@ body {
   font-family: var(--font-body);
   line-height: 1.7;
   font-size: 1.125rem;
-  text-transform: lowercase;
-}
-
-input, select, textarea, input::placeholder, textarea::placeholder, label, li, td, th, blockquote {
-  text-transform: lowercase;
-}
-
-/* Paragraphs - Sentence Case (first letter capitalized) */
-p {
-  text-transform: lowercase;
-}
-
-p::first-letter {
-  text-transform: uppercase !important;
-}
-
-/* Navigation, Buttons, Badges, and Headings - Capitalize First Letter of Each Word (Title Case) */
-nav a, header a, button, button *, .btn-primary, .btn-primary *, .btn-secondary, .btn-secondary *,
-h1, h2, h3, h4, h5, h6,
-h1 *, h2 *, h3 *, h4 *, h5 *, h6 *,
-.font-header, .font-header * {
-  text-transform: capitalize !important;
 }
 
 /* Font utility classes mapping display, numeric and body */
@@ -143,7 +120,7 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *,
   background-image: radial-gradient(rgba(169, 192, 245, 0.1) 1.5px, transparent 1.5px);
 }
 
-/* Custom Buttons conforming to the design tokens */
+/* Custom Buttons conforming to design tokens */
 .btn-primary {
   background-color: #4A72EB;
   color: #ffffff;
@@ -422,24 +399,4 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *,
     left: 120%;
     top: 120%;
   }
-}
-
-/* Global breathing room spacing rules */
-h2, h3 {
-  margin-bottom: 1.25rem !important;
-}
-p {
-  margin-bottom: 1.75rem !important;
-}
-.max-w-3xl p {
-  margin-bottom: 0 !important;
-}
-.max-w-2xl {
-  margin-bottom: 1.75rem !important;
-}
-.glass-card p, .premium-glass-card p {
-  margin-bottom: 1rem !important;
-}
-.glass-card p:last-child, .premium-glass-card p:last-child {
-  margin-bottom: 0 !important;
 }

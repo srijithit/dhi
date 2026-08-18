@@ -10,28 +10,28 @@ export default function ProcessSection() {
   const steps = [
     {
       num: 1,
-      title: "DISCOVER",
+      title: "1. Discover",
       desc: "We learn about your business, goals, and competition to build a tailored growth plan that truly fits your needs.",
       // Step 1: Corporate conference room discovery discussion with laptop
       image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&auto=format&fit=crop&q=80"
     },
     {
       num: 2,
-      title: "STRATEGISE",
+      title: "2. Strategise",
       desc: "Our team crafts a data-backed digital strategy aligned to your industry and target audience for maximum ROI.",
       // Step 2: Wall-mounted analytics strategy dashboard with team analyzing growth charts
       image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1200&auto=format&fit=crop&q=80"
     },
     {
       num: 3,
-      title: "EXECUTE",
+      title: "3. Execute",
       desc: "From development to campaigns — we build, launch, and manage with precision and full accountability.",
       // Step 3: Software developers working at multi-monitor code workstation
       image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&auto=format&fit=crop&q=80"
     },
     {
       num: 4,
-      title: "GROW",
+      title: "4. Grow",
       desc: "We monitor, optimise, and scale — continuously improving your results month after month.",
       // Step 4: Exponential business growth analytics monitor presentation with executive
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80"
@@ -73,10 +73,10 @@ export default function ProcessSection() {
             Seamless Journey
           </span>
           <h2 className="font-header text-3xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white tracking-wide mb-3 text-center">
-            OUR PROCESS — SIMPLE, TRANSPARENT, <span className="text-[#2196E8]">RESULTS-DRIVEN</span>
+            Our Process — Simple, Transparent, <span className="text-[#2196E8]">Results-Driven</span>
           </h2>
           <p className="text-slate-500 dark:text-slate-400 text-sm sm:text-base font-body text-center">
-            Free Consultation → Tailored Growth Plan → Measurable Results
+            Free consultation → Tailored growth plan → Measurable results
           </p>
         </div>
 
