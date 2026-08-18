@@ -166,9 +166,9 @@ export default function AboutPage() {
                     />
                   </div>
 
-                  <h3 className="font-header text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-wide mb-4">
+                  <h2 className="font-header text-4xl sm:text-5xl text-slate-900 dark:text-white tracking-wider leading-none mb-4">
                     Our Vision
-                  </h3>
+                  </h2>
 
                   <div className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed space-y-4 font-normal">
                     <p>
@@ -199,9 +199,9 @@ export default function AboutPage() {
                     />
                   </div>
 
-                  <h3 className="font-header text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-wide mb-4">
+                  <h2 className="font-header text-4xl sm:text-5xl text-slate-900 dark:text-white tracking-wider leading-none mb-4">
                     Our Mission
-                  </h3>
+                  </h2>
 
                   <div className="text-slate-600 dark:text-slate-350 text-sm sm:text-base leading-relaxed space-y-4 font-normal">
                     <p>
