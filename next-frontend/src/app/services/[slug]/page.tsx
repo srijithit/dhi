@@ -18,7 +18,7 @@ interface ServicePageProps {
 // Generate dynamic SEO metadata from the services data
 export async function generateMetadata({ params }: ServicePageProps) {
   const { slug } = await params;
-  const service = SERVICES_DATA.find(s => s.id === slug);
+  const service = SERVICES_DATA.find(s => s.id === slug || (slug === 'business-automation' && s.id === 'business-growth-automation'));
   if (!service) {
     return {
       title: "Service Not Found | DhiGrowth",
@@ -46,6 +46,7 @@ const SERVICE_IMAGE_MAP: Record<string, string> = {
   "ai-development": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&auto=format&fit=crop&q=80",
   "ai-automation": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop&q=80",
   "whatsapp-marketing": "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=800&auto=format&fit=crop&q=80",
+  "business-growth-automation": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80",
   "business-automation": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80",
   "business-development": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=80",
   "seo": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop&q=80",
@@ -62,6 +63,7 @@ const SERVICE_QUOTE_MAP: Record<string, string> = {
   "ai-development": "Deploying custom neural networks, recommendation algorithms, and advanced deep learning structures.",
   "ai-automation": "Automating client inquiry pipelines, visual analytics boards, and machine learning models for backend scaling.",
   "whatsapp-marketing": "Automated broadcast funnels, direct API communication sequences, and prefilled lead generation forms.",
+  "business-growth-automation": "Streamlining workflow automation, ERP integrations, CRM pipelines, and backend cloud processing.",
   "business-automation": "Streamlining workflow automation, ERP integrations, CRM pipelines, and backend cloud processing.",
   "business-development": "Strategic commercial targets, client validation cycles, and local growth roadmaps.",
   "seo": "Ranking on key commercial terms across Coimbatore, maximizing organic traffic value and customer trust.",
@@ -74,7 +76,7 @@ const SERVICE_QUOTE_MAP: Record<string, string> = {
 
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params;
-  const service = SERVICES_DATA.find(s => s.id === slug);
+  const service = SERVICES_DATA.find(s => s.id === slug || (slug === 'business-automation' && s.id === 'business-growth-automation'));
 
   if (!service) {
     notFound();

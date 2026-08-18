@@ -45,6 +45,72 @@ export interface Industry {
 
 export const SERVICES_DATA: Service[] = [
   {
+    id: "ai-development",
+    name: "AI Development",
+    shortCopy: "Smart AI products — chatbots, recommendation engines & custom ML models.",
+    category: "ai",
+    iconName: "Cpu",
+    badge: "Future Tech",
+    heroTitle: "AI Development Company in Coimbatore",
+    heroSub: "At DHI Growth, we deliver innovative artificial intelligence solutions that empower businesses to automate, predict, and innovate in the digital age.",
+    sections: [
+      {
+        heading: "Smart Solutions for Modern Businesses",
+        content: "Artificial intelligence is no longer the future — it is the present. DhiGrowth builds custom AI solutions that give your business a competitive edge. We develop intelligent chatbots, recommendation engines, predictive analytics tools, natural language processing (NLP) systems, and machine learning models tailored to your industry."
+      },
+      {
+        heading: "AI Services & Capabilities",
+        items: [
+          { title: "Predictive Analytics", desc: "Forecast market trends, demand, and customer behavior using custom ML models." },
+          { title: "Conversational Chatbots", desc: "24/7 AI virtual assistants powered by LLMs to automate support and drive sales." },
+          { title: "Computer Vision", desc: "Automated quality inspection, facial recognition, and visual document analysis for manufacturing and retail." },
+          { title: "Natural Language Processing", desc: "Extract insights from customer feedback, emails, and unstructured text automatically." }
+        ]
+      }
+    ]
+  },
+  {
+    id: "ai-automation",
+    name: "AI Automation",
+    shortCopy: "Automate repetitive tasks and workflows using intelligent AI solutions.",
+    category: "ai",
+    iconName: "Zap",
+    badge: "Efficiency",
+    heroTitle: "AI Automation Development Company in Coimbatore",
+    heroSub: "Work Smarter, Not Harder. Eliminate manual bottlenecks with self-running AI workflows.",
+    sections: [
+      {
+        heading: "Work Smarter, Not Harder",
+        content: "Manual tasks slow your business down. DhiGrowth's AI automation solutions eliminate repetitive processes and replace them with intelligent, self-running systems that save time, reduce errors, and cut operational costs."
+      },
+      {
+        heading: "Key Automation Use Cases",
+        items: [
+          { title: "Lead Qualification & Follow-up", desc: "Instant AI engagement with new incoming leads across web, ads, and WhatsApp." },
+          { title: "Document & Invoice Processing", desc: "Automated data extraction from PDFs, receipts, and invoices directly into your accounting tools." },
+          { title: "Customer Support Pipelines", desc: "Resolve 80%+ of customer inquiries instantly without human intervention." },
+          { title: "Inventory & Workflow Automation", desc: "Predictive restock alerts and seamless cross-platform task sync." }
+        ]
+      }
+    ]
+  },
+  {
+    id: "business-growth-automation",
+    name: "Business Growth Automation",
+    shortCopy: "Streamline operations, reduce costs & boost efficiency with smart automation.",
+    category: "ai",
+    iconName: "Sliders",
+    badge: "Cost Savings",
+    heroTitle: "Business Growth Automation Services in Coimbatore",
+    heroSub: "Streamline Operations, Eliminate Bottlenecks, and Scale Your Enterprise Faster.",
+    sections: [
+      {
+        heading: "Operational Excellence Through Digitization",
+        content: "Running a business involves hundreds of repetitive tasks that consume your team's time. DhiGrowth's business growth automation services help you identify, digitise, and automate those processes — from CRM workflows and invoice generation to HR management, sales pipelines, and customer onboarding."
+      }
+    ]
+  },
+  {
     id: "website-development",
     name: "Website Development",
     shortCopy: "Custom, responsive, SEO-ready websites built for speed and conversions.",
@@ -131,56 +197,6 @@ export const SERVICES_DATA: Service[] = [
     ]
   },
   {
-    id: "ai-development",
-    name: "AI Development",
-    shortCopy: "Smart AI products — chatbots, recommendation engines & custom ML models.",
-    category: "ai",
-    iconName: "Cpu",
-    badge: "Future Tech",
-    heroTitle: "AI Development Company in Coimbatore",
-    heroSub: "At DHI Growth, we deliver innovative artificial intelligence solutions that empower businesses to automate, predict, and innovate in the digital age.",
-    sections: [
-      {
-        heading: "Smart Solutions for Modern Businesses",
-        content: "Artificial intelligence is no longer the future — it is the present. DhiGrowth builds custom AI solutions that give your business a competitive edge. We develop intelligent chatbots, recommendation engines, predictive analytics tools, natural language processing (NLP) systems, and machine learning models tailored to your industry."
-      },
-      {
-        heading: "AI Services & Capabilities",
-        items: [
-          { title: "Predictive Analytics", desc: "Forecast market trends, demand, and customer behavior using custom ML models." },
-          { title: "Conversational Chatbots", desc: "24/7 AI virtual assistants powered by LLMs to automate support and drive sales." },
-          { title: "Computer Vision", desc: "Automated quality inspection, facial recognition, and visual document analysis for manufacturing and retail." },
-          { title: "Natural Language Processing", desc: "Extract insights from customer feedback, emails, and unstructured text automatically." }
-        ]
-      }
-    ]
-  },
-  {
-    id: "ai-automation",
-    name: "AI Automation",
-    shortCopy: "Automate repetitive tasks and workflows using intelligent AI solutions.",
-    category: "ai",
-    iconName: "Zap",
-    badge: "Efficiency",
-    heroTitle: "AI Automation Development Company in Coimbatore",
-    heroSub: "Work Smarter, Not Harder. Eliminate manual bottlenecks with self-running AI workflows.",
-    sections: [
-      {
-        heading: "Work Smarter, Not Harder",
-        content: "Manual tasks slow your business down. DhiGrowth's AI automation solutions eliminate repetitive processes and replace them with intelligent, self-running systems that save time, reduce errors, and cut operational costs."
-      },
-      {
-        heading: "Key Automation Use Cases",
-        items: [
-          { title: "Lead Qualification & Follow-up", desc: "Instant AI engagement with new incoming leads across web, ads, and WhatsApp." },
-          { title: "Document & Invoice Processing", desc: "Automated data extraction from PDFs, receipts, and invoices directly into your accounting tools." },
-          { title: "Customer Support Pipelines", desc: "Resolve 80%+ of customer inquiries instantly without human intervention." },
-          { title: "Inventory & Workflow Automation", desc: "Predictive restock alerts and seamless cross-platform task sync." }
-        ]
-      }
-    ]
-  },
-  {
     id: "whatsapp-marketing",
     name: "WhatsApp Marketing",
     shortCopy: "High-engagement campaigns via WhatsApp Business API to drive sales.",
@@ -202,22 +218,6 @@ export const SERVICES_DATA: Service[] = [
           { title: "CRM & E-Commerce Integration", desc: "Trigger automated abandoned cart reminders, invoice notifications, and shipping alerts." },
           { title: "Analytics & Opt-in Management", desc: "Real-time delivery, read, and conversion tracking with full policy compliance." }
         ]
-      }
-    ]
-  },
-  {
-    id: "business-automation",
-    name: "Business Automation",
-    shortCopy: "Streamline operations, reduce costs & boost efficiency with smart automation.",
-    category: "ai",
-    iconName: "Sliders",
-    badge: "Cost Savings",
-    heroTitle: "Business Automation Services in Coimbatore",
-    heroSub: "Streamline Operations, Eliminate Bottlenecks, and Scale Your Enterprise Faster.",
-    sections: [
-      {
-        heading: "Operational Excellence Through Digitization",
-        content: "Running a business involves hundreds of repetitive tasks that consume your team's time. DhiGrowth's business automation services help you identify, digitise, and automate those processes — from CRM workflows and invoice generation to HR management, sales pipelines, and customer onboarding."
       }
     ]
   },
@@ -263,151 +263,83 @@ export const SERVICES_DATA: Service[] = [
     ]
   },
   {
-    id: "digital-marketing",
-    name: "Digital Marketing",
-    shortCopy: "Full-funnel digital campaigns that attract, engage and convert customers.",
+    id: "performance-marketing",
+    name: "Performance Marketing",
+    shortCopy: "Data-driven Meta & Google Ads campaigns optimized for maximum ROAS.",
     category: "marketing",
     iconName: "Target",
-    badge: "Full Funnel",
-    heroTitle: "Digital Marketing Company in Coimbatore",
-    heroSub: "Data-Driven Full-Funnel Campaigns That Deliver Measurable ROI on Every Rupee.",
+    badge: "ROI Focused",
+    heroTitle: "Performance Marketing Agency in Coimbatore",
+    heroSub: "Stop Wasting Ad Spend. Get Measured ROI with High-Converting Paid Ads.",
     sections: [
       {
-        heading: "Integrated Performance Marketing",
-        content: "Digital marketing is more than running ads or posting on social media — it is a connected strategy that attracts, engages, and converts your ideal customers at every stage of their journey. DhiGrowth provides end-to-end digital marketing services backed by data and creative execution."
+        heading: "Predictable, Scalable Paid Growth",
+        content: "DhiGrowth's performance marketing services in Coimbatore combine strategic ad creation, precise audience targeting, and real-time bid optimisation across Meta (Facebook & Instagram), Google Search, YouTube, and LinkedIn Ads."
       }
     ]
   },
   {
     id: "social-media-marketing",
     name: "Social Media Marketing",
-    shortCopy: "Build your brand and community across Instagram, Facebook & LinkedIn.",
+    shortCopy: "Build an active, loyal brand audience across Instagram, LinkedIn & Facebook.",
     category: "marketing",
     iconName: "Share2",
-    badge: "Brand Building",
-    heroTitle: "Social Media Marketing in Coimbatore",
-    heroSub: "Build Your Brand. Engage Your Audience. Turn Followers Into Brand Advocates.",
+    badge: "Brand Voice",
+    heroTitle: "Social Media Marketing Agency in Coimbatore",
+    heroSub: "Turn Followers Into Brand Advocates and Repeat Customers.",
     sections: [
       {
-        heading: "Powerful Brand Presence Across Platforms",
-        content: "Social media is where your customers spend hours every day. We manage your presence across Instagram, Facebook, LinkedIn, and YouTube with a strategic mix of high-converting visual creatives, reels, community management, and growth tactics."
+        heading: "Strategic Brand Presence Across All Channels",
+        content: "Social media is where your customers discover, evaluate, and connect with your brand. DhiGrowth delivers end-to-end social media management in Coimbatore — from content strategy and creative design to community management and influencer collaborations."
       }
     ]
   },
   {
-    id: "meta-google-ads",
-    name: "Meta & Google Ads",
-    shortCopy: "Targeted paid advertising to maximise ROAS across Google and Meta platforms.",
-    category: "marketing",
+    id: "branding-design",
+    name: "Branding & Design",
+    shortCopy: "Memorable visual identities, logos & brand guidelines that stand out.",
+    category: "creative",
     iconName: "BarChart3",
-    badge: "High ROAS",
-    heroTitle: "Meta Ads & Google Ads Management in Coimbatore",
-    heroSub: "Stop Wasting Money on Ads That Don't Convert. Maximize Your Return on Ad Spend.",
+    badge: "Creative Impact",
+    heroTitle: "Branding & Graphic Design Company in Coimbatore",
+    heroSub: "Craft a Distinct, Premium Brand Identity That Demands Attention.",
     sections: [
       {
-        heading: "Targeted Paid Ads That Deliver Real ROI",
-        content: "DhiGrowth's paid advertising specialists design and manage high-performing Meta Ads (Facebook & Instagram) and Google Ads campaigns (Search, Display, Shopping, YouTube) that target the right audience at the right time with precision ad copy."
+        heading: "Design That Defines Your Brand",
+        content: "Your brand identity is the foundation of every customer interaction. DhiGrowth creates distinctive brand strategies, logo designs, color systems, typography rules, and marketing collateral for businesses in Coimbatore."
       }
     ]
   },
   {
-    id: "ads-shooting",
-    name: "Ads Shooting",
-    shortCopy: "Professional ad film production — creative concepts to camera-ready content.",
+    id: "commercial-videography",
+    name: "Commercial Videography",
+    shortCopy: "High-end corporate videos, product shoots & brand storytelling.",
     category: "creative",
     iconName: "Video",
-    badge: "Cinematic",
-    heroTitle: "Ad Film & Commercial Shooting Services in Coimbatore",
-    heroSub: "Cinematic Storytelling & Professional Commercial Production Built for Impact.",
+    badge: "Cinema Quality",
+    heroTitle: "Commercial Videography & Video Production in Coimbatore",
+    heroSub: "Cinematic Video Production That Captivates Audiences and Converts Viewers.",
     sections: [
       {
-        heading: "Camera-Ready Content for TV & Digital",
-        content: "Great advertising starts with captivating visuals. DhiGrowth offers professional ad film and commercial shooting services in Coimbatore — handling concept development, scriptwriting, location scouting, direction, and 4K camera production."
+        heading: "Visual Storytelling That Drives Business Action",
+        content: "Video is the most engaging media format across digital channels. DhiGrowth provides professional commercial videography services in Coimbatore — including corporate videos, product launch films, factory walkthroughs, and ad creative shoots."
       }
     ]
   },
   {
     id: "video-editing",
     name: "Video Editing",
-    shortCopy: "High-quality video editing for reels, ads, brand videos & social content.",
+    shortCopy: "Professional post-production, motion graphics & social video editing.",
     category: "creative",
     iconName: "Film",
-    badge: "Viral Content",
-    heroTitle: "Professional Video Editing Services in Coimbatore",
-    heroSub: "High-Impact Video Editing for Reels, Ads, Brand Films & YouTube.",
+    badge: "Post Production",
+    heroTitle: "Video Editing & Motion Graphics Company in Coimbatore",
+    heroSub: "Transform Raw Footage Into High-Impact Visual Content.",
     sections: [
       {
-        heading: "Content That Captivates & Converts",
-        content: "Raw footage is just the beginning. DhiGrowth's video editing team transforms raw clips into polished, high-impact videos with professional color grading, motion graphics, subtitles, sound design, and viral pacing."
+        heading: "Expert Post-Production Services",
+        content: "DhiGrowth's video editing team in Coimbatore turns raw footage into polished, engaging video assets for YouTube, Instagram Reels, ad campaigns, and corporate presentations."
       }
     ]
   }
-];
-
-export const TESTIMONIALS_DATA: Testimonial[] = [
-  {
-    id: 1,
-    name: "Karthik Raja",
-    role: "Managing Director",
-    company: "Veda Tex & Fabrics",
-    location: "Coimbatore",
-    text: "DhiGrowth transformed our traditional textile business into a digital powerhouse. Their custom website and targeted Google Ads campaign increased our wholesale inquiry volume by 320% within 4 months. Best digital agency in Coimbatore!",
-    rating: 5,
-    avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-    linkedinUrl: "https://linkedin.com/in/karthik-raja-vedatex",
-    websiteUrl: "https://vedatexfabrics.com",
-    logoLetter: "V"
-  },
-  {
-    id: 2,
-    name: "Dr. Ananya Sundaram",
-    role: "Founder",
-    company: "Aura Dental Speciality Hospital",
-    location: "Coimbatore",
-    text: "We needed local patient inquiries and high search rankings in Coimbatore. DhiGrowth's SEO and WhatsApp marketing integration automated our appointment booking pipeline completely. Exceptional quality and transparent reporting.",
-    rating: 5,
-    avatarUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
-    linkedinUrl: "https://linkedin.com/in/dr-ananya-sundaram",
-    websiteUrl: "https://auradentalcoimbatore.com",
-    logoLetter: "A"
-  },
-  {
-    id: 3,
-    name: "Santhosh Kumar",
-    role: "Co-Founder",
-    company: "NexGen Precision Engineering",
-    location: "Peelamedu, Coimbatore",
-    text: "The AI automation system built by DhiGrowth automated our entire lead qualification and quotation workflow. Tasks that took 3 hours now run in seconds. Their tech capability is truly world-class.",
-    rating: 5,
-    avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
-    linkedinUrl: "https://linkedin.com/in/santhosh-kumar-nexgen",
-    websiteUrl: "https://nexgenprecision.com",
-    logoLetter: "N"
-  },
-  {
-    id: 4,
-    name: "Priya Varma",
-    role: "Marketing Head",
-    company: "Covai Organic Foods",
-    location: "Coimbatore",
-    text: "Their ad films and Meta ad campaigns gave our organic brand massive visibility across South India. Return on ad spend (ROAS) reached 5.4x consistently! Highly recommended growth partner.",
-    rating: 5,
-    avatarUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-    linkedinUrl: "https://linkedin.com/in/priya-varma-covai",
-    websiteUrl: "https://covaiorganicfoods.com",
-    logoLetter: "C"
-  }
-];
-
-export const INDUSTRIES_DATA: Industry[] = [
-  { title: "Retail & E-Commerce", icon: "ShoppingBag", desc: "Online stores, inventory sync & conversion checkout optimization." },
-  { title: "Healthcare & Clinics", icon: "Activity", desc: "Patient booking portals, local SEO & trust-building campaigns." },
-  { title: "Education & Institutions", icon: "GraduationCap", desc: "Admission funnel campaigns, student portals & institutional branding." },
-  { title: "Manufacturing & Textile", icon: "Factory", desc: "B2B lead generation, export catalog websites & AI process automation." },
-  { title: "Real Estate & Construction", icon: "Building", desc: "Project landing pages, virtual tour videos & high-intent lead ads." },
-  { title: "Hospitality & Restaurants", icon: "Utensils", desc: "Menu digitization, WhatsApp reservation bots & social media reels." },
-  { title: "Logistics & Transportation", icon: "Truck", desc: "Fleet tracking portals, automated booking flows & client dashboards." },
-  { title: "Professional Services", icon: "Briefcase", desc: "Authority branding, LinkedIn campaigns & client portal websites." },
-  { title: "Startups & Tech", icon: "Rocket", desc: "SaaS landing pages, mobile apps & scalable AI product development." },
-  { title: "Non-Profit & Govt", icon: "Globe", desc: "Community awareness campaigns, donation portals & public engagement." }
 ];
