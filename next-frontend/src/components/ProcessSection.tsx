@@ -65,26 +65,26 @@ export default function ProcessSection() {
       {/* Decorative Glow Accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1360px] h-64 bg-[#2196E8]/5 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10 font-body">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
         
         {/* Section Header */}
-        <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mb-6 w-full">
-          <span className="text-[#2196E8] font-semibold text-xs uppercase tracking-widest block mb-2 font-body text-center">
+        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-6 w-full">
+          <span className="text-[#2196E8] font-bold text-xs uppercase tracking-widest block mb-2 font-body text-center">
             Seamless Journey
           </span>
-          <h2 className="font-header text-3xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white tracking-wide mb-3 text-center">
+          <h2 className="font-header text-2xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-white tracking-wide mb-2.5 text-center leading-tight">
             Our Process — Simple, Transparent, <span className="text-[#2196E8]">Results-Driven</span>
           </h2>
-          <p className="text-slate-500 dark:text-slate-400 text-sm sm:text-base font-body text-center">
+          <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm font-body text-center">
             Free consultation → Tailored growth plan → Measurable results
           </p>
         </div>
 
-        {/* 2-Column Responsive Split Section matching video recording */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        {/* 2-Column Responsive Split Section matching 80% zoom proportion */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           
           {/* Left Column (5 Cols): Clean Interactive Step List */}
-          <div className="lg:col-span-5 space-y-4">
+          <div className="lg:col-span-5 space-y-3">
             {steps.map((step, idx) => {
               const isActive = activeStep === idx;
               const isCompleted = idx < activeStep;
@@ -93,24 +93,24 @@ export default function ProcessSection() {
                 <div
                   key={step.num}
                   onClick={() => handleStepClick(idx)}
-                  className={`group p-4 sm:p-5 rounded-2xl transition-all duration-300 cursor-pointer flex items-start gap-4 ${
+                  className={`group p-3.5 sm:p-4 rounded-2xl transition-all duration-300 cursor-pointer flex items-start gap-3.5 ${
                     isActive
-                      ? 'opacity-100 bg-slate-50/80 dark:bg-[#0c111d]/60 border border-slate-200/80 dark:border-slate-800/80 shadow-md'
+                      ? 'opacity-100 bg-slate-50/90 dark:bg-[#0c111d]/70 border border-slate-200/90 dark:border-slate-800 shadow-md'
                       : isCompleted
                       ? 'opacity-65 hover:opacity-100'
                       : 'opacity-40 hover:opacity-80'
                   }`}
                 >
                   {/* Step Indicator Circle */}
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0 transition-all duration-300 ${
+                  <div className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs shrink-0 transition-all duration-300 ${
                     isActive
-                      ? 'bg-[#2196E8] text-white shadow-lg shadow-[#2196E8]/30 scale-105'
+                      ? 'bg-[#2196E8] text-white shadow-md shadow-[#2196E8]/30 scale-105'
                       : isCompleted
                       ? 'bg-slate-200 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300'
                       : 'bg-slate-100 dark:bg-slate-900 text-slate-400 dark:text-slate-600 border border-slate-200/60 dark:border-slate-800/60'
                   }`}>
                     {isActive || isCompleted ? (
-                      <Check className="w-5 h-5 stroke-[2.5]" />
+                      <Check className="w-4 h-4 stroke-[2.5]" />
                     ) : (
                       step.num
                     )}
@@ -118,15 +118,15 @@ export default function ProcessSection() {
 
                   {/* Step Content */}
                   <div className="flex-1 min-w-0 pt-0.5">
-                    <h3 className={`font-header text-xl sm:text-2xl tracking-wide transition-colors ${
+                    <h3 className={`font-header text-lg sm:text-xl tracking-wide transition-colors ${
                       isActive
                         ? 'text-slate-900 dark:text-white font-bold'
                         : 'text-slate-500 dark:text-slate-400 font-semibold'
                     }`}>
-                      {step.num}. {step.title}
+                      {step.title}
                     </h3>
 
-                    <p className={`text-sm leading-relaxed mt-1 transition-colors ${
+                    <p className={`text-xs leading-relaxed mt-0.5 transition-colors ${
                       isActive
                         ? 'text-slate-700 dark:text-slate-200 font-normal'
                         : 'text-slate-500 dark:text-slate-500 font-normal'
@@ -136,7 +136,7 @@ export default function ProcessSection() {
 
                     {/* Active Blue Indicator Line */}
                     {isActive && (
-                      <div className="relative h-[3px] bg-slate-200 dark:bg-slate-800 rounded-full mt-3 w-full max-w-[280px] overflow-hidden">
+                      <div className="relative h-[2.5px] bg-slate-200 dark:bg-slate-800 rounded-full mt-2.5 w-full max-w-[240px] overflow-hidden">
                         <motion.div
                           key={`progress-${activeStep}-${isPaused}`}
                           initial={{ width: "0%" }}
