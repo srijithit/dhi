@@ -38,9 +38,9 @@ export default function CaseStudiesPage() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="font-header text-4xl sm:text-6xl lg:text-7xl tracking-tight text-slate-900 dark:text-white"
+              className="font-header text-4xl sm:text-6xl lg:text-7xl tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto"
             >
-              Success stories &amp; <span className="text-[#2196E8]">case studies</span>
+              Case studies &amp; <span className="text-[#2196E8] whitespace-nowrap">success stories</span>
             </motion.h1>
 
             <motion.p

@@ -166,7 +166,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "bad-biscuit-detection",
     title: "Bad Biscuit Detection & Rejection",
-    category: "AI & Vision",
+    category: "AI & vision",
     description: "Industrial AI computer vision system for automated quality control on high-speed food production lines. Detects broken or burnt biscuits and triggers real-time mechanical rejection.",
     image: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1200&q=80",
     slug: "bad-biscuit-detection",
@@ -174,7 +174,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "fabric-defect-detection",
     title: "Fabric Defect Detection",
-    category: "AI & Vision",
+    category: "AI & vision",
     description: "Computer vision and automated inspection solution for textile manufacturing lines, detecting weaving errors, tears, and discoloration with sub-millimeter precision.",
     image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=80",
     slug: "fabric-defect-detection",
@@ -182,7 +182,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "dhigrowth-ai-chatbot",
     title: "DhiGrowth AI Chatbot",
-    category: "AI Development",
+    category: "AI development",
     description: "Enterprise conversational intelligence system with customized knowledge retrieval (RAG), multi-language understanding, and automated CRM lead capture.",
     image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1200&q=80",
     slug: "dhigrowth-ai-chatbot",
@@ -190,7 +190,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "ai-invoice-processing",
     title: "AI Invoice Processing",
-    category: "AI Automation",
+    category: "AI automation",
     description: "Intelligent document processing and automated extraction pipeline for invoices, receipts, and purchase orders with zero-shot ERP synchronization.",
     image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80",
     slug: "ai-invoice-processing",
