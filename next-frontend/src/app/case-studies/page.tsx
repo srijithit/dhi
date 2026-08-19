@@ -1,158 +1,260 @@
 "use client";
-import React from 'react';
+
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
+import { caseStudies, CaseStudy } from '@/data/caseStudies';
 
 export default function CaseStudiesPage() {
-  const col1 = [
-    "Infinite Structure Business",
-    "Nest Pilot Pg Management software",
-    "Ruts N Rides Admin Software",
-    "Squirlio Details",
-    "Keystone",
-    "Thoorigai",
-    "Splendour Park"
-  ];
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [activeModalStudy, setActiveModalStudy] = useState<CaseStudy | null>(null);
 
-  const col2 = [
-    "Akirva",
-    "Judah https",
-    "Venture Pax",
-    "Amaravati",
-    "Vectra Mechnovation",
-    "Giga Bull"
-  ];
+  // Extract unique categories for filter tabs
+  const categories = useMemo(() => {
+    const list = Array.from(new Set(caseStudies.map((item) => item.category)));
+    return ['All', ...list];
+  }, []);
 
-  const col3 = [
-    { name: "Clean Culture", type: "live", slug: "clean-culture" },
-    { name: "Ruts N Rides Website", type: "regular", slug: null },
-    { name: "Befhue", type: "regular", slug: null },
-    { name: "Sales App", type: "regular", slug: null },
-    { name: "Sanika Restaurant", type: "regular", slug: null },
-    { name: "Startten", type: "new", slug: "startten" }
-  ];
+  // Filtered case studies list
+  const filteredStudies = useMemo(() => {
+    if (selectedCategory === 'All') return caseStudies;
+    return caseStudies.filter((item) => item.category.toLowerCase() === selectedCategory.toLowerCase());
+  }, [selectedCategory]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#000000] text-slate-900 dark:text-white selection:bg-[#2196E8] selection:text-white font-body transition-colors duration-300">
       <CustomCursor />
       <Navbar />
 
-      <main className="subpage-padding-top bg-slate-50 dark:bg-[#070911]/30">
+      <main className="pt-[80px] pb-24 font-body">
+        {/* Hero Section */}
+        <section className="relative w-full py-16 sm:py-24 overflow-hidden bg-slate-50/70 dark:bg-[#070911]/50 border-b border-slate-200/60 dark:border-slate-800/80">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-[#2196E8]/10 dark:bg-[#2196E8]/15 rounded-full blur-[140px] pointer-events-none" />
+          
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-5">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#2196E8]/10 dark:bg-[#2196E8]/20 border border-[#2196E8]/30 text-[#2196E8] text-xs font-semibold tracking-wider font-body"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Our work</span>
+            </motion.div>
 
-        {/* Centered Page Hero */}
-        <section className="relative py-20 bg-slate-50 dark:bg-[#070911]/50 overflow-hidden bg-dot-matrix border-b border-slate-200/60 dark:border-slate-900 text-center">
-          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/5 rounded-full blur-[130px] pointer-events-none" />
-          <div className="max-w-6xl mx-auto px-6 relative z-10 space-y-4">
-            <span className="text-[#2196E8] font-body text-xs font-bold tracking-widest block uppercase">
-              Coimbatore digital agency
-            </span>
-            <h1 className="font-body text-slate-900 dark:text-white text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight">
-              Case studies &amp; <span className="text-[#2196E8]">success stories</span>
-            </h1>
-            <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed font-body">
-              See how we help businesses in Coimbatore and across India scale their traffic, leads, and sales through custom digital marketing campaigns.
-            </p>
+            <motion.h1
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="font-header text-4xl sm:text-6xl lg:text-7xl tracking-tight text-slate-900 dark:text-white"
+            >
+              Success stories &amp; <span className="text-[#2196E8]">case studies</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed font-body"
+            >
+              Explore how DhiGrowth helps businesses leverage artificial intelligence and modern digital solutions to solve complex challenges and achieve remarkable growth.
+            </motion.p>
           </div>
         </section>
 
-        {/* Projects Directory Section */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="w-full bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-12 shadow-xl relative z-10"
-          >
-            {/* Header */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <div className="space-y-1.5">
-                <h2 className="text-2xl sm:text-3xl text-slate-900 dark:text-white font-extrabold font-body">
-                  Case studies &amp; success stories
-                </h2>
-                <p className="text-[#2196E8] text-sm font-semibold font-body">
-                  Explore digital transformations and apps built by DhiGrowth
-                </p>
-              </div>
-              <div className="border border-[#2196E8]/20 bg-[#2196E8]/5 text-[#2196E8] px-4 py-1.5 rounded-full text-xs font-bold font-body shrink-0 shadow-sm">
-                19 Projects
-              </div>
+        {/* Case Studies Grid Section */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16">
+          
+          {/* Header & Category Filters */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+            <div>
+              <span className="text-xs font-bold tracking-widest text-[#2196E8] block mb-1 font-body">
+                Our portfolio
+              </span>
+              <h2 className="font-header text-2xl sm:text-4xl text-slate-900 dark:text-white">
+                Our case studies
+              </h2>
             </div>
 
-            {/* Divider */}
-            <div className="w-full h-px bg-slate-100 dark:bg-slate-800 my-8" />
-
-            {/* Projects Columns Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-x-12 sm:gap-y-4">
-
-              {/* Column 1 */}
-              <div className="space-y-4">
-                {col1.map((project, idx) => (
-                  <div
-                    key={idx}
-                    className="text-slate-800 dark:text-slate-300 hover:text-[#2196E8] text-[13.5px] font-medium transition-colors duration-200 py-1.5 block font-body"
-                  >
-                    {project}
-                  </div>
-                ))}
-              </div>
-
-              {/* Column 2 */}
-              <div className="space-y-4">
-                {col2.map((project, idx) => (
-                  <div
-                    key={idx}
-                    className="text-slate-800 dark:text-slate-300 hover:text-[#2196E8] text-[13.5px] font-medium transition-colors duration-200 py-1.5 block font-body"
-                  >
-                    {project}
-                  </div>
-                ))}
-              </div>
-
-              {/* Column 3 — linked items */}
-              <div className="space-y-4">
-                {col3.map((project, idx) => {
-                  if (project.type === "live") {
-                    return (
-                      <Link
-                        key={idx}
-                        href={project.slug ? `/case-studies/${project.slug}` : '#'}
-                        className="border border-emerald-200 bg-emerald-50 text-emerald-800 font-semibold px-3 py-1.5 rounded-xl flex items-center justify-between text-[13.5px] transition-all hover:bg-emerald-100 hover:border-emerald-400 hover:shadow-md shadow-sm font-body"
-                      >
-                        <span>{project.name}</span>
-                        <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 ml-2" />
-                      </Link>
-                    );
-                  } else if (project.type === "new") {
-                    return (
-                      <Link
-                        key={idx}
-                        href={project.slug ? `/case-studies/${project.slug}` : '#'}
-                        className="border border-rose-200 bg-rose-50 text-rose-800 font-semibold px-3 py-1.5 rounded-xl flex items-center justify-between text-[13.5px] transition-all hover:bg-rose-100 hover:border-rose-400 hover:shadow-md shadow-sm font-body"
-                      >
-                        <span>{project.name}</span>
-                        <span className="w-2 h-2 rounded-full bg-rose-500 shrink-0 ml-2" />
-                      </Link>
-                    );
-                  } else {
-                    return (
-                      <div
-                        key={idx}
-                        className="text-slate-800 dark:text-slate-300 hover:text-[#2196E8] text-[13.5px] font-medium transition-colors duration-200 py-1.5 block font-body"
-                      >
-                        {project.name}
-                      </div>
-                    );
-                  }
+            {/* Category Filter Chips */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none max-w-full">
+              <div className="flex items-center gap-2">
+                {categories.map((category) => {
+                  const isActive = selectedCategory === category;
+                  return (
+                    <button
+                      key={category}
+                      onClick={() => setSelectedCategory(category)}
+                      className={`px-4 py-2 rounded-full text-xs font-semibold font-body transition-all duration-200 whitespace-nowrap cursor-pointer ${
+                        isActive
+                          ? 'bg-[#2196E8] text-white shadow-md shadow-[#2196E8]/25'
+                          : 'bg-slate-100 dark:bg-slate-900/80 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200/80 dark:border-slate-800'
+                      }`}
+                    >
+                      {category}
+                    </button>
+                  );
                 })}
               </div>
-
             </div>
+          </div>
+
+          {/* Cards Grid */}
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-9"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredStudies.map((study) => {
+                const cardContent = (
+                  <motion.div
+                    key={study.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                    className="group bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 rounded-[32px] overflow-hidden flex flex-col transition-all duration-300 hover:scale-[1.03] hover:border-[#2196E8] hover:shadow-[0_20px_40px_-10px_rgba(33,150,232,0.25)] relative h-full cursor-pointer"
+                    onClick={() => {
+                      if (!study.slug) {
+                        setActiveModalStudy(study);
+                      }
+                    }}
+                  >
+                    {/* Image Container */}
+                    <div className="relative w-full h-64 overflow-hidden p-2.5">
+                      <div className="relative w-full h-full rounded-[24px] overflow-hidden bg-slate-100 dark:bg-slate-900">
+                        <img
+                          src={study.image}
+                          alt={study.title}
+                          className="object-cover w-full h-full group-hover:scale-108 transition-transform duration-500"
+                          loading="lazy"
+                        />
+                        {/* Dark Gradient Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
+                      </div>
+
+                      {/* Tag Badge */}
+                      <div className="absolute top-6 left-6 bg-black/65 backdrop-blur-md text-white font-semibold text-[11px] sm:text-xs px-4 py-1.5 rounded-full border border-white/20 tracking-wide shadow-sm font-body">
+                        {study.category}
+                      </div>
+
+                      {study.slug && (
+                        <div className="absolute top-6 right-6 bg-emerald-500/90 text-white font-semibold text-[10px] px-3 py-1 rounded-full border border-emerald-400/30 tracking-wide shadow-sm font-body">
+                          Live study
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Card Details */}
+                    <div className="p-6 sm:p-7 flex flex-col gap-3 flex-grow">
+                      <h3 className="font-header text-xl sm:text-2xl text-slate-900 dark:text-white group-hover:text-[#2196E8] transition-colors">
+                        {study.title}
+                      </h3>
+                      <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-[15px] line-clamp-4 leading-relaxed font-body">
+                        {study.description}
+                      </p>
+
+                      {/* Bottom Link in Sentence Case */}
+                      <div className="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <span className="inline-flex items-center gap-2 text-sm font-bold text-[#2196E8] group-hover:text-blue-500 transition-colors font-body">
+                          <span>Read case study</span>
+                          <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5" />
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+
+                if (study.slug) {
+                  return (
+                    <Link
+                      key={study.id}
+                      href={`/case-studies/${study.slug}`}
+                      className="h-full block focus:outline-none"
+                    >
+                      {cardContent}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <div key={study.id} className="h-full block">
+                    {cardContent}
+                  </div>
+                );
+              })}
+            </AnimatePresence>
           </motion.div>
         </section>
+
+        {/* Detailed Modal for Non-Slugs / Quick Overview */}
+        <AnimatePresence>
+          {activeModalStudy && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm font-body">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                className="relative w-full max-w-2xl bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-2xl p-6 sm:p-8 space-y-6"
+              >
+                {/* Modal Header */}
+                <div className="flex items-center justify-between">
+                  <span className="bg-[#2196E8]/10 text-[#2196E8] border border-[#2196E8]/20 px-3.5 py-1 rounded-full text-xs font-semibold font-body">
+                    {activeModalStudy.category}
+                  </span>
+                  <button
+                    onClick={() => setActiveModalStudy(null)}
+                    className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
+                  >
+                    &times;
+                  </button>
+                </div>
+
+                {/* Modal Image */}
+                <div className="w-full h-64 rounded-2xl overflow-hidden relative">
+                  <img
+                    src={activeModalStudy.image}
+                    alt={activeModalStudy.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Modal Content */}
+                <div className="space-y-3">
+                  <h3 className="font-header text-2xl sm:text-3xl text-slate-900 dark:text-white">
+                    {activeModalStudy.title}
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-body">
+                    {activeModalStudy.description}
+                  </p>
+                </div>
+
+                {/* Modal Actions */}
+                <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+                  <Link
+                    href="/contact"
+                    className="w-full sm:w-auto flex-1 bg-[#2196E8] hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl text-center text-sm shadow-md shadow-[#2196E8]/25 transition-colors font-body"
+                  >
+                    Discuss similar project
+                  </Link>
+                  <button
+                    onClick={() => setActiveModalStudy(null)}
+                    className="w-full sm:w-auto px-6 py-3 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900 text-sm font-semibold transition-colors cursor-pointer font-body"
+                  >
+                    Close
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
 
       </main>
 
