@@ -318,7 +318,7 @@ export default function CleanCulturePage() {
                 { title: 'Hyperlocal delivery engine', desc: 'Geofenced delivery zones with GPS pinpoint placement, pincode serviceability check, and next-day 6AM slot.', color: 'blue', icon: <MapPin className="w-6 h-6" /> },
                 { title: 'Real-time order tracking', desc: 'Live 5-step pipeline: Placed → Confirmed → Packed → Out for Delivery → Delivered with 1-click reorder.', color: 'sky', icon: <Route className="w-6 h-6" /> },
                 { title: 'Integrated wallet', desc: 'Prepaid wallet with 1-tap checkout, subscription auto-debit, cashbacks, and full transaction history.', color: 'violet', icon: <Coins className="w-6 h-6" /> },
-                { title: 'Multi-payment support', desc: 'UPI (GPay, PhonePe, Paytm), Clean Culture Wallet balance, and Cash on Delivery — customer's choice.', color: 'amber', icon: <Shield className="w-6 h-6" /> },
+                { title: 'Multi-payment support', desc: "UPI (GPay, PhonePe, Paytm), Clean Culture Wallet balance, and Cash on Delivery — customer's choice.", color: 'amber', icon: <Shield className="w-6 h-6" /> },
                 { title: '24/7 support desk', desc: 'Searchable FAQ, categorized help tickets, and direct WhatsApp Chat + Toll-Free phone support anytime.', color: 'cyan', icon: <MessageSquare className="w-6 h-6" /> },
               ].map((c, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }} viewport={{ once: true }}
