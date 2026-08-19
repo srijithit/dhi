@@ -11,20 +11,7 @@ import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import { caseStudies, CaseStudy } from '@/data/caseStudies';
 
 export default function CaseStudiesPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activeModalStudy, setActiveModalStudy] = useState<CaseStudy | null>(null);
-
-  // Extract unique categories for filter tabs
-  const categories = useMemo(() => {
-    const list = Array.from(new Set(caseStudies.map((item) => item.category)));
-    return ['All', ...list];
-  }, []);
-
-  // Filtered case studies list
-  const filteredStudies = useMemo(() => {
-    if (selectedCategory === 'All') return caseStudies;
-    return caseStudies.filter((item) => item.category.toLowerCase() === selectedCategory.toLowerCase());
-  }, [selectedCategory]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#000000] text-slate-900 dark:text-white selection:bg-[#2196E8] selection:text-white font-body transition-colors duration-300">
@@ -70,47 +57,19 @@ export default function CaseStudiesPage() {
         {/* Case Studies Grid Section */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16">
           
-          {/* Header & Category Filters */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
-            <div>
-              <span className="text-xs font-bold tracking-widest text-[#2196E8] block mb-1 font-body">
-                Our portfolio
-              </span>
-              <h2 className="font-header text-2xl sm:text-4xl text-slate-900 dark:text-white">
-                Our case studies
-              </h2>
-            </div>
-
-            {/* Category Filter Chips */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none max-w-full">
-              <div className="flex items-center gap-2">
-                {categories.map((category) => {
-                  const isActive = selectedCategory === category;
-                  return (
-                    <button
-                      key={category}
-                      onClick={() => setSelectedCategory(category)}
-                      className={`px-4 py-2 rounded-full text-xs font-semibold font-body transition-all duration-200 whitespace-nowrap cursor-pointer ${
-                        isActive
-                          ? 'bg-[#2196E8] text-white shadow-md shadow-[#2196E8]/25'
-                          : 'bg-slate-100 dark:bg-slate-900/80 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200/80 dark:border-slate-800'
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+          {/* Header */}
+          <div className="flex flex-col items-center gap-2 text-center mb-12 sm:mb-14">
+            <span className="text-xs font-bold tracking-widest text-[#2196E8] uppercase block font-body">
+              Our work
+            </span>
+            <h2 className="font-header text-3xl sm:text-5xl text-slate-900 dark:text-white">
+              Our case studies
+            </h2>
           </div>
 
           {/* Cards Grid */}
-          <motion.div
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-9"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredStudies.map((study) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-9">
+            {caseStudies.map((study) => {
                 const cardContent = (
                   <motion.div
                     key={study.id}
@@ -189,8 +148,7 @@ export default function CaseStudiesPage() {
                   </div>
                 );
               })}
-            </AnimatePresence>
-          </motion.div>
+          </div>
         </section>
 
         {/* Detailed Modal for Non-Slugs / Quick Overview */}
