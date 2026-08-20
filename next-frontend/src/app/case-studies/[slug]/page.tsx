@@ -119,16 +119,38 @@ export default function DynamicCaseStudyPage({
 
   const isMobileApp = study.category.toLowerCase().includes('app') || study.category.toLowerCase().includes('ecosystem') || !!playstoreMatch || !!appstoreMatch;
 
-  // Derive highlight points for the experience section
-  const actionPoints = study.results && study.results.length >= 3
-    ? study.results.slice(0, 3)
-    : study.solutionBullets && study.solutionBullets.length >= 3
-    ? study.solutionBullets.slice(0, 3)
-    : [
-        `${study.title} Engineered With Sub-Second Performance And Cloud Scale`,
-        'End-To-End Automated Digital Workflow From Discovery To Completion',
-        'Built With Modern Responsive UX And Componentized Design System',
-      ];
+  // Helper to extract a short, punchy summary (max 2 clear sentences, no raw bullet concatenation)
+  const formatShortNarrative = (rawText: string) => {
+    if (!rawText) return '';
+    // If text has bullet symbols, take the first chunk
+    const firstChunk = rawText.split('•')[0].trim();
+    // Remove "Category Title: " prefix if present
+    const cleaned = firstChunk.replace(/^[A-Za-z0-9\s&/-]+:\s*/, '').trim();
+    // Split by sentences and take first 2
+    const sentences = cleaned.split(/(?<=[.!?])\s+/);
+    if (sentences.length > 2) {
+      return sentences.slice(0, 2).join(' ');
+    }
+    return cleaned;
+  };
+
+  // Helper to extract all bullet items, flattening strings with '•'
+  const extractItems = (items: string[]) => {
+    if (!items || items.length === 0) return [];
+    const flattened: string[] = [];
+    items.forEach((it) => {
+      if (it.includes('•')) {
+        it.split('•').forEach((sub) => {
+          const trimmed = sub.trim();
+          if (trimmed.length > 8) flattened.push(trimmed);
+        });
+      } else {
+        const trimmed = it.trim();
+        if (trimmed.length > 8 && !trimmed.endsWith(':')) flattened.push(trimmed);
+      }
+    });
+    return flattened;
+  };
 
   // Colors list for highlights grid (Blue & White Theme)
   const highlightColors = [
@@ -140,57 +162,67 @@ export default function DynamicCaseStudyPage({
     { name: 'cyan', bg: 'bg-cyan-50', text: 'text-cyan-600', icon: <MessageSquare className="w-6 h-6" /> },
   ];
 
-  // Parse highlights into structured items
-  const parsedHighlights = (study.highlights && study.highlights.length > 0 ? study.highlights : [
-    "High-Performance Architecture — Optimized For Sub-Second Responses And Scalability.",
-    "Intuitive User Journey — Frictionless Navigation From Discovery To Checkout.",
-    "Automated Workflows — Intelligent Data Processing And Business Logic Integration.",
-    "Enterprise Security — Protected APIs, Role-Based Controls, And Reliable SLAs.",
-    "Multi-Device Experience — Seamless Responsive UX Tailored For Mobile And Desktop.",
-    "24/7 Reliability And Monitoring — Continuous Performance Tracking And Cloud Uptime."
+  // Derive highlight points for the experience section
+  const rawResults = extractItems(study.results || []);
+  const rawBullets = extractItems(study.solutionBullets || []);
+  const actionPoints = (rawResults.length >= 3 ? rawResults : rawBullets.length >= 3 ? rawBullets : [
+    `${study.title} engineered with sub-second performance and cloud scale.`,
+    'End-to-end automated digital workflow from discovery to completion.',
+    'Built with modern responsive UX and componentized design system.',
+  ]).slice(0, 3).map(p => formatShortNarrative(p));
+
+  // Parse highlights into concise structured items
+  const rawHighlightsList = extractItems(study.highlights || []);
+  const parsedHighlights = (rawHighlightsList.length > 0 ? rawHighlightsList : [
+    "High-Performance Architecture — Optimized for sub-second responses and scalability.",
+    "Intuitive User Journey — Frictionless navigation from discovery to checkout.",
+    "Automated Workflows — Intelligent data processing and business logic integration.",
+    "Enterprise Security — Protected APIs, role-based controls, and reliable SLAs.",
+    "Multi-Device Experience — Seamless responsive UX tailored for mobile and desktop.",
+    "24/7 Reliability & Monitoring — Continuous performance tracking and cloud uptime."
   ]).slice(0, 6).map((item, idx) => {
     const parts = item.split(/[:—–-]/);
-    const title = parts[0]?.trim() || item;
-    const desc = parts.length > 1 ? parts.slice(1).join('—').trim() : "Engineered For Optimal User Engagement And Scalable Performance.";
+    const rawTitle = parts[0]?.trim() || item;
+    const cleanTitle = rawTitle.replace(/^[A-Za-z0-9\s&/-]+:\s*/, '').slice(0, 32);
+    const rawDesc = parts.length > 1 ? parts.slice(1).join(' ').trim() : item;
+    const cleanDesc = formatShortNarrative(rawDesc);
     const colorScheme = highlightColors[idx % highlightColors.length];
-    return { title: capitalizeText(title), desc, ...colorScheme };
+    return { title: capitalizeText(cleanTitle), desc: cleanDesc, ...colorScheme };
   });
 
-  // Generate clean, short 2-4 word titles and detailed descriptions for capabilities
-  const solutionSections = (study.solutionBullets && study.solutionBullets.length > 0
-    ? study.solutionBullets
-        .filter((b) => b.trim().length > 10 && !b.endsWith(':'))
-        .map((bullet) => {
-          const colonMatch = bullet.split(/[:—–]/);
-          if (colonMatch.length > 1 && colonMatch[0].trim().length < 35) {
-            return {
-              title: capitalizeText(colonMatch[0].trim()),
-              desc: colonMatch.slice(1).join(' ').trim(),
-            };
-          }
-
-          const cleanText = bullet.replace(/^[0-9.\-\s]+/, '').trim();
-          const words = cleanText.split(/\s+/);
-
-          let shortTitle = '';
-          if (words.length <= 4) {
-            shortTitle = cleanText;
-          } else {
-            const meaningfulWords = words.filter(
-              (w) => !/^(we|developed|built|created|designed|implemented|provides|providing|an|a|the|as|to|for|with|through|by|in|on|of|and)$/i.test(w)
-            );
-            shortTitle = meaningfulWords.slice(0, 3).join(' ');
-          }
-
-          if (!shortTitle || shortTitle.length < 3) {
-            shortTitle = words.slice(0, 3).join(' ');
-          }
-
+  // Generate clean, short 2-4 word titles and concise descriptions for capabilities
+  const solutionSections = (rawBullets.length > 0
+    ? rawBullets.map((bullet) => {
+        const colonMatch = bullet.split(/[:—–]/);
+        if (colonMatch.length > 1 && colonMatch[0].trim().length < 35) {
           return {
-            title: capitalizeText(shortTitle.replace(/[.,:;—–-]+$/, '')),
-            desc: cleanText,
+            title: capitalizeText(colonMatch[0].trim()),
+            desc: formatShortNarrative(colonMatch.slice(1).join(' ')),
           };
-        })
+        }
+
+        const cleanText = bullet.replace(/^[0-9.\-\s]+/, '').trim();
+        const words = cleanText.split(/\s+/);
+
+        let shortTitle = '';
+        if (words.length <= 4) {
+          shortTitle = cleanText;
+        } else {
+          const meaningfulWords = words.filter(
+            (w) => !/^(we|developed|built|created|designed|implemented|provides|providing|an|a|the|as|to|for|with|through|by|in|on|of|and)$/i.test(w)
+          );
+          shortTitle = meaningfulWords.slice(0, 3).join(' ');
+        }
+
+        if (!shortTitle || shortTitle.length < 3) {
+          shortTitle = words.slice(0, 3).join(' ');
+        }
+
+        return {
+          title: capitalizeText(shortTitle.replace(/[.,:;—–-]+$/, '')),
+          desc: formatShortNarrative(cleanText),
+        };
+      })
     : [
         { title: 'Dynamic User Interface', desc: `${study.title} provides a clean, responsive interface tailored for effortless navigation.` },
         { title: 'Automated Workflow Engine', desc: 'Automates complex processes and business logic to maximize efficiency and scalability.' },
@@ -318,8 +350,8 @@ export default function DynamicCaseStudyPage({
                   </div>
                 </div>
 
-                <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal whitespace-pre-line font-body">
-                  {study.about}
+                <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal font-body">
+                  {formatShortNarrative(study.about)}
                 </p>
 
                 {/* Live Actions */}
@@ -521,7 +553,7 @@ export default function DynamicCaseStudyPage({
                       Product Objective
                     </h3>
                     <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-body">
-                      {study.productExperience || study.about}
+                      {formatShortNarrative(study.productExperience || study.about)}
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 font-body">
