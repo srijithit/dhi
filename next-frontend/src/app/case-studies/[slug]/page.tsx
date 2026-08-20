@@ -37,6 +37,39 @@ import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import { detailedCaseStudies } from '@/data/caseStudiesFull';
+function BrandAvatar({
+  src,
+  title,
+  size = 'md',
+}: {
+  src?: string;
+  title: string;
+  size?: 'sm' | 'md' | 'lg';
+}) {
+  const [hasError, setHasError] = useState(false);
+  const sizeClasses = {
+    sm: 'w-12 h-12 rounded-xl text-xl',
+    md: 'w-16 h-16 rounded-2xl text-2xl',
+    lg: 'w-24 h-24 sm:w-32 sm:h-32 rounded-3xl text-4xl',
+  }[size];
+
+  return (
+    <div
+      className={`${sizeClasses} shadow-lg flex items-center justify-center text-white font-extrabold shrink-0 border-2 overflow-hidden bg-[#2196E8] border-[#2196E8] relative`}
+    >
+      {src && !hasError ? (
+        <img
+          src={src}
+          alt={title}
+          className="w-full h-full object-cover absolute inset-0"
+          onError={() => setHasError(true)}
+        />
+      ) : (
+        <span className="font-body font-extrabold">{title.charAt(0).toUpperCase()}</span>
+      )}
+    </div>
+  );
+}
 
 export default function DynamicCaseStudyPage({
   params,
@@ -194,19 +227,7 @@ export default function DynamicCaseStudyPage({
                 </Link>
 
                 <div className="flex items-center space-x-4">
-                  <div
-                    className="w-16 h-16 rounded-2xl shadow-lg flex items-center justify-center text-white font-extrabold text-2xl shrink-0 border-2 overflow-hidden font-body bg-[#2196E8] border-[#2196E8]"
-                  >
-                    <img
-                      src={study.image}
-                      alt={study.title}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLElement).style.display = 'none';
-                      }}
-                    />
-                    <span className="font-body font-extrabold">{study.title.charAt(0)}</span>
-                  </div>
+                  <BrandAvatar src={study.image} title={study.title} size="md" />
                   <div>
                     <span className="text-xs font-bold tracking-wide text-[#2196E8] block mb-1 font-body">
                       {capitalizeText(study.category)}
@@ -329,19 +350,7 @@ export default function DynamicCaseStudyPage({
                   <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight font-body">
                     Experience {capitalizeText(study.title)} In Action
                   </h3>
-                  <div
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl border-2 object-cover shadow-xl shrink-0 flex items-center justify-center font-extrabold text-2xl text-white overflow-hidden font-body bg-[#2196E8] border-[#2196E8]"
-                  >
-                    <img
-                      src={study.image}
-                      alt={study.title}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLElement).style.display = 'none';
-                      }}
-                    />
-                    <span className="font-body font-extrabold">{study.title.charAt(0)}</span>
-                  </div>
+                  <BrandAvatar src={study.image} title={study.title} size="md" />
                 </div>
 
                 <div className="space-y-4 pt-2 font-body">
@@ -592,19 +601,7 @@ export default function DynamicCaseStudyPage({
                 <div
                   className="absolute -inset-3 rounded-3xl blur-2xl transition-all opacity-60 bg-[#2196E8]"
                 />
-                <div
-                  className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-3xl border-2 object-cover shadow-2xl transition hover:scale-105 overflow-hidden flex items-center justify-center font-extrabold text-4xl text-white font-body bg-[#2196E8] border-[#2196E8]"
-                >
-                  <img
-                    src={study.image}
-                    alt={study.title}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLElement).style.display = 'none';
-                    }}
-                  />
-                  <span className="font-body font-extrabold">{study.title.charAt(0)}</span>
-                </div>
+                <BrandAvatar src={study.image} title={study.title} size="lg" />
               </div>
             </div>
 
