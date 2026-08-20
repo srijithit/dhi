@@ -229,10 +229,10 @@ export default function DynamicCaseStudyPage({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight uppercase leading-tight font-body drop-shadow-lg"
+              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight font-body drop-shadow-lg"
             >
-              Building Digital Growth Through <br />
-              <span className="text-[#2196E8] drop-shadow-[0_0_25px_rgba(33,150,232,0.6)]">Tailored Innovation</span>
+              Building digital growth through <br />
+              <span className="text-[#2196E8] drop-shadow-[0_0_25px_rgba(33,150,232,0.6)]">tailored innovation</span>
             </motion.h1>
 
             <motion.p
