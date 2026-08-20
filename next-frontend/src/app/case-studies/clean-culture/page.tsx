@@ -550,15 +550,15 @@ export default function CleanCulturePage() {
               <a href="#" className="inline-flex items-center space-x-4 px-8 py-4 rounded-2xl bg-[#090E17] hover:bg-[#0E1524] border border-emerald-500/40 hover:border-emerald-400 text-white font-medium shadow-[0_0_25px_rgba(16,185,129,0.25)] transition transform hover:-translate-y-1">
                 <svg className="w-7 h-7 text-emerald-400 fill-current" viewBox="0 0 512 512"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58 33.3-60.1-60.1L472.2 359c16.1-9.2 27.2-26.6 27.2-46.7 0-20.1-11.1-37.5-27.2-46.7zm-207.1 52.1L104.6 499l220.7-126.7-60.1-60.1-24.4 24.4z" /></svg>
                 <div className="text-left font-body">
-                  <span className="text-[10px] uppercase tracking-wider text-slate-400 block leading-none font-bold">GET IT ON</span>
-                  <span className="text-lg font-extrabold text-white leading-tight">Google Play</span>
+                  <span className="text-[10px] tracking-wide text-slate-400 block leading-none font-bold font-body">Get it on</span>
+                  <span className="text-lg font-extrabold text-white leading-tight font-body">Google Play</span>
                 </div>
               </a>
               <a href="#" className="inline-flex items-center space-x-4 px-8 py-4 rounded-2xl bg-[#090E17] hover:bg-[#0E1524] border border-slate-700/80 hover:border-slate-500 text-white font-medium shadow-[0_0_25px_rgba(255,255,255,0.1)] transition transform hover:-translate-y-1">
                 <svg className="w-7 h-7 text-white fill-current" viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-48.7-22.9-74.5-22.9-39.9 0-79.7 20.6-102.1 59.5-23 39.8-17.6 102.4 3.9 155.8 12.1 30.2 30 53.5 53 54.1 22.8.6 34.7-11.4 59.5-11.4 24.8 0 36.6 11.4 59.5 11.4 23.3-.6 41.2-21.2 53-38.2 15-21.4 22.4-44.4 22.7-45.6-1.1-.3-44.3-17.2-44.7-68.8zM245.5 81c22.4-24.6 37.5-58.8 31.3-93-29.4 1.2-65.4 19.6-86.5 44.6-18.8 22.4-35.3 56.8-29.3 89.8 32.5 1.2 65.7-18.4 84.5-41.4z" /></svg>
                 <div className="text-left font-body">
-                  <span className="text-[10px] uppercase tracking-wider text-slate-400 block leading-none font-bold">DOWNLOAD ON THE</span>
-                  <span className="text-lg font-extrabold text-white leading-tight">App Store</span>
+                  <span className="text-[10px] tracking-wide text-slate-400 block leading-none font-bold font-body">Download on the</span>
+                  <span className="text-lg font-extrabold text-white leading-tight font-body">App Store</span>
                 </div>
               </a>
             </div>

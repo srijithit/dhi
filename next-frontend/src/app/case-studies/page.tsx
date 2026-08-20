@@ -38,9 +38,9 @@ export default function CaseStudiesPage() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="font-header text-4xl sm:text-6xl lg:text-7xl tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto"
+              className="font-body text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto"
             >
-              Case studies &amp; <span className="text-[#2196E8] whitespace-nowrap">success stories</span>
+              Case studies and <span className="text-[#2196E8] whitespace-nowrap">success stories</span>
             </motion.h1>
 
             <motion.p
@@ -59,11 +59,11 @@ export default function CaseStudiesPage() {
           
           {/* Header */}
           <div className="flex flex-col items-center gap-2 text-center mb-12 sm:mb-14">
-            <span className="text-xs font-bold tracking-widest text-[#2196E8] uppercase block font-body">
+            <span className="text-xs font-bold tracking-wide text-[#2196E8] block font-body">
               Our work
             </span>
-            <h2 className="font-header text-3xl sm:text-5xl text-slate-900 dark:text-white">
-              Our case studies
+            <h2 className="font-body text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Featured case studies
             </h2>
           </div>
 
@@ -112,7 +112,7 @@ export default function CaseStudiesPage() {
 
                     {/* Card Details */}
                     <div className="p-6 sm:p-7 flex flex-col gap-3 flex-grow">
-                      <h3 className="font-header text-xl sm:text-2xl text-slate-900 dark:text-white group-hover:text-[#2196E8] transition-colors">
+                      <h3 className="font-body text-xl sm:text-2xl font-bold text-slate-900 dark:text-white group-hover:text-[#2196E8] transition-colors">
                         {study.title}
                       </h3>
                       <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-[15px] line-clamp-4 leading-relaxed font-body">
@@ -185,7 +185,7 @@ export default function CaseStudiesPage() {
 
                 {/* Modal Content */}
                 <div className="space-y-3">
-                  <h3 className="font-header text-2xl sm:text-3xl text-slate-900 dark:text-white">
+                  <h3 className="font-body text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
                     {activeModalStudy.title}
                   </h3>
                   <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-body">
