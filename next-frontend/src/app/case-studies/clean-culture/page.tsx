@@ -184,10 +184,75 @@ export default function CleanCulturePage() {
       <CustomCursor />
       <Navbar />
 
-      <main className="subpage-padding-top">
+      <main className="subpage-padding-top font-body bg-white">
 
-        {/* ── HERO ── */}
-        <section className="relative py-16 sm:py-24 bg-white border-b border-slate-100 overflow-hidden">
+        {/* ── TOP PANORAMIC COVER HERO BANNER ── */}
+        <section className="relative w-full h-[360px] sm:h-[460px] lg:h-[520px] overflow-hidden bg-slate-950 flex items-center justify-center font-body group">
+          {/* Background Image with Ambient Zoom & Fade */}
+          <div className="absolute inset-0 z-0">
+            <img
+              src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80"
+              alt="Clean Culture Cover Banner"
+              className="w-full h-full object-cover scale-105 transition-transform duration-1000 group-hover:scale-110"
+            />
+            {/* Atmospheric Dark & Brand Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/65 to-slate-950/40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-transparent to-slate-950/80" />
+            <div className="absolute inset-0 bg-[#2196E8]/10 mix-blend-overlay" />
+          </div>
+
+          {/* Centered Overlay Content */}
+          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 sm:space-y-6">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight uppercase leading-tight font-body drop-shadow-lg">
+              Building Digital Growth Through <br />
+              <span className="text-[#2196E8] drop-shadow-[0_0_25px_rgba(33,150,232,0.6)]">Tailored Innovation</span>
+            </h1>
+
+            <p className="text-slate-200 text-sm sm:text-base lg:text-lg max-w-3xl mx-auto leading-relaxed font-body drop-shadow-md font-medium">
+              Discover how DhiGrowth transformed everyday organic grocery &amp; coconut subscriptions into a seamless, fast, minimal mobile application for <strong className="text-white font-bold">Clean Culture</strong>.
+            </p>
+
+            <div className="pt-2 flex justify-center">
+              <button
+                onClick={() => {
+                  const el = document.getElementById('clean-culture-overview');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="inline-flex items-center gap-3 px-6 sm:px-8 py-3.5 rounded-full bg-[#0A0F17]/90 hover:bg-[#121B2B] border border-[#2196E8]/50 hover:border-[#2196E8] text-white text-sm sm:text-base font-bold shadow-[0_0_30px_rgba(33,150,232,0.35)] transition-all transform hover:scale-105 cursor-pointer font-body backdrop-blur-md"
+              >
+                <img src="/images/clean_culture_logo.png" alt="Clean Culture" className="w-6 h-6 rounded-full object-cover border border-emerald-400" />
+                <span>Jump to Clean Culture Case Study ↓</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Left / Right Carousel Arrow Buttons */}
+          <Link
+            href="/case-studies/akirva"
+            title="Previous Case Study"
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-[#2196E8] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all shadow-xl hover:scale-110 cursor-pointer"
+          >
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+          </Link>
+
+          <Link
+            href="/case-studies/startten"
+            title="Next Case Study"
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-[#2196E8] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all shadow-xl hover:scale-110 cursor-pointer"
+          >
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+          </Link>
+
+          {/* Bottom Carousel Pagination Dots */}
+          <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-black/50 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">
+            <span className="w-6 h-2 rounded-full bg-[#2196E8] transition-all" />
+            <span className="w-2 h-2 rounded-full bg-white/40" />
+            <span className="w-2 h-2 rounded-full bg-white/40" />
+          </div>
+        </section>
+
+        {/* ── HERO OVERVIEW ── */}
+        <section id="clean-culture-overview" className="relative py-16 sm:py-24 bg-white border-b border-slate-100 overflow-hidden font-body">
           <div className="absolute right-0 top-1/3 pointer-events-none select-none opacity-[0.04] text-[160px] font-extrabold tracking-widest text-[#2196E8] uppercase hidden lg:block font-body leading-none">
             CLEAN CULTURE
           </div>
