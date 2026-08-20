@@ -547,6 +547,7 @@ export default function DynamicCaseStudyPage({
                       />
                     </div>
                   </div>
+                  
 
                   <div className="lg:col-span-7 space-y-6 font-body">
                     <h3 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-body">

@@ -36,6 +36,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     { name: 'Services', path: '/services' },
     { name: 'About', path: '/about' },
     { name: 'Case Study', path: '/case-studies', hasDropdown: true },
+    { name: 'Careers', path: '/careers' },
     { name: 'Contact', path: '/contact' },
   ];
 

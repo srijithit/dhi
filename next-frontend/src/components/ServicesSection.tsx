@@ -75,21 +75,27 @@ export default function ServicesSection() {
           
           {/* Service Filters */}
           <div className="flex flex-nowrap gap-2 sm:gap-2.5 items-center justify-start md:justify-end shrink-0 overflow-x-auto no-scrollbar scroll-smooth max-w-full pb-1 md:pb-0 font-body">
-            {['all', 'tech', 'ai', 'marketing', 'creative'].map((cat) => (
+            {[
+              { id: 'all', label: 'All Services (13)' },
+              { id: 'tech', label: 'Tech' },
+              { id: 'ai', label: 'AI' },
+              { id: 'marketing', label: 'Marketing' },
+              { id: 'creative', label: 'Creative' }
+            ].map((cat) => (
               <motion.button
-                key={cat}
+                key={cat.id}
                 layout
-                onClick={() => handleFilterChange(cat as any)}
+                onClick={() => handleFilterChange(cat.id as any)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-semibold tracking-wider transition-all duration-300 border whitespace-nowrap shrink-0 cursor-pointer ${
-                  filter === cat
+                  filter === cat.id
                     ? 'bg-[#2196E8] text-white border-[#2196E8] shadow-sm shadow-[#2196E8]/20'
                     : 'bg-white dark:bg-[#0b0f19] text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-900'
                 }`}
               >
-                {cat === 'all' ? 'All Services (13)' : cat}
+                {cat.label}
               </motion.button>
             ))}
           </div>

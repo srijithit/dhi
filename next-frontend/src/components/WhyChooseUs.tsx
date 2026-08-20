@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export default function WhyChooseUs() {
   const [currentIdx, setCurrentIdx] = useState(0);
+  const [cardStep, setCardStep] = useState(344);
 
   const differentiators = [
     {
@@ -40,12 +41,27 @@ export default function WhyChooseUs() {
     }
   ];
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (typeof window !== 'undefined') {
+        if (window.innerWidth < 640) {
+          setCardStep(290 + 24);
+        } else {
+          setCardStep(320 + 24);
+        }
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const handleNext = () => {
-    setCurrentIdx((prev) => (prev + 1) % (differentiators.length - 1));
+    setCurrentIdx((prev) => (prev + 1) % differentiators.length);
   };
 
   const handlePrev = () => {
-    setCurrentIdx((prev) => (prev - 1 + (differentiators.length - 1)) % (differentiators.length - 1));
+    setCurrentIdx((prev) => (prev - 1 + differentiators.length) % differentiators.length);
   };
 
   return (
@@ -98,7 +114,7 @@ export default function WhyChooseUs() {
             <div className="relative overflow-hidden py-2">
               <motion.div 
                 className="flex gap-6 transition-transform duration-500 ease-out"
-                animate={{ x: -currentIdx * 320 }}
+                animate={{ x: -currentIdx * cardStep }}
               >
                 {differentiators.map((diff, idx) => (
                   <div 
@@ -141,7 +157,7 @@ export default function WhyChooseUs() {
               <div className="flex-1 max-w-[200px] h-[3px] bg-slate-800 rounded-full overflow-hidden">
                 <motion.div 
                   className="h-full bg-[#2196E8] rounded-full"
-                  animate={{ width: `${((currentIdx + 1) / (differentiators.length - 1)) * 100}%` }}
+                  animate={{ width: `${((currentIdx + 1) / differentiators.length) * 100}%` }}
                   transition={{ duration: 0.3 }}
                 />
               </div>
