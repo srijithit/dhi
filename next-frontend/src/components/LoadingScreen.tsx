@@ -55,7 +55,7 @@ export default function LoadingScreen() {
           className="fixed inset-0 z-[99999] bg-black flex items-center justify-center overflow-hidden select-none"
         >
           {/* Full Screen Intro Video Container */}
-          <div className="relative w-full h-full flex items-center justify-center bg-black">
+          <div className="relative w-full h-full flex items-center justify-center bg-[#05070c] px-4 sm:px-6 md:px-0">
             {/* Ambient blurred backdrop video to fill portrait/mobile screens seamlessly */}
             <video
               src="/intro_loading.mp4"
@@ -67,21 +67,23 @@ export default function LoadingScreen() {
               aria-hidden="true"
             />
 
-            {/* Main Responsive Intro Video */}
-            <video
-              ref={videoRef}
-              src="/intro_loading.mp4"
-              autoPlay
-              playsInline
-              preload="auto"
-              onEnded={handleComplete}
-              className="relative z-10 w-full h-full object-contain pointer-events-none"
-            />
+            {/* Video Wrapper: Glass Border on Mobile, Seamless Fullscreen with No Border on Desktop */}
+            <div className="relative z-10 w-full max-w-md sm:max-w-lg md:max-w-none md:w-full md:h-full flex items-center justify-center rounded-2xl sm:rounded-3xl md:rounded-none border border-white/20 md:border-0 bg-white/10 md:bg-transparent backdrop-blur-xl md:backdrop-blur-none p-1.5 sm:p-2 md:p-0 shadow-2xl md:shadow-none overflow-hidden transition-all duration-300">
+              <video
+                ref={videoRef}
+                src="/intro_loading.mp4"
+                autoPlay
+                playsInline
+                preload="auto"
+                onEnded={handleComplete}
+                className="w-full h-auto max-h-[75vh] md:max-h-none md:h-full object-contain md:object-cover rounded-[14px] sm:rounded-[20px] md:rounded-none pointer-events-none"
+              />
+            </div>
 
             {/* Skip Intro Button */}
             <button
               onClick={handleComplete}
-              className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 z-20 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-slate-900/80 hover:bg-slate-900 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-bold tracking-wider flex items-center gap-2 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer font-body shadow-2xl"
+              className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 z-30 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-slate-900/80 hover:bg-slate-900 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-bold tracking-wider flex items-center gap-2 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer font-body shadow-2xl"
             >
               <span>Skip Intro</span>
               <SkipForward className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
