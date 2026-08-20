@@ -40,31 +40,31 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
   ];
 
   const col1 = [
-    { name: "Infinite Structure Business", slug: "infinite-structure-business" },
-    { name: "Nest Pilot Pg Management software", slug: "nest-pilot-pg-management" },
-    { name: "Ruts N Rides Admin Software", slug: "ruts-n-rides-admin" },
-    { name: "Squirlio Details", slug: "squirlio-details" },
-    { name: "Keystone", slug: "keystone" },
-    { name: "Thoorigai", slug: "thoorigai" },
-    { name: "Splendour Park", slug: "splendour-park" }
+    { name: "Infragen Realtors", slug: "infragen" },
+    { name: "NestPilot PG SaaS", slug: "nestpilot" },
+    { name: "Ruts N Rides (Internal)", slug: "ruts-n-rides-internal" },
+    { name: "Squirlio Snacks", slug: "squirlio" },
+    { name: "Keystone Enterprise", slug: "keystone" },
+    { name: "Thoorigai Events", slug: "thoorigai" },
+    { name: "Splendour Park ERP", slug: "splendour-park" }
   ];
 
   const col2 = [
-    { name: "Akirva", slug: "akirva" },
-    { name: "Judah https", slug: "judah-https" },
-    { name: "Venture Pax", slug: "venture-pax" },
-    { name: "Amaravati", slug: "amaravati" },
-    { name: "Vectra Mechnovation", slug: "vectra-mechnovation" },
-    { name: "Giga Bull", slug: "giga-bull" }
+    { name: "Akirva Mobility", slug: "akirva" },
+    { name: "Judah Food Logistics", slug: "judah" },
+    { name: "VerdurePax Lifestyle", slug: "verdurepax" },
+    { name: "Amaravathy Coir", slug: "amaravathy-coir" },
+    { name: "Vectra Mechnovations", slug: "vectra-mechnovations" },
+    { name: "Gigabull Luxury", slug: "gigabull" }
   ];
 
   const col3 = [
     { name: "Clean Culture", slug: "clean-culture", type: "live" },
-    { name: "Ruts N Rides Website", slug: "ruts-n-rides-website" },
-    { name: "Befhue", slug: "befhue" },
-    { name: "Sales App", slug: "sales-app" },
-    { name: "Sanika Restaurant", slug: "sanika-restaurant" },
-    { name: "Startten", slug: "startten", type: "new" }
+    { name: "Ruts N Rides", slug: "ruts-n-rides" },
+    { name: "Befhue Creative Agency", slug: "befhue" },
+    { name: "Sales CRM App", slug: "sales-app" },
+    { name: "Sanika's Indian Cuisine", slug: "sanikas-indian-cuisine" },
+    { name: "Startten Platform", slug: "startten", type: "new" }
   ];
 
   const handleApplyClick = () => {
@@ -118,35 +118,32 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
           />
         </Link>
 
-        {/* Navigation Links */}
+        {/* Desktop Nav Items */}
         <nav className="hidden md:flex items-center gap-6 lg:gap-8 font-body text-sm font-semibold">
           {navLinks.map((link) => {
-            const isLinkHome = link.path === '/';
-            const isActive = isLinkHome ? pathname === '/' : pathname === link.path;
+            const isActive = pathname === link.path || (link.path !== '/' && pathname.startsWith(link.path));
 
             if (link.hasDropdown) {
               return (
                 <div 
-                  key={link.name}
-                  className="relative py-2 group/dropdown cursor-pointer"
+                  key={link.name} 
+                  className="relative"
                   onMouseEnter={() => setDropdownOpen(true)}
                   onMouseLeave={() => setDropdownOpen(false)}
                 >
-                  <div className="flex items-center gap-1">
-                    <Link 
-                      href={link.path} 
-                      className={`transition-colors flex items-center gap-1 ${navLinkTextClass(isActive || dropdownOpen)}`}
-                    >
-                      {link.name}
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
-                    </Link>
-                  </div>
+                  <Link 
+                    href={link.path} 
+                    className={`flex items-center gap-1.5 transition-colors py-2 ${navLinkTextClass(isActive)}`}
+                  >
+                    <span>{link.name}</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180 text-[#2196E8]' : ''}`} />
+                  </Link>
 
-                  {/* Dropdown Card */}
+                  {/* Mega Menu Dropdown */}
                   <AnimatePresence>
                     {dropdownOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
@@ -164,9 +161,13 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                           </div>
                           
                           {/* Badge */}
-                          <div className="border border-[#2196E8]/20 bg-[#2196E8]/5 text-[#2196E8] px-3.5 py-1 rounded-full text-xs font-bold font-body">
+                          <Link 
+                            href="/case-studies"
+                            onClick={() => setDropdownOpen(false)}
+                            className="border border-[#2196E8]/20 bg-[#2196E8]/5 hover:bg-[#2196E8]/10 text-[#2196E8] px-3.5 py-1 rounded-full text-xs font-bold font-body transition-colors"
+                          >
                             19 Projects
-                          </div>
+                          </Link>
                         </div>
 
                         {/* Divider */}
@@ -179,7 +180,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                             {col1.map((project, idx) => (
                               <Link
                                 key={idx}
-                                href="/case-studies"
+                                href={`/case-studies/${project.slug}`}
                                 onClick={() => setDropdownOpen(false)}
                                 className="text-slate-800 hover:text-[#2196E8] text-[13.5px] font-medium transition-colors duration-200 py-1 block font-body"
                               >
@@ -193,7 +194,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                             {col2.map((project, idx) => (
                               <Link
                                 key={idx}
-                                href="/case-studies"
+                                href={`/case-studies/${project.slug}`}
                                 onClick={() => setDropdownOpen(false)}
                                 className="text-slate-800 hover:text-[#2196E8] text-[13.5px] font-medium transition-colors duration-200 py-1 block font-body"
                               >
@@ -205,9 +206,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                           {/* Column 3 */}
                           <div className="space-y-3">
                             {col3.map((project, idx) => {
-                              const href = project.slug === 'clean-culture' || project.slug === 'startten'
-                                ? `/case-studies/${project.slug}`
-                                : '/case-studies';
+                              const href = `/case-studies/${project.slug}`;
                               if (project.type === "live") {
                                 return (
                                   <Link
@@ -317,21 +316,16 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                         </Link>
                         
                         <div className="grid grid-cols-2 gap-2 text-xs text-slate-500 pr-2">
-                          {[...col1, ...col2, ...col3].map((p, idx) => {
-                            const href = p.slug === 'clean-culture' || p.slug === 'startten'
-                              ? `/case-studies/${p.slug}`
-                              : '/case-studies';
-                            return (
-                              <Link
-                                key={idx}
-                                href={href}
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="hover:text-black py-1 block truncate font-medium"
-                              >
-                                {p.name}
-                              </Link>
-                            );
-                          })}
+                          {[...col1, ...col2, ...col3].map((p, idx) => (
+                            <Link
+                              key={idx}
+                              href={`/case-studies/${p.slug}`}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="hover:text-[#2196E8] py-1 block truncate font-medium"
+                            >
+                              {p.name}
+                            </Link>
+                          ))}
                         </div>
                       </div>
                     )}
