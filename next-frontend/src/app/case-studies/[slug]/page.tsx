@@ -208,8 +208,88 @@ export default function DynamicCaseStudyPage({
 
       <main className="subpage-padding-top font-body bg-white">
 
-        {/* ── HERO SECTION (BLUE & WHITE THEME) ── */}
-        <section className="relative py-16 sm:py-24 bg-gradient-to-b from-blue-50/70 via-slate-50/30 to-white border-b border-blue-100/60 overflow-hidden font-body">
+        {/* ── TOP PANORAMIC COVER HERO BANNER ── */}
+        <section className="relative w-full h-[360px] sm:h-[460px] lg:h-[520px] overflow-hidden bg-slate-950 flex items-center justify-center font-body group">
+          {/* Background Image with Ambient Zoom & Fade */}
+          <div className="absolute inset-0 z-0">
+            <img
+              src={study.image}
+              alt={`${study.title} Cover Banner`}
+              className="w-full h-full object-cover scale-105 transition-transform duration-1000 group-hover:scale-110"
+            />
+            {/* Atmospheric Dark & Brand Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/65 to-slate-950/40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-transparent to-slate-950/80" />
+            <div className="absolute inset-0 bg-[#2196E8]/10 mix-blend-overlay" />
+          </div>
+
+          {/* Centered Overlay Content matching user screenshot */}
+          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 sm:space-y-6">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight uppercase leading-tight font-body drop-shadow-lg"
+            >
+              Building Digital Growth Through <br />
+              <span className="text-[#2196E8] drop-shadow-[0_0_25px_rgba(33,150,232,0.6)]">Tailored Innovation</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-slate-200 text-sm sm:text-base lg:text-lg max-w-3xl mx-auto leading-relaxed font-body drop-shadow-md font-medium"
+            >
+              Discover how DhiGrowth transformed everyday operations into a seamless, fast, minimal digital platform for <strong className="text-white font-bold">{study.title}</strong>.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="pt-2 flex justify-center"
+            >
+              <button
+                onClick={() => {
+                  const el = document.getElementById('case-study-overview');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="inline-flex items-center gap-3 px-6 sm:px-8 py-3.5 rounded-full bg-[#0A0F17]/90 hover:bg-[#121B2B] border border-[#2196E8]/50 hover:border-[#2196E8] text-white text-sm sm:text-base font-bold shadow-[0_0_30px_rgba(33,150,232,0.35)] transition-all transform hover:scale-105 cursor-pointer font-body backdrop-blur-md"
+              >
+                <BrandAvatar src={study.image} title={study.title} size="sm" />
+                <span>Jump To {study.title} Case Study ↓</span>
+              </button>
+            </motion.div>
+          </div>
+
+          {/* Left / Right Carousel Arrow Buttons */}
+          <Link
+            href={`/case-studies/${prevStudy.slug}`}
+            title="Previous Case Study"
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-[#2196E8] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all shadow-xl hover:scale-110 cursor-pointer"
+          >
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+          </Link>
+
+          <Link
+            href={`/case-studies/${nextStudy.slug}`}
+            title="Next Case Study"
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-[#2196E8] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all shadow-xl hover:scale-110 cursor-pointer"
+          >
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+          </Link>
+
+          {/* Bottom Carousel Pagination Dots */}
+          <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-black/50 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">
+            <span className="w-6 h-2 rounded-full bg-[#2196E8] transition-all" />
+            <span className="w-2 h-2 rounded-full bg-white/40" />
+            <span className="w-2 h-2 rounded-full bg-white/40" />
+          </div>
+        </section>
+
+        {/* ── HERO OVERVIEW SECTION (BLUE & WHITE THEME) ── */}
+        <section id="case-study-overview" className="relative py-16 sm:py-24 bg-gradient-to-b from-blue-50/70 via-slate-50/30 to-white border-b border-blue-100/60 overflow-hidden font-body">
           {/* Subtle Radial Blue Glows */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[360px] bg-[#2196E8]/10 rounded-full blur-[140px] pointer-events-none" />
           
