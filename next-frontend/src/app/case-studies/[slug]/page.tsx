@@ -123,18 +123,50 @@ export default function DynamicCaseStudyPage({
     return { title: capitalizeText(title), desc, ...colorScheme };
   });
 
-  // Generate numbered breakdown sections
-  const solutionItems = (study.solutionBullets && study.solutionBullets.length > 3
-    ? study.solutionBullets.filter(b => b.length > 15 && !b.endsWith(':')).slice(0, 8)
+  // Generate clean, short 2-4 word titles and detailed descriptions for capabilities
+  const solutionSections = (study.solutionBullets && study.solutionBullets.length > 0
+    ? study.solutionBullets
+        .filter((b) => b.trim().length > 10 && !b.endsWith(':'))
+        .map((bullet) => {
+          const colonMatch = bullet.split(/[:—–]/);
+          if (colonMatch.length > 1 && colonMatch[0].trim().length < 35) {
+            return {
+              title: capitalizeText(colonMatch[0].trim()),
+              desc: colonMatch.slice(1).join(' ').trim(),
+            };
+          }
+
+          const cleanText = bullet.replace(/^[0-9.\-\s]+/, '').trim();
+          const words = cleanText.split(/\s+/);
+
+          let shortTitle = '';
+          if (words.length <= 4) {
+            shortTitle = cleanText;
+          } else {
+            const meaningfulWords = words.filter(
+              (w) => !/^(we|developed|built|created|designed|implemented|provides|providing|an|a|the|as|to|for|with|through|by|in|on|of|and)$/i.test(w)
+            );
+            shortTitle = meaningfulWords.slice(0, 3).join(' ');
+          }
+
+          if (!shortTitle || shortTitle.length < 3) {
+            shortTitle = words.slice(0, 3).join(' ');
+          }
+
+          return {
+            title: capitalizeText(shortTitle.replace(/[.,:;—–-]+$/, '')),
+            desc: cleanText,
+          };
+        })
     : [
-        "Interactive User Experience And Dynamic Interface Flow",
-        "Automated Logic Engine And Real-Time State Management",
-        "Secure Payment Integration And Seamless Checkout System",
-        "Granular Real-Time Tracking And Notification Pipeline",
-        "Administrative Dashboard And Centralized Analytics",
-        "Scalable Cloud Backend Architecture And Sub-Second API Response"
+        { title: 'Dynamic User Interface', desc: `${study.title} provides a clean, responsive interface tailored for effortless navigation.` },
+        { title: 'Automated Workflow Engine', desc: 'Automates complex processes and business logic to maximize efficiency and scalability.' },
+        { title: 'Real-Time State Sync', desc: 'Maintains live state synchronization across user sessions with instant feedback.' },
+        { title: 'Secure Checkout & Data', desc: 'Ensures encrypted transactions, data integrity, and enterprise-grade compliance.' },
+        { title: 'Centralized Admin Dashboard', desc: 'Comprehensive management dashboard for analytics, reporting, and operational control.' },
+        { title: 'High-Performance Cloud API', desc: 'Engineered on modern cloud infrastructure with 99.9% uptime and rapid responsiveness.' },
       ]
-  );
+  ).slice(0, 6);
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-body selection:bg-[#2196E8] selection:text-white">
@@ -431,11 +463,9 @@ export default function DynamicCaseStudyPage({
               </div>
 
               {/* Alternating Numbered Feature Sections */}
-              {solutionItems.map((item, i) => {
+              {solutionSections.map((sec, i) => {
                 const isLeft = i % 2 === 0;
                 const num = `${i + 4}.`;
-                const title = item.includes(':') ? item.split(':')[0] : item;
-                const desc = item.includes(':') ? item.split(':')[1] : `${study.title} Integrates Seamless User Workflows, Real-Time Validations, And Clean Interfaces Designed To Scale Operations Effortlessly.`;
 
                 return (
                   <div
@@ -453,7 +483,7 @@ export default function DynamicCaseStudyPage({
                                 {i % 4 === 0 ? <Shield className="w-8 h-8" /> : i % 4 === 1 ? <Route className="w-8 h-8" /> : i % 4 === 2 ? <CalendarCheck className="w-8 h-8" /> : <Coins className="w-8 h-8" />}
                               </div>
                               <span className="text-sm font-extrabold tracking-wide block font-body text-[#2196E8]">
-                                {capitalizeText(title)}
+                                {sec.title}
                               </span>
                               <p className="text-xs text-slate-600 font-body">
                                 High-Precision Architecture And Frictionless User Experience
@@ -467,11 +497,11 @@ export default function DynamicCaseStudyPage({
                           </div>
 
                           <div className="lg:col-span-7 space-y-5 font-body">
-                            <h3 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-body">
-                              {num} {capitalizeText(title)}
+                            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight font-body">
+                              {num} {sec.title}
                             </h3>
                             <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-body">
-                              {desc}
+                              {sec.desc}
                             </p>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 font-body">
@@ -489,11 +519,11 @@ export default function DynamicCaseStudyPage({
                       ) : (
                         <>
                           <div className="lg:col-span-7 space-y-5 order-2 lg:order-1 font-body">
-                            <h3 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-body">
-                              {num} {capitalizeText(title)}
+                            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight font-body">
+                              {num} {sec.title}
                             </h3>
                             <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-body">
-                              {desc}
+                              {sec.desc}
                             </p>
 
                             <div className="flex gap-3 pt-2 flex-wrap font-body">
@@ -515,7 +545,7 @@ export default function DynamicCaseStudyPage({
                                 <CheckCircle2 className="w-8 h-8" />
                               </div>
                               <span className="text-sm font-extrabold tracking-wide text-[#2196E8] block font-body">
-                                Verified Output
+                                {sec.title}
                               </span>
                               <p className="text-xs text-slate-600 font-body">
                                 Seamless User Flow And Automated Processing
