@@ -174,7 +174,7 @@ export default function DynamicCaseStudyPage({
                   </div>
                   <div>
                     <span className="text-xs font-bold uppercase tracking-wider text-[#2196E8] block mb-1">
-                      {study.category} • Led by {study.tl || 'DhiGrowth Team'}
+                      {study.category}
                     </span>
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight font-body">
                       {study.title} {isMobileApp ? 'App' : 'Platform'}
