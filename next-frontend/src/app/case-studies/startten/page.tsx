@@ -65,8 +65,8 @@ export default function StarttenPage() {
           {/* Centered Overlay Content */}
           <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 sm:space-y-6">
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight font-body drop-shadow-lg">
-              Building digital growth through <br />
-              <span className="text-[#E61E2B] drop-shadow-[0_0_25px_rgba(230,30,43,0.6)]">tailored innovation</span>
+              Building Digital Growth Through <br />
+              <span className="text-[#E61E2B] drop-shadow-[0_0_25px_rgba(230,30,43,0.6)]">Tailored Innovation</span>
             </h1>
 
             <p className="text-slate-200 text-sm sm:text-base lg:text-lg max-w-3xl mx-auto leading-relaxed font-body drop-shadow-md font-medium">
