@@ -54,8 +54,20 @@ export default function LoadingScreen() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="fixed inset-0 z-[99999] bg-black flex items-center justify-center overflow-hidden select-none"
         >
-          {/* Full Screen Intro Video Always with Sound */}
-          <div className="relative w-full h-full flex items-center justify-center">
+          {/* Full Screen Intro Video Container */}
+          <div className="relative w-full h-full flex items-center justify-center bg-black">
+            {/* Ambient blurred backdrop video to fill portrait/mobile screens seamlessly */}
+            <video
+              src="/intro_loading.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-40 pointer-events-none scale-110"
+              aria-hidden="true"
+            />
+
+            {/* Main Responsive Intro Video */}
             <video
               ref={videoRef}
               src="/intro_loading.mp4"
@@ -63,16 +75,16 @@ export default function LoadingScreen() {
               playsInline
               preload="auto"
               onEnded={handleComplete}
-              className="w-full h-full object-cover opacity-100"
+              className="relative z-10 w-full h-full object-contain pointer-events-none"
             />
 
             {/* Skip Intro Button */}
             <button
               onClick={handleComplete}
-              className="absolute bottom-8 right-8 z-20 px-5 py-2.5 rounded-full bg-slate-900/80 hover:bg-slate-900 backdrop-blur-md border border-white/20 text-white text-xs font-bold tracking-wider flex items-center gap-2 transition-all duration-300 hover:scale-105 cursor-pointer font-body shadow-2xl"
+              className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 z-20 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-slate-900/80 hover:bg-slate-900 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-bold tracking-wider flex items-center gap-2 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer font-body shadow-2xl"
             >
               <span>Skip Intro</span>
-              <SkipForward className="w-4 h-4" />
+              <SkipForward className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
           </div>
         </motion.div>
