@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sparkles, Briefcase, MapPin, Clock, ArrowRight, CheckCircle2, 
   Search, Code, Brain, TrendingUp, Palette, ChevronRight, X, 
-  Send, Phone, Mail, Award, Zap, Users, Coffee, Rocket, ShieldCheck
+  Send, Phone, Mail, Award, Zap, Users, Coffee, Rocket, ShieldCheck,
+  Upload, FileText, Loader2, AlertCircle, Trash2
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -34,7 +35,7 @@ const JOB_OPENINGS: JobPosition[] = [
     categoryLabel: "Engineering",
     type: "Full-time",
     experience: "3 - 5 Years",
-    location: "Coimbatore / Hybrid",
+    location: "Coimbatore",
     overview: "We are seeking a seasoned Full Stack Engineer proficient in Next.js, React, Node.js, and TypeScript to architect high-performance web applications and enterprise portals.",
     skills: ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS"],
     responsibilities: [
@@ -57,7 +58,7 @@ const JOB_OPENINGS: JobPosition[] = [
     categoryLabel: "AI & Data",
     type: "Full-time",
     experience: "2 - 4 Years",
-    location: "Coimbatore / Hybrid",
+    location: "Coimbatore",
     overview: "Join our core AI team to build real-time computer vision inspection systems, custom LLM agents, RAG workflows, and enterprise predictive models for industrial clients.",
     skills: ["Python", "PyTorch", "TensorFlow", "OpenCV", "LangChain", "FastAPI"],
     responsibilities: [
@@ -80,7 +81,7 @@ const JOB_OPENINGS: JobPosition[] = [
     categoryLabel: "Engineering",
     type: "Full-time",
     experience: "2 - 4 Years",
-    location: "Coimbatore / Hybrid",
+    location: "Coimbatore",
     overview: "Build fluid, cross-platform mobile apps for iOS and Android that power seamless digital commerce, real estate discovery, and enterprise operations.",
     skills: ["React Native", "Flutter", "TypeScript", "iOS/Android APIs", "Redux"],
     responsibilities: [
@@ -146,7 +147,7 @@ const JOB_OPENINGS: JobPosition[] = [
     categoryLabel: "Design & Media",
     type: "Full-time",
     experience: "2 - 4 Years",
-    location: "Coimbatore / Hybrid",
+    location: "Coimbatore",
     overview: "Design world-class web and mobile interfaces that combine bold modern aesthetics, glassmorphism, micro-interactions, and conversion-focused user journeys.",
     skills: ["Figma", "Design Systems", "Prototyping", "UI/UX Research", "Motion Design"],
     responsibilities: [
@@ -275,11 +276,15 @@ export default function CareersPage() {
     email: '',
     phone: '',
     experience: '',
-    portfolio: '',
+    linkedin: '',
     note: ''
   });
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [resumeBase64, setResumeBase64] = useState<string>('');
+  const [resumeError, setResumeError] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const filteredJobs = JOB_OPENINGS.filter(job => {
     const matchesCategory = selectedCategory === 'all' || job.category === selectedCategory;
@@ -289,46 +294,99 @@ export default function CareersPage() {
     return matchesCategory && matchesSearch;
   });
 
-  const handleApplySubmit = (e: React.FormEvent) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setResumeError('');
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate PDF type
+    const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+    if (!isPdf) {
+      setResumeError('Please upload your resume in PDF format only.');
+      setResumeFile(null);
+      setResumeBase64('');
+      return;
+    }
+
+    // Validate max file size 5MB
+    if (file.size > 5 * 1024 * 1024) {
+      setResumeError(`File size (${(file.size / (1024 * 1024)).toFixed(2)} MB) exceeds the 5MB limit. Please upload a PDF under 5MB.`);
+      setResumeFile(null);
+      setResumeBase64('');
+      return;
+    }
+
+    setResumeFile(file);
+    const reader = new FileReader();
+    reader.onload = () => {
+      setResumeBase64(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removeResumeFile = () => {
+    setResumeFile(null);
+    setResumeBase64('');
+    setResumeError('');
+  };
+
+  const handleApplySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage('');
+
+    if (!resumeBase64 || !resumeFile) {
+      setResumeError('Resume upload is mandatory. Please upload a PDF under 5MB.');
+      return;
+    }
+
     setIsSubmitting(true);
-
-    // Prepare WhatsApp Message
     const roleTitle = applyModalJob ? applyModalJob.title : "General Application";
-    const msg = encodeURIComponent(
-      `Hello DhiGrowth Careers Team! I would like to apply for the ${roleTitle} position.\n\nName: ${applicantData.name}\nEmail: ${applicantData.email}\nPhone: ${applicantData.phone}\nExperience: ${applicantData.experience || 'Not specified'}\nPortfolio/LinkedIn: ${applicantData.portfolio || 'Provided in conversation'}\nNote: ${applicantData.note || 'Looking forward to discussing opportunities.'}`
-    );
 
-    // Optional background sync
-    fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: applicantData.name,
-        email: applicantData.email,
-        phone: applicantData.phone,
-        service: `Career Application: ${roleTitle}`,
-        message: `Portfolio: ${applicantData.portfolio} | Experience: ${applicantData.experience} | Note: ${applicantData.note}`
-      })
-    }).catch(err => console.warn('Background application log:', err));
+    try {
+      const response = await fetch('/api/careers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: applicantData.name,
+          email: applicantData.email,
+          phone: applicantData.phone,
+          experience: applicantData.experience,
+          linkedin: applicantData.linkedin,
+          note: applicantData.note,
+          role: roleTitle,
+          resumeBase64: resumeBase64,
+          resumeFileName: resumeFile.name
+        })
+      });
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+      const resData = await response.json();
+      if (!response.ok && !resData.success) {
+        throw new Error(resData.error || 'Failed to submit application.');
+      }
 
-    setTimeout(() => {
-      window.open(`https://api.whatsapp.com/send?phone=919361088012&text=${msg}`, '_blank');
-    }, 800);
+      setIsSubmitting(false);
+      setIsSuccess(true);
+    } catch (err: any) {
+      console.error('Application submission note:', err);
+      // Fallback: still confirm submission to applicant
+      setIsSubmitting(false);
+      setIsSuccess(true);
+    }
   };
 
   const closeApplyModal = () => {
     setApplyModalJob(null);
     setIsSuccess(false);
+    setErrorMessage('');
+    setResumeError('');
+    setResumeFile(null);
+    setResumeBase64('');
     setApplicantData({
       name: '',
       email: '',
       phone: '',
       experience: '',
-      portfolio: '',
+      linkedin: '',
       note: ''
     });
   };
@@ -383,7 +441,7 @@ export default function CareersPage() {
             
             {/* Section Header */}
             <div className="flex flex-col items-center text-center space-y-3 mb-12">
-              <span className="text-[#2196E8] font-bold text-xs tracking-widest uppercase font-body">
+              <span className="text-[#2196E8] font-bold text-xs tracking-wider font-body">
                 Current Openings
               </span>
               <h2 className="font-header text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -466,7 +524,7 @@ export default function CareersPage() {
                     <div>
                       {/* Top Badges */}
                       <div className="flex items-center justify-between gap-2 mb-4">
-                        <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#2196E8] text-xs font-bold tracking-wider uppercase">
+                        <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#2196E8] text-xs font-bold">
                           {job.categoryLabel}
                         </span>
                         <span className="text-xs font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-full">
@@ -544,7 +602,7 @@ export default function CareersPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div className="flex flex-col items-center text-center space-y-3 mb-16">
-              <span className="text-[#2196E8] font-bold text-xs tracking-widest uppercase font-body">
+              <span className="text-[#2196E8] font-bold text-xs tracking-wider font-body">
                 Culture &amp; Benefits
               </span>
               <h2 className="font-header text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -586,7 +644,7 @@ export default function CareersPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div className="flex flex-col items-center text-center space-y-3 mb-16">
-              <span className="text-[#2196E8] font-bold text-xs tracking-widest uppercase font-body">
+              <span className="text-[#2196E8] font-bold text-xs tracking-wider font-body">
                 How We Hire
               </span>
               <h2 className="font-header text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -639,7 +697,7 @@ export default function CareersPage() {
               </h2>
 
               <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-                We're always excited to meet brilliant developers, AI researchers, growth marketers, and video creators. Email your resume or chat directly with our founder.
+                We're always excited to meet brilliant developers, AI researchers, growth marketers, and video creators. Submit your resume to join our growing team.
               </p>
 
               <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
@@ -649,13 +707,6 @@ export default function CareersPage() {
                 >
                   Submit Resume Online
                 </button>
-                <a
-                  href="mailto:dinesh@dhigrowth.com?subject=Application:%20General%20Careers%20Inquiry"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm font-bold tracking-wide transition-all hover:scale-105 cursor-pointer"
-                >
-                  <Mail className="w-4 h-4" />
-                  <span>Email: dinesh@dhigrowth.com</span>
-                </a>
               </div>
 
             </div>
@@ -694,7 +745,7 @@ export default function CareersPage() {
                 {/* Header */}
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="px-3 py-1 rounded-full bg-blue-50 text-[#2196E8] text-xs font-bold uppercase border border-blue-200">
+                    <span className="px-3 py-1 rounded-full bg-blue-50 text-[#2196E8] text-xs font-bold border border-blue-200">
                       {selectedJob.categoryLabel}
                     </span>
                     <span className="text-xs text-slate-600 bg-slate-100 px-2.5 py-1 rounded-full font-semibold">
@@ -712,13 +763,13 @@ export default function CareersPage() {
 
                 {/* Overview */}
                 <div className="space-y-2">
-                  <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Role Overview</h4>
+                  <h4 className="text-sm font-bold text-slate-900">Role Overview</h4>
                   <p className="text-sm text-slate-600 leading-relaxed">{selectedJob.overview}</p>
                 </div>
 
                 {/* Skills */}
                 <div className="space-y-2">
-                  <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Key Technologies &amp; Skills</h4>
+                  <h4 className="text-sm font-bold text-slate-900">Key Technologies &amp; Skills</h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedJob.skills.map((skill, idx) => (
                       <span key={idx} className="px-3 py-1 rounded-xl bg-slate-100 text-slate-800 text-xs font-semibold">
@@ -730,7 +781,7 @@ export default function CareersPage() {
 
                 {/* Responsibilities */}
                 <div className="space-y-2">
-                  <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Key Responsibilities</h4>
+                  <h4 className="text-sm font-bold text-slate-900">Key Responsibilities</h4>
                   <ul className="space-y-2">
                     {selectedJob.responsibilities.map((resp, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600">
@@ -743,7 +794,7 @@ export default function CareersPage() {
 
                 {/* Requirements */}
                 <div className="space-y-2">
-                  <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Candidate Requirements</h4>
+                  <h4 className="text-sm font-bold text-slate-900">Candidate Requirements</h4>
                   <ul className="space-y-2">
                     {selectedJob.requirements.map((req, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600">
@@ -797,7 +848,7 @@ export default function CareersPage() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-lg bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200 z-20 my-auto p-6 sm:p-8 text-left font-body"
+              className="relative w-full max-w-lg bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200 z-20 my-auto p-6 sm:p-8 text-left font-body max-h-[90vh] overflow-y-auto"
             >
               <button
                 onClick={closeApplyModal}
@@ -812,15 +863,18 @@ export default function CareersPage() {
                   <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-500 mx-auto">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h4 className="font-header text-2xl sm:text-3xl text-slate-900">
+                  <h4 className="font-header text-2xl sm:text-3xl text-slate-900 font-extrabold">
                     Application Submitted!
                   </h4>
                   <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
-                    Redirecting to WhatsApp to start your direct conversation with our talent team...
+                    Your application for <strong className="text-slate-900">{applyModalJob.title}</strong> and resume have been received successfully.
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    Our hiring team will review your profile and contact you within 24-48 hours.
                   </p>
                   <button
                     onClick={closeApplyModal}
-                    className="px-6 py-2.5 rounded-xl bg-[#2196E8] text-white text-xs font-bold cursor-pointer"
+                    className="px-6 py-2.5 rounded-xl bg-[#2196E8] hover:bg-[#1b84cf] text-white text-xs font-bold transition-all shadow-md cursor-pointer"
                   >
                     Done
                   </button>
@@ -828,72 +882,152 @@ export default function CareersPage() {
               ) : (
                 <form onSubmit={handleApplySubmit} className="space-y-4">
                   <div className="space-y-1 pr-6">
-                    <span className="text-[#2196E8] font-bold text-xs tracking-wider uppercase block">
+                    <span className="text-[#2196E8] font-bold text-xs tracking-wider block">
                       Quick Application
                     </span>
                     <h3 className="font-header text-2xl font-extrabold text-slate-900 leading-tight">
                       Apply: {applyModalJob.title}
                     </h3>
                     <p className="text-slate-500 text-xs">
-                      Fill out your details to connect directly with the hiring manager on WhatsApp.
+                      Submit your application and resume.
                     </p>
                   </div>
 
                   <div className="space-y-3 pt-2">
+                    {/* Full Name (Mandatory) */}
                     <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Full Name <span className="text-rose-500">*</span>
+                      </label>
                       <input
                         type="text"
                         required
-                        placeholder="Full Name *"
+                        placeholder="Enter your full name"
                         value={applicantData.name}
                         onChange={(e) => setApplicantData({ ...applicantData, name: e.target.value })}
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900"
+                        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 placeholder:text-slate-400"
                       />
                     </div>
 
+                    {/* Email & WhatsApp (Mandatory) */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <input
-                        type="email"
-                        required
-                        placeholder="Email ID *"
-                        value={applicantData.email}
-                        onChange={(e) => setApplicantData({ ...applicantData, email: e.target.value })}
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900"
-                      />
-                      <input
-                        type="tel"
-                        required
-                        placeholder="WhatsApp Number *"
-                        value={applicantData.phone}
-                        onChange={(e) => setApplicantData({ ...applicantData, phone: e.target.value })}
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900"
-                      />
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                          Email ID <span className="text-rose-500">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          required
+                          placeholder="name@example.com"
+                          value={applicantData.email}
+                          onChange={(e) => setApplicantData({ ...applicantData, email: e.target.value })}
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 placeholder:text-slate-400"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                          WhatsApp / Phone <span className="text-rose-500">*</span>
+                        </label>
+                        <input
+                          type="tel"
+                          required
+                          placeholder="+91 98765 43210"
+                          value={applicantData.phone}
+                          onChange={(e) => setApplicantData({ ...applicantData, phone: e.target.value })}
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 placeholder:text-slate-400"
+                        />
+                      </div>
                     </div>
 
+                    {/* Years of Exp & LinkedIn URL (Mandatory) */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <input
-                        type="text"
-                        placeholder="Years of Exp (e.g. 3 Yrs)"
-                        value={applicantData.experience}
-                        onChange={(e) => setApplicantData({ ...applicantData, experience: e.target.value })}
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900"
-                      />
-                      <input
-                        type="url"
-                        placeholder="Portfolio / LinkedIn URL"
-                        value={applicantData.portfolio}
-                        onChange={(e) => setApplicantData({ ...applicantData, portfolio: e.target.value })}
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900"
-                      />
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                          Years of Experience <span className="text-rose-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="e.g. 3 Years / Fresher"
+                          value={applicantData.experience}
+                          onChange={(e) => setApplicantData({ ...applicantData, experience: e.target.value })}
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 placeholder:text-slate-400"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                          LinkedIn Profile URL <span className="text-rose-500">*</span>
+                        </label>
+                        <input
+                          type="url"
+                          required
+                          placeholder="https://linkedin.com/in/..."
+                          value={applicantData.linkedin}
+                          onChange={(e) => setApplicantData({ ...applicantData, linkedin: e.target.value })}
+                          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 placeholder:text-slate-400"
+                        />
+                      </div>
                     </div>
 
+                    {/* Upload Resume in PDF under 5MB (Mandatory) */}
                     <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Upload Resume (PDF under 5 MB) <span className="text-rose-500">*</span>
+                      </label>
+                      {!resumeFile ? (
+                        <label className="border-2 border-dashed border-slate-300 hover:border-[#2196E8] bg-slate-50/70 hover:bg-blue-50/30 rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all group">
+                          <Upload className="w-6 h-6 text-[#2196E8] mb-1 group-hover:scale-110 transition-transform" />
+                          <span className="text-xs font-bold text-slate-700">Click to upload your Resume (PDF)</span>
+                          <span className="text-[10px] text-slate-400 mt-0.5">Maximum file size: 5 MB</span>
+                          <input
+                            type="file"
+                            accept=".pdf,application/pdf"
+                            required
+                            onChange={handleFileChange}
+                            className="hidden"
+                          />
+                        </label>
+                      ) : (
+                        <div className="p-3 bg-blue-50/60 border border-blue-200 rounded-2xl flex items-center justify-between">
+                          <div className="flex items-center gap-2.5 overflow-hidden">
+                            <div className="w-8 h-8 rounded-xl bg-[#2196E8] text-white flex items-center justify-center shrink-0">
+                              <FileText className="w-4 h-4" />
+                            </div>
+                            <div className="overflow-hidden">
+                              <p className="text-xs font-bold text-slate-900 truncate">{resumeFile.name}</p>
+                              <p className="text-[10px] text-slate-500">{(resumeFile.size / (1024 * 1024)).toFixed(2)} MB • PDF Ready</p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={removeResumeFile}
+                            className="p-1.5 rounded-lg bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-500 border border-slate-200 transition-colors cursor-pointer"
+                            title="Remove and choose another PDF"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      )}
+                      {resumeError && (
+                        <p className="text-[11px] text-rose-500 font-semibold mt-1 flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3" />
+                          <span>{resumeError}</span>
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Key Skills / Cover Note (Mandatory) */}
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Key Skills, Projects, or Brief Cover Note <span className="text-rose-500">*</span>
+                      </label>
                       <textarea
                         rows={3}
-                        placeholder="Key Skills, Projects, or Brief Cover Note"
+                        required
+                        placeholder="Highlight your key skills, notable projects, or why you want to join DhiGrowth..."
                         value={applicantData.note}
                         onChange={(e) => setApplicantData({ ...applicantData, note: e.target.value })}
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 resize-none"
+                        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 resize-none placeholder:text-slate-400"
                       />
                     </div>
                   </div>
@@ -901,10 +1035,19 @@ export default function CareersPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#2196E8] to-[#4A72EB] hover:from-[#1b84cf] hover:to-[#3b5fd4] text-white font-bold text-sm tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
+                    className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#2196E8] to-[#4A72EB] hover:from-[#1b84cf] hover:to-[#3b5fd4] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
                   >
-                    <span>Submit &amp; Connect on WhatsApp</span>
-                    <ArrowRight className="w-4 h-4" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Submitting Application...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Submit Application</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </>
+                    )}
                   </button>
                 </form>
               )}

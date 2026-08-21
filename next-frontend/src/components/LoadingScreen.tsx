@@ -4,10 +4,26 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { SkipForward } from 'lucide-react';
 
 export default function LoadingScreen() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    // Only show intro video on the very first landing/session visit
+    try {
+      const hasSeen = sessionStorage.getItem('dhi_splash_seen');
+      if (hasSeen === 'true') {
+        return;
+      }
+    } catch {
+      // Fallback if sessionStorage is disabled or unavailable
+    }
+
+    setLoading(true);
+  }, []);
+
+  useEffect(() => {
+    if (!loading) return;
+
     // Always play video unmuted with sound
     if (videoRef.current) {
       videoRef.current.muted = false;
@@ -37,10 +53,12 @@ export default function LoadingScreen() {
     }, 12000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [loading]);
 
   const handleComplete = () => {
-    sessionStorage.setItem('dhi_splash_seen', 'true');
+    try {
+      sessionStorage.setItem('dhi_splash_seen', 'true');
+    } catch {}
     setLoading(false);
   };
 

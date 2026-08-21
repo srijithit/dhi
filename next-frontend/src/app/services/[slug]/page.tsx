@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import CTABanner from '@/components/CTABanner';
 import CustomCursor from '@/components/CustomCursor';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
+import ServiceInquirySection from '@/components/ServiceInquirySection';
 import { SERVICES_DATA } from '@/data/servicesData';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 
@@ -140,18 +141,12 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-              <Link 
-                href="/contact"
-                className="btn-primary w-full sm:w-auto px-8 py-3.5 bg-brand text-white font-bold rounded-lg hover:bg-brand-bright transition-colors tracking-wider text-sm font-body"
+              <a 
+                href="#service-inquiry-form"
+                className="btn-primary w-full sm:w-auto px-8 py-3.5 bg-brand text-white font-bold rounded-lg hover:bg-brand-bright transition-colors tracking-wider text-sm font-body shadow-lg hover:scale-105 cursor-pointer"
               >
-                Get a Free Consultation
-              </Link>
-              <Link 
-                href="/services"
-                className="btn-secondary w-full sm:w-auto px-8 py-3.5 !border-slate-800 text-white hover:bg-slate-900 transition-colors tracking-wider text-sm font-body"
-              >
-                View Our Portfolio
-              </Link>
+                Book a Call
+              </a>
             </div>
           </div>
         </section>
@@ -337,6 +332,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </div>
           </div>
         </section>
+
+        {/* Service Inquiry & Consultation Form */}
+        <ServiceInquirySection currentServiceName={service.name} />
 
         {/* Bottom CTA Banner */}
         <CTABanner />

@@ -45,31 +45,6 @@ export interface Industry {
 
 export const SERVICES_DATA: Service[] = [
   {
-    id: "ai-development",
-    name: "AI Development",
-    shortCopy: "Smart AI products — chatbots, recommendation engines & custom ML models.",
-    category: "ai",
-    iconName: "Cpu",
-    badge: "Future Tech",
-    heroTitle: "AI Development Company in Coimbatore",
-    heroSub: "At DHI Growth, we deliver innovative artificial intelligence solutions that empower businesses to automate, predict, and innovate in the digital age.",
-    sections: [
-      {
-        heading: "Smart Solutions for Modern Businesses",
-        content: "Artificial intelligence is no longer the future — it is the present. DhiGrowth builds custom AI solutions that give your business a competitive edge. We develop intelligent chatbots, recommendation engines, predictive analytics tools, natural language processing (NLP) systems, and machine learning models tailored to your industry."
-      },
-      {
-        heading: "AI Services & Capabilities",
-        items: [
-          { title: "Predictive Analytics", desc: "Forecast market trends, demand, and customer behavior using custom ML models." },
-          { title: "Conversational Chatbots", desc: "24/7 AI virtual assistants powered by LLMs to automate support and drive sales." },
-          { title: "Computer Vision", desc: "Automated quality inspection, facial recognition, and visual document analysis for manufacturing and retail." },
-          { title: "Natural Language Processing", desc: "Extract insights from customer feedback, emails, and unstructured text automatically." }
-        ]
-      }
-    ]
-  },
-  {
     id: "ai-automation",
     name: "AI Automation",
     shortCopy: "Automate repetitive tasks and workflows using intelligent AI solutions.",
@@ -107,6 +82,66 @@ export const SERVICES_DATA: Service[] = [
       {
         heading: "Operational Excellence Through Digitization",
         content: "Running a business involves hundreds of repetitive tasks that consume your team's time. DhiGrowth's business growth automation services help you identify, digitise, and automate those processes — from CRM workflows and invoice generation to HR management, sales pipelines, and customer onboarding."
+      }
+    ]
+  },
+  {
+    id: "ai-development",
+    name: "AI Development",
+    shortCopy: "Smart AI products — chatbots, recommendation engines & custom ML models.",
+    category: "ai",
+    iconName: "Cpu",
+    badge: "Future Tech",
+    heroTitle: "AI Development Company in Coimbatore",
+    heroSub: "At DHI Growth, we deliver innovative artificial intelligence solutions that empower businesses to automate, predict, and innovate in the digital age.",
+    sections: [
+      {
+        heading: "Smart Solutions for Modern Businesses",
+        content: "Artificial intelligence is no longer the future — it is the present. DhiGrowth builds custom AI solutions that give your business a competitive edge. We develop intelligent chatbots, recommendation engines, predictive analytics tools, natural language processing (NLP) systems, and machine learning models tailored to your industry."
+      },
+      {
+        heading: "AI Services & Capabilities",
+        items: [
+          { title: "Predictive Analytics", desc: "Forecast market trends, demand, and customer behavior using custom ML models." },
+          { title: "Conversational Chatbots", desc: "24/7 AI virtual assistants powered by LLMs to automate support and drive sales." },
+          { title: "Computer Vision", desc: "Automated quality inspection, facial recognition, and visual document analysis for manufacturing and retail." },
+          { title: "Natural Language Processing", desc: "Extract insights from customer feedback, emails, and unstructured text automatically." }
+        ]
+      }
+    ]
+  },
+  {
+    id: "app-development",
+    name: "Application Development",
+    shortCopy: "iOS, Android & cross-platform apps designed for seamless user experiences.",
+    category: "tech",
+    iconName: "Smartphone",
+    badge: "High Growth",
+    heroTitle: "Mobile App Development Company in Coimbatore",
+    heroSub: "At DHI Growth, we build innovative, user-friendly, and scalable mobile applications for startups, SMEs, and enterprises across industries.",
+    sections: [
+      {
+        heading: "Mobile App Development in Coimbatore",
+        content: "In a mobile-first world, your business needs an app that performs flawlessly. DhiGrowth builds custom iOS, Android, and cross-platform mobile applications tailored to your business goals. From customer-facing apps and on-demand platforms to internal enterprise tools and SaaS products — we handle the full development lifecycle from ideation to App Store launch."
+      },
+      {
+        heading: "Our App Development Offerings",
+        items: [
+          { title: "Native iOS & Android Apps", desc: "High-performance native applications optimized specifically for Swift/Apple and Kotlin/Android ecosystems." },
+          { title: "Cross-Platform Apps", desc: "Cost-effective multi-platform apps built using React Native and Flutter with single codebase efficiency." },
+          { title: "Enterprise Mobility Solutions", desc: "Streamlined internal business apps for workflow management, field operations, and CRM integration." },
+          { title: "E-Commerce & Service Apps", desc: "Engaging shopping apps with push notifications, in-app checkout, and loyalty systems." }
+        ]
+      },
+      {
+        heading: "Our Structured Mobile App Process",
+        steps: [
+          "1. Requirement Analysis — Define architecture, user stories, and technical requirements.",
+          "2. UI/UX Design — Crafting intuitive screens and interactive prototypes.",
+          "3. Agile Development — Sprint-based development with frequent progress demos.",
+          "4. Quality Assurance — End-to-end testing for speed, battery performance, and security.",
+          "5. Deployment & Maintenance — App Store & Play Store publishing plus continuous updates."
+        ]
       }
     ]
   },
@@ -157,41 +192,6 @@ export const SERVICES_DATA: Service[] = [
           "5. Testing & Quality Check — Cross-device, speed, and security audits.",
           "6. Launch & SEO Setup — Going live with Google Analytics and Search Console.",
           "7. Support & Maintenance — Ongoing updates and performance monitoring."
-        ]
-      }
-    ]
-  },
-  {
-    id: "app-development",
-    name: "Application Development",
-    shortCopy: "iOS, Android & cross-platform apps designed for seamless user experiences.",
-    category: "tech",
-    iconName: "Smartphone",
-    badge: "High Growth",
-    heroTitle: "Mobile App Development Company in Coimbatore",
-    heroSub: "At DHI Growth, we build innovative, user-friendly, and scalable mobile applications for startups, SMEs, and enterprises across industries.",
-    sections: [
-      {
-        heading: "Mobile App Development in Coimbatore",
-        content: "In a mobile-first world, your business needs an app that performs flawlessly. DhiGrowth builds custom iOS, Android, and cross-platform mobile applications tailored to your business goals. From customer-facing apps and on-demand platforms to internal enterprise tools and SaaS products — we handle the full development lifecycle from ideation to App Store launch."
-      },
-      {
-        heading: "Our App Development Offerings",
-        items: [
-          { title: "Native iOS & Android Apps", desc: "High-performance native applications optimized specifically for Swift/Apple and Kotlin/Android ecosystems." },
-          { title: "Cross-Platform Apps", desc: "Cost-effective multi-platform apps built using React Native and Flutter with single codebase efficiency." },
-          { title: "Enterprise Mobility Solutions", desc: "Streamlined internal business apps for workflow management, field operations, and CRM integration." },
-          { title: "E-Commerce & Service Apps", desc: "Engaging shopping apps with push notifications, in-app checkout, and loyalty systems." }
-        ]
-      },
-      {
-        heading: "Our Structured Mobile App Process",
-        steps: [
-          "1. Requirement Analysis — Define architecture, user stories, and technical requirements.",
-          "2. UI/UX Design — Crafting intuitive screens and interactive prototypes.",
-          "3. Agile Development — Sprint-based development with frequent progress demos.",
-          "4. Quality Assurance — End-to-end testing for speed, battery performance, and security.",
-          "5. Deployment & Maintenance — App Store & Play Store publishing plus continuous updates."
         ]
       }
     ]

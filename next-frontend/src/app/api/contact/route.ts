@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, service, message } = body;
+    const { name, email, phone, company, service, message } = body;
 
     // Input validation
     if (!name || !email || !message) {
@@ -37,8 +37,8 @@ export async function POST(request: Request) {
 
         const htmlContent = `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff;">
-            <h2 style="color: #2196E8; margin-top: 0;">New Contact Inquiry — DhiGrowth</h2>
-            <p style="color: #475569; font-size: 14px;">You have received a new email inquiry from the DhiGrowth website:</p>
+            <h2 style="color: #2196E8; margin-top: 0;">New Service Inquiry — DhiGrowth</h2>
+            <p style="color: #475569; font-size: 14px;">You have received a new consultation inquiry from the DhiGrowth website:</p>
             <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
               <tr style="border-bottom: 1px solid #f1f5f9;">
                 <td style="padding: 10px; font-weight: bold; color: #1e293b; width: 30%;">Full Name:</td>
@@ -51,6 +51,10 @@ export async function POST(request: Request) {
               <tr style="border-bottom: 1px solid #f1f5f9;">
                 <td style="padding: 10px; font-weight: bold; color: #1e293b;">Phone / WhatsApp:</td>
                 <td style="padding: 10px; color: #334155;">${phone || 'N/A'}</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 10px; font-weight: bold; color: #1e293b;">Company / Brand:</td>
+                <td style="padding: 10px; color: #334155;">${company || 'N/A'}</td>
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9;">
                 <td style="padding: 10px; font-weight: bold; color: #1e293b;">Requested Service:</td>

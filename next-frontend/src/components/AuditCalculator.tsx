@@ -148,7 +148,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
               type="submit" 
               className="btn-primary w-full !py-4 sm:!py-5 mt-4 flex items-center justify-center gap-3 cursor-pointer !rounded-2xl sm:!rounded-3xl shadow-xl font-bold text-base sm:text-lg min-h-[56px] capitalize"
             >
-              <span>Submit to WhatsApp</span>
+              <span>Submit</span>
               <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           </form>
@@ -333,7 +333,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
                       type="submit" 
                       className="btn-primary w-full !py-3 sm:!py-3.5 mt-2 flex items-center justify-center gap-2.5 cursor-pointer !rounded-xl shadow-lg font-bold text-sm sm:text-base min-h-[48px] capitalize"
                     >
-                      <span>Submit to WhatsApp</span>
+                      <span>Submit</span>
                       <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                     </button>
                   </form>
