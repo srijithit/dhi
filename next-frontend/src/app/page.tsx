@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, ArrowRight, ChevronDown, Globe, Calendar, User, ExternalLink, Activity, Target, Cpu } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -29,6 +29,18 @@ const LinkedInIcon = (props: any) => (
 
 export default function Home() {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+
+  // Auto popup in 10 seconds
+  useEffect(() => {
+    const isDismissed = typeof window !== 'undefined' && sessionStorage.getItem('lead_popup_closed') === 'true';
+    if (isDismissed) return;
+
+    const timer = setTimeout(() => {
+      setIsLeadModalOpen(true);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleOpenAudit = () => {
     setIsLeadModalOpen(true);

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CTABanner from '@/components/CTABanner';
@@ -11,6 +11,18 @@ import { motion } from 'framer-motion';
 
 export default function AboutPage() {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+
+  // Auto popup in 10 seconds
+  useEffect(() => {
+    const isDismissed = typeof window !== 'undefined' && sessionStorage.getItem('lead_popup_closed') === 'true';
+    if (isDismissed) return;
+
+    const timer = setTimeout(() => {
+      setIsLeadModalOpen(true);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleOpenAudit = () => {
     setIsLeadModalOpen(true);

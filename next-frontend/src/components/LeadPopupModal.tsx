@@ -1,14 +1,20 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Sparkles, CheckCircle2, Loader2, ArrowRight } from 'lucide-react';
 
 interface LeadPopupModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
+  autoPopupDelay?: number;
 }
 
-export default function LeadPopupModal({ isOpen, onClose }: LeadPopupModalProps) {
+export default function LeadPopupModal({
+  isOpen: controlledIsOpen,
+  onClose,
+  autoPopupDelay = 10000 // 10 seconds
+}: LeadPopupModalProps) {
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,7 +25,31 @@ export default function LeadPopupModal({ isOpen, onClose }: LeadPopupModalProps)
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  if (!isOpen) return null;
+  // Auto popup in 10 seconds
+  useEffect(() => {
+    if (autoPopupDelay <= 0) return;
+
+    const isDismissed = typeof window !== 'undefined' && sessionStorage.getItem('lead_popup_closed') === 'true';
+    if (isDismissed) return;
+
+    const timer = setTimeout(() => {
+      setInternalIsOpen(true);
+    }, autoPopupDelay);
+
+    return () => clearTimeout(timer);
+  }, [autoPopupDelay]);
+
+  const showModal = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
+
+  const handleClose = () => {
+    setInternalIsOpen(false);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('lead_popup_closed', 'true');
+    }
+    if (onClose) onClose();
+  };
+
+  if (!showModal) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,7 +100,7 @@ export default function LeadPopupModal({ isOpen, onClose }: LeadPopupModalProps)
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={onClose}
+          onClick={handleClose}
           className="fixed inset-0 bg-black/80 backdrop-blur-md cursor-pointer"
         />
 
@@ -84,7 +114,7 @@ export default function LeadPopupModal({ isOpen, onClose }: LeadPopupModalProps)
         >
           {/* Close Button */}
           <button 
-            onClick={onClose}
+            onClick={handleClose}
             className="absolute top-4 right-4 z-30 p-2.5 rounded-full bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition-colors cursor-pointer"
             aria-label="Close modal"
           >
@@ -103,7 +133,7 @@ export default function LeadPopupModal({ isOpen, onClose }: LeadPopupModalProps)
                 Redirecting to WhatsApp for instant confirmation and consultation...
               </p>
               <button
-                onClick={onClose}
+                onClick={handleClose}
                 className="btn-primary !py-2.5 !px-6 text-xs !rounded-xl mt-4 cursor-pointer"
               >
                 Done
