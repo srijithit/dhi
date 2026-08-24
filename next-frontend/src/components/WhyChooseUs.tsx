@@ -110,16 +110,27 @@ export default function WhyChooseUs() {
           {/* Right Column (7 Cols): Horizontal Carousel Cards matching reference site */}
           <div className="lg:col-span-7 space-y-6">
             
-            {/* Cards Carousel Container */}
-            <div className="relative overflow-hidden py-2">
+            {/* Cards Carousel Container with Swipe / Drag gestures */}
+            <div className="relative overflow-hidden py-2 cursor-grab active:cursor-grabbing select-none touch-pan-y">
               <motion.div 
-                className="flex gap-6 transition-transform duration-500 ease-out"
+                className="flex gap-6 select-none"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x < -35 || info.velocity.x < -200) {
+                    handleNext();
+                  } else if (info.offset.x > 35 || info.velocity.x > 200) {
+                    handlePrev();
+                  }
+                }}
                 animate={{ x: -currentIdx * cardStep }}
+                transition={{ ease: [0.32, 0.72, 0, 1], duration: 0.45 }}
               >
                 {differentiators.map((diff, idx) => (
                   <div 
                     key={idx}
-                    className="w-[290px] sm:w-[320px] shrink-0 bg-white text-slate-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between group"
+                    className="w-[290px] sm:w-[320px] shrink-0 bg-white text-slate-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between group select-none"
                   >
                     <div>
                       {/* Top Header Image */}
@@ -127,7 +138,8 @@ export default function WhyChooseUs() {
                         <img 
                           src={diff.image} 
                           alt={diff.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          draggable={false}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none select-none"
                         />
                       </div>
 
