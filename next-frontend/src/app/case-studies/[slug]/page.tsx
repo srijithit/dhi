@@ -911,22 +911,22 @@ export default function DynamicCaseStudyPage({
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 relative z-10 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12 xl:gap-16">
             
-            {/* LEFT COLUMN: TITLE, OVERVIEW & ARROW CONTROLS */}
-            <div className="flex flex-col gap-6 lg:gap-8 items-center lg:items-start w-full lg:w-[380px] xl:w-[440px] shrink-0 z-20 mt-2 lg:-mt-2">
+            {/* LEFT COLUMN: TITLE, OVERVIEW & ARROW CONTROLS (STRICTLY LEFT ALIGNED) */}
+            <div className="flex flex-col gap-6 lg:gap-8 items-start text-left w-full lg:w-[380px] xl:w-[440px] shrink-0 z-20 mt-2 lg:-mt-2">
               
               {/* Section Heading & Overview */}
-              <div className="text-center lg:text-left w-full">
-                <h2 className="text-slate-900 font-sans text-4xl sm:text-5xl lg:text-[54px] xl:text-[62px] leading-tight font-extrabold tracking-tight">
+              <div className="text-left w-full">
+                <h2 className="text-slate-900 font-sans text-4xl sm:text-5xl lg:text-[54px] xl:text-[62px] leading-tight font-extrabold tracking-tight text-left">
                   Solution
                 </h2>
-                <div className="w-16 h-1.5 bg-[#4A72E8] rounded-full mt-3 mx-auto lg:mx-0" />
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium mt-4 max-w-[390px] mx-auto lg:mx-0">
+                <div className="w-16 h-1.5 bg-[#4A72E8] rounded-full mt-3 mx-0" />
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium mt-4 max-w-[390px] mx-0 text-left">
                   To address core delivery challenges, our team architected isolated execution sessions, a centralized calculation engine, and strict validation safeguards with responsive visual interfaces.
                 </p>
               </div>
 
               {/* Arrow Navigation Controls */}
-              <div className="flex flex-row gap-4 items-center">
+              <div className="flex flex-row gap-4 items-center justify-start">
                 <button
                   id="solutionPrevBtn"
                   onClick={handlePrevSolution}
@@ -946,7 +946,7 @@ export default function DynamicCaseStudyPage({
               </div>
 
               {/* Solution Dots Indicator */}
-              <div id="solutionDots" className="flex items-center justify-center lg:justify-start gap-2 pt-1">
+              <div id="solutionDots" className="flex items-center justify-start gap-2 pt-1">
                 {solutionDeck.map((_, idx) => (
                   <button
                     key={idx}
