@@ -168,24 +168,45 @@ export default function CleanCulturePage() {
   const parallaxRotate = useTransform(solutionScrollProgress, [0, 1], [-20, 25]);
   const parallaxBackCardY = useTransform(solutionScrollProgress, [0, 1], [30, -30]);
 
-  const handleNextSolution = () => {
-    setSolutionDirection(1);
-    setSolutionIdx((prev) => (prev + 1) % solutionSlides.length);
+  const [solutionInView, setSolutionInView] = useState(false);
+  const [solutionIsHovered, setSolutionIsHovered] = useState(false);
+
+  const paginateSolution = (newDirection: number) => {
+    setSolutionDirection(newDirection);
+    setSolutionIdx((prev) => {
+      let next = prev + newDirection;
+      if (next < 0) return solutionSlides.length - 1;
+      if (next >= solutionSlides.length) return 0;
+      return next;
+    });
   };
 
-  const handlePrevSolution = () => {
-    setSolutionDirection(-1);
-    setSolutionIdx((prev) => (prev - 1 + solutionSlides.length) % solutionSlides.length);
-  };
+  const handleNextSolution = () => paginateSolution(1);
+  const handlePrevSolution = () => paginateSolution(-1);
 
-  // Auto-play for Solution carousel
+  // Viewport-aware autoplay & pause on hover (5s interval)
   useEffect(() => {
-    const timer = setInterval(() => {
-      setSolutionDirection(1);
-      setSolutionIdx((prev) => (prev + 1) % solutionSlides.length);
-    }, 4500);
-    return () => clearInterval(timer);
+    const el = solutionSectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setSolutionInView(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!solutionInView || solutionIsHovered) return;
+    const timer = setInterval(() => {
+      paginateSolution(1);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [solutionInView, solutionIsHovered, solutionSlides.length]);
 
   const confettiCanvasRef = useRef<HTMLCanvasElement>(null);
   const confettiInstanceRef = useRef<any>(null);
@@ -620,213 +641,135 @@ export default function CleanCulturePage() {
           </svg>
         </div>
 
-        {/* ── 2. SOLUTION (SCROLL-DRIVEN PARALLAX + STAGGERED FADE-UP + INTERACTIVE 3D CAROUSEL) ── */}
+        {/* ── 2. SOLUTION (CIRCULAR ARC MOTION & FADE TRANSITION ENGINE) ── */}
         <section
-          id="solution"
+          id="solution-overview"
           ref={solutionSectionRef}
-          className="pt-10 pb-16 sm:pt-16 sm:pb-24 bg-gradient-to-b from-white via-blue-50/20 to-white border-b border-slate-200 relative overflow-hidden"
+          onMouseEnter={() => setSolutionIsHovered(true)}
+          onMouseLeave={() => setSolutionIsHovered(false)}
+          className="bg-white text-slate-900 h-auto relative w-full overflow-hidden flex items-center justify-center py-10 lg:py-16 border-b border-slate-200/80"
         >
-          {/* Scroll-Driven Parallax Depth Elements */}
-          <motion.div
-            style={{ y: parallaxSphereY1 }}
-            className="absolute top-12 left-10 w-8 h-8 rounded-full bg-blue-400/25 blur-xs pointer-events-none"
-          />
-          <motion.div
-            style={{ y: parallaxSphereY2, rotate: parallaxRotate }}
-            className="absolute top-28 right-16 w-12 h-12 rounded-2xl border-2 border-[#2196E8]/30 backdrop-blur-xs pointer-events-none flex items-center justify-center shadow-lg"
-          >
-            <div className="w-2.5 h-2.5 rounded-full bg-[#2196E8]" />
-          </motion.div>
-          <motion.div
-            style={{ y: parallaxSphereY1 }}
-            className="absolute bottom-20 left-1/4 w-6 h-6 rounded-full bg-cyan-400/30 blur-sm pointer-events-none"
-          />
-          <motion.div
-            style={{ y: parallaxSphereY2 }}
-            className="absolute bottom-12 right-1/3 w-10 h-10 rounded-full border border-blue-300/60 pointer-events-none flex items-center justify-center"
-          >
-            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping" />
-          </motion.div>
-          <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-blue-100/40 rounded-full blur-[150px] pointer-events-none -z-1" />
-          <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-cyan-50/50 rounded-full blur-[130px] pointer-events-none -z-1" />
+          {/* Ambient Background Circular Arc */}
+          <div className="rounded-full border-solid border-[rgba(33,150,232,0.06)] border-[40px] lg:border-[80px] w-[500px] h-[500px] lg:w-[950px] lg:h-[950px] absolute left-[50%] lg:left-[-400px] bottom-[-200px] lg:bottom-auto lg:top-[50%] -translate-x-1/2 lg:translate-x-0 lg:-translate-y-1/2 pointer-events-none z-0" />
           
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              
-              {/* Left Column: Staggered Fade-up Reveal (Title, Description, Controls) */}
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 1,
-                    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-                  },
-                }}
-                className="lg:col-span-5 space-y-6"
-              >
-                {/* 1. Tag & Live Badge */}
-                <motion.div
-                  variants={{
-                    hidden: { opacity: 0, y: 25 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-                  }}
-                  className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-[#2196E8] text-xs font-bold font-mono uppercase tracking-wider shadow-xs"
-                >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 relative z-10 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12 xl:gap-16">
+            
+            {/* LEFT COLUMN: TITLE, OVERVIEW & ARROW CONTROLS */}
+            <div className="flex flex-col gap-6 lg:gap-8 items-center lg:items-start w-full lg:w-[380px] xl:w-[440px] shrink-0 z-20 mt-2 lg:-mt-2">
+              <div className="text-center lg:text-left w-full space-y-3">
+                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-[#2196E8] text-[11px] font-bold font-mono uppercase tracking-wider shadow-xs mb-1">
                   <span className="w-2 h-2 rounded-full bg-[#2196E8] animate-pulse" />
                   <span>ARCHITECTURE &amp; SOLUTIONS</span>
-                </motion.div>
-
-                {/* 2. Heading */}
-                <motion.div
-                  variants={{
-                    hidden: { opacity: 0, y: 30 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
-                  }}
-                >
-                  <h2 className="text-5xl sm:text-6xl font-extrabold text-slate-900 tracking-tight font-body inline-block relative">
-                    Solution
-                    <span className="block w-14 h-1.5 bg-[#2196E8] rounded-full mt-2" />
-                  </h2>
-                </motion.div>
-
-                {/* 3. Description Paragraph */}
-                <motion.p
-                  variants={{
-                    hidden: { opacity: 0, y: 30 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
-                  }}
-                  className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal"
-                >
-                  To address high-concurrency delivery challenges, our team architected isolated checkout sessions, a centralized calculation engine, and strict stock validation with realistic visual interfaces.
-                </motion.p>
-
-                {/* 4. Interactive Carousel Controls */}
-                <motion.div
-                  variants={{
-                    hidden: { opacity: 0, y: 30 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
-                  }}
-                  className="pt-2 flex items-center gap-4"
-                >
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={handlePrevSolution}
-                      title="Previous Solution"
-                      className="w-12 h-12 rounded-2xl bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-200 shadow-md cursor-pointer hover:scale-105 active:scale-95 group"
-                    >
-                      <ChevronLeft className="w-5 h-5 transition-transform group-hover:-translate-x-0.5" />
-                    </button>
-                    <button
-                      onClick={handleNextSolution}
-                      title="Next Solution"
-                      className="w-12 h-12 rounded-2xl bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-200 shadow-md cursor-pointer hover:scale-105 active:scale-95 group"
-                    >
-                      <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5" />
-                    </button>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 ml-2">
-                    {solutionSlides.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => {
-                          setSolutionDirection(i > solutionIdx ? 1 : -1);
-                          setSolutionIdx(i);
-                        }}
-                        className={`transition-all duration-300 rounded-full cursor-pointer ${
-                          solutionIdx === i ? 'w-8 h-2.5 bg-[#2196E8]' : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-400'
-                        }`}
-                      />
-                    ))}
-                  </div>
-
-                  <span className="text-xs font-mono font-bold text-slate-400 ml-auto">
-                    0{solutionIdx + 1} / 0{solutionSlides.length}
-                  </span>
-                </motion.div>
-              </motion.div>
-
-              {/* Center Divider Tag */}
-              <div className="hidden lg:flex lg:col-span-2 justify-center items-center">
-                <div className="flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest text-[#2196E8] uppercase">
-                  <span>{solutionSlides[solutionIdx].tag}</span>
-                  <div className="w-8 h-[1px] bg-[#2196E8]/60" />
-                  <div className="w-2 h-2 rounded-full bg-[#2196E8]" />
                 </div>
+                <h2 className="text-slate-900 font-body text-4xl sm:text-5xl lg:text-[52px] xl:text-[58px] leading-tight font-extrabold tracking-tight">
+                  Solution
+                </h2>
+                <div className="w-16 h-1.5 bg-[#2196E8] rounded-full mx-auto lg:mx-0" />
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium pt-2 max-w-[400px] mx-auto lg:mx-0">
+                  To address high-concurrency delivery challenges, our team architected isolated checkout sessions, a centralized calculation engine, and strict stock validation with realistic visual interfaces.
+                </p>
               </div>
 
-              {/* Right Column: 3D Perspective Stage & Interactive Content Carousel */}
-              <div className="lg:col-span-5 flex justify-center relative min-h-[520px] items-center [perspective:1400px]">
-                {/* 3D Stacked Left Background Card */}
-                <motion.div
-                  style={{ y: parallaxBackCardY }}
-                  className="absolute top-4 -left-6 sm:-left-8 w-full max-w-md h-[460px] bg-gradient-to-br from-slate-100/90 to-blue-50/60 rounded-3xl border border-slate-200/80 p-8 shadow-lg pointer-events-none select-none overflow-hidden [transform:rotateY(14deg)_scale(0.92)_translateZ(-80px)] opacity-40 transition-transform duration-700 hidden sm:block"
+              {/* Arrow Navigation Controls */}
+              <div className="flex flex-row gap-4 items-center">
+                <button
+                  id="solutionPrevBtn"
+                  onClick={handlePrevSolution}
+                  aria-label="Previous solution item"
+                  className="shrink-0 w-11 h-11 rounded-xl bg-slate-900 hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-md hover:scale-105 active:scale-95"
                 >
-                  <div className="text-[10px] font-mono font-extrabold tracking-widest text-[#2196E8]/70 uppercase mb-3">
-                    {solutionSlides[(solutionIdx - 1 + solutionSlides.length) % solutionSlides.length].watermark || 'PREVIOUS MODULE'}
-                  </div>
-                  <span className="text-4xl font-extrabold text-slate-300 block font-mono">
-                    {solutionSlides[(solutionIdx - 1 + solutionSlides.length) % solutionSlides.length].num}
-                  </span>
-                  <div className="text-lg font-bold text-slate-400 mt-2">
-                    {solutionSlides[(solutionIdx - 1 + solutionSlides.length) % solutionSlides.length].title}
-                  </div>
-                </motion.div>
-
-                {/* 3D Stacked Right Background Card */}
-                <motion.div
-                  style={{ y: parallaxBackCardY }}
-                  className="absolute top-2 -right-4 sm:-right-6 w-full max-w-md h-[460px] bg-gradient-to-bl from-slate-100/90 to-blue-50/60 rounded-3xl border border-slate-200/80 p-8 shadow-lg pointer-events-none select-none overflow-hidden [transform:rotateY(-14deg)_scale(0.92)_translateZ(-80px)] opacity-40 transition-transform duration-700 hidden sm:block"
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  id="solutionNextBtn"
+                  onClick={handleNextSolution}
+                  aria-label="Next solution item"
+                  className="shrink-0 w-11 h-11 rounded-xl bg-slate-900 hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-md hover:scale-105 active:scale-95"
                 >
-                  <div className="text-[10px] font-mono font-extrabold tracking-widest text-[#2196E8]/70 uppercase mb-3">
-                    {solutionSlides[(solutionIdx + 1) % solutionSlides.length].watermark || 'NEXT MODULE'}
-                  </div>
-                  <span className="text-4xl font-extrabold text-slate-300 block font-mono">
-                    {solutionSlides[(solutionIdx + 1) % solutionSlides.length].num}
-                  </span>
-                  <div className="text-lg font-bold text-slate-400 mt-2">
-                    {solutionSlides[(solutionIdx + 1) % solutionSlides.length].title}
-                  </div>
-                </motion.div>
+                  <ChevronRight className="w-5 h-5" />
+                </button>
 
-                {/* Active Card with Interactive 3D Content Carousel Transition & Moving Border Beam */}
+                <span className="text-xs font-mono font-bold text-slate-400 ml-2">
+                  0{solutionIdx + 1} / 0{solutionSlides.length}
+                </span>
+              </div>
+
+              {/* Solution Dots Indicator */}
+              <div id="solutionDots" className="flex items-center justify-center lg:justify-start gap-2 pt-1">
+                {solutionSlides.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    aria-label={`Go to solution slide ${idx + 1}`}
+                    onClick={() => {
+                      if (idx !== solutionIdx) {
+                        const dir = idx > solutionIdx ? 1 : -1;
+                        setSolutionDirection(dir);
+                        setSolutionIdx(idx);
+                      }
+                    }}
+                    className={
+                      idx === solutionIdx
+                        ? 'w-7 h-2.5 rounded-full bg-[#2196E8] transition-all duration-300 cursor-pointer shadow-sm'
+                        : 'w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-500 transition-all duration-300 cursor-pointer'
+                    }
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN: DYNAMIC MOTION CARD STAGE */}
+            <div className="relative flex items-center justify-center w-full lg:flex-1 xl:w-[540px] xl:flex-none h-[480px] sm:h-[460px] lg:h-[440px]">
+              
+              {/* Stacked Preview Background Outline */}
+              <div className="absolute top-2 -right-4 sm:-right-6 w-full max-w-[340px] sm:max-w-[380px] h-[380px] bg-gradient-to-bl from-slate-100/70 to-blue-50/40 rounded-2xl border border-slate-200/60 p-6 pointer-events-none select-none opacity-40 hidden sm:block [transform:scale(0.94)]" />
+
+              <div id="solutionCardStage" className="relative w-full h-full flex items-center justify-center">
                 <AnimatePresence mode="wait" custom={solutionDirection}>
                   <motion.div
                     key={solutionIdx}
                     custom={solutionDirection}
                     variants={{
-                      enter: (dir: number) => ({
-                        opacity: 0,
-                        x: dir > 0 ? 140 : -140,
-                        rotateY: dir > 0 ? 32 : -32,
-                        scale: 0.88,
-                        z: -100,
-                      }),
+                      enter: (dir: number) => {
+                        const radius = 320;
+                        const angle = dir > 0 ? 45 : -45;
+                        const rad = (angle * Math.PI) / 180;
+                        const tx = Math.sin(rad) * radius;
+                        const ty = (1 - Math.cos(rad)) * radius;
+                        return {
+                          x: tx,
+                          y: ty,
+                          rotate: angle,
+                          opacity: 0,
+                        };
+                      },
                       center: {
-                        opacity: 1,
                         x: 0,
-                        rotateY: 0,
-                        scale: 1,
-                        z: 0,
+                        y: 0,
+                        rotate: 0,
+                        opacity: 1,
                         transition: {
-                          duration: 0.85,
+                          duration: 1.1,
                           ease: [0.33, 1, 0.68, 1],
                         },
                       },
-                      exit: (dir: number) => ({
-                        opacity: 0,
-                        x: dir > 0 ? -140 : 140,
-                        rotateY: dir > 0 ? -32 : 32,
-                        scale: 0.88,
-                        z: -100,
-                        transition: {
-                          duration: 0.65,
-                          ease: [0.33, 1, 0.68, 1],
-                        },
-                      }),
+                      exit: (dir: number) => {
+                        const radius = 320;
+                        const angle = dir > 0 ? -45 : 45;
+                        const rad = (angle * Math.PI) / 180;
+                        const tx = Math.sin(rad) * radius;
+                        const ty = (1 - Math.cos(rad)) * radius;
+                        return {
+                          x: tx,
+                          y: ty,
+                          rotate: angle,
+                          opacity: 0,
+                          transition: {
+                            duration: 1.1,
+                            ease: [0.33, 1, 0.68, 1],
+                          },
+                        };
+                      },
                     }}
                     initial="enter"
                     animate="center"
@@ -835,40 +778,55 @@ export default function CleanCulturePage() {
                     dragConstraints={{ left: 0, right: 0 }}
                     dragElastic={0.25}
                     onDragEnd={(_, info) => {
-                      if (info.offset.x < -60) {
+                      if (info.offset.x < -50) {
                         handleNextSolution();
-                      } else if (info.offset.x > 60) {
+                      } else if (info.offset.x > 50) {
                         handlePrevSolution();
                       }
                     }}
-                    className="animated-solution-card w-full max-w-md bg-white/95 backdrop-blur-xl rounded-3xl p-7 sm:p-8 border border-slate-200/90 shadow-[0_25px_60px_rgba(0,0,0,0.12)] space-y-4 relative z-20 cursor-grab active:cursor-grabbing transform-gpu select-none"
+                    className="solution-card-item absolute inset-0 flex flex-col lg:flex-row items-center justify-center w-full h-full cursor-grab active:cursor-grabbing select-none"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="text-5xl font-extrabold text-blue-200 block font-mono">
-                        {solutionSlides[solutionIdx].num}
-                      </span>
-                      <span className="px-3 py-1 rounded-full bg-blue-50 text-[#2196E8] text-[10px] font-extrabold font-mono tracking-wider uppercase">
+                    {/* Era Line Indicator & Step Tag */}
+                    <div className="hidden lg:flex items-center translate-y-10 mr-4 xl:mr-[18px] shrink-0 order-2 lg:order-1 select-none">
+                      <span className="text-[#2196E8] font-bold text-[11px] tracking-wider uppercase font-mono">
                         {solutionSlides[solutionIdx].tag}
                       </span>
+                      <div className="border-t border-slate-300 w-[30px] xl:w-[60px] h-0 mx-2.5" />
+                      <div className="bg-[#2196E8] rounded-full w-3 h-3 shrink-0 shadow-sm" />
                     </div>
 
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-body">
-                      {solutionSlides[solutionIdx].title}
-                    </h3>
-                    <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                      {solutionSlides[solutionIdx].desc}
-                    </p>
+                    {/* Content Card Body */}
+                    <div className="relative flex flex-col gap-3 w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[390px] order-1 lg:order-2 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-xl overflow-hidden group">
+                      
+                      {/* Geometric Corner Lines */}
+                      <div className="absolute -top-12 -right-12 w-28 h-28 border border-blue-400/25 rounded-full pointer-events-none" />
+                      <div className="absolute -bottom-10 -left-10 w-24 h-24 border border-cyan-400/25 rounded-full pointer-events-none" />
 
-                    {/* Preview Image with Hover Scale & Glowing Overlay */}
-                    <div className="pt-2">
-                      <div className="w-full h-44 sm:h-48 rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 relative shadow-inner group">
+                      <div className="flex items-center justify-between">
+                        <div className="font-bold text-[48px] lg:text-[56px] leading-none text-[#2196E8]/20 select-none font-mono">
+                          {solutionSlides[solutionIdx].num}
+                        </div>
+                        <span className="px-3 py-1 rounded-full bg-blue-50 text-[#2196E8] text-[10px] font-extrabold font-mono tracking-wider uppercase border border-blue-100">
+                          {solutionSlides[solutionIdx].tag}
+                        </span>
+                      </div>
+
+                      <div className="font-extrabold text-lg lg:text-xl leading-tight text-slate-900 tracking-tight font-body line-clamp-2">
+                        {solutionSlides[solutionIdx].title}
+                      </div>
+                      
+                      <p className="font-body text-xs sm:text-sm leading-relaxed text-slate-600 font-normal line-clamp-3">
+                        {solutionSlides[solutionIdx].desc}
+                      </p>
+
+                      <div className="w-full aspect-[16/9] h-[140px] sm:h-[160px] lg:h-[175px] relative overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 shadow-inner">
                         <img
                           src={solutionSlides[solutionIdx].img}
                           alt={solutionSlides[solutionIdx].title}
-                          className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-                        <div className="absolute bottom-2.5 right-3 text-[10px] font-mono text-white/80 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                        <div className="absolute bottom-2 right-2.5 text-[9px] font-mono text-white/90 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md">
                           Swipe to explore ↔
                         </div>
                       </div>
@@ -876,8 +834,8 @@ export default function CleanCulturePage() {
                   </motion.div>
                 </AnimatePresence>
               </div>
-
             </div>
+
           </div>
         </section>
 
