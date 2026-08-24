@@ -784,7 +784,7 @@ export default function CleanCulturePage() {
                         </div>
 
                         {/* Content Card Body */}
-                        <div className="flex flex-col gap-3 w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[390px] order-1 lg:order-2 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-xl">
+                        <div className="flex flex-col gap-3.5 w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[390px] order-1 lg:order-2 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-xl">
                           <div className="flex items-center justify-between">
                             <div className="font-bold text-[54px] lg:text-[64px] leading-none text-[#4A72E8]/20 select-none font-mono">
                               {card.num}
@@ -794,21 +794,17 @@ export default function CleanCulturePage() {
                             </div>
                           </div>
 
-                          <div className="font-extrabold text-xl lg:text-2xl leading-tight text-slate-900 tracking-tight font-body line-clamp-2">
+                          <div className="font-extrabold text-xl lg:text-2xl leading-tight text-slate-900 tracking-tight font-body">
                             {card.title}
                           </div>
                           
-                          <div className="flex flex-col gap-3">
-                            <p className="font-sans text-xs sm:text-sm leading-relaxed text-slate-600 font-normal line-clamp-3">
-                              {card.desc}
-                            </p>
-                            <div className="w-full aspect-[16/9] h-[140px] sm:h-[160px] lg:h-[175px] relative overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 shadow-sm">
-                              <img
-                                src={card.img}
-                                alt={card.title}
-                                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                              />
-                            </div>
+                          <div className="w-full aspect-[16/10] h-[160px] sm:h-[185px] lg:h-[200px] relative overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 shadow-sm mt-1">
+                            <img
+                              src={card.img}
+                              alt={card.title}
+                              draggable={false}
+                              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105 select-none pointer-events-none"
+                            />
                           </div>
                         </div>
                       </motion.div>
@@ -893,7 +889,7 @@ export default function CleanCulturePage() {
             </div>
 
             {/* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe */}
-            <div className="relative max-w-4xl mx-auto mb-8">
+            <div className="relative max-w-5xl mx-auto mb-8 px-4 sm:px-10 md:px-14">
               <motion.div
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
@@ -948,18 +944,20 @@ export default function CleanCulturePage() {
 
               <button
                 onClick={() => setHighlightIdx((prev) => (prev - 1 + 3) % 3)}
-                className="absolute left-0 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition shadow-lg cursor-pointer hover:scale-110"
+                aria-label="Previous highlight screen"
+                className="absolute -left-2 sm:-left-6 md:-left-10 lg:-left-12 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setHighlightIdx((prev) => (prev + 1) % 3)}
-                className="absolute right-0 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition shadow-lg cursor-pointer hover:scale-110"
+                aria-label="Next highlight screen"
+                className="absolute -right-2 sm:-right-6 md:-right-10 lg:-right-12 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
 
-              <div className="flex justify-center items-center gap-2 mt-3">
+              <div className="flex justify-center items-center gap-2 mt-4">
                 {[0, 1, 2].map((i) => (
                   <button
                     key={i}
