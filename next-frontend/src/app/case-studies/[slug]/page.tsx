@@ -317,6 +317,13 @@ export default function DynamicCaseStudyPage({
       '/images/case-studies/ai-invoice-processing/showcase_2.webp',
       '/images/case-studies/ai-invoice-processing/showcase_3.png',
     ],
+    'judah': [
+      '/images/case-studies/judah/showcase_1.png',
+      '/images/case-studies/judah/showcase_2.png',
+      '/images/case-studies/judah/showcase_3.png',
+      '/images/case-studies/judah/showcase_4.png',
+      '/images/case-studies/judah/showcase_5.png',
+    ],
     'ruts-n-rides': [
       '/images/case-studies/ruts-n-rides/tp1.jpg',
       '/images/case-studies/ruts-n-rides/tp2.jpg',

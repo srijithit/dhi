@@ -41,7 +41,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Judah",
     "category": "Food Delivery",
     "description": "Comprehensive Food Delivery Ecosystem: Judah is a multi-platform on-demand food ordering and logistics platform connecting consumers, local restaurants, and delivery fleets.",
-    "image": "/images/cc_highlight_store.jpg",
+    "image": "/images/case-studies/judah/showcase_1.png",
     "slug": "judah",
     "featured": false
   },
