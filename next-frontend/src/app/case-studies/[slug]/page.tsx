@@ -318,9 +318,18 @@ export default function DynamicCaseStudyPage({
       '/images/case-studies/ai-invoice-processing/showcase_3.png',
     ],
     'ruts-n-rides': [
-      '/images/case-studies/ruts-n-rides/showcase_1.png',
-      '/images/case-studies/ruts-n-rides/showcase_1.png',
-      '/images/case-studies/ruts-n-rides/showcase_1.png',
+      '/images/case-studies/ruts-n-rides/tp1.jpg',
+      '/images/case-studies/ruts-n-rides/tp2.jpg',
+      '/images/case-studies/ruts-n-rides/tp3.jpg',
+      '/images/case-studies/ruts-n-rides/showcase_4.png',
+      '/images/case-studies/ruts-n-rides/showcase_5.png',
+    ],
+    'ruts-n-rides-admin': [
+      '/images/case-studies/ruts-n-rides/tp1.jpg',
+      '/images/case-studies/ruts-n-rides/tp2.jpg',
+      '/images/case-studies/ruts-n-rides/tp3.jpg',
+      '/images/case-studies/ruts-n-rides/showcase_4.png',
+      '/images/case-studies/ruts-n-rides/showcase_5.png',
     ],
     'startten': [
       '/images/case-studies/startten/showcase_1.png',

@@ -10,6 +10,34 @@ import CustomCursor from '@/components/CustomCursor';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import { caseStudies, CaseStudy } from '@/data/caseStudies';
 
+const CASE_STUDY_LOGOS: Record<string, string> = {
+  'clean-culture': '/images/case-studies/logos/clean_culture.png',
+  'infragen': '/images/case-studies/logos/infragen.png',
+  'verdurepax': '/images/case-studies/logos/verdurepax.png',
+  'befhue': '/images/case-studies/logos/befhue.png',
+  'squirlio': '/images/case-studies/logos/squirlio.png',
+  'ruts-n-rides': '/images/case-studies/logos/ruts-n-rides.png',
+  'ruts-n-rides-admin': '/images/case-studies/logos/ruts-n-rides.png',
+  'nestpilot': '/images/case-studies/logos/nestpilot.png',
+  'amaravathy-coir': '/images/case-studies/logos/amaravathy.png',
+  'amaravathy': '/images/case-studies/logos/amaravathy.png',
+  'keystone': '/images/case-studies/logos/kiipl.png',
+  'kiipl': '/images/case-studies/logos/kiipl.png',
+  'gigabull': '/images/case-studies/logos/gigabull.png',
+  'sanikas-restaurant': '/images/case-studies/logos/sanikas.png',
+  'akirva': '/images/case-studies/logos/clean_culture.png',
+  'judah': '/images/case-studies/logos/clean_culture.png',
+  'startten': '/images/case-studies/logos/startten.ico',
+  'thoorigai': '/images/case-studies/logos/thoorigai.ico',
+  'sales-app': '/images/case-studies/logos/clean_culture.png',
+  'vectra-mechnovations': '/images/case-studies/logos/kiipl.png',
+  'splendour-park': '/images/case-studies/logos/startten.ico',
+  'bad-biscuit-detection': '/images/case-studies/logos/infragen.png',
+  'fabric-defect-detection': '/images/case-studies/logos/infragen.png',
+  'dhigrowth-ai-chatbot': '/images/case-studies/logos/clean_culture.png',
+  'ai-invoice-processing': '/images/case-studies/logos/infragen.png',
+};
+
 export default function CaseStudiesPage() {
   const [activeModalStudy, setActiveModalStudy] = useState<CaseStudy | null>(null);
 
@@ -79,6 +107,8 @@ export default function CaseStudiesPage() {
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-9">
             {caseStudies.map((study) => {
+              const brandLogo = CASE_STUDY_LOGOS[study.slug || study.id];
+
               const cardContent = (
                 <motion.div
                   key={study.id}
@@ -94,26 +124,45 @@ export default function CaseStudiesPage() {
                     }
                   }}
                 >
-                  {/* Image Container */}
+                  {/* Image Container with Brand Logo Presentation */}
                   <div className="relative w-full h-64 overflow-hidden p-2.5">
-                    <div className="relative w-full h-full rounded-[22px] overflow-hidden bg-slate-100">
-                      <img
-                        src={study.image}
-                        alt={study.title}
-                        className="object-cover w-full h-full group-hover:scale-108 transition-transform duration-500"
-                        loading="lazy"
-                      />
-                      {/* Soft Blue Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent pointer-events-none" />
+                    <div className="relative w-full h-full rounded-[22px] overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 flex items-center justify-center border border-slate-800/80 shadow-inner">
+                      {study.image && !study.image.includes('placeholder') && (
+                        <img
+                          src={study.image}
+                          alt={study.title}
+                          className="absolute inset-0 object-cover w-full h-full opacity-35 group-hover:opacity-50 group-hover:scale-110 transition-all duration-700 blur-[0.5px] group-hover:blur-0 select-none"
+                          loading="lazy"
+                        />
+                      )}
+                      
+                      {/* Dark Vignette Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-slate-950/30" />
+
+                      {/* Brand Official Logo Centered in High-Gloss Glass Emblem */}
+                      {brandLogo ? (
+                        <div className="relative z-10 w-28 h-28 sm:w-32 sm:h-32 rounded-2xl bg-white/95 backdrop-blur-md p-3.5 shadow-2xl border border-white/70 flex items-center justify-center transform group-hover:scale-110 transition-all duration-500">
+                          <img
+                            src={brandLogo}
+                            alt={`${study.title} Logo`}
+                            className="max-w-full max-h-full object-contain drop-shadow-sm select-none"
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : (
+                        <div className="relative z-10 text-xl font-extrabold text-white font-body tracking-wider uppercase px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20">
+                          {study.title}
+                        </div>
+                      )}
                     </div>
 
                     {/* Tag Badge (Capitalized Blue Pill) */}
-                    <div className="absolute top-5 left-5 bg-slate-900/80 backdrop-blur-md text-white font-bold text-[11px] sm:text-xs px-3.5 py-1.5 rounded-full border border-white/20 tracking-wide shadow-md font-body">
+                    <div className="absolute top-5 left-5 bg-slate-900/90 backdrop-blur-md text-white font-bold text-[11px] sm:text-xs px-3.5 py-1.5 rounded-full border border-white/20 tracking-wide shadow-md font-body z-20">
                       {capitalizeText(study.category)}
                     </div>
 
                     {study.slug && (
-                      <div className="absolute top-5 right-5 bg-emerald-500 text-white font-bold text-[10px] px-3 py-1 rounded-full border border-emerald-400/40 tracking-wide shadow-md font-body flex items-center gap-1.5">
+                      <div className="absolute top-5 right-5 bg-emerald-500 text-white font-bold text-[10px] px-3 py-1 rounded-full border border-emerald-400/40 tracking-wide shadow-md font-body flex items-center gap-1.5 z-20">
                         <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                         <span>Live Study</span>
                       </div>

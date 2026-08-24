@@ -86,7 +86,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Squirlio",
     "category": "App Platform",
     "description": "Squirlio is a premium e-commerce platform dedicated to offering healthy, nutrient-rich snacks.",
-    "image": "/images/case-studies/befhue/showcase_3.webp",
+    "image": "/images/case-studies/squirlio/banner_1.jpeg",
     "slug": "squirlio",
     "featured": false
   },
@@ -95,7 +95,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Amaravathy Coir",
     "category": "Manufacturing",
     "description": "Amaravathy Coir Producer Company Limited is a Tamil Nadu-based coir enterprise focused on producing sustainable coir fibre, yarn-dyed products, and premium coir solutions for domestic and international markets.",
-    "image": "/images/case-studies/squirlio/banner_1.jpeg",
+    "image": "/images/case-studies/amaravathy/hero.png",
     "slug": "amaravathy-coir",
     "featured": false
   },
@@ -104,7 +104,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Sales App",
     "category": "Enterprise App",
     "description": "LeadNova CRM is a mobile-based customer relationship management application designed to help sales teams manage leads, follow-ups, activities, and the complete sales pipeline efficiently.",
-    "image": "/images/cc_highlight_product.jpg",
+    "image": "/images/case-studies/clean-culture/showcase_1.png",
     "slug": "sales-app",
     "featured": false
   },
@@ -113,7 +113,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Keystone",
     "category": "Enterprise Digital",
     "description": "KIIPL needed a strong digital presence that could communicate its business identity, capabilities, and professional approach to customers and stakeholders.",
-    "image": "/images/cc_highlight_category.jpg",
+    "image": "/images/case-studies/kiipl/hero.png",
     "slug": "keystone",
     "featured": false
   },
@@ -122,7 +122,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Vectra Mechnovations",
     "category": "Industrial Engineering",
     "description": "Vectra Mechnovations needed a digital presence that could communicate its technical expertise, engineering capabilities, and professional approach to potential customers.",
-    "image": "/images/cc_highlight_store.jpg",
+    "image": "/images/case-studies/kiipl/brand1-product1.png",
     "slug": "vectra-mechnovations",
     "featured": false
   },
@@ -131,7 +131,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Sanika’s Indian Cuisine",
     "category": "Hospitality & Ordering",
     "description": "Sanika’s Indian Cuisine brings the rich flavours of Indian cooking to Mt.",
-    "image": "/images/case-studies/sanikas-restaurant/showcase_3.png",
+    "image": "/images/case-studies/sanikas/logo.png",
     "slug": "sanikas-restaurant",
     "featured": false
   },
@@ -140,7 +140,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Thoorigai",
     "category": "Event Platform",
     "description": "Thoorigai is a modern digital platform designed to simplify the way users discover and book events.",
-    "image": "/images/case-studies/sanikas-restaurant/showcase_3.png",
+    "image": "/images/case-studies/clean-culture/showcase_2.png",
     "slug": "thoorigai",
     "featured": false
   },
@@ -149,7 +149,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Gigabull",
     "category": "E-Commerce",
     "description": "Gigabull is a modern e-commerce platform created for a leather products brand serving customers and international buyers with high-quality leather goods at competitive prices.",
-    "image": "/images/cc_highlight_store.jpg",
+    "image": "/images/case-studies/gigabull/brand1-product1.png",
     "slug": "gigabull",
     "featured": false
   },
