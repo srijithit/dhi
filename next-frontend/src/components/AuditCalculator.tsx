@@ -180,52 +180,9 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
                 <span className="text-[#2196E8]">In Coimbatore?</span>
               </h2>
 
-              <p className="text-slate-650 dark:text-slate-355 text-xs sm:text-sm leading-relaxed mb-5 font-body max-w-xl">
+              <p className="text-slate-650 dark:text-slate-355 text-xs sm:text-sm leading-relaxed mb-6 font-body max-w-xl">
                 Talk to our digital growth experts today. Get a free audit of your website, ads, or social media — and a custom roadmap to scale your business faster.
               </p>
-
-              {/* Calculator Box */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#090d18] border border-slate-200 dark:border-slate-800 mb-6 space-y-3 shadow-sm w-full max-w-xl text-left">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-wider flex items-center gap-2 font-body">
-                    <Calculator className="w-4 h-4 text-[#2196E8]" />
-                    Growth Budget Calculator (₹/Month)
-                  </span>
-                  <span className="font-numeric font-bold text-[#2196E8] text-base sm:text-lg">
-                    {budget >= 2000000 
-                      ? '₹20 Lakhs+' 
-                      : budget >= 100000 
-                        ? `₹${(budget / 100000).toFixed(budget % 100000 === 0 ? 0 : 1)} Lakhs` 
-                        : `₹${budget.toLocaleString('en-IN')}`
-                    }
-                  </span>
-                </div>
-
-                <input 
-                  type="range" 
-                  min="25000" 
-                  max="2000000" 
-                  step="25000" 
-                  value={budget} 
-                  onChange={(e) => setBudget(Number(e.target.value))}
-                  className="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-[#2196E8]"
-                />
-
-                <div className="grid grid-cols-2 gap-3 pt-1 text-center font-body">
-                  <div className="bg-slate-50 dark:bg-[#121829] p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
-                    <span className="text-[11px] text-slate-500 dark:text-slate-400 block mb-0.5">Est. Monthly Reach</span>
-                    <span className="font-numeric font-bold text-slate-900 dark:text-white text-base sm:text-lg">
-                      {estimatedReach.toLocaleString('en-IN')}
-                    </span>
-                  </div>
-                  <div className="bg-slate-50 dark:bg-[#121829] p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
-                    <span className="text-[11px] text-slate-500 dark:text-slate-400 block mb-0.5">Est. Qualified Leads</span>
-                    <span className="font-numeric font-bold text-[#2196E8] text-base sm:text-lg">
-                      {estimatedLeads}+ /mo
-                    </span>
-                  </div>
-                </div>
-              </div>
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-4 w-full max-w-xl">
                 <button 
