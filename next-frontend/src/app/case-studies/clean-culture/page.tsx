@@ -508,14 +508,20 @@ export default function CleanCulturePage() {
                 </div>
               </div>
 
-              {/* Right Column: 3D iPhone Slideshow with Dark Pill Pagination & Hover Nav Arrows & Touch Swipe */}
+              {/* Right Column: 3D iPhone Slideshow with Dark Pill Pagination, Hover Nav Arrows & Motion Drag Swipe */}
               <div className="lg:col-span-6 flex justify-center py-2">
                 <div className="relative w-[300px] sm:w-[380px] group">
-                  <div
-                    onTouchStart={(e) => handleTouchStartOverview(e.touches[0].clientX)}
-                    onTouchEnd={(e) => handleTouchEndOverview(e.changedTouches[0].clientX)}
-                    onMouseDown={(e) => handleTouchStartOverview(e.clientX)}
-                    onMouseUp={(e) => handleTouchEndOverview(e.clientX)}
+                  <motion.div
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.25}
+                    onDragEnd={(_, info) => {
+                      if (info.offset.x < -35 || info.velocity.x < -250) {
+                        setCurrentCoverSlide((prev) => (prev === 2 ? 0 : prev + 1));
+                      } else if (info.offset.x > 35 || info.velocity.x > 250) {
+                        setCurrentCoverSlide((prev) => (prev === 0 ? 2 : prev - 1));
+                      }
+                    }}
                     className="relative w-full h-[420px] sm:h-[480px] flex items-center justify-center drop-shadow-2xl cursor-grab active:cursor-grabbing select-none"
                   >
                     {['/images/cc_overview_slide1.png', '/images/cc_overview_slide2.png', '/images/cc_overview_slide3.png'].map((src, idx) => (
@@ -523,7 +529,8 @@ export default function CleanCulturePage() {
                         key={idx}
                         src={src}
                         alt={`Clean Culture App Screen ${idx + 1}`}
-                        className={`absolute inset-0 w-full h-full object-contain transition-all duration-700 ${
+                        draggable={false}
+                        className={`absolute inset-0 w-full h-full object-contain transition-all duration-700 pointer-events-none select-none ${
                           currentCoverSlide === idx ? 'opacity-100 scale-100 z-20' : 'opacity-0 scale-95 z-10'
                         }`}
                       />
@@ -558,7 +565,7 @@ export default function CleanCulturePage() {
                         />
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             </div>
@@ -885,13 +892,19 @@ export default function CleanCulturePage() {
               </h2>
             </div>
 
-            {/* 3D Perspective Phone Showcase with Touch / Drag Swipe */}
+            {/* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe */}
             <div className="relative max-w-4xl mx-auto mb-8">
-              <div
-                onTouchStart={(e) => handleTouchStartHighlight(e.touches[0].clientX)}
-                onTouchEnd={(e) => handleTouchEndHighlight(e.changedTouches[0].clientX)}
-                onMouseDown={(e) => handleTouchStartHighlight(e.clientX)}
-                onMouseUp={(e) => handleTouchEndHighlight(e.clientX)}
+              <motion.div
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.25}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x < -35 || info.velocity.x < -250) {
+                    setHighlightIdx((prev) => (prev + 1) % 3);
+                  } else if (info.offset.x > 35 || info.velocity.x > 250) {
+                    setHighlightIdx((prev) => (prev - 1 + 3) % 3);
+                  }
+                }}
                 className="flex items-center justify-center gap-4 sm:gap-8 py-4 cursor-grab active:cursor-grabbing select-none"
               >
                 {/* Left Screen Card (Tilted Angle) */}
@@ -902,18 +915,20 @@ export default function CleanCulturePage() {
                   <img
                     src={highlightItems[(highlightIdx + 2) % 3].screen}
                     alt="Previous Screen"
-                    className="w-full h-full object-contain drop-shadow-md transition-all duration-700 pointer-events-none"
+                    draggable={false}
+                    className="w-full h-full object-contain drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
 
                 {/* Center Main Screen Card (Active Blue Border Focus) */}
                 <div
-                  className="relative w-56 sm:w-72 h-[380px] sm:h-[450px] rounded-3xl p-4 sm:p-5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden"
+                  className="relative w-56 sm:w-72 h-[380px] sm:h-[450px] rounded-3xl p-4 sm:p-5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
                 >
                   <img
                     src={highlightItems[highlightIdx].screen}
                     alt="Active Screen"
-                    className="w-full h-full object-contain drop-shadow-xl transition-all duration-700 pointer-events-none"
+                    draggable={false}
+                    className="w-full h-full object-contain drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
 
@@ -925,10 +940,11 @@ export default function CleanCulturePage() {
                   <img
                     src={highlightItems[(highlightIdx + 1) % 3].screen}
                     alt="Next Screen"
-                    className="w-full h-full object-contain drop-shadow-md transition-all duration-700 pointer-events-none"
+                    draggable={false}
+                    className="w-full h-full object-contain drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
-              </div>
+              </motion.div>
 
               <button
                 onClick={() => setHighlightIdx((prev) => (prev - 1 + 3) % 3)}
