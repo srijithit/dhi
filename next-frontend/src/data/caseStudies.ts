@@ -14,7 +14,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Akirva",
     "category": "App dev",
     "description": "Akirva is a hyperlocal mobility platform designed to make everyday auto travel faster, simpler, and more accessible.",
-    "image": "/images/cc_highlight_product.jpg",
+    "image": "/images/case-studies/akirva/showcase_1.png",
     "slug": "akirva",
     "featured": true
   },

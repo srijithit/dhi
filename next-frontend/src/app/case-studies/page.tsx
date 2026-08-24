@@ -25,7 +25,7 @@ const CASE_STUDY_LOGOS: Record<string, string> = {
   'kiipl': '/images/case-studies/logos/kiipl.png',
   'gigabull': '/images/case-studies/logos/gigabull.png',
   'sanikas-restaurant': '/images/case-studies/logos/sanikas.png',
-  'akirva': '/images/case-studies/logos/clean_culture.png',
+  'akirva': '/images/case-studies/logos/akirva.png',
   'judah': '/images/case-studies/logos/judah.png',
   'startten': '/images/case-studies/logos/startten.ico',
   'thoorigai': '/images/case-studies/logos/thoorigai.ico',

@@ -317,6 +317,13 @@ export default function DynamicCaseStudyPage({
       '/images/case-studies/ai-invoice-processing/showcase_2.webp',
       '/images/case-studies/ai-invoice-processing/showcase_3.png',
     ],
+    'akirva': [
+      '/images/case-studies/akirva/showcase_1.png',
+      '/images/case-studies/akirva/showcase_2.png',
+      '/images/case-studies/akirva/showcase_3.png',
+      '/images/case-studies/akirva/showcase_4.png',
+      '/images/case-studies/akirva/showcase_5.png',
+    ],
     'judah': [
       '/images/case-studies/judah/showcase_1.png',
       '/images/case-studies/judah/showcase_2.png',
@@ -552,6 +559,7 @@ export default function DynamicCaseStudyPage({
   // Brand Logo Mapping (Extracted directly from client websites)
   const logoMap: Record<string, string> = {
     'clean-culture': '/images/case-studies/logos/clean_culture.png',
+    'akirva': '/images/case-studies/logos/akirva.png',
     'infragen': '/images/case-studies/logos/infragen.png',
     'verdurepax': '/images/case-studies/logos/verdurepax.png',
     'befhue': '/images/case-studies/logos/befhue.png',
