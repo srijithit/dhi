@@ -1595,24 +1595,6 @@ export default function DynamicCaseStudyPage({
                       </div>
                     </a>
                   )}
-
-                  {webLink && (
-                    <a
-                      href={webLink}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={triggerSideCannons}
-                      className="inline-flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-500/40 text-emerald-300 font-medium shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-all transform hover:-translate-y-1 hover:scale-105"
-                    >
-                      <Globe className="w-5 h-5 text-emerald-400 shrink-0" />
-                      <div className="text-left font-body">
-                        <span className="text-[10px] uppercase font-bold text-emerald-400/80 block leading-none">WEB PORTAL</span>
-                        <span className="text-base font-extrabold text-white leading-tight flex items-center gap-1">
-                          Live Portal <ExternalLink className="w-3.5 h-3.5 text-emerald-400" />
-                        </span>
-                      </div>
-                    </a>
-                  )}
                 </>
               )}
 

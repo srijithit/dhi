@@ -1352,23 +1352,6 @@ export default function CleanCulturePage() {
                   <span className="text-lg sm:text-xl font-extrabold text-white leading-tight">App Store</span>
                 </div>
               </a>
-
-              {/* Live Web Platform Button */}
-              <a
-                href="http://cleanculture.in/"
-                target="_blank"
-                rel="noreferrer"
-                onClick={triggerSideCannons}
-                className="inline-flex items-center space-x-3.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-500/40 text-emerald-300 font-medium shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-all transform hover:-translate-y-1 hover:scale-105"
-              >
-                <Globe className="w-6 h-6 text-emerald-400 shrink-0" />
-                <div className="text-left font-body">
-                  <span className="text-[10px] uppercase font-bold text-emerald-400/80 block leading-none">WEB PORTAL</span>
-                  <span className="text-base sm:text-lg font-extrabold text-white leading-tight flex items-center gap-1.5">
-                    cleanculture.in <ExternalLink className="w-3.5 h-3.5 text-emerald-400" />
-                  </span>
-                </div>
-              </a>
             </div>
           </div>
         </section>
