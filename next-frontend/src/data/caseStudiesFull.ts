@@ -75,7 +75,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built a complete mobility ecosystem — from the first ride request to the final destination."
     ],
     "link": "Playstore: https://play.google.com/store/apps/details?id=com.akirva.user.akirva_user   Appstore: Not Launched",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCHlYwDyCiK0C9GcjpLxPzQriWelwtydEqIvSKilgDhIIQYCOiMvKZWzDEDqpfvAurG5hlqETlAGK42ZgnYtwglhM31fKPV15YCxjKGLgYAKf0DYkd_jrHcmSCSwCoujS2QmHxd4DPF3M84dF9Ak5CYVBNnFKP4IRQZg-ywsYLrWT0dczKjAtEp2_k5LhJeiayMABzW3buwAXLk2Y5d-n0BhKWvpXEEygI_f_O_W_moFRH0_pVcXuMg"
+    "image": "/images/cc_highlight_product.jpg"
   },
   {
     "slug": "clean-culture",
@@ -136,14 +136,14 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built a system that turns everyday purchases into an automated habit."
     ],
     "link": "Website:\nClean Culture Website: http://cleanculture.in/\n\niOS App:\nDownload on the Apple App Store: https://apps.apple.com/us/app/clean-culture/id6767485341\n\nAndroid App:\nGet it on Google Play: https://play.google.com/store/apps/details?id=com.dhigrowth.cleanculture&hl=en_IN",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAXqm-HzAntWtcvra3b3H4UHLjvIckn5uZ1ZTCkSvgRQ2QGwoPDS-Jwrbenj8DPn0WYoks7U-8XJSO_UnllP_fcjX2s_WtT4PaWFM7T6jReXJoH8UYC_7hYsm2azQMsji7fHE5sns9BploorSSdGnWshawS9IY6RPN5PAmpI172NwjC2J3PMRyrB6BlNerz0jU7eWe7eQzA8LEJeOo0k5NIBpCLJiLbl-7HoVpyqW0e23-x9vuO7E7f"
+    "image": "/images/cc_overview_slide1.png"
   },
   {
     "slug": "nestpilot",
     "title": "NestPilot",
     "subtitle": "PG & Hostel Management SaaS Platform",
-    "category": "SaaS",
-    "brandColor": "#4f46e5",
+    "category": "SaaS Platform",
+    "brandColor": "#3b82f6",
     "tl": "pranitha",
     "about": "Managing a PG or hostel shouldn't mean managing spreadsheets, paper registers, WhatsApp messages, rent calculations, and scattered tenant records.\n\nNestPilot was built to change that.\n\nNestPilot is a cloud-based PG and hostel management platform that brings tenant onboarding, room allocation, rent collection, expense tracking, documentation, and business analytics into one unified system.\n\nOur goal was to transform a traditionally manual operation into a smart, automated, and data-driven management experience — helping PG owners spend less time managing operations and more time growing their business.",
     "challenges": "PG and hostel management involves hundreds of small operational tasks every month. When these processes are handled manually, even a small mistake can result in payment leakage, inaccurate occupancy data, or hours of administrative work.\n\nThe key challenges we addressed included:\n\nManaging tenant information across scattered records\nTracking room and bed availability manually\nCalculating and collecting monthly rent\nFollowing up on pending payments\nManaging tenant KYC and documentation\nTracking operational expenses\nGenerating receipts manually\nUnderstanding real-time occupancy and profitability\nManaging multiple properties from different locations\nFinding historical tenant and payment records quickly\n\nThe challenge wasn't simply to digitise paperwork.\n\nIt was to rethink how an entire PG business operates.",
@@ -194,13 +194,13 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built an operating system for the modern PG business."
     ],
     "link": "https://nestpilot.in/",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCjP7RmuHaFil_wMEP3korLZqvz0NsB9qOYYGEe0zWB2VDR2vwJrvTuAtuzdq0Vn5hx5-qSA6_ri0123xfJ41z6Fu-bMbzc_TRDA9iTgFXrZBlcYuLq3-V5TbnwzC-EchzOQDAhojgC7y_BNZ54GpDDWGa0i08D3H9YT8ykHx6SNuohQ5ZY8R_s_Jqoyr-RzhRYseh8KjjfoYvQ_nTaDe0jZqwpEbmYdAzKg2QCsebqU-Z4VupItOZT"
+    "image": "/images/cc_highlight_category.jpg"
   },
   {
     "slug": "judah",
     "title": "Judah",
     "subtitle": "Judah",
-    "category": "Logistics",
+    "category": "Food Delivery",
     "brandColor": "#f97316",
     "tl": "sathish",
     "about": "Comprehensive Food Delivery Ecosystem: Judah is a multi-platform on-demand food ordering and logistics platform connecting consumers, local restaurants, and delivery fleets. • Core Problem Solved: Eliminates operational bottlenecks in hyperlocal food commerce through automated nearby driver dispatch, dynamic detour-indexed pricing, and real-time order lifecycle synchronization. • Multi-Stakeholder Target Audience: Serves four distinct personas — end consumers ordering meals, restaurant merchants managing menus and fulfillment, freelance delivery agents accepting tasks, and platform administrators managing logistics and finances. • Primary Business Objective: Delivers transparent meal delivery with granular variant pricing, schedule-based food availability, and reliable settlement ledgers for vendors and drivers. • Key Platform Capabilities: Features real-time GPS rider tracking, PostGIS-powered geospatial vendor discovery, automated timeout-driven agent queuing, and multi-tier variant cart management.",
@@ -221,13 +221,13 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Successfully engineered and integrated all 4 ecosystem components (Customer App, Vendor App, Delivery Agent App, Admin Web Dashboard). • Extensive Backend Architecture: Delivered 40+ modular REST API feature route modules and 30+ relational database entities managing the full ordering lifecycle. • Low-Latency Dispatch Engine: Validated automated queue-based agent assignment executing on 10-second polling cycles with 60-second expiration timeouts. • Deployment Pipelines: Configured staging (juda-staging-api.dhigrowth.com) and production (juda-api.dhigrowth.com) environments with AWS RDS and S3 integration. • Business Growth & Revenue Metrics: Business result requires confirmation"
     ],
     "link": "https://play.google.com/store/apps/details?id=com.judah.fooddelivery&hl=en_IN • Apple App Store URL: https://apps.apple.com/in/app/judah-delivery/id6758565796 • Production API Endpoint: https://juda-api.dhigrowth.com/api/v1 • Staging API Endpoint: https://juda-staging-api.dhigrowth.com/api/v1",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAouWOY3t_xnFPvpRkAoxBVf3gswcqtzg-r0EAzDPjF0sw1f_5WZK2sIJMuEsfY3APgEDU0lKz9-u8sYLNu-ckJETFYM2lYPdrvjU_uOgC-uhVIAF_pL4BqXP2GF6fVmVfwT0Sp_vEmNlHxgS-8LiuYcQxV2VAQ4efLIdp-URYf8a38qsW7TUiWs-eU80b8eagpYVBU2P-D_r-f2h4FRQOcO2Q2rrKf4fs4fI17A3rJU1p8uLQbjoSL"
+    "image": "/images/cc_highlight_store.jpg"
   },
   {
     "slug": "ruts-n-rides",
     "title": "Ruts N Rides",
     "subtitle": "Motorsports Training & Rider Experience Platform",
-    "category": "Public site",
+    "category": "Sports Tech",
     "brandColor": "#e11d48",
     "tl": "gokilavani",
     "about": "Ruts N Rides is a purpose-built rider ecosystem created for motorcycle enthusiasts who want to learn, train, practice, and experience riding beyond the road.\n\nThe platform brings together professional motorcycle training programs, memberships, riding experiences, accommodation, a moto café, service facilities, and a growing rider community under one digital experience.\n\nOur objective was to transform the complete Ruts N Rides experience into a modern digital platform where riders can discover programs, understand training options, explore the facility, and take the next step toward booking their experience.\n\nInstead of building a conventional sports website, we created a digital experience that captures the energy, adventure, and community behind the Ruts N Rides brand.",
@@ -280,14 +280,14 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built a digital experience that makes riders want to get on the bike and start their journey."
     ],
     "link": "https://rutsnrides.com/",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAM_gsV6-lV2uhW1b1KsgQNa8wZoUxsT0pEk7uUX7YOh6FQvib_oerCJMFJhR-hwteKl66QOkkMXBfK6QyKOPEfkSCBtyBrhXVAo9LhUYEKCGJH1QBz4nM8LH0g3XJjw3WmKpGNsoJmsjKI9D0vE485vGol7WRGGvOby-BQ-O4U4Bd8Gl-8LTbsHbRCcxrpDcx-ceV2Nyr9tBZfg9ddjhdpGWle44WmDR7D6xuTN90xlCgp3O9f6-bk"
+    "image": "/images/case-studies/ruts-n-rides/showcase_1.png"
   },
   {
-    "slug": "ruts-n-rides-internal",
+    "slug": "ruts-n-rides-admin",
     "title": "Ruts N Rides",
     "subtitle": "Training, Booking & Operations Management System",
-    "category": "Operations",
-    "brandColor": "#0284c7",
+    "category": "Operations SaaS",
+    "brandColor": "#8b5cf6",
     "tl": "gokilavani",
     "about": "Behind every successful training centre is a complex set of daily operations — bookings, clients, trainers, attendance, payments, invoices, expenses, leads, and reporting.\n\nRuts N Rides needed a centralised system to bring all of these operations together.\n\nWe designed and developed a custom internal management platform that gives the Ruts N Rides team complete visibility and control over their day-to-day operations.\n\nFrom the first customer enquiry to booking, training attendance, payment collection, invoicing, and financial reporting, the entire operational workflow is managed through one unified system.\n\nOne platform. One source of truth. Complete operational visibility.",
     "challenges": "Before centralising operations, managing a training business with multiple programs, trainers, clients, bookings, and financial transactions can quickly become complex.\n\nThe key challenges included:\n\nManaging client information across different records\nCoordinating multiple bookings and training programs\nManaging trainer schedules and availability\nTracking client attendance\nTracking trainer attendance\nMonitoring pending payments and outstanding dues\nGenerating and managing invoices\nRecording operational expenses\nMaintaining complete client training history\nManaging leads and marketing communication\nGenerating useful operational and financial reports\nMaintaining accountability across internal activities\nReducing dependency on manual spreadsheets and disconnected processes\n\nThe challenge wasn't simply to digitise individual tasks.\n\nIt was to connect the entire business operation into one intelligent workflow.",
@@ -336,8 +336,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Scalable Architecture — Built to support the organisation as its operations grow."
     ],
     "techStack": [
-      "Frontend: React.js",
-      "Backend: Node.js"
+      "Frontend: React.js\nBackend: Node.js"
     ],
     "scope": "Our scope covered the complete design and development of the internal management platform, including:\n\nOperations\nDashboard\nCalendar management\nClient management\nBooking management\nInvoice management\nTraining Management\nPrograms & Trainers\nClient attendance\nTrainer attendance\nClient training history\nTraining workflow management\nFinance\nPayment management\nExpense management\nFinancial reports\nPending dues tracking\nRevenue monitoring\nMarketing\nLead management\nBulk messaging\nNewsletter management\nAdministration\nSystem settings\nActivity logs\nAdministrative controls\nUser access and operational management\nTechnical Development\nUI/UX implementation\nFrontend development\nBackend development\nDatabase architecture\nAPI development\nBusiness workflow implementation\nDashboard and analytics\nResponsive application experience\nPerformance optimisation\nSecurity and access management\nDeployment and production support",
     "results": [
@@ -350,14 +349,14 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built the operating system behind Ruts N Rides."
     ],
     "link": "Public Website:\nhttps://rutsnrides.com/",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuA8llPlX-vTUmPxv9_spVy3-VdvFcm2LkA-OExquuj7yADIEwDgUC91D4bolZO5xAfQ1Sfp27uh5cJp-IAxca9ZVwoQ1sFzJ8uGPFBVMqjRJN7QA_E6KGPffv3BGAhe0EBhkifEKWgjl6_cAXKxX2VwZTrMk5YWW4QlrQOpXIAXYNrQNsVz88pHuf9VOpd7_dwMQKVlOu1RhLL5m3lhyQrVcbYk2GovzI7FLEk9xxVMId9HCB7h9Ww-"
+    "image": "/images/cc_highlight_category.jpg"
   },
   {
     "slug": "verdurepax",
     "title": "VerdurePax",
-    "subtitle": "Gardening & Plant Lifestyle E - Commerce Platform",
-    "category": "E-commerce",
-    "brandColor": "#059669",
+    "subtitle": "Gardening & Plant Lifestyle E-Commerce Platform",
+    "category": "E-Commerce",
+    "brandColor": "#16a34a",
     "tl": "mathan",
     "about": "VerdurePax is a modern gardening and plant lifestyle brand built around the idea of making green spaces more beautiful, functional, and accessible.\n\nThe platform brings together a wide range of gardening essentials — from premium plant stands, pots, plants, seeds, and fertilizers to soil products, gardening tools, grow bags, and terrace gardening solutions.\n\nOur goal was to transform this diverse product catalogue into a visually engaging, easy-to-navigate e-commerce experience that makes discovering and purchasing gardening products simple.\n\nThe result is a digital storefront where gardening meets lifestyle, design, and convenience.",
     "challenges": "VerdurePax operates across multiple gardening categories, each with different product types, use cases, and customer needs.\n\nThe key challenges included:\n\nOrganising a diverse gardening catalogue into intuitive categories\nMaking a large number of products easy to discover\nCreating a visually appealing experience for a lifestyle-oriented brand\nPresenting premium plant stands and décor products effectively\nMaking product information easy to understand\nCreating a frictionless shopping journey\nSupporting customers across India with a clear delivery experience\nBuilding trust through returns, support, and product quality messaging\nCreating a responsive experience across mobile and desktop devices\nBuilding a scalable foundation for a growing product catalogue",
@@ -407,14 +406,14 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built a digital space where customers can discover products, imagine their perfect green space, and bring it to life."
     ],
     "link": "https://www.verdurepax.com/",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCfuFWyP3mNWg0vnX791wjvWtv_OTMp6ilzgoRCFe-d3_YNg7b4DwcYwCRuLJK7qMvGHEQQGB5PGoAx9hN6vi2h0BiTZVAR3Vb8AHhXO_FMB_1yiWeFJlYgOPuuIgrA4QZPaVkNzIGjfWgEWUQxBGVvqieSmSk4VzssXBYXHFayl8uo8M-JUZucBoAw_iuriq0iKXikg-hPjrfBnAO8Tjwgy0_ZBz_2KWZlBulw6C7Yr136d2qKzMxD"
+    "image": "/images/case-studies/verdurepax/showcase_3.jpeg"
   },
   {
     "slug": "befhue",
     "title": "BEFHUE",
     "subtitle": "Creative Agency Digital Experience & Brand Platform",
-    "category": "Agency",
-    "brandColor": "#8b5cf6",
+    "category": "Creative Agency",
+    "brandColor": "#ec4899",
     "tl": "gokilavani",
     "about": "BEFHUE is a creative and digital growth company that brings together branding, design, video production, digital marketing, UI/UX, and technology to help businesses build stronger digital identities.\n\nThe challenge was to translate that wide range of creative and technology capabilities into a single digital experience that feels as creative as the work BEFHUE delivers.\n\nWe designed and developed a modern, visually driven website that combines brand storytelling, service discovery, portfolio presentation, and lead generation into one cohesive platform.\n\nThe result is a digital presence designed not just to showcase what BEFHUE does, but to communicate why businesses should trust them with their brand.",
     "challenges": "BEFHUE operates across multiple creative and digital disciplines. Presenting such a broad service portfolio without making the website feel crowded was one of the primary challenges.\n\nThe key challenges included:\n\nCommunicating multiple services through one cohesive brand experience\nBalancing creativity with professional business communication\nMaking a broad service portfolio easy to explore\nCreating an engaging way to showcase creative work\nEstablishing credibility with potential clients\nCommunicating the company's strategic approach rather than only its creative capabilities\nCreating strong enquiry and conversion journeys\nMaintaining a visually rich experience without compromising usability\nBuilding a responsive and scalable digital platform",
@@ -462,14 +461,14 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built a digital experience that feels like the agency itself."
     ],
     "link": "https://befhue.com/",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCzod0z2UViD1R_SFy6sg99RyLcwbbsxhrGWgKiUzNlvM5L8iEVPTQIFbxq8g7gTc4NzckwJOC2fSCJq-8r1brTNdJ6X9mPGUY5E4TQfCkSdtUB3lHCYd5Q7RURCFKEOeJr6VVxFZxHVWDJhjefHJmgyKpzgdrvVWlD9LKaKyuagAZeDo96LOg2JKUKgkQfwqRl5PGZ7iVbS3ABgc4eAOOneQujeT2pSWt9QiPFAiEwSsXbccffcgSz"
+    "image": "/images/case-studies/befhue/showcase_3.webp"
   },
   {
     "slug": "squirlio",
     "title": "Squirlio",
     "subtitle": "Squirlio",
-    "category": "E-commerce",
-    "brandColor": "#ea580c",
+    "category": "App Platform",
+    "brandColor": "#6366f1",
     "tl": "akila",
     "about": "Squirlio is a premium e-commerce platform dedicated to offering healthy, nutrient-rich snacks. Built with a focus on a seamless user experience, the platform enables customers to discover, customize, and purchase high-quality snacks effortlessly. It features an intuitive storefront, robust cart management, and a streamlined direct-to-payment checkout process.",
     "challenges": "Complex Session Management: Designing a checkout architecture that supports both a standard multi-step shopping cart and a lightning-fast \"Reorder\" flow without the two data states colliding or overwriting each other.\r\nReal-Time Inventory Integrity: Ensuring strict inventory validation across complex product variants (e.g., different weights) so users are never allowed to purchase out-of-stock or discontinued items.\r\nDynamic Pricing & Shipping: Calculating accurate cart totals, GST, coupon discounts, and dynamic shipping rates based on real-time pincode serviceability without causing UI latency.",
@@ -486,24 +485,21 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Single Source of Truth: Synchronized state management ensuring that the frontend UI and backend PostgreSQL database always reflect the exact same pricing and inventory data."
     ],
     "techStack": [
-      "Frontend: Next.js,Tailwind CSS, TypeScript, Context API",
-      "Backend: Node.js, Express, TypeScript, Sequelize ORM",
-      "Database: PostgreSQL",
-      "Integrations: Razorpay API (Online Payments)"
+      "Frontend: Next.js,Tailwind CSS, TypeScript, Context API\nBackend: Node.js, Express, TypeScript, Sequelize ORM\nDatabase: PostgreSQL\nIntegrations: Razorpay API (Online Payments)"
     ],
     "scope": "The project encompassed the end-to-end development of the customer-facing storefront and backend logic. This included product discovery pages, dynamic cart management, user authentication, address book management, order history tracking, and a highly secure multi-step checkout pipeline.",
     "results": [
       "A highly scalable, performant, and secure e-commerce application that reduces cart abandonment through fast-tracked checkout options. The platform provides a flawless, bug-free user journey from product discovery to payment, ensuring a premium brand experience that aligns perfectly with Squirlio's healthy snacking mission."
     ],
     "link": "",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCzweuYi819f22NDa8c-AipfNKUGv8hjTIyI_0vksZ690zAOtKyPs4XgThxvVj8s7pZZanwCvk2qUakaRsOD9WqC7UBFL6uKK4V6yC_IDl4Hs0SaqIKH2kjb3EY1Gsk2T_qYFsEblKGds6GD897l0_RwQQS1YF7zrRFplwhHKUZORFaeXoDCDm0p1EMjQFUavrtN5zxyivtHUbiOdjJjvdBVkQJqPJKoRv_-1fsqBNCDsz98QHA90AD"
+    "image": "/images/case-studies/squirlio/banner_1.jpeg"
   },
   {
     "slug": "amaravathy-coir",
     "title": "Amaravathy Coir",
     "subtitle": "Sustainable Coir Manufacturing & Export Platform",
     "category": "Manufacturing",
-    "brandColor": "#d97706",
+    "brandColor": "#ca8a04",
     "tl": "mathan",
     "about": "Amaravathy Coir Producer Company Limited is a Tamil Nadu-based coir enterprise focused on producing sustainable coir fibre, yarn-dyed products, and premium coir solutions for domestic and international markets. The company combines natural materials with modern manufacturing processes to deliver durable and eco-friendly products.\n\nWe transformed this industrial capability into a modern digital experience designed to communicate quality, sustainability, manufacturing strength, and global readiness.\n\nThe objective was to create a website that would not only showcase products, but also establish Amaravathy Coir as a credible and reliable partner for distributors, exporters, and industry buyers.",
     "challenges": "The biggest challenge was translating a technically driven manufacturing business into a digital experience that could be understood quickly by both domestic and international audiences.\n\nThe key challenges included:\n\nCommunicating a complex manufacturing business in a simple way\nPresenting multiple coir products without overwhelming visitors\nEstablishing credibility with international buyers\nHighlighting manufacturing capabilities and production scale\nCommunicating sustainability as a core business value\nBuilding trust around quality and export readiness\nCreating clear enquiry paths for bulk and customised requirements\nMaking the website accessible across desktop, tablet, and mobile devices",
@@ -549,14 +545,14 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built a digital gateway connecting sustainable Indian manufacturing with global markets."
     ],
     "link": "https://amaravathycoir.com/",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAT5aoSXO6l6a2K_oWoqi07iIn8DF1u5p0iTbolhEtU0i-i3PZEIb_3q09jLCJcZoPfUEaDVfNj_4w5Tzzt7jAZfoAdxZt0rvWJLs9vOaCnjqlcrVxIRkOU8S8A3qa2_3mchgXwO4urauuPB0UmXDcMVRqahCcbnIL3-TbmSOnqDZRRmrncjuWsTOn2DJVXvyumCyGykQ2MncUJGkXm5iD5KcyreYpYCiAKTFFgIf94Q1xc1FpSSC7o"
+    "image": "/images/cc_highlight_store.jpg"
   },
   {
     "slug": "sales-app",
     "title": "Sales App",
     "subtitle": "Sales App",
-    "category": "Mobile app",
-    "brandColor": "#2563eb",
+    "category": "Enterprise App",
+    "brandColor": "#0284c7",
     "tl": "jayaraj",
     "about": "LeadNova CRM is a mobile-based customer relationship management application designed to help sales teams manage leads, follow-ups, activities, and the complete sales pipeline efficiently. It provides a centralized platform for tracking customer interactions, monitoring sales performance, and managing leads from initial contact through successful deal closure.",
     "challenges": "The main challenge was to design a simple and efficient CRM system for managing leads, follow-ups, sales activities, and pipeline stages. Another challenge was ensuring accurate real-time data, secure authentication, and a user-friendly experience across all application modules.",
@@ -574,12 +570,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Simple, user-friendly mobile experience."
     ],
     "techStack": [
-      "Frontend: Flutter, Dart",
-      "Backend: REST API",
-      "Authentication: JWT Authentication, Flutter Secure Storage",
-      "Database: Backend database",
-      "Charts: Conversion Area Chart",
-      "Communication: Phone Dialer, WhatsApp, Email Integration"
+      "Frontend: Flutter, Dart\nBackend: REST API\nAuthentication: JWT Authentication, Flutter Secure Storage\nDatabase: Backend database\nCharts: Conversion Area Chart\nCommunication: Phone Dialer, WhatsApp, Email Integration"
     ],
     "scope": "LeadNova CRM covers the complete sales management process, including lead creation, pipeline tracking, follow-up management, activity monitoring, notifications, and sales performance analysis.",
     "results": [
@@ -587,14 +578,14 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "It improves team productivity by providing real-time insights, organized customer activities, and easy access to essential sales operations."
     ],
     "link": "APP",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuC4ZvF2LEXG8qGX3Lm57Hw7Oe_jiw-ZnahzXvsa-1WRzULSavVVdVW8Z6YSpuI5oAwBZUUeaSTtrGgcBsoYwcJVsMlKEm-5XEF_YZHqTivKtlBuFcsoDZ6rgu3LgEtD-FG5jjZ6myFHD1dTzvd29IFe_Ayp3kvUkn9Y0KxovZ15_TgcayRtB-GffjxVQPa8PxanWypmXx4YSOrIKmnPw5MqACUklpFKqw61zXhbTlDJ1H5iBuCCVtoe"
+    "image": "/images/cc_highlight_product.jpg"
   },
   {
     "slug": "keystone",
     "title": "Keystone",
     "subtitle": "Corporate Digital Transformation Platform",
-    "category": "Corporate",
-    "brandColor": "#0284c7",
+    "category": "Enterprise Digital",
+    "brandColor": "#059669",
     "tl": "sanjai",
     "about": "KIIPL needed a strong digital presence that could communicate its business identity, capabilities, and professional approach to customers and stakeholders.\n\nWe designed and developed a modern corporate website that transforms the company's offline presence into a structured, professional, and engaging digital experience.\n\nThe objective was to create more than an informational website — it was to build a digital platform that establishes credibility, communicates value clearly, and creates a strong first impression.",
     "challenges": "For a corporate organisation, the website needs to balance professionalism with simplicity. Visitors should be able to understand the organisation quickly while still having access to detailed information when required.\n\nThe key challenges included:\n\nEstablishing a strong and credible digital identity\nPresenting business information in a structured manner\nMaking important information easy to discover\nCreating a modern experience without compromising professionalism\nDesigning an intuitive navigation structure\nBuilding trust with potential customers and business stakeholders\nEnsuring the experience works seamlessly across devices\nCreating a scalable technical foundation for future growth",
@@ -626,7 +617,9 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Responsive Experience — Optimised for desktop, tablet, and mobile users.",
       "Scalable Architecture — Built to support future content, features, and business requirements."
     ],
-    "techStack": [],
+    "techStack": [
+      ""
+    ],
     "scope": "Our scope covered the complete digital development of the KIIPL website, including:\n\nUI/UX implementation\nCorporate website development\nFrontend development\nBackend development\nInformation architecture\nContent structure and presentation\nResponsive web development\nUser journey optimisation\nAPI and backend integration\nPerformance optimisation\nCross-device compatibility\nScalable application architecture\nDeployment support",
     "results": [
       "The new KIIPL website provides the organisation with a modern, credible, and scalable digital presence.",
@@ -636,13 +629,13 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built a digital experience designed to create trust."
     ],
     "link": "https://kiipl.co.in/",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuB_kx8jx1-GNHqgaOum4HT1--aJ3DRqc2O8z0Iq_aA_cKw2v-F9_hEiYOt0Fb2wlsEvZII-JQPnwZjH0SOyNKuEUSvVRuDs0T39kQ7Nj_dlpILqALXzzMtpboIaOUI7_7Q1uUcD4v0YU2vQg-m9Kd623GVUbSzHWxL9bQa2EMjPPbVPnAD7oOCte-cL26k8fHVGNxUs2YUZivs8vI1P3SG-DYe58ke2pi_k-ANLqgr3gAl4N3_oatB5"
+    "image": "/images/cc_highlight_category.jpg"
   },
   {
     "slug": "vectra-mechnovations",
     "title": "Vectra Mechnovations",
     "subtitle": "Industrial Engineering & Manufacturing Website",
-    "category": "Engineering",
+    "category": "Industrial Engineering",
     "brandColor": "#475569",
     "tl": "sanjai",
     "about": "Vectra Mechnovations needed a digital presence that could communicate its technical expertise, engineering capabilities, and professional approach to potential customers.\n\nWe designed and developed a modern, business-focused website that transforms complex industrial capabilities into a clear, structured, and credible digital experience.\n\nThe objective was simple — build a platform that doesn't just tell visitors what Vectra Mechnovations does, but gives them confidence in why they should choose them.",
@@ -675,7 +668,9 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Modern Visual System — A clean interface creates a strong first impression for prospective customers.",
       "Scalable Architecture — Developed with flexibility for future content, features, and business expansion."
     ],
-    "techStack": [],
+    "techStack": [
+      ""
+    ],
     "scope": "Our scope covered the complete digital development of the Vectra Mechnovations platform, including:\n\nUI/UX implementation\nCorporate website development\nFrontend development\nBackend development\nInformation architecture\nService/capability presentation\nBusiness enquiry journey\nResponsive web development\nAPI and backend integration\nPerformance optimisation\nCross-device compatibility\nScalable application architecture\nDeployment support",
     "results": [
       "The new Vectra Mechnovations website provides the company with a stronger, more professional digital identity and a structured platform to communicate its engineering capabilities.",
@@ -685,14 +680,14 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built a digital representation of their engineering capabilities."
     ],
     "link": "",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuA49gyLl3HAynBLHO3pB_DxaJhUNYswm-PWm3XMd2umQX2MynVBQ04UtNjEDjXNxE3oseRwTj7sDwf4faKBZGtykF4kGQRLM6T9hxf6rJWUqlCb4eTStdw3XIb_q4Hkg0PM71lNQSOAUQZVyc-DsCNRy2jEUQLsvrBcLyuFz2GOXmtQncJHZ9cDxM2hVlWUCFJKLdL7198lfB3VCWhX9e2kcyzYlL8by2VP17JA6Psj2u_LJt64YMNJ"
+    "image": "/images/cc_highlight_store.jpg"
   },
   {
-    "slug": "sanikas-indian-cuisine",
+    "slug": "sanikas-restaurant",
     "title": "Sanika’s Indian Cuisine",
     "subtitle": "Restaurant & Online Ordering Experience",
-    "category": "Hospitality",
-    "brandColor": "#b91c1c",
+    "category": "Hospitality & Ordering",
+    "brandColor": "#ea580c",
     "tl": "sanjai",
     "about": "Sanika’s Indian Cuisine brings the rich flavours of Indian cooking to Mt. Juliet, Tennessee, combining traditional recipes with a modern culinary approach. The restaurant offers an extensive menu covering everything from authentic Indian favourites and biryanis to tandoor specialities, dosas, Indo-Chinese dishes, desserts, and beverages.\n\nOur goal was to create a digital experience that captures the warmth and richness of the restaurant while making it effortless for customers to discover the menu, explore signature dishes, place orders, and connect with the restaurant.\n\nThe result is a modern restaurant platform that turns the online experience into an extension of the dining experience.",
     "challenges": "Sanika’s has a diverse menu and a strong culinary identity. The challenge was to communicate that variety without overwhelming customers.\n\nThe key challenges included:\n\nPresenting a large and diverse menu in an easy-to-navigate format\nCreating a digital experience that reflects the restaurant’s authentic Indian identity\nMaking signature dishes visually and contextually engaging\nConnecting customers quickly to online ordering\nBuilding trust through customer reviews and restaurant information\nMaking essential information such as location, contact details, hours, and ordering options easily accessible\nDelivering a consistent experience across desktop and mobile devices",
@@ -727,8 +722,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Scalable Architecture — Developed with future improvements and integrations in mind."
     ],
     "techStack": [
-      "Frontend: React.js",
-      "Backend: Node.js"
+      "Frontend: React.js\nBackend: Node.js"
     ],
     "scope": "Our scope covered the complete digital experience for Sanika’s Indian Cuisine, including:\n\nUI/UX implementation\nFrontend development\nBackend development\nRestaurant website development\nMenu architecture and presentation\nFood category organisation\nSignature dish showcase\nOnline ordering journey\nCustomer review integration\nContact and location experience\nFAQ section\nResponsive web development\nAPI and backend integration\nPerformance and usability optimisation\nScalable application architecture",
     "results": [
@@ -739,14 +733,14 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built a digital experience that makes people hungry."
     ],
     "link": "https://sanikasrestaurant.com/",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAZDbb1y_21qfXoZDCjxYm4_X-xx2usFTALaCVBZx8_z5O9jcQjZ4pH6SkYcaEXtcdBjP48xOpfS_w1Abn19mL_Z73qJkMIoypWc_afO5sG1y4acRdkX8PrqX_HPob5gPPzjk5JdwJRQRod18U0KIubcouY1OD6l1ckCQqN-JgwczkYjQUOXWEzVXdHaiKemYGTNq8dfmClkzSRCrqcoubyEN5lcnnygPJKCmvSjOS2lTmo8YemBMNC"
+    "image": "/images/case-studies/sanikas-restaurant/showcase_3.png"
   },
   {
     "slug": "thoorigai",
     "title": "Thoorigai",
     "subtitle": "Event Booking & Management Platform",
-    "category": "Event tech",
-    "brandColor": "#7c3aed",
+    "category": "Event Platform",
+    "brandColor": "#9333ea",
     "tl": "sanjai",
     "about": "Thoorigai is a modern digital platform designed to simplify the way users discover and book events.\n\nThe platform brings event discovery and booking into one streamlined digital experience, helping users explore available events, understand event details, and take action with minimal friction.\n\nOur objective was to transform the traditional event discovery process into a simple, engaging, and technology-driven experience that can support both customers and the growing needs of the event ecosystem.",
     "challenges": "The event industry involves multiple touchpoints — discovering an event, understanding the details, evaluating the experience, and finally making a booking.\n\nThoorigai needed a platform that could bring these interactions together while maintaining a smooth and intuitive user experience.\n\nKey challenges included:\n\nCreating an intuitive event discovery experience\nPresenting event information clearly and attractively\nReducing friction throughout the booking journey\nDesigning a platform that could support multiple events and categories\nMaintaining a consistent experience across different devices\nBuilding a scalable technical foundation for future expansion",
@@ -776,8 +770,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Future-Ready Platform — The architecture provides a strong foundation for additional features and integrations."
     ],
     "techStack": [
-      "Frontend: React.js",
-      "Backend: Node.js"
+      "Frontend: React.js\nBackend: Node.js"
     ],
     "scope": "Our scope covered the development of the complete digital platform experience, including:\n\nUI/UX implementation\nFrontend development\nBackend development\nEvent discovery experience\nEvent information architecture\nBooking journey\nResponsive web development\nUser interaction flows\nAPI and backend integration\nPerformance and usability optimisation\nScalable application architecture\nDeployment support",
     "results": [
@@ -786,14 +779,14 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Rather than simply building an event website, we created a digital experience designed around how users discover, evaluate, and book events."
     ],
     "link": "https://www.thoorigai.net/",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuD3Dl9SbZZYHsgffAJIMq4I5Iq6rQ2CCSxP6bLbA4Zzk1syRo4jQH5p9Sf_Ns_gDeGLXIKr-iy_7AEQlYsYeztXXCd4cO4uWzAeg5eFBdrwFlV02AE7NR6oznnT5sXJTpLe2EYHqULdy2okK5SVjeUoMcP5md1jO8CsoPoNwStVuS-ae7TQ2LCUw0JKPcd0Od5Om1-gvnWGf0olv6p9_F-F_fLql7aP2UqSKozTjeAyFyR_Ac6L78VP"
+    "image": "/images/cc_highlight_category.jpg"
   },
   {
     "slug": "gigabull",
     "title": "Gigabull",
-    "subtitle": "Premium Leather Products E - commerce Platform",
-    "category": "E-commerce",
-    "brandColor": "#92400e",
+    "subtitle": "Premium Leather Products E-commerce Platform",
+    "category": "E-Commerce",
+    "brandColor": "#b45309",
     "tl": "dinesh",
     "about": "Gigabull is a modern e-commerce platform created for a leather products brand serving customers and international buyers with high-quality leather goods at competitive prices. The website presents the brand’s product range through a clean, professional, and conversion-focused digital storefront.\n\nThe platform enables users to discover products, explore detailed specifications, and make confident purchasing decisions through an intuitive browsing experience. With its premium visual presentation and structured product catalogue, Gigabull reflects the brand’s focus on quality, reliability, and global standards.",
     "challenges": "Establishing a premium online identity for a leather products brand.\n\nPresenting a diverse product catalogue in a clear and organised manner.\n\nCommunicating product quality, design, functionality, and craftsmanship effectively.\n\nCreating a smooth browsing experience across desktop, tablet, and mobile devices.\n\nMaking product information easy to understand for both domestic and international customers.\n\nDesigning a scalable foundation for future products, categories, and e-commerce growth.",
@@ -821,8 +814,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Built with modern web technologies for performance and maintainability."
     ],
     "techStack": [
-      "Frontend: React.js",
-      "Backend: Node.js"
+      "Frontend: React.js\n\nBackend: Node.js"
     ],
     "scope": "UI/UX design implementation.\n\nResponsive website development.\n\nE-commerce product catalogue development.\n\nProduct listing and detail page development.\n\nFrontend and backend integration.\n\nWebsite structure and navigation.\n\nCross-device compatibility.\n\nScalable architecture planning.\n\nQuality assurance and deployment support.",
     "results": [
@@ -830,14 +822,14 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "By combining a premium design language with a scalable technical foundation, the website is prepared to support future product additions, category expansion, and broader customer acquisition initiatives."
     ],
     "link": "https://www.gigabull.in/",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCpWDPMGyxLp0dB6Tkb1ZJZek0KKGLtxxCwXCxtp0GIG61rSE32XjG8YbanlXvIamvtI3yNYlunV75LkZHQZVvm4qdlH0576C_pDcITZ89R6SEuFTAkanb3YzuxpDL8HLeey5OOXcOgjNff3K2bzQwSZV7GWjijIU8dvSBKdhzMb7YbJelTzLC-NvIkU7GNlhAUCScpHZlpR4NmBVFWPsCIiH3Oh6Fu9x4l1Zz7zjzuBph943cIuQvV"
+    "image": "/images/cc_highlight_store.jpg"
   },
   {
     "slug": "startten",
     "title": "STARTTEN",
     "subtitle": "Time Auction & Reward Platform",
-    "category": "Platform",
-    "brandColor": "#E61E2B",
+    "category": "Fintech & Reward",
+    "brandColor": "#dc2626",
     "tl": "mathan",
     "about": "STARTTEN is a next-generation digital platform built around an engaging time-based auction experience, designed to turn traditional auction mechanics into a fast, interactive, and accessible digital experience.\n\nThe platform brings together competition, timing, rewards, and user engagement into a simple product journey — creating an experience where every second can influence the outcome.\n\nOur objective was to transform a unique auction concept into a scalable, intuitive, and high-engagement digital product that users can understand and interact with effortlessly.",
     "challenges": "Building a time-based auction platform comes with a different set of product challenges compared with a traditional website.\n\nThe experience needs to be fast, intuitive, and highly engaging while clearly communicating how the auction mechanism works.\n\nKey challenges included:\n\nSimplifying a unique time-auction concept for first-time users\nDesigning an experience that encourages continuous user engagement\nCreating clear and intuitive user journeys\nPresenting auction information without overwhelming users\nBuilding an architecture capable of handling dynamic user interactions\nDesigning a responsive experience across different devices\nCreating a scalable foundation for future product variants and features",
@@ -869,7 +861,9 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Scalable Architecture — Built with future product expansion and new variants in mind.",
       "Modern Digital Interface — Created a contemporary experience suited to a technology-driven consumer product."
     ],
-    "techStack": [],
+    "techStack": [
+      ""
+    ],
     "scope": "Our scope covered the complete digital product development experience, including:\n\nProduct UI/UX implementation\nFrontend development\nBackend development\nAuction experience\nUser interaction flows\nReward and information presentation\nResponsive web development\nAPI and backend integration\nPerformance optimisation\nCross-device compatibility\nScalable application architecture\nFuture-ready product structure\nDeployment support",
     "results": [
       "STARTTEN was transformed from an innovative auction concept into a modern, engaging digital product experience.",
@@ -880,14 +874,14 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built an experience where every second matters."
     ],
     "link": "https://startten.com/",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuC9KuDYUvpc5YaABKMqKN8FSD7HMaxz6hBKZ_helP3LEXsx_fAl6po2ClynDN9Qa7-GlXqZZ1Spdxx84A9olRG7hpsh698qYWivUq5lL9Bn6vNcnoE_cSqpUmw4iLG1BkPyH6epdR8VW-5MORO_72fmS_GhsYErwDvwkl7lv4he3p9phjmZPCu9cighWeOVuFgweHVy5Jg0IyDEcW9omwFzEMbNR99HFD88PoRZeXnqNvNrILgLtuAO"
+    "image": "/images/case-studies/startten/showcase_1.png"
   },
   {
     "slug": "splendour-park",
     "title": "Splendour Park",
     "subtitle": "Splendour Park",
-    "category": "ERP",
-    "brandColor": "#0369a1",
+    "category": "Internal System",
+    "brandColor": "#0891b2",
     "tl": "sathish",
     "about": "Splendour Park is a multi-branch ERP system built for end-to-end management of bulk trading desks, retail counters, wholesale billing, and warehouse inventory. • Core Problem Solved: Eliminates inventory reconciliation errors, unrecorded logistics costs, batch stock conflicts, and manual supplier/customer ledger tracking across distributed branches. • Target Users: Branch managers, billing desk operators, warehouse stock controllers, and finance/accounting administrators. • Primary Capabilities: Real-time inward purchase recording with freight/courier charge tracking, multi-rate GST tax invoicing (inclusive/exclusive pricing), automated stock ledger movements, supplier/customer dual-entry running balance ledgers, and PDF/CSV reporting. • Multi-Branch Architecture: Supports isolated branch operations with centralized database consolidation on PostgreSQL RDS.",
     "challenges": "Recording gross product purchases without voucher-level freight/courier charges led to inaccurate supplier ledger balances and distorted item cost valuations. • Dual-Entry Ledger Synchronization: Ensuring inward purchases, customer tax invoices, and payment receipts automatically update running balance ledgers and stock inventory movements atomically in real time. • Batch Conflicts & Stock Negative Balances: Preventing overselling and out-of-sequence stock deductions across concurrent billing terminals and multi-branch operations. • Windows DLL Engine Locking: Operating live TypeScript development servers while running schema migrations (prisma generate) caused Windows EPERM file-lock collisions on the query engine binary. • Cross-Platform PDF & Excel Document Generation: Formatting compliant GST invoices and multi-page running-balance account statements across desktop, web, and mobile environments.",
@@ -907,14 +901,14 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Database Models: 20+ Prisma schema models supporting full ERP workflows (Purchases, Invoices, Ledgers, Customers, Suppliers, Branches, Users). • Type Safety & Build Status: 100% clean TypeScript build (tsc) and zero compilation errors in Flutter static analysis (flutter analyze). • Automated Ledger Reconciliation: Eliminated manual calculation of supplier balances by computing real-time net payables from purchase vouchers and payment receipts. • Structured Freight Auditing: Complete transparency over inward courier charges and transporter LR references across all purchase records and exports. • Business Impact Metrics: Business result requires confirmation."
     ],
     "link": "Internal Application",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDHXLgccXCXovzOdYUcR464wI0RXai4IJ_i3LThfbk0FSMTGLHWFbLkhDByX_v4wJYJ7N9SDCijXsqR6z79OY2GCgvfvP3fGDHppY273AxU_K8ikK4Qct4D0zsCBq0Mz9fhWmrnad2z1KI7ExjdUmS6DWGWBY2RhiSjsacSRSzBHOfZUp_v_fP1t--5FkKHlk2fRmWH6ZqZeqqLdWcOjBEmvHb6L1PRPCgreDC2NbTsp8Rokkg_Q65o"
+    "image": "/images/cc_highlight_category.jpg"
   },
   {
     "slug": "infragen",
     "title": "infragen",
     "subtitle": "infragen",
-    "category": "Custom dev",
-    "brandColor": "#ea580c",
+    "category": "Real Estate & Infra",
+    "brandColor": "#2563eb",
     "tl": "srimathi",
     "about": "Vizhi Infragen Realtors LLP is a trusted real estate and property management company based in Coimbatore. The website was designed to showcase their wide range of property services, local expertise, and trust-driven approach. The goal was to create a modern digital presence that connects customers with the right property solutions.",
     "challenges": "The main challenge was presenting extensive real estate services and business information without making the website feel overwhelming. The design also needed to build trust, highlight Coimbatore's key locations, and serve different audiences including buyers, investors, property owners, and NRI clients.",
@@ -945,10 +939,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Scalable frontend structure"
     ],
     "techStack": [
-      "Framework: Next.js",
-      "Styling: Tailwind CSS",
-      "Development: Frontend",
-      "Design Approach: Responsive & Component-Based UI"
+      "Framework: Next.js\nStyling: Tailwind CSS\nDevelopment: Frontend\nDesign Approach: Responsive & Component-Based UI"
     ],
     "scope": "Frontend Development\n\nThe development scope focused on transforming the approved visual direction and business requirements into a functional responsive website.\n\nPages Developed\n\nHome Page\nCompany introduction, services, areas served, trust factors, FAQs, and contact CTA.\n\nAbout Page\nCompany story, vision, mission, values, expertise, and trust-focused content.\n\nServices Page\nComplete overview of Vizhi Infragen's real estate and property management services.\n\nService Detail Pages\nDedicated pages explaining individual services, their benefits, process, and enquiry opportunities.",
     "results": [
@@ -967,130 +958,118 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "The component-based frontend structure provides a foundation for future additions such as property listings, enquiry systems, project showcases, and other business integrations."
     ],
     "link": "https://dhigrowth07.github.io/infragen-fe/",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDC1hn3wzmsMFLfBdj_rYJWQ4h88E-K8jY3VTeOf_gz2Wyx1UKvyDnAnTABpMsqBN6tX1vhSXzKofhGnjqU1BNvZ7Yc-zNy2b_W2x7PYp7tMIZZkIoGCeOujCQPll_q2klqRY2y27bYUrJQOPR_KU4SgnZ53fHx5Yk8Is0C9i_xb_fzzj-Js6xn8Xr_-PqL5fPZzBgS2PvSs9v5FN2rrlYhtDubfDCoiBP2x2lr4UH_VVlRHhuuZxCq"
+    "image": "/images/case-studies/infragen/showcase_3.jpg"
   },
   {
     "slug": "bad-biscuit-detection",
     "title": "Bad Biscuit Detection and Rejection",
-    "subtitle": "Automated Computer Vision Quality Control",
-    "category": "AI & Vision",
+    "subtitle": "Bad Biscuit Detection and Rejection",
+    "category": "AI & Computer Vision",
     "brandColor": "#d97706",
     "tl": "Dinesh",
-    "about": "Industrial AI computer vision system for automated quality control on high-speed food production lines. Detects broken or burnt biscuits and triggers real-time mechanical pneumatic rejection.",
-    "challenges": "Manual visual inspection on high-speed conveyor belts resulted in fatigue-induced errors, missed defects, and unnecessary product wastage during packaging.",
-    "solutions": "Deployed edge-computed high-frame-rate cameras powered by custom convolutional neural networks (CNN) to classify defective biscuits within milliseconds and actuate pneumatic air ejectors.",
+    "about": "https://www.techasoft.com/bad-biscuit-detection-and-rejection-case-study",
+    "challenges": "",
+    "solutions": "",
     "solutionBullets": [
-      "High-speed edge camera integration analyzing 600+ items per minute",
-      "Real-time broken, deformed, and burnt biscuit classification",
-      "Sub-millisecond mechanical rejection synchronization"
+      ""
     ],
-    "productExperience": "Industrial AI computer vision system engineered for automated quality inspection on fast-moving food production lines, ensuring consistent packaging standard.",
+    "productExperience": "",
     "highlights": [
-      "99.4% Defect Detection Accuracy",
-      "Sub-5ms Inference Latency",
-      "Zero Mechanical Bottlenecks"
+      ""
     ],
-    "techStack": ["Python", "OpenCV", "TensorFlow", "Edge AI", "PLC Automation"],
-    "scope": "End-to-end industrial computer vision deployment from hardware camera mounting to pneumatic PLC synchronization.",
+    "techStack": [
+      ""
+    ],
+    "scope": "",
     "results": [
-      "Reduced packaging defect rate by 94%",
-      "Increased production line throughput by 35%",
-      "24/7 continuous operation with zero operator fatigue"
+      ""
     ],
     "link": "",
-    "image": "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1200&q=80"
+    "image": "/images/cc_highlight_product.jpg"
   },
   {
     "slug": "fabric-defect-detection",
-    "title": "Fabric Defect Detection",
-    "subtitle": "High-Speed Automated Textile Inspection",
-    "category": "AI & Vision",
-    "brandColor": "#4338ca",
+    "title": "Fabric Defect detection",
+    "subtitle": "Fabric Defect detection",
+    "category": "AI & Computer Vision",
+    "brandColor": "#7c3aed",
     "tl": "Dinesh",
-    "about": "Computer vision and automated inspection solution for textile manufacturing lines, detecting weaving errors, tears, missing threads, and discoloration with sub-millimeter precision.",
-    "challenges": "Traditional manual textile inspection missed subtle warp/weft misalignment and small yarn breakages, resulting in expensive fabric roll returns.",
-    "solutions": "Integrated high-resolution line-scan camera arrays with real-time semantic segmentation models to flag surface imperfections immediately as fabric rolls through the loom.",
+    "about": "https://www.techasoft.com/fabric-defect-detection-case-study",
+    "challenges": "",
+    "solutions": "",
     "solutionBullets": [
-      "Line-scan camera array with specialized polarized illumination",
-      "Deep-learning defect localization for 20+ fabric weave types",
-      "Real-time digital defect heatmaps and roll tagging"
+      ""
     ],
-    "productExperience": "Continuous optical textile inspection engine that seamlessly integrates into weaving and finishing mills to prevent flawed roll shipments.",
+    "productExperience": "",
     "highlights": [
-      "0.2mm Defect Detection Sensitivity",
-      "Instant Mill Alarm & Auto-Stop Triggers",
-      "Digital Fabric Quality Scoring"
+      ""
     ],
-    "techStack": ["PyTorch", "OpenCV", "CUDA", "Industrial IoT", "Next.js Dashboard"],
-    "scope": "Optical sensing hardware integration, custom AI model training on textile datasets, and live inspection reporting software.",
+    "techStack": [
+      ""
+    ],
+    "scope": "",
     "results": [
-      "Eliminated 98% of post-shipment customer quality rejections",
-      "Saved 120+ inspection man-hours weekly per production line",
-      "Real-time cloud analytics for root-cause loom troubleshooting"
+      ""
     ],
     "link": "",
-    "image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=80"
+    "image": "/images/cc_highlight_category.jpg"
   },
   {
-    "slug": "dhigrowth",
-    "title": "DhiGrowth AI Chatbot",
-    "subtitle": "Enterprise Conversational Intelligence & Lead Funnel",
-    "category": "Digital Solutions",
-    "brandColor": "#2196E8",
+    "slug": "dhigrowth-ai-chatbot",
+    "title": "Dhigrowth",
+    "subtitle": "Ai Chatbot",
+    "category": "AI Automation",
+    "brandColor": "#0284c7",
     "tl": "Dinesh",
-    "about": "Enterprise conversational intelligence system with customized knowledge retrieval (RAG), multi-language understanding, and automated CRM lead capture for business growth.",
-    "challenges": "Businesses lost prospective inbound leads after business hours due to delayed response times and lack of automated discovery workflows.",
-    "solutions": "Engineered a custom RAG-powered AI assistant connected to agency service catalogs, knowledge bases, and direct WhatsApp routing for instant consultations.",
+    "about": "https://www.techasoft.com/techasoft-ai-chatbot-case-study",
+    "challenges": "",
+    "solutions": "",
     "solutionBullets": [
-      "Domain-specific retrieval-augmented generation (RAG)",
-      "Automated lead qualification and instant WhatsApp dispatch",
-      "Context-aware interactive consultation responses"
+      ""
     ],
-    "productExperience": "24/7 intelligent conversational assistant that instantly handles client inquiries, provides service estimates, and bridges leads directly to team members.",
+    "productExperience": "",
     "highlights": [
-      "< 800ms Average Response Time",
-      "Direct WhatsApp Consultation Bridge",
-      "Multi-turn Knowledge Retrieval"
+      ""
     ],
-    "techStack": ["Next.js", "TypeScript", "OpenAI / LLM API", "Tailwind CSS", "Framer Motion"],
-    "scope": "Conversational UI architecture, domain knowledge embeddings, and interactive lead routing logic.",
+    "techStack": [
+      ""
+    ],
+    "scope": "",
     "results": [
-      "40% increase in after-hours qualified lead captures",
-      "Instant inquiry resolution without manual support intervention",
-      "Seamless multichannel user redirection to WhatsApp"
+      ""
     ],
     "link": "",
-    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
+    "image": "/images/cc_highlight_store.jpg"
   },
   {
     "slug": "ai-invoice-processing",
-    "title": "AI Invoice Processing",
-    "subtitle": "Automated Financial Document Extraction",
-    "category": "AI Automation",
-    "brandColor": "#0891b2",
+    "title": "Ai Invoice Processing",
+    "subtitle": "Ai Invoice Processing",
+    "category": "AI & Document Intelligence",
+    "brandColor": "#059669",
     "tl": "Dinesh",
-    "about": "Intelligent document processing and automated extraction pipeline for invoices, receipts, and purchase orders with zero-shot ERP synchronization and fraud verification.",
-    "challenges": "Manual accounts payable workflows suffered from data entry typos, invoice reconciliation delays, and slow approval cycles.",
-    "solutions": "Built an automated document parsing pipeline using OCR and vision-language models that automatically parses multi-format invoices and syncs clean ledger items to ERP systems.",
+    "about": "https://www.techasoft.com/ai-invoice-processing-case-study",
+    "challenges": "",
+    "solutions": "",
     "solutionBullets": [
-      "Multi-format document parsing (PDF, scanned PNG, TIFF)",
-      "Zero-shot key-value field extraction (Tax, Line items, Totals)",
-      "Automated 3-way reconciliation with Purchase Orders"
+      ""
     ],
-    "productExperience": "Streamlined accounts payable automation engine converting raw invoice uploads into verified ERP entries in seconds.",
+    "productExperience": "",
     "highlights": [
-      "99.1% Field Extraction Precision",
-      "Automated Duplicate & Discrepancy Detection",
-      "Instant ERP API Webhooks"
+      ""
     ],
-    "techStack": ["Python", "FastAPI", "Vision LLMs", "PostgreSQL", "Next.js"],
-    "scope": "Document parsing pipeline, automated validation rules, and financial ledger integration.",
+    "techStack": [
+      ""
+    ],
+    "scope": "",
     "results": [
-      "Reduced invoice turnaround time from 3 days to under 2 minutes",
-      "Eliminated 99% of manual financial data entry errors",
-      "Accelerated monthly accounts closing cycle"
+      ""
     ],
     "link": "",
-    "image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80"
+    "image": "/images/case-studies/ai-invoice-processing/showcase_3.png"
   }
 ];
+
+export function getCaseStudyBySlug(slug: string): CaseStudyDetail | undefined {
+  return detailedCaseStudies.find((study) => study.slug === slug);
+}

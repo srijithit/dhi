@@ -3,73 +3,36 @@
 import React, { use, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { motion } from 'framer-motion';
-import {
-  ArrowLeft,
-  ChevronLeft,
-  ChevronRight,
-  ExternalLink,
-  Volume2,
-  VolumeX,
-  Check,
-  Zap,
-  RefreshCw,
-  MapPin,
-  Clock,
-  Layers,
-  Tag,
-  Heart,
-  Warehouse,
-  Receipt,
-  Shield,
-  Route,
-  CalendarCheck,
-  Coins,
-  MessageSquare,
-  Sparkles,
-  ArrowRight,
-  Globe,
-  Cpu,
-  CheckCircle2,
-} from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import confetti from 'canvas-confetti';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import { detailedCaseStudies } from '@/data/caseStudiesFull';
-function BrandAvatar({
-  src,
-  title,
-  size = 'md',
-}: {
-  src?: string;
-  title: string;
-  size?: 'sm' | 'md' | 'lg';
-}) {
-  const [hasError, setHasError] = useState(false);
-  const sizeClasses = {
-    sm: 'w-12 h-12 rounded-xl text-xl',
-    md: 'w-16 h-16 rounded-2xl text-2xl',
-    lg: 'w-24 h-24 sm:w-32 sm:h-32 rounded-3xl text-4xl',
-  }[size];
-
-  return (
-    <div
-      className={`${sizeClasses} shadow-lg flex items-center justify-center text-white font-extrabold shrink-0 border-2 overflow-hidden bg-[#2196E8] border-[#2196E8] relative`}
-    >
-      {src && !hasError ? (
-        <img
-          src={src}
-          alt={title}
-          className="w-full h-full object-cover absolute inset-0"
-          onError={() => setHasError(true)}
-        />
-      ) : (
-        <span className="font-body font-extrabold">{title.charAt(0).toUpperCase()}</span>
-      )}
-    </div>
-  );
-}
+import {
+  ChevronLeft,
+  ChevronRight,
+  Volume2,
+  VolumeX,
+  Play,
+  Pause,
+  Maximize2,
+  Check,
+  Zap,
+  MapPin,
+  Database,
+  Layers,
+  Sparkles,
+  TrendingUp,
+  Truck,
+  Shield,
+  Headphones,
+  ChevronDown,
+  ChevronUp,
+  Globe,
+  ExternalLink,
+} from 'lucide-react';
 
 export default function DynamicCaseStudyPage({
   params,
@@ -83,26 +46,70 @@ export default function DynamicCaseStudyPage({
     notFound();
   }
 
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentCoverSlide, setCurrentCoverSlide] = useState(0);
+  const [videoPlaying, setVideoPlaying] = useState(true);
   const [videoMuted, setVideoMuted] = useState(true);
+  const [solutionIdx, setSolutionIdx] = useState(0);
+  const [expandedProductExp, setExpandedProductExp] = useState<{ [key: number]: boolean }>({});
+  const [highlightIdx, setHighlightIdx] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Helper to capitalize words
-  const capitalizeText = (text: string) => {
-    if (!text) return '';
-    return text.replace(/\b\w+/g, (word) => word.charAt(0).toUpperCase() + word.slice(1));
-  };
-
-  // Find next and previous case studies for navigation
-  const currentIndex = detailedCaseStudies.findIndex((s) => s.slug === resolvedParams.slug);
-  const nextStudy = detailedCaseStudies[(currentIndex + 1) % detailedCaseStudies.length];
-  const prevStudy = detailedCaseStudies[(currentIndex - 1 + detailedCaseStudies.length) % detailedCaseStudies.length];
-
-  // Auto-advance slideshow if multiple images
+  // Auto-advance cover banner
   useEffect(() => {
-    const timer = setInterval(() => setCurrentSlide((p) => (p + 1) % 3), 4500);
+    const timer = setInterval(() => setCurrentCoverSlide((p) => (p + 1) % 3), 4500);
     return () => clearInterval(timer);
   }, []);
+
+  // Auto-play for Highlights 3D Phone carousel
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setHighlightIdx((prev) => (prev + 1) % 3);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, []);
+
+  const [solutionDirection, setSolutionDirection] = useState(1);
+  const solutionSectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: solutionScrollProgress } = useScroll({
+    target: solutionSectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const parallaxSphereY1 = useTransform(solutionScrollProgress, [0, 1], [-60, 80]);
+  const parallaxSphereY2 = useTransform(solutionScrollProgress, [0, 1], [80, -70]);
+  const parallaxRotate = useTransform(solutionScrollProgress, [0, 1], [-20, 25]);
+  const parallaxBackCardY = useTransform(solutionScrollProgress, [0, 1], [30, -30]);
+
+  const handleNextSolution = () => {
+    setSolutionDirection(1);
+    setSolutionIdx((prev) => (prev + 1) % 5);
+  };
+
+  const handlePrevSolution = () => {
+    setSolutionDirection(-1);
+    setSolutionIdx((prev) => (prev - 1 + 5) % 5);
+  };
+
+  // Auto-play for Solution carousel
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSolutionDirection(1);
+      setSolutionIdx((prev) => (prev + 1) % 5);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, []);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (videoPlaying) {
+        videoRef.current.pause();
+        setVideoPlaying(false);
+      } else {
+        videoRef.current.play();
+        setVideoPlaying(true);
+      }
+    }
+  };
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -111,572 +118,1183 @@ export default function DynamicCaseStudyPage({
     }
   };
 
-  // Extract URLs from link field
-  const playstoreMatch = study.link.match(/https:\/\/play\.google\.com[^\s]+/);
-  const appstoreMatch = study.link.match(/https:\/\/apps\.apple\.com[^\s]+/);
-  const generalUrlMatch = study.link.match(/https?:\/\/[^\s]+/);
-  const primaryLiveUrl = generalUrlMatch ? generalUrlMatch[0] : null;
-
-  const isMobileApp = study.category.toLowerCase().includes('app') || study.category.toLowerCase().includes('ecosystem') || !!playstoreMatch || !!appstoreMatch;
-
-  // Helper to extract a short, punchy summary (max 2 clear sentences, no raw bullet concatenation)
-  const formatShortNarrative = (rawText: string) => {
-    if (!rawText) return '';
-    // If text has bullet symbols, take the first chunk
-    const firstChunk = rawText.split('•')[0].trim();
-    // Remove "Category Title: " prefix if present
-    const cleaned = firstChunk.replace(/^[A-Za-z0-9\s&/-]+:\s*/, '').trim();
-    // Split by sentences and take first 2
-    const sentences = cleaned.split(/(?<=[.!?])\s+/);
-    if (sentences.length > 2) {
-      return sentences.slice(0, 2).join(' ');
+  const toggleFullscreen = () => {
+    if (videoRef.current && videoRef.current.requestFullscreen) {
+      videoRef.current.requestFullscreen();
     }
-    return cleaned;
   };
 
-  // Helper to extract all bullet items, flattening strings with '•'
-  const extractItems = (items: string[]) => {
-    if (!items || items.length === 0) return [];
-    const flattened: string[] = [];
-    items.forEach((it) => {
-      if (it.includes('•')) {
-        it.split('•').forEach((sub) => {
-          const trimmed = sub.trim();
-          if (trimmed.length > 8) flattened.push(trimmed);
-        });
-      } else {
-        const trimmed = it.trim();
-        if (trimmed.length > 8 && !trimmed.endsWith(':')) flattened.push(trimmed);
+
+  const toggleProductExp = (idx: number) => {
+    setExpandedProductExp((prev) => ({ ...prev, [idx]: !prev[idx] }));
+  };
+
+  // Helper functions to cleanly split bullets and shorten content
+  const splitCleanItems = (input: string | string[] | undefined): string[] => {
+    if (!input) return [];
+    if (Array.isArray(input)) {
+      return input.flatMap((item) => splitCleanItems(item));
+    }
+    return input
+      .split(/[•\n]+/)
+      .map((s) => s.trim().replace(/^[-*•\d.)\s]+/, ''))
+      .filter((s) => s.length > 3 && !s.toLowerCase().startsWith('key challenge') && !s.toLowerCase().startsWith('the platform includes'));
+  };
+
+  const extractTitleAndDesc = (text: string, defaultTitle: string, defaultDesc: string) => {
+    if (!text) return { title: defaultTitle, desc: defaultDesc };
+    const sep = text.includes(':') ? ':' : text.includes('—') ? '—' : text.includes('–') ? '–' : '-';
+    if (text.includes(sep)) {
+      const parts = text.split(sep);
+      const title = parts[0].trim().replace(/^[-*•\d.)\s]+/, '');
+      const desc = parts.slice(1).join(sep).trim();
+      return {
+        title: title.length > 55 ? title.slice(0, 52) + '...' : title,
+        desc: desc.length > 140 ? desc.slice(0, 135) + '...' : desc,
+      };
+    }
+    return {
+      title: text.length > 55 ? text.slice(0, 52) + '...' : text,
+      desc: defaultDesc,
+    };
+  };
+
+  const cleanAboutParagraphs = (aboutText?: string, subtitle?: string) => {
+    if (!aboutText) return [subtitle || '', ''];
+    const rawItems = aboutText.split(/[•\n]+/).map((s) => s.trim()).filter((s) => s.length > 8);
+    
+    const sanitize = (str: string, maxLen = 170) => {
+      let s = str.replace(/^[-*•\d.)\s]+/, '').trim();
+      if (s.includes(':')) {
+        const after = s.split(':')[1].trim();
+        if (after.length > 15) s = after;
       }
-    });
-    return flattened;
+      // Take only the first sentence for optimal brevity
+      const match = s.match(/^([^.!?]+[.!?])/);
+      if (match) {
+        s = match[1].trim();
+      }
+      if (s.length > maxLen) {
+        s = s.slice(0, maxLen - 3).trim() + '...';
+      }
+      return s;
+    };
+
+    if (rawItems.length >= 2) {
+      const p1 = sanitize(rawItems[0]);
+      const p2 = sanitize(rawItems[1]);
+      return [p1, p2];
+    } else if (rawItems.length === 1) {
+      const p1 = sanitize(rawItems[0]);
+      return [p1, ''];
+    }
+    return [subtitle || '', ''];
   };
 
-  // Colors list for highlights grid (Blue & White Theme)
-  const highlightColors = [
-    { name: 'blue', bg: 'bg-blue-50', text: 'text-[#2196E8]', icon: <RefreshCw className="w-6 h-6" /> },
-    { name: 'sky', bg: 'bg-sky-50', text: 'text-sky-600', icon: <MapPin className="w-6 h-6" /> },
-    { name: 'emerald', bg: 'bg-emerald-50', text: 'text-emerald-600', icon: <Route className="w-6 h-6" /> },
-    { name: 'indigo', bg: 'bg-indigo-50', text: 'text-indigo-600', icon: <Coins className="w-6 h-6" /> },
-    { name: 'blue-dark', bg: 'bg-blue-50', text: 'text-[#4A72EB]', icon: <Shield className="w-6 h-6" /> },
-    { name: 'cyan', bg: 'bg-cyan-50', text: 'text-cyan-600', icon: <MessageSquare className="w-6 h-6" /> },
+  const [aboutP1, aboutP2] = cleanAboutParagraphs(study.about, study.subtitle);
+
+  // 1. Dynamic Challenges Extraction (4 Clean Cards)
+  const challengeLines = splitCleanItems(study.challenges);
+
+  const defaultChallenges = [
+    'High-Concurrency Traffic & Session Management',
+    'Real-Time Pincode & Serviceability Validation',
+    'Automated Subscription & Daily Delivery Engine',
+    'Multi-Cart & Zero-Latency Reordering Architecture',
   ];
 
-  // Derive highlight points for the experience section
-  const rawResults = extractItems(study.results || []);
-  const rawBullets = extractItems(study.solutionBullets || []);
-  const actionPoints = (rawResults.length >= 3 ? rawResults : rawBullets.length >= 3 ? rawBullets : [
-    `${study.title} engineered with sub-second performance and cloud scale.`,
-    'End-to-end automated digital workflow from discovery to completion.',
-    'Built with modern responsive UX and componentized design system.',
-  ]).slice(0, 3).map(p => formatShortNarrative(p));
-
-  // Parse highlights into concise structured items
-  const rawHighlightsList = extractItems(study.highlights || []);
-  const parsedHighlights = (rawHighlightsList.length > 0 ? rawHighlightsList : [
-    "High-Performance Architecture — Optimized for sub-second responses and scalability.",
-    "Intuitive User Journey — Frictionless navigation from discovery to checkout.",
-    "Automated Workflows — Intelligent data processing and business logic integration.",
-    "Enterprise Security — Protected APIs, role-based controls, and reliable SLAs.",
-    "Multi-Device Experience — Seamless responsive UX tailored for mobile and desktop.",
-    "24/7 Reliability & Monitoring — Continuous performance tracking and cloud uptime."
-  ]).slice(0, 6).map((item, idx) => {
-    const parts = item.split(/[:—–-]/);
-    const rawTitle = parts[0]?.trim() || item;
-    const cleanTitle = rawTitle.replace(/^[A-Za-z0-9\s&/-]+:\s*/, '').slice(0, 32);
-    const rawDesc = parts.length > 1 ? parts.slice(1).join(' ').trim() : item;
-    const cleanDesc = formatShortNarrative(rawDesc);
-    const colorScheme = highlightColors[idx % highlightColors.length];
-    return { title: capitalizeText(cleanTitle), desc: cleanDesc, ...colorScheme };
+  const challengeCards = Array.from({ length: 4 }).map((_, i) => {
+    const raw = challengeLines[i];
+    if (raw) {
+      const title = raw.includes(':') ? raw.split(':')[0].trim() : raw.includes('—') ? raw.split('—')[0].trim() : raw.trim();
+      return { title: title.length > 55 ? title.slice(0, 52) + '...' : title };
+    }
+    return { title: defaultChallenges[i] };
   });
 
-  // Generate clean, short 2-4 word titles and concise descriptions for capabilities
-  const solutionSections = (rawBullets.length > 0
-    ? rawBullets.map((bullet) => {
-        const colonMatch = bullet.split(/[:—–]/);
-        if (colonMatch.length > 1 && colonMatch[0].trim().length < 35) {
-          return {
-            title: capitalizeText(colonMatch[0].trim()),
-            desc: formatShortNarrative(colonMatch.slice(1).join(' ')),
-          };
-        }
+  // 2. Dynamic Solution Deck Extraction (5 Cards)
+  const solutionTags = [
+    'CORE PLATFORM',
+    'CHECKOUT ENGINE',
+    'SECURITY & PROFILES',
+    'REALTIME DISPATCH',
+    'DATABASE ARCHITECTURE',
+  ];
 
-        const cleanText = bullet.replace(/^[0-9.\-\s]+/, '').trim();
-        const words = cleanText.split(/\s+/);
+  const defaultSolutionTitles = [
+    'Real–time multi–hub allocation',
+    '1–click direct transaction flow',
+    'Automated recurring billing pipeline',
+    'Hyperlocal geofencing & tracking',
+    'Single source of truth ledger',
+  ];
 
-        let shortTitle = '';
-        if (words.length <= 4) {
-          shortTitle = cleanText;
-        } else {
-          const meaningfulWords = words.filter(
-            (w) => !/^(we|developed|built|created|designed|implemented|provides|providing|an|a|the|as|to|for|with|through|by|in|on|of|and)$/i.test(w)
-          );
-          shortTitle = meaningfulWords.slice(0, 3).join(' ');
-        }
+  const defaultSolutionDescs = [
+    'Dynamic scheduling engine validating live stock across nearest hubs, ensuring low latency and automated routing.',
+    'Optimized single-step checkout reducing friction, validating live data, and cutting drop-offs by over 60%.',
+    'Automated payment settlements and scheduled ledger sync with 1-tap administrative overrides and instant invoicing.',
+    'GPS-guided dispatch algorithms routing tasks with sub-second precision straight to customer devices.',
+    'Strict transactional concurrency guards ensuring total inventory and account sync during peak traffic hours.',
+  ];
 
-        if (!shortTitle || shortTitle.length < 3) {
-          shortTitle = words.slice(0, 3).join(' ');
-        }
+  // Project Real Showcase Images Mapping (Extracted directly from client websites)
+  const showcaseImageMap: Record<string, string[]> = {
+    'squirlio': [
+      '/images/case-studies/squirlio/banner_1.jpeg',
+      '/images/case-studies/squirlio/squirlio_product_1.png',
+      '/images/case-studies/squirlio/squirlio_product_2.png',
+      '/images/case-studies/squirlio/squirlio_product_3.png',
+      '/images/case-studies/squirlio/tab-view.png',
+    ],
+    'infragen': [
+      '/images/case-studies/infragen/showcase_3.jpg',
+      '/images/case-studies/infragen/showcase_4.jpg',
+      '/images/case-studies/infragen/showcase_5.jpg',
+      '/images/case-studies/infragen/showcase_6.jpg',
+      '/images/case-studies/infragen/property.jpg',
+    ],
+    'verdurepax': [
+      '/images/case-studies/verdurepax/showcase_3.jpeg',
+      '/images/case-studies/verdurepax/showcase_4.jpg',
+      '/images/case-studies/verdurepax/showcase_5.jpeg',
+      '/images/case-studies/verdurepax/showcase_6.jpeg',
+      '/images/case-studies/verdurepax/showcase_3.jpeg',
+    ],
+    'befhue': [
+      '/images/case-studies/befhue/showcase_3.webp',
+      '/images/case-studies/befhue/showcase_4.webp',
+      '/images/case-studies/befhue/showcase_5.webp',
+      '/images/case-studies/befhue/showcase_6.webp',
+      '/images/case-studies/befhue/showcase_3.webp',
+    ],
+    'sanikas-restaurant': [
+      '/images/case-studies/sanikas-restaurant/showcase_3.png',
+      '/images/case-studies/sanikas-restaurant/showcase_4.png',
+      '/images/case-studies/sanikas-restaurant/showcase_5.png',
+      '/images/case-studies/sanikas-restaurant/showcase_6.png',
+      '/images/case-studies/sanikas-restaurant/showcase_3.png',
+    ],
+    'ai-invoice-processing': [
+      '/images/case-studies/ai-invoice-processing/showcase_3.png',
+      '/images/case-studies/ai-invoice-processing/showcase_5.png',
+      '/images/case-studies/ai-invoice-processing/showcase_6.png',
+      '/images/case-studies/ai-invoice-processing/showcase_2.webp',
+      '/images/case-studies/ai-invoice-processing/showcase_3.png',
+    ],
+    'ruts-n-rides': [
+      '/images/case-studies/ruts-n-rides/showcase_1.png',
+      '/images/case-studies/ruts-n-rides/showcase_1.png',
+      '/images/case-studies/ruts-n-rides/showcase_1.png',
+    ],
+    'startten': [
+      '/images/case-studies/startten/showcase_1.png',
+      '/images/case-studies/startten/showcase_1.png',
+      '/images/case-studies/startten/showcase_1.png',
+    ],
+  };
 
-        return {
-          title: capitalizeText(shortTitle.replace(/[.,:;—–-]+$/, '')),
-          desc: formatShortNarrative(cleanText),
-        };
-      })
-    : [
-        { title: 'Dynamic User Interface', desc: `${study.title} provides a clean, responsive interface tailored for effortless navigation.` },
-        { title: 'Automated Workflow Engine', desc: 'Automates complex processes and business logic to maximize efficiency and scalability.' },
-        { title: 'Real-Time State Sync', desc: 'Maintains live state synchronization across user sessions with instant feedback.' },
-        { title: 'Secure Checkout & Data', desc: 'Ensures encrypted transactions, data integrity, and enterprise-grade compliance.' },
-        { title: 'Centralized Admin Dashboard', desc: 'Comprehensive management dashboard for analytics, reporting, and operational control.' },
-        { title: 'High-Performance Cloud API', desc: 'Engineered on modern cloud infrastructure with 99.9% uptime and rapid responsiveness.' },
-      ]
-  ).slice(0, 6);
+  const projectImages = showcaseImageMap[study.slug] || [
+    '/images/cc_overview_slide1.png',
+    '/images/cc_overview_slide2.png',
+    '/images/cc_overview_slide3.png',
+  ];
+
+  const solutionRawList = splitCleanItems(study.solutionBullets?.length ? study.solutionBullets : study.solutions);
+
+  const solutionDeck = Array.from({ length: 5 }).map((_, i) => {
+    const raw = solutionRawList[i];
+    const { title, desc } = extractTitleAndDesc(raw, defaultSolutionTitles[i], defaultSolutionDescs[i]);
+    return {
+      num: `0${i + 1}`,
+      tag: solutionTags[i],
+      watermark: solutionTags[i].replace('&', 'AND'),
+      title,
+      desc,
+      img: showcaseImageMap[study.slug]?.[i] || ((study.image && study.image.startsWith('http')) ? study.image : '/images/cc_highlight_category.jpg'),
+    };
+  });
+
+  // 3. Dynamic Product Experience (4 Cards in 2x2 Grid)
+  const productExpIcons = [
+    <Sparkles key="1" className="w-5 h-5 text-[#2196E8]" />,
+    <TrendingUp key="2" className="w-5 h-5 text-[#2196E8]" />,
+    <Layers key="3" className="w-5 h-5 text-[#2196E8]" />,
+    <Zap key="4" className="w-5 h-5 text-[#2196E8]" />,
+  ];
+
+  const defaultExpTitles = [
+    'Visually Rich UI & Micro-Animations',
+    'Real-Time State Indicators',
+    'Intuitive Guided Workflows',
+    'Frictionless Reorder & Automation',
+  ];
+
+  const productExpRawList = splitCleanItems(study.productExperience);
+
+  const productExpCards = Array.from({ length: 4 }).map((_, i) => {
+    const raw = productExpRawList[i];
+    const { title, desc } = extractTitleAndDesc(
+      raw,
+      defaultExpTitles[i],
+      `${study.title} provides a scalable interface with instant caching and real-time validations.`
+    );
+    return {
+      icon: productExpIcons[i],
+      title,
+      shortDesc: desc.length > 110 ? desc.slice(0, 105) + '...' : desc,
+      fullDesc: desc,
+    };
+  });
+
+  // 4. Dynamic Highlights (3 Cards)
+  const defaultHighlightScreens = [
+    '/images/cc_highlight_product.jpg',
+    '/images/cc_highlight_category.jpg',
+    '/images/cc_highlight_store.jpg',
+  ];
+
+  const highlightRawList = splitCleanItems(study.highlights);
+
+  const highlightItems = Array.from({ length: 3 }).map((_, i) => {
+    const raw = highlightRawList[i];
+    const { title, desc } = extractTitleAndDesc(
+      raw,
+      defaultExpTitles[i],
+      `High-performance modular architecture engineered for scale and speed in ${study.title}.`
+    );
+    const customScreens = showcaseImageMap[study.slug];
+    return {
+      id: i,
+      icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+      title,
+      desc,
+      screen: customScreens?.[i] || ((study.image && study.image.startsWith('http')) ? study.image : defaultHighlightScreens[i]),
+    };
+  });
+
+  // 5. Tech Stack with Official Brand Logos
+  const techStackList = [
+    {
+      name: 'Next.js',
+      icon: (
+        <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.665 21.978C16.71 23.275 14.417 24 12 24 5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12c0 3.125-1.077 6.012-2.924 8.27L9.957 6.785H7.714v10.43h1.714v-7.85l9.237 12.613zm-.951-1.393L8.857 7.935v7.71h1.714v-5.28l7.143 10.22z"/>
+        </svg>
+      ),
+      bg: 'bg-black text-white'
+    },
+    {
+      name: 'Tailwind CSS',
+      icon: (
+        <svg className="w-5 h-5 text-[#38bdf8] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C7.666 17.818 9.027 19.2 12.001 19.2c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z"/>
+        </svg>
+      ),
+      bg: 'bg-cyan-50'
+    },
+    {
+      name: 'TypeScript',
+      icon: (
+        <svg className="w-5 h-5 shrink-0 rounded" viewBox="0 0 24 24">
+          <rect width="24" height="24" rx="4" fill="#3178C6" />
+          <path d="M11.75 14.4c0 2.25-1.4 3.6-3.8 3.6-1.5 0-2.65-.5-3.3-1.15l1-1.85c.55.45 1.3.8 2.15.8 1.15 0 1.85-.6 1.85-1.45 0-.85-.65-1.3-1.9-1.8-1.75-.7-2.7-1.5-2.7-3.05 0-2 1.55-3.35 3.6-3.35 1.3 0 2.25.4 2.85.85l-.95 1.85c-.5-.35-1.1-.65-1.85-.65-.9 0-1.55.5-1.55 1.25 0 .75.5 1.15 1.7 1.65 1.8.75 2.9 1.65 2.9 3.25zm8.25-6.2v1.9h-2.8v7.7h-2.35v-7.7H12v-1.9h8z" fill="#FFFFFF"/>
+        </svg>
+      ),
+      bg: 'bg-transparent'
+    },
+    {
+      name: 'Node.js',
+      icon: (
+        <svg className="w-5 h-5 text-[#539E43] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 1.6l9.6 5.5v11L12 23.6 2.4 18.1V7.1L12 1.6zm0 2.3L4.4 8.3v7.4L12 20.1l7.6-4.4V8.3L12 3.9zm-.1 3.5c1.9 0 3.4.6 3.4 2.4v5.6c0 1.9-1.5 2.4-3.4 2.4s-3.4-.6-3.4-2.4V9.8c0-1.8 1.5-2.4 3.4-2.4zm0 2c-1 0-1.4.3-1.4 1v4.4c0 .7.4 1 1.4 1s1.4-.3 1.4-1v-4.4c0-.7-.4-1-1.4-1z"/>
+        </svg>
+      ),
+      bg: 'bg-emerald-50'
+    },
+    {
+      name: 'Express',
+      icon: (
+        <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <rect width="24" height="24" rx="4" fill="#18181B" />
+          <path d="M6 8h4.5c1.4 0 2.5 1.1 2.5 2.5s-1.1 2.5-2.5 2.5H8v3H6V8zm2 3.5h2.5c.3 0 .5-.2.5-.5s-.2-.5-.5-.5H8v1zm5.5-3.5h2l1.8 3.2L19 8h2l-2.8 4.6L21 17h-2l-1.9-3.4L15.2 17h-2l2.9-4.5L13.5 8z" fill="#FAFAFA" />
+        </svg>
+      ),
+      bg: 'bg-transparent'
+    },
+    {
+      name: 'PostgreSQL',
+      icon: (
+        <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none">
+          <rect width="24" height="24" rx="4" fill="#336791" />
+          <path d="M12 4.5c-3.8 0-6.8 2.5-6.8 5.6 0 1.9 1.1 3.5 2.8 4.5v3.4l2.8-1.5c.4.1.8.1 1.2.1 3.8 0 6.8-2.5 6.8-5.6s-3-6.5-6.8-6.5zm0 1.8c2.8 0 5 1.8 5 4.1 0 2.3-2.2 4.1-5 4.1-.4 0-.8 0-1.2-.1l-.4-.1-1.6.8v-1.6l-.4-.3c-1-1-1.4-1.9-1.4-2.9 0-2.3 2.2-4.1 5-4.1z" fill="#FFFFFF"/>
+        </svg>
+      ),
+      bg: 'bg-transparent'
+    },
+    {
+      name: 'Flutter',
+      icon: (
+        <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="#02569B">
+          <path d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.37zM14.314 11.235L8.528 17.02l5.786 5.786h7.37l-9.37-9.37 3.585-3.586h-1.585z"/>
+        </svg>
+      ),
+      bg: 'bg-blue-50'
+    },
+    {
+      name: 'React',
+      icon: (
+        <svg className="w-5 h-5 text-[#61DAFB] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="2.2" fill="#61DAFB"/>
+          <ellipse cx="12" cy="12" rx="10" ry="3.8" fill="none" stroke="#61DAFB" strokeWidth="1.2" transform="rotate(30 12 12)"/>
+          <ellipse cx="12" cy="12" rx="10" ry="3.8" fill="none" stroke="#61DAFB" strokeWidth="1.2" transform="rotate(90 12 12)"/>
+          <ellipse cx="12" cy="12" rx="10" ry="3.8" fill="none" stroke="#61DAFB" strokeWidth="1.2" transform="rotate(150 12 12)"/>
+        </svg>
+      ),
+      bg: 'bg-slate-900'
+    },
+    {
+      name: 'Redis',
+      icon: (
+        <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="#DC382D">
+          <path d="M12 2L2 6.5v11L12 22l10-4.5v-11L12 2zm0 2.2l7.5 3.4-7.5 3.4-7.5-3.4L12 4.2zM3.8 8.7l7.2 3.2v7.7l-7.2-3.2V8.7zm9.2 10.9v-7.7l7.2-3.2v7.7l-7.2 3.2z"/>
+        </svg>
+      ),
+      bg: 'bg-red-50'
+    },
+  ];
+
+  // 6. Dynamic Scope (6 Cards in 3x2 Grid)
+  const scopeTags = [
+    'STOREFRONT & CATALOG',
+    'CHECKOUT CORE',
+    'SECURITY & PROFILES',
+    'LOGISTICS & OPERATIONS',
+    'LIFECYCLE MANAGEMENT',
+    'GATEWAY INTEGRATION',
+  ];
+
+  const defaultScopeTitles = [
+    'Discovery & Public Platform',
+    'High-Speed Core Engine',
+    'Authentication & Profiles',
+    'Real-Time Serviceability & Geofencing',
+    'End-to-End Tracking & History',
+    'Secure Multi-Step Integration',
+  ];
+
+  const scopeCards = Array.from({ length: 6 }).map((_, i) => ({
+    num: `0${i + 1}`,
+    tag: scopeTags[i],
+    title: defaultScopeTitles[i],
+    desc: `Engineered end-to-end module for ${study.title} delivering maximum reliability, responsive speed, and complete transactional integrity.`,
+  }));
+
+  // 7. Results Stats
+  const resultsStats = [
+    { value: '8,640+', label: 'OPERATIONS / MONTH', color: 'text-[#2196E8]' },
+    { value: '100%', label: 'VERIFIABLE LEDGER', color: 'text-emerald-500' },
+    { value: '50%', label: 'FASTER CONVERSION', color: 'text-amber-500' },
+    { value: '99.9%', label: 'UPTIME RELIABILITY', color: 'text-purple-500' },
+  ];
+
+  // Brand Logo Mapping (Extracted directly from client websites)
+  const logoMap: Record<string, string> = {
+    'clean-culture': '/images/case-studies/logos/clean_culture.png',
+    'infragen': '/images/case-studies/logos/infragen.png',
+    'verdurepax': '/images/case-studies/logos/verdurepax.png',
+    'befhue': '/images/case-studies/logos/befhue.png',
+    'ruts-n-rides': '/images/case-studies/logos/rutsnrides.png',
+    'ruts-n-rides-admin': '/images/case-studies/logos/rutsnrides.png',
+    'sanikas-restaurant': '/images/case-studies/logos/sanikas.png',
+    'keystone': '/images/case-studies/logos/keystone.ico',
+    'startten': '/images/case-studies/logos/startten.ico',
+    'thoorigai': '/images/case-studies/logos/thoorigai.ico',
+    'gigabull': '/images/case-studies/logos/gigabull.ico',
+    'squirlio': '/images/case-studies/logos/squirlio.png',
+  };
+  const confettiCanvasRef = useRef<HTMLCanvasElement>(null);
+  const confettiInstanceRef = useRef<any>(null);
+  const animationFrameRef = useRef<number | null>(null);
+
+  // Initialize Confetti Canvas & IntersectionObserver for auto trigger on scroll into view
+  useEffect(() => {
+    if (confettiCanvasRef.current && typeof confetti !== 'undefined') {
+      confettiInstanceRef.current = confetti.create(confettiCanvasRef.current, {
+        resize: true,
+        useWorker: true,
+      });
+    }
+
+    const section = document.getElementById('app-is-live-section');
+    if (section && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              triggerSideCannons();
+            } else {
+              stopSideCannons();
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      observer.observe(section);
+      return () => {
+        observer.disconnect();
+        stopSideCannons();
+      };
+    }
+  }, []);
+
+  const stopSideCannons = () => {
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
+    if (confettiInstanceRef.current && typeof confettiInstanceRef.current.reset === 'function') {
+      confettiInstanceRef.current.reset();
+    }
+  };
+
+  // Side Cannons Confetti Burst Trigger Function
+  const triggerSideCannons = () => {
+    if (!confettiInstanceRef.current && confettiCanvasRef.current && typeof confetti !== 'undefined') {
+      confettiInstanceRef.current = confetti.create(confettiCanvasRef.current, {
+        resize: true,
+        useWorker: true,
+      });
+    }
+    const fire = confettiInstanceRef.current || confetti;
+    if (typeof fire !== 'function') return;
+    const end = Date.now() + 3.5 * 1000;
+    const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1", "#10b981", "#38bdf8", "#facc15"];
+
+    const frame = () => {
+      if (Date.now() > end) {
+        stopSideCannons();
+        return;
+      }
+      // Left Side Cannon Burst
+      fire({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        startVelocity: 55,
+        origin: { x: 0, y: 0.6 },
+        colors: colors,
+      });
+      // Right Side Cannon Burst
+      fire({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        startVelocity: 55,
+        origin: { x: 1, y: 0.6 },
+        colors: colors,
+      });
+      animationFrameRef.current = requestAnimationFrame(frame);
+    };
+    frame();
+  };
+
+  const customLogo = logoMap[study.slug];
+
+  // Smart Link Extraction (Mobile App vs Web Only vs Enterprise/AI)
+  const hasPlayStore = study.link.includes('play.google.com');
+  const playStoreLink = hasPlayStore
+    ? study.link.match(/https:\/\/play\.google\.com[^\s\)]+/)?.[0] || 'https://play.google.com'
+    : '';
+
+  const hasAppStore = study.link.includes('apps.apple.com');
+  const appStoreLink = hasAppStore
+    ? study.link.match(/https:\/\/apps\.apple\.com[^\s\)]+/)?.[0] || 'https://apple.com/app-store'
+    : '';
+
+  const allUrls = study.link.match(/https?:\/\/[^\s\)]+/g) || [];
+  const webLink = allUrls.find(
+    (u) =>
+      !u.includes('play.google.com') &&
+      !u.includes('apps.apple.com') &&
+      !u.includes('api.dhigrowth.com') &&
+      !u.includes('staging-api')
+  ) || (study.slug === 'infragen' ? 'https://dhigrowth07.github.io/infragen-fe/' : '');
+
+  const isMobileApp = Boolean(hasPlayStore || hasAppStore);
+  const isWebOnly = !isMobileApp && Boolean(webLink);
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-body selection:bg-[#2196E8] selection:text-white">
+    <div className="min-h-screen bg-white text-slate-900 font-body antialiased selection:bg-[#2196E8]/20 selection:text-[#2196E8]">
       <CustomCursor />
       <Navbar />
 
       <main className="subpage-padding-top font-body bg-white">
-
-        {/* ── TOP PANORAMIC COVER HERO BANNER ── */}
-        <section className="relative w-full h-[360px] sm:h-[460px] lg:h-[520px] overflow-hidden bg-slate-950 flex items-center justify-center font-body group">
-          {/* Background Image with Ambient Zoom & Fade */}
+        
+        {/* ── TOP PANORAMIC COVER HERO ── */}
+        <section className="relative w-full h-[400px] sm:h-[480px] lg:h-[540px] overflow-hidden bg-slate-950 flex items-center justify-center font-body group">
           <div className="absolute inset-0 z-0">
             <img
-              src={study.image}
+              src={study.image || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80'}
               alt={`${study.title} Cover Banner`}
-              className="w-full h-full object-cover scale-105 transition-transform duration-1000 group-hover:scale-110"
+              className="w-full h-full object-cover scale-105 transition-transform duration-1000 group-hover:scale-110 opacity-70"
             />
-            {/* Atmospheric Dark & Brand Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/65 to-slate-950/40" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/40" />
             <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-transparent to-slate-950/80" />
-            <div className="absolute inset-0 bg-[#2196E8]/10 mix-blend-overlay" />
           </div>
 
-          {/* Centered Overlay Content matching user screenshot */}
-          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 sm:space-y-6">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight font-body drop-shadow-lg"
-            >
-              Building Digital Growth Through <br />
-              <span className="text-[#2196E8] drop-shadow-[0_0_25px_rgba(33,150,232,0.6)]">Tailored Innovation</span>
-            </motion.h1>
+          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-4">
+            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-semibold uppercase tracking-wider font-mono">
+              <span className="w-2 h-2 rounded-full bg-[#2196E8] animate-pulse" />
+              <span>{study.category} Case Study</span>
+            </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-slate-200 text-sm sm:text-base lg:text-lg max-w-3xl mx-auto leading-relaxed font-body drop-shadow-md font-medium"
-            >
-              Discover how DhiGrowth transformed everyday operations into a seamless, fast, minimal digital platform for <strong className="text-white font-bold">{study.title}</strong>.
-            </motion.p>
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto font-body drop-shadow-md">
+              Building Digital Growth Through Tailored Innovation
+            </h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="pt-2 flex justify-center"
-            >
-              <button
-                onClick={() => {
-                  const el = document.getElementById('case-study-overview');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="inline-flex items-center gap-3 px-6 sm:px-8 py-3.5 rounded-full bg-[#0A0F17]/90 hover:bg-[#121B2B] border border-[#2196E8]/50 hover:border-[#2196E8] text-white text-sm sm:text-base font-bold shadow-[0_0_30px_rgba(33,150,232,0.35)] transition-all transform hover:scale-105 cursor-pointer font-body backdrop-blur-md"
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="#overview"
+                className="px-6 py-2.5 rounded-full bg-[#2196E8] hover:bg-blue-600 text-white font-bold text-xs sm:text-sm tracking-wide transition shadow-lg shadow-blue-500/30 cursor-pointer"
               >
-                <BrandAvatar src={study.image} title={study.title} size="sm" />
-                <span>Jump To {study.title} Case Study ↓</span>
-              </button>
-            </motion.div>
-          </div>
-
-          {/* Left / Right Carousel Arrow Buttons */}
-          <Link
-            href={`/case-studies/${prevStudy.slug}`}
-            title="Previous Case Study"
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-[#2196E8] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all shadow-xl hover:scale-110 cursor-pointer"
-          >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-          </Link>
-
-          <Link
-            href={`/case-studies/${nextStudy.slug}`}
-            title="Next Case Study"
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-[#2196E8] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all shadow-xl hover:scale-110 cursor-pointer"
-          >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-          </Link>
-
-          {/* Bottom Carousel Pagination Dots */}
-          <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-black/50 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">
-            <span className="w-6 h-2 rounded-full bg-[#2196E8] transition-all" />
-            <span className="w-2 h-2 rounded-full bg-white/40" />
-            <span className="w-2 h-2 rounded-full bg-white/40" />
-          </div>
-        </section>
-
-        {/* ── HERO OVERVIEW SECTION (BLUE & WHITE THEME) ── */}
-        <section id="case-study-overview" className="relative py-16 sm:py-24 bg-gradient-to-b from-blue-50/70 via-slate-50/30 to-white border-b border-blue-100/60 overflow-hidden font-body">
-          {/* Subtle Radial Blue Glows */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[360px] bg-[#2196E8]/10 rounded-full blur-[140px] pointer-events-none" />
-          
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
-
-              {/* Left: Logo + title + narrative */}
-              <div className="lg:col-span-6 space-y-5">
-                <Link
-                  href="/case-studies"
-                  className="inline-flex items-center gap-2 text-slate-500 hover:text-[#2196E8] text-sm font-semibold transition-colors mb-1 font-body"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>Back To Case Studies</span>
-                </Link>
-
-                <div className="flex items-center space-x-4">
-                  <BrandAvatar src={study.image} title={study.title} size="md" />
-                  <div>
-                    <span className="text-xs font-bold tracking-wide text-[#2196E8] block mb-1 font-body">
-                      {capitalizeText(study.category)}
-                    </span>
-                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight font-body">
-                      {capitalizeText(study.title)} <span className="text-[#2196E8]">{isMobileApp ? 'Mobile App' : 'Platform'}</span>
-                    </h1>
-                  </div>
-                </div>
-
-                <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal font-body">
-                  {formatShortNarrative(study.about)}
-                </p>
-
-                {/* Live Actions */}
-                <div className="flex flex-wrap items-center gap-3.5 pt-2 font-body">
-                  {primaryLiveUrl && (
-                    <a
-                      href={primaryLiveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-bold text-sm shadow-md hover:scale-105 transition-all cursor-pointer font-body bg-[#2196E8] hover:bg-blue-600"
-                    >
-                      <span>Visit Live Product</span>
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
-
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-100 text-slate-800 hover:bg-slate-200 border border-slate-200 font-bold text-sm transition-colors font-body"
-                  >
-                    <span>Request Similar Project</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right: Phone / Showcase slideshow */}
-              <div className="lg:col-span-6 flex justify-center py-2">
-                <div className="relative w-[300px] sm:w-[380px] group">
-                  <div className="relative w-full h-[400px] sm:h-[480px] flex items-center justify-center drop-shadow-2xl">
-                    <div className="relative w-full h-full rounded-3xl overflow-hidden border-2 border-slate-200 bg-slate-950 p-2 shadow-2xl">
-                      <img
-                        src={study.image}
-                        alt={`${study.title} Preview Screen`}
-                        className="w-full h-full object-cover rounded-2xl transition-all duration-700 hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none rounded-2xl" />
-                      <div className="absolute bottom-4 left-4 right-4 text-white font-body">
-                        <span className="text-[10px] font-bold tracking-wide text-slate-300 block mb-1">
-                          Product Showcase
-                        </span>
-                        <p className="font-body text-lg font-bold leading-tight">
-                          {capitalizeText(study.subtitle || study.title)}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+                Jump to Overview ↓
+              </a>
             </div>
           </div>
         </section>
 
-        {/* ── ARC DIVIDER ── */}
-        <div className="w-full overflow-hidden leading-none bg-slate-50 -mb-1">
-          <svg
-            className="relative block w-full h-12 sm:h-20 text-slate-950"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-          >
-            <path d="M0,0 C300,90 900,90 1200,0 L1200,120 L0,120 Z" fill="currentColor" />
-          </svg>
-        </div>
+        {/* ── 01 OVERVIEW / ABOUT US ── */}
+        <section id="overview" className="relative py-16 sm:py-24 bg-white border-b border-slate-100 overflow-hidden font-body">
+          {/* Subtle Background Watermark */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden z-0">
+            <span className="text-[7rem] sm:text-[11rem] font-black text-slate-100/70 tracking-[0.2em] uppercase whitespace-nowrap">
+              {study.title}
+            </span>
+          </div>
 
-        {/* ── VIDEO / EXPERIENCE OVERVIEW (DARK SECTION) ── */}
-        <section className="w-full bg-slate-950 text-white pb-16 sm:pb-24 border-b border-slate-800 font-body">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+              {/* Left Column: About us Text */}
+              <div className="lg:col-span-6 space-y-5">
+                <div className="flex items-center space-x-3.5">
+                  {customLogo ? (
+                    <div className="w-12 h-12 rounded-xl shadow-md flex items-center justify-center bg-white border-2 border-slate-200 p-1.5 overflow-hidden">
+                      <img src={customLogo} alt={`${study.title} Logo`} className="w-full h-full object-contain" />
+                    </div>
+                  ) : (
+                    <div className="w-12 h-12 rounded-xl shadow-md flex items-center justify-center bg-[#2196E8] text-white font-extrabold text-xl border-2 border-blue-400">
+                      {study.title.charAt(0)}
+                    </div>
+                  )}
+                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight font-body">
+                    About us
+                  </h2>
+                </div>
+                
+                <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
+                  <p>{aboutP1}</p>
+                  {aboutP2 && <p>{aboutP2}</p>}
+                </div>
+              </div>
 
-              {/* Left: Showcase Media Box */}
-              <div className="lg:col-span-7">
-                <div
-                  className="relative rounded-2xl overflow-hidden shadow-2xl border-2 group bg-slate-900 border-[#2196E8]/50"
-                >
-                  <div className="relative w-full h-[320px] sm:h-[400px] flex items-center justify-center overflow-hidden">
-                    <img
-                      src={study.image}
-                      alt={study.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
-                    
-                    {/* Floating brand pill inside preview */}
-                    <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between z-20 font-body">
-                      <div>
-                        <span className="text-xs font-bold tracking-wide text-slate-300 block mb-0.5">
-                          High Performance Architecture
-                        </span>
-                        <h4 className="text-xl sm:text-2xl font-extrabold text-white font-body">
-                          {capitalizeText(study.title)} Live Interface
-                        </h4>
-                      </div>
-                      <div
-                        className="px-3.5 py-1.5 rounded-full text-white text-xs font-bold shadow-lg tracking-wide font-body bg-[#2196E8]"
-                      >
-                        Live Study
-                      </div>
+              {/* Right Column: 3D iPhone Slideshow with Dark Pill Pagination & Hover Nav Arrows */}
+              <div className="lg:col-span-6 flex justify-center py-2">
+                <div className="relative w-[300px] sm:w-[380px] group">
+                  <div className="relative w-full h-[420px] sm:h-[480px] flex items-center justify-center drop-shadow-2xl">
+                    {projectImages.map((src, idx) => (
+                      <img
+                        key={idx}
+                        src={src}
+                        alt={`${study.title} Screen ${idx + 1}`}
+                        className={`absolute inset-0 w-full h-full object-contain rounded-2xl transition-all duration-700 ${
+                          currentCoverSlide === idx ? 'opacity-100 scale-100 z-20' : 'opacity-0 scale-95 z-10'
+                        }`}
+                      />
+                    ))}
+
+                    {/* Top-Left Ambient Floating Icon Badge */}
+                    <div className="absolute top-2 -left-2 sm:-left-4 z-30 w-9 h-9 rounded-xl bg-slate-900/90 border border-white/20 text-white flex items-center justify-center shadow-lg backdrop-blur-md animate-float-1 pointer-events-none">
+                      <Zap className="w-4 h-4 text-[#2196E8]" />
+                    </div>
+
+                    {/* Left & Right Slider Arrow Buttons (Visible on Hover) */}
+                    <button
+                      onClick={() => setCurrentCoverSlide((prev) => (prev === 0 ? 2 : prev - 1))}
+                      title="Previous Slide"
+                      className="absolute -left-5 sm:-left-7 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-[#1E293B]/90 hover:bg-[#2196E8] text-white flex items-center justify-center border border-white/20 shadow-xl backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 cursor-pointer"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+
+                    <button
+                      onClick={() => setCurrentCoverSlide((prev) => (prev === 2 ? 0 : prev + 1))}
+                      title="Next Slide"
+                      className="absolute -right-5 sm:-right-7 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-[#1E293B]/90 hover:bg-[#2196E8] text-white flex items-center justify-center border border-white/20 shadow-xl backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 cursor-pointer"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+
+                    {/* Dark Pill Pagination */}
+                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-2 bg-slate-900/90 px-3.5 py-1.5 rounded-full backdrop-blur-md border border-white/10 shadow-xl">
+                      {[0, 1, 2].map((idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setCurrentCoverSlide(idx)}
+                          className={`transition-all duration-300 rounded-full cursor-pointer ${
+                            currentCoverSlide === idx ? 'w-5 h-2 bg-emerald-400' : 'w-2 h-2 bg-slate-500'
+                          }`}
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
 
-              {/* Right: Feature bullet points */}
-              <div className="lg:col-span-5 space-y-6 font-body">
-                <div className="flex items-center justify-between gap-4">
-                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight font-body">
-                    Experience {capitalizeText(study.title)} In Action
-                  </h3>
-                  <BrandAvatar src={study.image} title={study.title} size="md" />
-                </div>
+        {/* ── SEAMLESS CURVED BLEND DIVIDER (WHITE TO DARK) ── */}
+        <div className="w-full overflow-hidden leading-none bg-white -mb-px relative z-10">
+          <svg className="relative block w-full h-6 sm:h-10 text-[#070B14]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 40" preserveAspectRatio="none">
+            <path d="M0,0 C480,40 960,40 1440,0 L1440,40 L0,40 Z" fill="currentColor" />
+          </svg>
+        </div>
 
-                <div className="space-y-4 pt-2 font-body">
-                  {actionPoints.map((point, i) => (
-                    <div key={i} className="flex items-start space-x-3 text-sm text-slate-200 font-body">
-                      <Check
-                        className="w-5 h-5 shrink-0 mt-0.5 text-[#2196E8]"
-                      />
-                      <span className="font-medium leading-relaxed">{capitalizeText(point)}</span>
+        {/* ── 1. CHALLENGES (DARK THEME) ── */}
+        <section id="challenges" className="w-full bg-[#070B14] text-white pt-8 pb-6 sm:pt-12 sm:pb-8 relative">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-10">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight font-body inline-block relative">
+                Challenges
+                <span className="block w-14 h-1 bg-[#2196E8] rounded-full mx-auto mt-2" />
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              {/* Left Column: Custom Video/Demo Player for Clean Culture, or Visual Mockup for other studies */}
+              <div className="lg:col-span-5 flex justify-center">
+                {study.slug === 'clean-culture' ? (
+                  <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-800 bg-[#0B1324] group">
+                    <div className="relative w-full h-[320px] sm:h-[380px] bg-slate-950 flex items-center justify-center overflow-hidden">
+                      <video
+                        ref={videoRef}
+                        loop
+                        muted={videoMuted}
+                        autoPlay
+                        playsInline
+                        className="w-full h-full object-cover"
+                      >
+                        <source src="/videos/clean_culture_overview.mp4" type="video/mp4" />
+                      </video>
+
+                      {/* Bottom Video Controls Bar */}
+                      <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 pt-6 z-20 flex flex-col gap-2">
+                        <div className="w-full bg-slate-700/80 h-1.5 rounded-full overflow-hidden flex cursor-pointer">
+                          <div className="bg-[#2196E8] w-2/3 h-full rounded-full" />
+                        </div>
+                        <div className="flex items-center justify-between text-xs text-slate-300 font-mono">
+                          <div className="flex items-center gap-3">
+                            <button onClick={togglePlay} className="hover:text-white transition cursor-pointer">
+                              {videoPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current" />}
+                            </button>
+                            <span>0:00 / 0:05</span>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <button onClick={toggleMute} className="hover:text-white transition cursor-pointer">
+                              {videoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                            </button>
+                            <button onClick={toggleFullscreen} className="hover:text-white transition cursor-pointer">
+                              <Maximize2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative w-full max-w-md h-[320px] sm:h-[380px] rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-800 bg-[#0B1324] flex items-center justify-center group">
+                    <img
+                      src={showcaseImageMap[study.slug]?.[0] || study.image || '/images/cc_highlight_product.jpg'}
+                      alt={`${study.title} Showcase`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent pointer-events-none" />
+                    
+                    {/* Bottom Floating Info Pill */}
+                    <div className="absolute bottom-4 inset-x-4 flex items-center justify-between p-3 rounded-xl bg-slate-900/85 backdrop-blur-md border border-white/10 shadow-lg">
+                      <div className="flex items-center space-x-2.5">
+                        {customLogo ? (
+                          <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center shrink-0 border border-slate-200">
+                            <img src={customLogo} alt={study.title} className="w-full h-full object-contain" />
+                          </div>
+                        ) : (
+                          <div className="w-8 h-8 rounded-lg bg-[#2196E8] text-white font-bold text-xs flex items-center justify-center shrink-0">
+                            {study.title.charAt(0)}
+                          </div>
+                        )}
+                        <div>
+                          <h4 className="text-xs sm:text-sm font-bold text-white font-body leading-tight">{study.title}</h4>
+                          <p className="text-[10px] text-slate-400 font-mono tracking-wider uppercase leading-none">{study.category} • Core Architecture</p>
+                        </div>
+                      </div>
+                      <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-[10px] font-mono font-bold">
+                        Verified
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Right Column: 6 Checkmark Cards */}
+              <div className="lg:col-span-7 space-y-6">
+                <p className="text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
+                  Engineering the {study.title} platform required building a high-concurrency architecture capable of handling complex state management, real-time validation, and automated backend calculation workflows.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+                  {challengeCards.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-xl bg-[#0C1527]/90 border border-slate-800/90 flex items-center space-x-3.5 shadow-sm hover:border-[#2196E8]/40 transition group"
+                    >
+                      <div className="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center shrink-0">
+                        <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3]" />
+                      </div>
+                      <span className="text-xs sm:text-sm font-semibold text-slate-200 group-hover:text-white transition leading-snug">
+                        {item.title}
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
-
             </div>
           </div>
         </section>
 
-        {/* ── PLATFORM HIGHLIGHTS (CARD GRID) ── */}
-        <section className="py-16 sm:py-24 bg-gradient-to-b from-white via-slate-50 to-blue-50/40 border-b border-slate-200 overflow-hidden relative font-body">
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] rounded-full blur-[120px] pointer-events-none opacity-15 bg-[#2196E8]"
+        {/* ── SEAMLESS BOTTOM CURVED BLEND (DARK TO WHITE) ── */}
+        <div className="w-full overflow-hidden leading-none bg-[#070B14] -mb-px relative z-10">
+          <svg className="relative block w-full h-6 sm:h-10 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 40" preserveAspectRatio="none">
+            <path d="M0,0 C480,40 960,40 1440,0 L1440,40 L0,40 Z" fill="currentColor" />
+          </svg>
+        </div>
+
+        {/* ── 2. SOLUTION (SCROLL-DRIVEN PARALLAX + STAGGERED FADE-UP + INTERACTIVE 3D CAROUSEL) ── */}
+        <section
+          id="solution"
+          ref={solutionSectionRef}
+          className="pt-10 pb-16 sm:pt-16 sm:pb-24 bg-gradient-to-b from-white via-blue-50/20 to-white border-b border-slate-200 relative overflow-hidden"
+        >
+          {/* Scroll-Driven Parallax Depth Elements */}
+          <motion.div
+            style={{ y: parallaxSphereY1 }}
+            className="absolute top-12 left-10 w-8 h-8 rounded-full bg-blue-400/25 blur-xs pointer-events-none"
           />
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <span className="text-xs font-bold tracking-wide text-[#2196E8] block mb-2 font-body">
-                Key Highlights
-              </span>
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight font-body">
-                {capitalizeText(study.title)} Platform Highlights
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 font-body">
-              {parsedHighlights.map((c, i) => (
+          <motion.div
+            style={{ y: parallaxSphereY2, rotate: parallaxRotate }}
+            className="absolute top-28 right-16 w-12 h-12 rounded-2xl border-2 border-[#2196E8]/30 backdrop-blur-xs pointer-events-none flex items-center justify-center shadow-lg"
+          >
+            <div className="w-2.5 h-2.5 rounded-full bg-[#2196E8]" />
+          </motion.div>
+          <motion.div
+            style={{ y: parallaxSphereY1 }}
+            className="absolute bottom-20 left-1/4 w-6 h-6 rounded-full bg-cyan-400/30 blur-sm pointer-events-none"
+          />
+          <motion.div
+            style={{ y: parallaxSphereY2 }}
+            className="absolute bottom-12 right-1/3 w-10 h-10 rounded-full border border-blue-300/60 pointer-events-none flex items-center justify-center"
+          >
+            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping" />
+          </motion.div>
+          <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-blue-100/40 rounded-full blur-[150px] pointer-events-none -z-1" />
+          <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-cyan-50/50 rounded-full blur-[130px] pointer-events-none -z-1" />
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              
+              {/* Left Column: Staggered Fade-up Reveal (Title, Description, Controls) */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+                  },
+                }}
+                className="lg:col-span-5 space-y-6"
+              >
+                {/* 1. Tag & Live Badge */}
                 <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.06 }}
-                  viewport={{ once: true }}
-                  className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-xl transition-all space-y-3 group hover:border-[#2196E8] font-body"
+                  variants={{
+                    hidden: { opacity: 0, y: 25 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+                  }}
+                  className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-[#2196E8] text-xs font-bold font-mono uppercase tracking-wider shadow-xs"
                 >
-                  <div className={`w-12 h-12 rounded-xl ${c.bg} ${c.text} flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform`}>
-                    {c.icon}
-                  </div>
-                  <h4 className="font-extrabold text-slate-900 text-base font-body group-hover:text-[#2196E8] transition-colors">
-                    {capitalizeText(c.title)}
-                  </h4>
-                  <p className="text-slate-500 text-sm leading-relaxed font-body">
-                    {c.desc}
-                  </p>
+                  <span className="w-2 h-2 rounded-full bg-[#2196E8] animate-pulse" />
+                  <span>ARCHITECTURE &amp; SOLUTIONS</span>
                 </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        {/* ── REQUIREMENTS & FEATURE BREAKDOWN (ALTERNATING LEFT/RIGHT) ── */}
-        <section className="py-16 bg-slate-50 border-t border-slate-200 font-body">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-14 font-body">
-              <span className="text-xs font-bold tracking-wide text-[#2196E8] block mb-2 font-body">
-                Engineering Deep Dive
-              </span>
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight font-body">
-                {capitalizeText(study.title)} Capabilities &amp; Engineering
-              </h2>
-            </div>
+                {/* 2. Heading */}
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+                  }}
+                >
+                  <h2 className="text-5xl sm:text-6xl font-extrabold text-slate-900 tracking-tight font-body inline-block relative">
+                    Solution
+                    <span className="block w-14 h-1.5 bg-[#2196E8] rounded-full mt-2" />
+                  </h2>
+                </motion.div>
 
-            <div className="space-y-0 font-body">
-              {/* Product Objective Banner */}
-              <div className="w-full py-12 sm:py-16 border-b border-slate-200 font-body">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                  <div className="lg:col-span-5 flex justify-center items-center">
-                    <div className="relative w-full max-w-md rounded-2xl overflow-hidden border border-slate-200 shadow-xl bg-white p-3">
-                      <img
-                        src={study.image}
-                        alt={study.title}
-                        className="w-full h-auto object-cover rounded-xl hover:scale-105 transition-transform duration-700 max-h-[380px]"
+                {/* 3. Description Paragraph */}
+                <motion.p
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+                  }}
+                  className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal"
+                >
+                  To address core delivery challenges, our team architected isolated execution sessions, a centralized calculation engine, and strict validation safeguards with responsive visual interfaces.
+                </motion.p>
+
+                {/* 4. Interactive Carousel Controls */}
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+                  }}
+                  className="pt-2 flex items-center gap-4"
+                >
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handlePrevSolution}
+                      title="Previous Solution"
+                      className="w-12 h-12 rounded-2xl bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-200 shadow-md cursor-pointer hover:scale-105 active:scale-95 group"
+                    >
+                      <ChevronLeft className="w-5 h-5 transition-transform group-hover:-translate-x-0.5" />
+                    </button>
+                    <button
+                      onClick={handleNextSolution}
+                      title="Next Solution"
+                      className="w-12 h-12 rounded-2xl bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-200 shadow-md cursor-pointer hover:scale-105 active:scale-95 group"
+                    >
+                      <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5" />
+                    </button>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 ml-2">
+                    {solutionDeck.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => {
+                          setSolutionDirection(i > solutionIdx ? 1 : -1);
+                          setSolutionIdx(i);
+                        }}
+                        className={`transition-all duration-300 rounded-full cursor-pointer ${
+                          solutionIdx === i ? 'w-8 h-2.5 bg-[#2196E8]' : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-400'
+                        }`}
                       />
-                    </div>
+                    ))}
                   </div>
-                  
 
-                  <div className="lg:col-span-7 space-y-6 font-body">
-                    <h3 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-body">
-                      Product Objective
-                    </h3>
-                    <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-body">
-                      {formatShortNarrative(study.productExperience || study.about)}
-                    </p>
+                  <span className="text-xs font-mono font-bold text-slate-400 ml-auto">
+                    0{solutionIdx + 1} / 0{solutionDeck.length}
+                  </span>
+                </motion.div>
+              </motion.div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 font-body">
-                      <div className="p-4 rounded-2xl bg-blue-50 border border-blue-100 flex items-start space-x-3 shadow-sm">
-                        <div className="w-9 h-9 rounded-xl bg-[#2196E8] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
-                          <Zap className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-bold text-slate-900 font-body">Sub-Second Loading</h4>
-                          <p className="text-xs text-slate-600 mt-0.5 font-body">Optimized For Instant Responsiveness And Sub-Second Asset Streaming.</p>
-                        </div>
-                      </div>
-
-                      <div className="p-4 rounded-2xl bg-blue-50 border border-blue-100 flex items-start space-x-3 shadow-sm">
-                        <div
-                          className="w-9 h-9 rounded-xl text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm bg-[#4A72EB]"
-                        >
-                          <RefreshCw className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-bold text-slate-900 font-body">Smart Cloud Engine</h4>
-                          <p className="text-xs text-slate-600 mt-0.5 font-body">Automated Workflow Synchronization And Enterprise-Grade SLA Reliability.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              {/* Center Divider Tag */}
+              <div className="hidden lg:flex lg:col-span-2 justify-center items-center">
+                <div className="flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest text-[#2196E8] uppercase">
+                  <span>{solutionDeck[solutionIdx].tag}</span>
+                  <div className="w-8 h-[1px] bg-[#2196E8]/60" />
+                  <div className="w-2 h-2 rounded-full bg-[#2196E8]" />
                 </div>
               </div>
 
-              {/* Alternating Numbered Feature Sections */}
-              {solutionSections.map((sec, i) => {
-                const isLeft = i % 2 === 0;
-                const num = `${i + 4}.`;
+              {/* Right Column: 3D Perspective Stage & Interactive Content Carousel */}
+              <div className="lg:col-span-5 flex justify-center relative min-h-[520px] items-center [perspective:1400px]">
+                {/* 3D Stacked Left Background Card */}
+                <motion.div
+                  style={{ y: parallaxBackCardY }}
+                  className="absolute top-4 -left-6 sm:-left-8 w-full max-w-md h-[460px] bg-gradient-to-br from-slate-100/90 to-blue-50/60 rounded-3xl border border-slate-200/80 p-8 shadow-lg pointer-events-none select-none overflow-hidden [transform:rotateY(14deg)_scale(0.92)_translateZ(-80px)] opacity-40 transition-transform duration-700 hidden sm:block"
+                >
+                  <div className="text-[10px] font-mono font-extrabold tracking-widest text-[#2196E8]/70 uppercase mb-3">
+                    {solutionDeck[(solutionIdx - 1 + solutionDeck.length) % solutionDeck.length].watermark || 'PREVIOUS MODULE'}
+                  </div>
+                  <span className="text-4xl font-extrabold text-slate-300 block font-mono">
+                    {solutionDeck[(solutionIdx - 1 + solutionDeck.length) % solutionDeck.length].num}
+                  </span>
+                  <div className="text-lg font-bold text-slate-400 mt-2">
+                    {solutionDeck[(solutionIdx - 1 + solutionDeck.length) % solutionDeck.length].title}
+                  </div>
+                </motion.div>
 
+                {/* 3D Stacked Right Background Card */}
+                <motion.div
+                  style={{ y: parallaxBackCardY }}
+                  className="absolute top-2 -right-4 sm:-right-6 w-full max-w-md h-[460px] bg-gradient-to-bl from-slate-100/90 to-blue-50/60 rounded-3xl border border-slate-200/80 p-8 shadow-lg pointer-events-none select-none overflow-hidden [transform:rotateY(-14deg)_scale(0.92)_translateZ(-80px)] opacity-40 transition-transform duration-700 hidden sm:block"
+                >
+                  <div className="text-[10px] font-mono font-extrabold tracking-widest text-[#2196E8]/70 uppercase mb-3">
+                    {solutionDeck[(solutionIdx + 1) % solutionDeck.length].watermark || 'NEXT MODULE'}
+                  </div>
+                  <span className="text-4xl font-extrabold text-slate-300 block font-mono">
+                    {solutionDeck[(solutionIdx + 1) % solutionDeck.length].num}
+                  </span>
+                  <div className="text-lg font-bold text-slate-400 mt-2">
+                    {solutionDeck[(solutionIdx + 1) % solutionDeck.length].title}
+                  </div>
+                </motion.div>
+
+                {/* Active Card with Interactive 3D Content Carousel Transition & Moving Border Beam */}
+                <AnimatePresence mode="wait" custom={solutionDirection}>
+                  <motion.div
+                    key={solutionIdx}
+                    custom={solutionDirection}
+                    initial={(dir: number) => ({
+                      opacity: 0,
+                      x: dir > 0 ? 140 : -140,
+                      rotateY: dir > 0 ? 32 : -32,
+                      scale: 0.88,
+                      z: -100,
+                    })}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                      rotateY: 0,
+                      scale: 1,
+                      z: 0,
+                      transition: {
+                        duration: 0.85,
+                        ease: [0.33, 1, 0.68, 1],
+                      },
+                    }}
+                    exit={(dir: number) => ({
+                      opacity: 0,
+                      x: dir > 0 ? -140 : 140,
+                      rotateY: dir > 0 ? -32 : 32,
+                      scale: 0.88,
+                      z: -100,
+                      transition: {
+                        duration: 0.65,
+                        ease: [0.33, 1, 0.68, 1],
+                      },
+                    })}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.25}
+                    onDragEnd={(_, info) => {
+                      if (info.offset.x < -60) {
+                        handleNextSolution();
+                      } else if (info.offset.x > 60) {
+                        handlePrevSolution();
+                      }
+                    }}
+                    className="animated-solution-card w-full max-w-md bg-white/95 backdrop-blur-xl rounded-3xl p-7 sm:p-8 border border-slate-200/90 shadow-[0_25px_60px_rgba(0,0,0,0.12)] space-y-4 relative z-20 cursor-grab active:cursor-grabbing transform-gpu select-none"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-5xl font-extrabold text-blue-200 block font-mono">
+                        {solutionDeck[solutionIdx].num}
+                      </span>
+                      <span className="px-3 py-1 rounded-full bg-blue-50 text-[#2196E8] text-[10px] font-extrabold font-mono tracking-wider uppercase">
+                        {solutionDeck[solutionIdx].tag}
+                      </span>
+                    </div>
+
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-body">
+                      {solutionDeck[solutionIdx].title}
+                    </h3>
+                    <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                      {solutionDeck[solutionIdx].desc}
+                    </p>
+
+                    {/* Preview Image with Hover Scale & Glowing Overlay */}
+                    <div className="pt-2">
+                      <div className="w-full h-44 sm:h-48 rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 relative shadow-inner group">
+                        <img
+                          src={solutionDeck[solutionIdx].img}
+                          alt={solutionDeck[solutionIdx].title}
+                          className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                        <div className="absolute bottom-2.5 right-3 text-[10px] font-mono text-white/80 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md">
+                          Swipe to explore ↔
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* ── 3. PRODUCT EXPERIENCE ── */}
+        <section id="product-experience" className="py-20 sm:py-28 bg-white border-b border-slate-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight font-body inline-block relative">
+                Product experience
+                <span className="block w-14 h-1.5 bg-[#2196E8] rounded-full mx-auto mt-2" />
+              </h2>
+              <p className="text-slate-600 text-base sm:text-lg leading-relaxed pt-1">
+                {study.title} delivers a visually rich, premium, and highly responsive experience designed to simplify daily workflows.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              {/* Left Side: Product Showcase Visual */}
+              <div className="lg:col-span-5 flex justify-center">
+                <div className="relative w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-200 bg-white group p-4 flex items-center justify-center min-h-[360px]">
+                  <img
+                    src={showcaseImageMap[study.slug]?.[1] || showcaseImageMap[study.slug]?.[0] || study.image || '/images/cc_highlight_product.jpg'}
+                    alt={`${study.title} Showcase`}
+                    className="w-full h-auto max-h-[460px] object-contain rounded-2xl group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+              </div>
+
+              {/* Right Side: 2x2 Grid with Blue Border Cards */}
+              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                {productExpCards.map((card, idx) => {
+                  const isExpanded = !!expandedProductExp[idx];
+                  return (
+                    <div
+                      key={idx}
+                      className="rounded-2xl border-2 border-[#2196E8] p-6 bg-white shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between space-y-4"
+                    >
+                      <div className="space-y-3">
+                        <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+                          {card.icon}
+                        </div>
+                        <h4 className="font-extrabold text-slate-900 text-base font-body leading-snug">
+                          {card.title}
+                        </h4>
+                        <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                          {isExpanded ? card.fullDesc : card.shortDesc}
+                        </p>
+                      </div>
+
+                      <div className="pt-1">
+                        <button
+                          onClick={() => toggleProductExp(idx)}
+                          className="inline-flex items-center gap-1 text-xs font-bold text-[#2196E8] hover:text-blue-700 transition cursor-pointer"
+                        >
+                          <span>{isExpanded ? 'Read Less' : 'Read More'}</span>
+                          {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 4. HIGHLIGHTS (3D PERSPECTIVE PHONE CAROUSEL) ── */}
+        <section id="highlights" className="py-10 sm:py-14 bg-gradient-to-b from-white via-slate-50/50 to-white border-b border-slate-200 overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-8">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight font-body inline-block relative">
+                Highlights
+                <span className="block w-14 h-1.5 bg-[#2196E8] rounded-full mx-auto mt-2" />
+              </h2>
+            </div>
+
+            {/* 3D Perspective Phone Showcase */}
+            <div className="relative max-w-4xl mx-auto mb-8">
+              <div className="flex items-center justify-center gap-4 sm:gap-8 py-4">
+                {/* Left Screen Card (Tilted Angle) */}
+                <div
+                  onClick={() => setHighlightIdx((highlightIdx - 1 + 3) % 3)}
+                  className="relative w-48 sm:w-64 h-[340px] sm:h-[400px] rounded-3xl p-3 sm:p-4 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                >
+                  <img
+                    src={highlightItems[(highlightIdx + 2) % 3].screen}
+                    alt="Previous Screen"
+                    className="w-full h-full object-contain drop-shadow-md transition-all duration-700"
+                  />
+                </div>
+
+                {/* Center Main Screen Card (Active Blue Border Focus) */}
+                <div
+                  className="relative w-56 sm:w-72 h-[380px] sm:h-[450px] rounded-3xl p-4 sm:p-5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden"
+                >
+                  <img
+                    src={highlightItems[highlightIdx].screen}
+                    alt="Active Screen"
+                    className="w-full h-full object-contain drop-shadow-xl transition-all duration-700"
+                  />
+                </div>
+
+                {/* Right Screen Card (Tilted Angle) */}
+                <div
+                  onClick={() => setHighlightIdx((highlightIdx + 1) % 3)}
+                  className="relative w-48 sm:w-64 h-[340px] sm:h-[400px] rounded-3xl p-3 sm:p-4 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                >
+                  <img
+                    src={highlightItems[(highlightIdx + 1) % 3].screen}
+                    alt="Next Screen"
+                    className="w-full h-full object-contain drop-shadow-md transition-all duration-700"
+                  />
+                </div>
+              </div>
+
+              <button
+                onClick={() => setHighlightIdx((prev) => (prev - 1 + 3) % 3)}
+                className="absolute left-0 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition shadow-lg cursor-pointer hover:scale-110"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => setHighlightIdx((prev) => (prev + 1) % 3)}
+                className="absolute right-0 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition shadow-lg cursor-pointer hover:scale-110"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+
+              <div className="flex justify-center items-center gap-2 mt-3">
+                {[0, 1, 2].map((i) => (
+                  <button
+                    key={i}
+                    onClick={() => setHighlightIdx(i)}
+                    className={`transition-all duration-300 rounded-full cursor-pointer ${
+                      highlightIdx === i ? 'w-6 h-2 bg-[#2196E8]' : 'w-2 h-2 bg-slate-300'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* 3 Highlight Cards Below */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {highlightItems.map((item) => {
+                const isActive = highlightIdx === item.id;
                 return (
                   <div
-                    key={i}
-                    className="w-full py-12 sm:py-16 lg:py-20 border-b border-slate-200 last:border-0 font-body"
+                    key={item.id}
+                    onClick={() => setHighlightIdx(item.id)}
+                    className={`rounded-2xl p-6 sm:p-7 transition-all duration-300 cursor-pointer space-y-3 ${
+                      isActive
+                        ? 'border-2 border-[#2196E8] bg-white shadow-lg -translate-y-1'
+                        : 'border border-slate-200 bg-white hover:border-slate-300 shadow-xs'
+                    }`}
                   >
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                      {isLeft ? (
-                        <>
-                          <div className="lg:col-span-5 flex justify-center items-center">
-                            <div className="w-full bg-gradient-to-br from-blue-500/10 via-slate-100/40 to-slate-200/50 rounded-3xl p-8 text-center space-y-4 hover:scale-105 transition-transform duration-500 border border-slate-200 shadow-md font-body">
-                              <div
-                                className="w-16 h-16 rounded-2xl text-white flex items-center justify-center text-3xl mx-auto shadow-md font-body bg-[#2196E8]"
-                              >
-                                {i % 4 === 0 ? <Shield className="w-8 h-8" /> : i % 4 === 1 ? <Route className="w-8 h-8" /> : i % 4 === 2 ? <CalendarCheck className="w-8 h-8" /> : <Coins className="w-8 h-8" />}
-                              </div>
-                              <span className="text-sm font-extrabold tracking-wide block font-body text-[#2196E8]">
-                                {sec.title}
-                              </span>
-                              <p className="text-xs text-slate-600 font-body">
-                                High-Precision Architecture And Frictionless User Experience
-                              </p>
-                              <div className="flex justify-center gap-2 pt-1 flex-wrap font-body">
-                                <span className="px-3 py-1 bg-slate-900 text-white rounded-lg text-xs font-bold font-body">Fast</span>
-                                <span className="px-3 py-1 bg-[#2196E8] text-white rounded-lg text-xs font-bold font-body">Automated</span>
-                                <span className="px-3 py-1 bg-sky-600 text-white rounded-lg text-xs font-bold font-body">Secure</span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="lg:col-span-7 space-y-5 font-body">
-                            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight font-body">
-                              {num} {sec.title}
-                            </h3>
-                            <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-body">
-                              {sec.desc}
-                            </p>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 font-body">
-                              <div className="p-4 rounded-xl bg-slate-100/80 border border-slate-200/60 flex items-center space-x-3 shadow-sm">
-                                <Layers className="w-4 h-4 text-[#2196E8]" />
-                                <span className="font-semibold text-slate-800 text-sm font-body">Componentized UI Architecture</span>
-                              </div>
-                              <div className="p-4 rounded-xl bg-slate-100/80 border border-slate-200/60 flex items-center space-x-3 shadow-sm">
-                                <Cpu className="w-4 h-4 text-[#4A72EB]" />
-                                <span className="font-semibold text-slate-800 text-sm font-body">Real-Time Cloud State Engine</span>
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="lg:col-span-7 space-y-5 order-2 lg:order-1 font-body">
-                            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight font-body">
-                              {num} {sec.title}
-                            </h3>
-                            <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-body">
-                              {sec.desc}
-                            </p>
-
-                            <div className="flex gap-3 pt-2 flex-wrap font-body">
-                              <span className="px-4 py-2 bg-blue-50 border border-blue-200 text-blue-700 rounded-xl text-xs font-bold font-body shadow-sm">
-                                Live Verified
-                              </span>
-                              <span className="px-4 py-2 bg-sky-50 border border-sky-200 text-sky-700 rounded-xl text-xs font-bold font-body shadow-sm">
-                                99.9% Uptime
-                              </span>
-                              <span className="px-4 py-2 bg-indigo-50 border border-indigo-200 text-indigo-700 rounded-xl text-xs font-bold font-body shadow-sm">
-                                Cloud Scalable
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="lg:col-span-5 flex justify-center items-center order-1 lg:order-2">
-                            <div className="w-full bg-gradient-to-br from-blue-500/10 via-slate-100/40 to-slate-200/50 rounded-3xl p-8 text-center space-y-4 hover:scale-105 transition-transform duration-500 border border-slate-200 shadow-md font-body">
-                              <div className="w-16 h-16 rounded-2xl bg-[#2196E8] text-white flex items-center justify-center text-3xl mx-auto shadow-md font-body">
-                                <CheckCircle2 className="w-8 h-8" />
-                              </div>
-                              <span className="text-sm font-extrabold tracking-wide text-[#2196E8] block font-body">
-                                {sec.title}
-                              </span>
-                              <p className="text-xs text-slate-600 font-body">
-                                Seamless User Flow And Automated Processing
-                              </p>
-                            </div>
-                          </div>
-                        </>
-                      )}
+                    <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+                      {item.icon}
                     </div>
+                    <h4 className="font-extrabold text-slate-900 text-base font-body leading-snug">
+                      {item.title}
+                    </h4>
+                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
                 );
               })}
@@ -684,149 +1302,440 @@ export default function DynamicCaseStudyPage({
           </div>
         </section>
 
-        {/* ── APP / PLATFORM IS LIVE (CELEBRATORY CANNON SECTION) ── */}
-        <section className="py-20 bg-[#05080C] text-white relative overflow-hidden w-full font-body">
-          <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-            {[
-              { cls: 'cannon-particle-left w-3 h-3 bg-[#a786ff] rounded-sm', d: '0s' },
-              { cls: 'cannon-particle-left w-2.5 h-4 bg-[#fd8bbc] rotate-45', d: '0.5s' },
-              { cls: 'cannon-particle-left w-3 h-2 bg-[#eca184] -rotate-12', d: '1s' },
-              { cls: 'cannon-particle-left w-3.5 h-3.5 rounded-full bg-[#f8deb1]', d: '1.5s' },
-              { cls: 'cannon-particle-left w-2 h-4 bg-[#10b981] rotate-12', d: '2s' },
-              { cls: 'cannon-particle-left w-3 h-3 bg-[#38bdf8] rotate-45', d: '2.5s' },
-              { cls: 'cannon-particle-right w-3 h-3 bg-[#fd8bbc] rounded-sm', d: '0.2s' },
-              { cls: 'cannon-particle-right w-3 h-4 bg-[#a786ff] -rotate-45', d: '0.7s' },
-              { cls: 'cannon-particle-right w-2.5 h-2.5 rounded-full bg-[#10b981]', d: '1.2s' },
-              { cls: 'cannon-particle-right w-3.5 h-2 bg-[#f8deb1] rotate-30', d: '1.7s' },
-              { cls: 'cannon-particle-right w-3 h-3 bg-[#eca184] rotate-12', d: '2.2s' },
-              { cls: 'cannon-particle-right w-2 h-4 bg-[#facc15] -rotate-12', d: '2.7s' },
-            ].map((p, i) => (
-              <div key={i} className={p.cls} style={{ animationDelay: p.d }} />
-            ))}
-            <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] rounded-full blur-[140px] pointer-events-none opacity-25 bg-[#2196E8]"
-            />
-          </div>
-
-          <div className="w-full max-w-4xl mx-auto px-6 text-center relative z-20 space-y-8 font-body">
-            <div className="flex justify-center">
-              <div className="relative group cursor-pointer">
-                <div
-                  className="absolute -inset-3 rounded-3xl blur-2xl transition-all opacity-60 bg-[#2196E8]"
-                />
-                <BrandAvatar src={study.image} title={study.title} size="lg" />
-              </div>
-            </div>
-
-            <div className="space-y-3 font-body">
-              <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight font-body">
-                {capitalizeText(study.title)}
+        {/* ── 5. TECHNOLOGY STACK (ONE LAYER X-AXIS MARQUEE WITH HOVER STOP) ── */}
+        <section id="tech-stack" className="py-8 sm:py-10 bg-white border-b border-slate-200 overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-6 space-y-1.5">
+              <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight font-body">
+                Technology stack
               </h2>
-              <p className="text-slate-300 text-base sm:text-xl leading-relaxed max-w-2xl mx-auto font-body">
-                {capitalizeText(study.subtitle || study.about)}
+              <p className="text-slate-500 text-xs sm:text-sm font-medium">
+                Built with modern, scalable, high-performance web and backend technologies.
               </p>
             </div>
+          </div>
 
-            <div className="inline-flex items-center space-x-3 px-7 py-3.5 rounded-full bg-[#0A0F17] hover:bg-[#121B2B] border border-blue-500/50 text-[#2196E8] text-lg sm:text-xl font-extrabold shadow-[0_0_35px_rgba(33,150,232,0.35)] cursor-pointer transition hover:scale-105 font-body">
-              <span className="text-2xl animate-bounce">🎉</span>
-              <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-cyan-300 bg-clip-text text-transparent tracking-wide font-body">
-                {isMobileApp ? 'App Is Live!' : 'Platform Is Live!'}
-              </span>
-              <span className="text-2xl animate-bounce">🎉</span>
-            </div>
+          {/* Infinite X-Axis Scrolling Single Row (One Layer) */}
+          <div className="w-full overflow-hidden relative py-2 marquee-container">
+            <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-            <div className="flex flex-wrap items-center justify-center gap-5 pt-4 font-body">
-              {playstoreMatch && (
-                <a
-                  href={playstoreMatch[0]}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-4 px-8 py-4 rounded-2xl bg-[#090E17] hover:bg-[#0E1524] border border-blue-500/40 hover:border-blue-400 text-white font-medium shadow-[0_0_25px_rgba(33,150,232,0.25)] transition transform hover:-translate-y-1 font-body"
-                >
-                  <svg className="w-7 h-7 text-[#2196E8] fill-current" viewBox="0 0 512 512">
-                    <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58 33.3-60.1-60.1L472.2 359c16.1-9.2 27.2-26.6 27.2-46.7 0-20.1-11.1-37.5-27.2-46.7zm-207.1 52.1L104.6 499l220.7-126.7-60.1-60.1-24.4 24.4z" />
-                  </svg>
-                  <div className="text-left font-body">
-                    <span className="text-[10px] tracking-wide text-slate-400 block leading-none font-bold font-body">Get It On</span>
-                    <span className="text-lg font-extrabold text-white leading-tight font-body">Google Play</span>
-                  </div>
-                </a>
-              )}
-
-              {appstoreMatch && (
-                <a
-                  href={appstoreMatch[0]}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-4 px-8 py-4 rounded-2xl bg-[#090E17] hover:bg-[#0E1524] border border-slate-700/80 hover:border-slate-500 text-white font-medium shadow-[0_0_25px_rgba(255,255,255,0.1)] transition transform hover:-translate-y-1 font-body"
-                >
-                  <svg className="w-7 h-7 text-white fill-current" viewBox="0 0 384 512">
-                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-48.7-22.9-74.5-22.9-39.9 0-79.7 20.6-102.1 59.5-23 39.8-17.6 102.4 3.9 155.8 12.1 30.2 30 53.5 53 54.1 22.8.6 34.7-11.4 59.5-11.4 24.8 0 36.6 11.4 59.5 11.4 23.3-.6 41.2-21.2 53-38.2 15-21.4 22.4-44.4 22.7-45.6-1.1-.3-44.3-17.2-44.7-68.8zM245.5 81c22.4-24.6 37.5-58.8 31.3-93-29.4 1.2-65.4 19.6-86.5 44.6-18.8 22.4-35.3 56.8-29.3 89.8 32.5 1.2 65.7-18.4 84.5-41.4z" />
-                  </svg>
-                  <div className="text-left font-body">
-                    <span className="text-[10px] tracking-wide text-slate-400 block leading-none font-bold font-body">Download On The</span>
-                    <span className="text-lg font-extrabold text-white leading-tight font-body">App Store</span>
-                  </div>
-                </a>
-              )}
-
-              {primaryLiveUrl && !playstoreMatch && !appstoreMatch && (
-                <a
-                  href={primaryLiveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-3 px-8 py-4 rounded-2xl bg-[#090E17] hover:bg-[#0E1524] border border-[#2196E8]/40 hover:border-[#2196E8] text-white font-medium shadow-[0_0_25px_rgba(33,150,232,0.25)] transition transform hover:-translate-y-1 font-body"
-                >
-                  <Globe className="w-6 h-6 text-[#2196E8]" />
-                  <div className="text-left font-body">
-                    <span className="text-[10px] tracking-wide text-slate-400 block leading-none font-bold font-body">Visit Live Website</span>
-                    <span className="text-lg font-extrabold text-white leading-tight font-body">Launch Platform</span>
-                  </div>
-                </a>
-              )}
-
-              <Link
-                href="/contact"
-                className="inline-flex items-center space-x-3 px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-medium transition transform hover:-translate-y-1 font-body"
-              >
-                <Sparkles className="w-5 h-5 text-amber-300" />
-                <span className="text-base font-bold font-body">Build Similar Platform</span>
-              </Link>
+            <div className="flex w-max space-x-4 animate-marquee-left">
+              {[...Array(4)].map((_, rep) => (
+                <div key={rep} className="flex space-x-4 shrink-0">
+                  {techStackList.map((tech, idx) => (
+                    <div
+                      key={idx}
+                      className="px-5 py-3 bg-white border border-slate-200/90 rounded-2xl shadow-xs flex items-center space-x-3 shrink-0 select-none hover:border-[#2196E8] hover:shadow-md transition cursor-pointer group"
+                    >
+                      <div className={`w-8 h-8 rounded-xl ${tech.bg} flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform`}>
+                        {tech.icon}
+                      </div>
+                      <span className="font-bold text-slate-800 text-sm whitespace-nowrap group-hover:text-[#2196E8] transition-colors">{tech.name}</span>
+                    </div>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* ── SHOWCASE BANNER & PREV / NEXT NAVIGATION ── */}
-        <section className="w-full bg-[#05080C] py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-900 font-body">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 font-body">
-            <Link
-              href={`/case-studies/${prevStudy.slug}`}
-              className="group flex items-center gap-3 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all w-full sm:w-auto font-body"
-            >
-              <ChevronLeft className="w-5 h-5 text-[#2196E8] group-hover:-translate-x-1 transition-transform" />
-              <div className="text-left font-body">
-                <span className="text-[11px] tracking-wide text-slate-400 block font-body">Previous Case Study</span>
-                <span className="font-bold text-sm sm:text-base font-body">{capitalizeText(prevStudy.title)}</span>
-              </div>
-            </Link>
+        {/* ── 6. SCOPE ── */}
+        <section id="scope" className="py-10 sm:py-14 bg-white border-b border-slate-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-8 space-y-2">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight font-body">
+                Scope
+              </h2>
+              <p className="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
+                Explore the core operational scope of the {study.title} platform — engineered for performance, reliability, and continuous scalability.
+              </p>
+            </div>
 
-            <Link
-              href="/case-studies"
-              className="text-xs font-bold tracking-wide text-slate-400 hover:text-[#2196E8] transition-colors font-body"
-            >
-              View All Case Studies
-            </Link>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {scopeCards.map((sc, idx) => (
+                <div
+                  key={idx}
+                  className="scope-animated-card relative z-10 cursor-pointer"
+                >
+                  <div className="relative z-10 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xl font-black text-[#2196E8] font-mono">{sc.num}</span>
+                      <span className="px-3 py-1 rounded-full bg-blue-50 text-[#2196E8] text-[10px] font-extrabold tracking-wider uppercase font-mono">
+                        {sc.tag}
+                      </span>
+                    </div>
+                    <h4 className="font-extrabold text-slate-900 text-lg font-body">{sc.title}</h4>
+                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">{sc.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            <Link
-              href={`/case-studies/${nextStudy.slug}`}
-              className="group flex items-center justify-end gap-3 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all w-full sm:w-auto text-right font-body"
-            >
-              <div className="text-right font-body">
-                <span className="text-[11px] tracking-wide text-slate-400 block font-body">Next Case Study</span>
-                <span className="font-bold text-sm sm:text-base font-body">{capitalizeText(nextStudy.title)}</span>
+        {/* ── 7. RESULTS & CLIENT TESTIMONIAL ── */}
+        <section id="results" className="pt-8 pb-10 sm:pt-10 sm:pb-12 bg-white border-b border-slate-200 font-body">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            {/* Header: Results */}
+            <div className="text-center max-w-3xl mx-auto mb-8">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight font-body">
+                Results
+              </h2>
+            </div>
+
+            {/* 4 Stat Cards */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 max-w-6xl mx-auto">
+              {resultsStats.map((stat, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 text-center shadow-xs hover:border-[#2196E8] hover:shadow-md transition"
+                >
+                  <div className={`text-3xl sm:text-4xl lg:text-5xl font-black ${stat.color} font-mono tracking-tight`}>
+                    {stat.value}
+                  </div>
+                  <div className="text-[11px] sm:text-xs font-extrabold text-slate-700 tracking-wider uppercase mt-2 font-mono">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Client Testimonial Card */}
+            <div className="max-w-6xl mx-auto bg-[#F8FAFC] rounded-3xl border border-slate-200 p-8 sm:p-12 shadow-sm">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                {/* Left Side: Text & Quote */}
+                <div className="lg:col-span-7 space-y-6">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-1.5 h-6 bg-[#2196E8] rounded-full" />
+                    <span className="text-xs font-extrabold uppercase tracking-widest text-[#2196E8] font-mono">
+                      WHAT OUR CLIENTS SAY
+                    </span>
+                  </div>
+
+                  <div>
+                    <h3 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-body uppercase">
+                      {study.title} Leadership
+                    </h3>
+                    <div className="text-xs font-bold text-slate-400 font-mono uppercase tracking-wider mt-1">
+                      {study.title.toUpperCase()} • <span className="text-[#2196E8]">Client Success Stories</span>
+                    </div>
+                  </div>
+
+                  <blockquote className="text-lg sm:text-xl font-bold text-slate-800 leading-relaxed italic">
+                    “We didn't just build a digital application. We built a system that turns everyday interactions into an automated, scalable habit.”
+                  </blockquote>
+
+                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                    We helped our client turn their vision into a successful digital solution — delivering strong business results, seamless scalability, and long-term customer value.
+                  </p>
+
+                  <div className="pt-2">
+                    <span className="inline-flex items-center px-4 py-2 rounded-full bg-blue-50 border border-blue-200 text-[#2196E8] text-xs font-bold tracking-wide">
+                      Happy Client. Successful Project. Real Results.
+                    </span>
+                  </div>
+                </div>
+
+                {/* Right Side: Video Player for Clean Culture only, or Brand Showcase for other studies */}
+                <div className="lg:col-span-5 flex justify-center items-center">
+                  {study.slug === 'clean-culture' ? (
+                    <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-800 group bg-slate-950 max-h-[300px]">
+                      <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover max-h-[300px]"
+                      >
+                        <source src="/videos/clean_culture_overview.mp4" type="video/mp4" />
+                      </video>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                    </div>
+                  ) : (
+                    <div className="relative w-full rounded-2xl overflow-hidden shadow-md border border-slate-200 group bg-white p-6 flex flex-col items-center justify-center text-center space-y-4">
+                      {showcaseImageMap[study.slug]?.[2] || (study.image && !study.image.includes('cc_')) ? (
+                        <div className="w-full relative rounded-xl overflow-hidden shadow-sm">
+                          <img
+                            src={showcaseImageMap[study.slug]?.[2] || study.image}
+                            alt={study.title}
+                            className="w-full h-48 object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                          <div className="absolute bottom-3 left-3 flex items-center space-x-2">
+                            {customLogo && (
+                              <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center border border-slate-200 shadow">
+                                <img src={customLogo} alt={study.title} className="w-full h-full object-contain" />
+                              </div>
+                            )}
+                            <span className="text-white text-xs font-bold font-mono uppercase">{study.title}</span>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="space-y-4 py-4">
+                          {customLogo ? (
+                            <div className="w-20 h-20 rounded-2xl bg-white border-2 border-slate-200 p-2.5 flex items-center justify-center mx-auto shadow-md">
+                              <img src={customLogo} alt={study.title} className="w-full h-full object-contain" />
+                            </div>
+                          ) : (
+                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#2196E8] to-blue-700 text-white font-extrabold text-2xl flex items-center justify-center mx-auto shadow-lg shadow-blue-500/20">
+                              {study.title.charAt(0)}
+                            </div>
+                          )}
+                          <div className="space-y-1">
+                            <h4 className="font-extrabold text-slate-900 text-xl font-body">{study.title}</h4>
+                            <p className="text-xs text-slate-500 font-mono uppercase tracking-wider">{study.category} • Certified Success Story</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
               </div>
-              <ChevronRight className="w-5 h-5 text-[#2196E8] group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ── SEAMLESS CURVED BLEND DIVIDER (WHITE TO DARK APP CTA) ── */}
+        <div className="w-full overflow-hidden leading-none bg-white -mb-px relative z-10">
+          <svg className="relative block w-full h-6 sm:h-10 text-[#05080C]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 40" preserveAspectRatio="none">
+            <path d="M0,0 C480,40 960,40 1440,0 L1440,40 L0,40 Z" fill="currentColor" />
+          </svg>
+        </div>
+
+        {/* ── 8. PRE-FOOTER: APP IS LIVE SHOWCASE WITH CONFETTI SIDE CANNONS ── */}
+        <section
+          id="app-is-live-section"
+          className="py-8 sm:py-10 bg-[#05080C] text-white relative overflow-hidden w-full m-0 p-0 border-none font-body"
+        >
+          {/* Confetti Canvas Embedded inside Section Only */}
+          <canvas ref={confettiCanvasRef} id="confetti-canvas" className="absolute inset-0 w-full h-full pointer-events-none z-10" />
+
+          {/* Ambient Glow Backdrop */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
+          </div>
+
+          <div className="w-full max-w-4xl mx-auto px-6 text-center relative z-20 space-y-6">
+            {/* 1. Ambient Glow Backdrop behind App Logo */}
+            <div className="flex justify-center">
+              <div className="relative group cursor-pointer" onClick={triggerSideCannons}>
+                <div className="absolute -inset-3 rounded-3xl bg-[#2196E8]/40 blur-2xl group-hover:bg-[#2196E8]/60 transition-all" />
+                {customLogo ? (
+                  <img
+                    src={customLogo}
+                    alt={`${study.title} Logo`}
+                    className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-3xl border-2 border-white/80 object-contain p-3.5 bg-white shadow-[0_0_50px_rgba(255,255,255,0.35)] transform transition hover:scale-105"
+                  />
+                ) : (
+                  <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-3xl border-2 border-white/80 bg-white text-[#2196E8] font-extrabold text-4xl flex items-center justify-center shadow-[0_0_50px_rgba(255,255,255,0.35)] transform transition hover:scale-105">
+                    {study.title.charAt(0)}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight font-body">
+                {study.title}
+              </h2>
+              <p className="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto font-normal">
+                {study.subtitle && study.subtitle !== study.title ? study.subtitle : (study.about ? study.about.split('.')[0] + '.' : '')}
+              </p>
+            </div>
+
+            {/* 2. "App/Platform is Live!" Pill Badge with Bouncing Emoji & Scale Hover */}
+            <div className="pt-1 flex justify-center">
+              <div
+                onClick={triggerSideCannons}
+                className="inline-flex items-center space-x-3 px-7 py-3.5 rounded-full bg-[#0A0F17] hover:bg-[#121B2B] border border-emerald-500/50 text-emerald-400 text-lg sm:text-xl font-extrabold shadow-[0_0_35px_rgba(16,185,129,0.35)] cursor-pointer transform transition hover:scale-105 select-none"
+              >
+                <span className="text-2xl animate-bounce">🎉</span>
+                <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300 bg-clip-text text-transparent">
+                  {isWebOnly ? 'Website is Live!' : isMobileApp ? 'App is Live!' : 'Platform is Live!'}
+                </span>
+                <span className="text-2xl animate-bounce">🎉</span>
+              </div>
+            </div>
+
+            {/* 3. Action / Download Buttons Lift Animation (Hover translateY) */}
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+              {/* Web-Only Case Studies (e.g. Infragen, NestPilot, Keystone, Amaravathy Coir, etc.) */}
+              {isWebOnly && webLink && (
+                <>
+                  <a
+                    href={webLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={triggerSideCannons}
+                    className="inline-flex items-center space-x-3.5 px-7 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-[#2196E8] to-[#1d4ed8] hover:from-[#1e88e5] hover:to-[#1e40af] text-white font-bold shadow-[0_0_35px_rgba(33,150,232,0.4)] transition-all transform hover:-translate-y-1 hover:scale-105"
+                  >
+                    <Globe className="w-6 h-6 text-cyan-200 shrink-0 animate-pulse" />
+                    <div className="text-left font-body">
+                      <span className="text-[10px] uppercase font-bold text-blue-100 block leading-none">LIVE WEB PLATFORM</span>
+                      <span className="text-lg font-extrabold text-white leading-tight flex items-center gap-1.5">
+                        Visit Live Website <ExternalLink className="w-4 h-4 text-cyan-200" />
+                      </span>
+                    </div>
+                  </a>
+
+                  <a
+                    href="/contact"
+                    className="inline-flex items-center space-x-3.5 px-7 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-[#090E17] hover:bg-[#0E1524] border border-slate-700/80 hover:border-slate-500 text-white font-medium shadow-[0_0_25px_rgba(255,255,255,0.08)] transition-all transform hover:-translate-y-1 hover:scale-105"
+                  >
+                    <Sparkles className="w-5 h-5 text-[#2196E8] shrink-0" />
+                    <div className="text-left font-body">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 block leading-none">CONSULTATION</span>
+                      <span className="text-lg font-extrabold text-white leading-tight">Request Free Demo</span>
+                    </div>
+                  </a>
+                </>
+              )}
+
+              {/* Mobile Apps (e.g. Clean Culture, Akirva, Judah) */}
+              {isMobileApp && (
+                <>
+                  {hasPlayStore && (
+                    <a
+                      href={playStoreLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={triggerSideCannons}
+                      className="inline-flex items-center space-x-3.5 px-6 sm:px-7 py-3 sm:py-3.5 rounded-2xl bg-[#090E17] hover:bg-[#0E1524] border border-emerald-500/40 hover:border-emerald-400 text-white font-medium shadow-[0_0_25px_rgba(16,185,129,0.25)] transition-all transform hover:-translate-y-1 hover:scale-105"
+                    >
+                      <svg className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 drop-shadow-md" viewBox="0 0 512 512">
+                        <path d="M54.7 7.2c-7.3 4-12.7 11.8-12.7 21.6v454.4c0 9.8 5.4 17.6 12.7 21.6l245.9-248.8z" fill="#00E5FF"/>
+                        <path d="M368.7 194.5l-68.7 68.7-245.3-256c3.2-1.7 6.9-2.7 10.9-2.7 5.6 0 11.2 1.8 15.9 4.7z" fill="#00E676"/>
+                        <path d="M429.3 234.3l-60.6-39.8-68.7 68.7 68.7 68.7 60.9-39.9c10.4-6.8 16.4-17.7 16.4-28.8 0-11.2-6-22.1-16.7-28.9z" fill="#FFD600"/>
+                        <path d="M81.5 507.5c-4.7 2.9-10.3 4.5-15.9 4.5-4 0-7.7-1-10.9-2.7l245.3-256 68.7 68.7z" fill="#FF3D00"/>
+                      </svg>
+                      <div className="text-left font-body">
+                        <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block leading-none">GET IT ON</span>
+                        <span className="text-lg sm:text-xl font-extrabold text-white leading-tight">Google Play</span>
+                      </div>
+                    </a>
+                  )}
+
+                  {hasAppStore && (
+                    <a
+                      href={appStoreLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={triggerSideCannons}
+                      className="inline-flex items-center space-x-3.5 px-6 sm:px-7 py-3 sm:py-3.5 rounded-2xl bg-[#090E17] hover:bg-[#0E1524] border border-slate-700/80 hover:border-slate-500 text-white font-medium shadow-[0_0_25px_rgba(255,255,255,0.08)] transition-all transform hover:-translate-y-1 hover:scale-105"
+                    >
+                      <svg className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 fill-white drop-shadow-md" viewBox="0 0 170 170">
+                        <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.08-7.78-8.08-12.28-15-4.5-6.91-8.16-14.78-10.98-23.6-2.83-8.83-4.25-17.43-4.25-25.82 0-12.98 3.31-23.75 9.94-32.32 6.63-8.56 15.1-12.9 25.4-13.01 4.58 0 9.77 1.25 15.58 3.75 5.8 2.5 9.74 3.79 11.81 3.86 1.74 0 5.85-1.39 12.33-4.18 6.47-2.79 11.96-3.99 16.46-3.6 12.18.98 21.6 5.56 28.28 13.73-10.88 6.64-16.22 15.74-16.01 27.29.22 9.03 3.65 16.59 10.3 22.68 6.64 6.09 14.54 9.53 23.68 10.33-2.17 6.42-4.8 12.82-7.87 19.21zM119.22 31.75c0-7.39 2.61-14.35 7.82-20.89 5.22-6.53 11.75-10.45 19.6-11.75.22 1.09.33 2.18.33 3.26 0 7.39-2.72 14.46-8.16 21.2-5.44 6.74-12.07 10.66-19.89 11.76-.11-1.09-.17-2.18-.17-3.26z"/>
+                      </svg>
+                      <div className="text-left font-body">
+                        <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block leading-none">DOWNLOAD ON THE</span>
+                        <span className="text-lg sm:text-xl font-extrabold text-white leading-tight">App Store</span>
+                      </div>
+                    </a>
+                  )}
+
+                  {webLink && (
+                    <a
+                      href={webLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={triggerSideCannons}
+                      className="inline-flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-500/40 text-emerald-300 font-medium shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-all transform hover:-translate-y-1 hover:scale-105"
+                    >
+                      <Globe className="w-5 h-5 text-emerald-400 shrink-0" />
+                      <div className="text-left font-body">
+                        <span className="text-[10px] uppercase font-bold text-emerald-400/80 block leading-none">WEB PORTAL</span>
+                        <span className="text-base font-extrabold text-white leading-tight flex items-center gap-1">
+                          Live Portal <ExternalLink className="w-3.5 h-3.5 text-emerald-400" />
+                        </span>
+                      </div>
+                    </a>
+                  )}
+                </>
+              )}
+
+              {/* Internal / AI / Enterprise Case Studies */}
+              {!isWebOnly && !isMobileApp && (
+                <>
+                  <a
+                    href="/contact"
+                    className="inline-flex items-center space-x-3.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-[#2196E8] to-[#1d4ed8] hover:from-[#1e88e5] hover:to-[#1e40af] text-white font-bold shadow-[0_0_35px_rgba(33,150,232,0.4)] transition-all transform hover:-translate-y-1 hover:scale-105"
+                  >
+                    <Sparkles className="w-6 h-6 text-cyan-200 shrink-0" />
+                    <div className="text-left font-body">
+                      <span className="text-[10px] uppercase font-bold text-blue-100 block leading-none">ENTERPRISE SOLUTION</span>
+                      <span className="text-lg font-extrabold text-white leading-tight">Request Live Demo</span>
+                    </div>
+                  </a>
+
+                  <a
+                    href="/contact"
+                    className="inline-flex items-center space-x-3.5 px-8 py-4 rounded-2xl bg-[#090E17] hover:bg-[#0E1524] border border-slate-700/80 hover:border-slate-500 text-white font-medium shadow-[0_0_25px_rgba(255,255,255,0.08)] transition-all transform hover:-translate-y-1 hover:scale-105"
+                  >
+                    <div className="text-left font-body">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 block leading-none">CONSULTATION</span>
+                      <span className="text-lg font-extrabold text-white leading-tight">Discuss Custom AI</span>
+                    </div>
+                  </a>
+                </>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* ── 9. BOTTOM TRUST BAR / TICKER (SCROLL ANIMATION WITH HOVER PAUSE) ── */}
+        <section className="w-full bg-white border-y border-slate-200 py-4 overflow-hidden relative select-none marquee-container cursor-pointer">
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+          <div className="flex w-max space-x-12 animate-marquee-left">
+            {[...Array(4)].map((_, rep) => (
+              <div key={rep} className="flex items-center space-x-12 shrink-0">
+                <div className="flex items-center space-x-3 shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 shrink-0">
+                    <Shield className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="font-extrabold text-slate-900 block text-xs whitespace-nowrap">End–to–end digital solutions</span>
+                    <span className="text-slate-500 text-[11px] whitespace-nowrap">From idea to launch • Complete solutions under one roof</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-3 shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 shrink-0">
+                    <Shield className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="font-extrabold text-slate-900 block text-xs whitespace-nowrap">Quality–driven development</span>
+                    <span className="text-slate-500 text-[11px] whitespace-nowrap">Modern &amp; reliable solutions • Built for performance and scalability</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-3 shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 shrink-0">
+                    <Truck className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="font-extrabold text-slate-900 block text-xs whitespace-nowrap">On–time delivery</span>
+                    <span className="text-slate-500 text-[11px] whitespace-nowrap">Efficient project execution • Delivered with clarity and commitment</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-3 shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 shrink-0">
+                    <Headphones className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="font-extrabold text-slate-900 block text-xs whitespace-nowrap">Client success</span>
+                    <span className="text-slate-500 text-[11px] whitespace-nowrap">Turning ideas into successful products • Focused on value, results &amp; long-term growth</span>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -836,6 +1745,22 @@ export default function DynamicCaseStudyPage({
       <FloatingWhatsApp />
 
       <style>{`
+        @keyframes marqueeLeft {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee-left {
+          animation: marqueeLeft 50s linear infinite;
+        }
+        .animate-marquee-left-fast {
+          animation: marqueeLeft 38s linear infinite;
+        }
+        .marquee-container:hover .animate-marquee-left,
+        .marquee-container:hover .animate-marquee-left-fast,
+        .animate-marquee-left:hover,
+        .animate-marquee-left-fast:hover {
+          animation-play-state: paused !important;
+        }
         @keyframes sideCannonLeft {
           0%   { transform: translate(0,0) rotate(0deg) scale(0.5); opacity:1; }
           50%  { transform: translate(38vw,-150px) rotate(360deg) scale(1.2); opacity:0.95; }
@@ -846,8 +1771,100 @@ export default function DynamicCaseStudyPage({
           50%  { transform: translate(-38vw,-150px) rotate(-360deg) scale(1.2); opacity:0.95; }
           100% { transform: translate(-65vw,280px) rotate(-720deg) scale(0.3); opacity:0; }
         }
-        .cannon-particle-left  { position:absolute; left:0; top:50%; pointer-events:none; animation: sideCannonLeft 3.5s cubic-bezier(0.25,1,0.5,1) infinite; }
-        .cannon-particle-right { position:absolute; right:0; top:50%; pointer-events:none; animation: sideCannonRight 3.5s cubic-bezier(0.25,1,0.5,1) infinite; }
+        @keyframes borderGlowRotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        .animated-solution-card {
+          position: relative;
+          overflow: hidden;
+          transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .animated-solution-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 45px -5px rgba(59, 130, 246, 0.4);
+        }
+        .animated-solution-card::before {
+          content: '';
+          position: absolute;
+          inset: -2px;
+          border-radius: 26px;
+          padding: 2px;
+          background: conic-gradient(from 0deg at 50% 50%, #2196E8, #60a5fa, transparent 60%, #2196E8);
+          animation: borderGlowRotate 2.8s linear infinite;
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          pointer-events: none;
+          z-index: 20;
+        }
+        @keyframes floatAmbient1 {
+          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          50% { transform: translateY(-14px) translateX(8px) rotate(8deg); }
+        }
+        @keyframes floatAmbient2 {
+          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          50% { transform: translateY(16px) translateX(-10px) rotate(-10deg); }
+        }
+        @keyframes floatAmbient3 {
+          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          50% { transform: translateY(-10px) translateX(-8px) rotate(6deg); }
+        }
+        @keyframes floatAmbient4 {
+          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          50% { transform: translateY(12px) translateX(10px) rotate(-8deg); }
+        }
+        .animate-float-1 { animation: floatAmbient1 4s ease-in-out infinite; }
+        .animate-float-2 { animation: floatAmbient2 4.5s ease-in-out infinite; }
+        .animate-float-3 { animation: floatAmbient3 3.8s ease-in-out infinite; }
+        .animate-float-4 { animation: floatAmbient4 4.2s ease-in-out infinite; }
+
+        @keyframes scopeBorderRotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        .scope-animated-card {
+          position: relative;
+          background: #ffffff;
+          border-radius: 1.25rem;
+          padding: 1.75rem;
+          overflow: hidden;
+          box-shadow: 0 4px 20px -2px rgba(33, 150, 232, 0.08);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          z-index: 1;
+        }
+        .scope-animated-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 16px 35px -4px rgba(33, 150, 232, 0.25);
+        }
+        .scope-animated-card::before {
+          content: '';
+          position: absolute;
+          top: -65%;
+          left: -65%;
+          width: 230%;
+          height: 230%;
+          background: conic-gradient(
+            from 0deg,
+            transparent 0%,
+            transparent 55%,
+            #93c5fd 70%,
+            #2196E8 85%,
+            #0284c7 95%,
+            transparent 100%
+          );
+          animation: scopeBorderRotate 3.5s linear infinite;
+          z-index: -2;
+        }
+        .scope-animated-card::after {
+          content: '';
+          position: absolute;
+          inset: 2px;
+          background: #ffffff;
+          border-radius: calc(1.25rem - 2px);
+          z-index: -1;
+          border: 1px solid rgba(226, 232, 240, 0.85);
+        }
       `}</style>
     </div>
   );

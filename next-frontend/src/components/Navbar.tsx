@@ -43,11 +43,12 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
   const col1 = [
     { name: "Infragen Realtors", slug: "infragen" },
     { name: "NestPilot PG SaaS", slug: "nestpilot" },
-    { name: "Ruts N Rides (Internal)", slug: "ruts-n-rides-internal" },
+    { name: "Ruts N Rides Operations", slug: "ruts-n-rides-admin" },
     { name: "Squirlio Snacks", slug: "squirlio" },
     { name: "Keystone Enterprise", slug: "keystone" },
     { name: "Thoorigai Events", slug: "thoorigai" },
-    { name: "Splendour Park ERP", slug: "splendour-park" }
+    { name: "Splendour Park ERP", slug: "splendour-park" },
+    { name: "AI Chatbot Assistant", slug: "dhigrowth-ai-chatbot" }
   ];
 
   const col2 = [
@@ -56,7 +57,9 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     { name: "VerdurePax Lifestyle", slug: "verdurepax" },
     { name: "Amaravathy Coir", slug: "amaravathy-coir" },
     { name: "Vectra Mechnovations", slug: "vectra-mechnovations" },
-    { name: "Gigabull Luxury", slug: "gigabull" }
+    { name: "Gigabull Luxury", slug: "gigabull" },
+    { name: "Fabric Defect AI", slug: "fabric-defect-detection" },
+    { name: "AI Invoice Processing", slug: "ai-invoice-processing" }
   ];
 
   const col3 = [
@@ -64,8 +67,9 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     { name: "Ruts N Rides", slug: "ruts-n-rides" },
     { name: "Befhue Creative Agency", slug: "befhue" },
     { name: "Sales CRM App", slug: "sales-app" },
-    { name: "Sanika's Indian Cuisine", slug: "sanikas-indian-cuisine" },
-    { name: "Startten Platform", slug: "startten", type: "new" }
+    { name: "Sanika's Cuisine", slug: "sanikas-restaurant" },
+    { name: "Startten Platform", slug: "startten", type: "new" },
+    { name: "Biscuit Defect AI", slug: "bad-biscuit-detection" }
   ];
 
   const handleApplyClick = () => {
@@ -167,7 +171,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                             onClick={() => setDropdownOpen(false)}
                             className="border border-[#2196E8]/20 bg-[#2196E8]/5 hover:bg-[#2196E8]/10 text-[#2196E8] px-3.5 py-1 rounded-full text-xs font-bold font-body transition-colors"
                           >
-                            19 Projects
+                            23 Projects
                           </Link>
                         </div>
 
