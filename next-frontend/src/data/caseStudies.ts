@@ -32,7 +32,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "NestPilot",
     "category": "SaaS Platform",
     "description": "Managing a PG or hostel shouldn't mean managing spreadsheets, paper registers, WhatsApp messages, rent calculations, and scattered tenant records.",
-    "image": "/images/cc_overview_slide1.png",
+    "image": "/images/case-studies/nestpilot/showcase_1.png",
     "slug": "nestpilot",
     "featured": false
   },

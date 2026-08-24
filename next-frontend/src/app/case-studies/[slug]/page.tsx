@@ -331,6 +331,13 @@ export default function DynamicCaseStudyPage({
       '/images/case-studies/judah/showcase_4.png',
       '/images/case-studies/judah/showcase_5.png',
     ],
+    'nestpilot': [
+      '/images/case-studies/nestpilot/showcase_1.png',
+      '/images/case-studies/nestpilot/showcase_2.png',
+      '/images/case-studies/nestpilot/showcase_3.png',
+      '/images/case-studies/nestpilot/showcase_4.png',
+      '/images/case-studies/nestpilot/showcase_5.png',
+    ],
     'ruts-n-rides': [
       '/images/case-studies/ruts-n-rides/tp1.jpg',
       '/images/case-studies/ruts-n-rides/tp2.jpg',
