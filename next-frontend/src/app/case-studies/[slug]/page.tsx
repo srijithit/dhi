@@ -290,11 +290,11 @@ export default function DynamicCaseStudyPage({
       '/images/case-studies/infragen/property.jpg',
     ],
     'verdurepax': [
-      '/images/case-studies/verdurepax/showcase_3.jpeg',
-      '/images/case-studies/verdurepax/showcase_4.jpg',
-      '/images/case-studies/verdurepax/showcase_5.jpeg',
-      '/images/case-studies/verdurepax/showcase_6.jpeg',
-      '/images/case-studies/verdurepax/showcase_3.jpeg',
+      '/images/case-studies/verdurepax/showcase_1.png',
+      '/images/case-studies/verdurepax/showcase_2.png',
+      '/images/case-studies/verdurepax/showcase_3.png',
+      '/images/case-studies/verdurepax/showcase_4.png',
+      '/images/case-studies/verdurepax/showcase_5.png',
     ],
     'befhue': [
       '/images/case-studies/befhue/showcase_3.webp',

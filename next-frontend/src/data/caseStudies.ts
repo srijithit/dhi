@@ -68,7 +68,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "VerdurePax",
     "category": "E-Commerce",
     "description": "VerdurePax is a modern gardening and plant lifestyle brand built around the idea of making green spaces more beautiful, functional, and accessible.",
-    "image": "/images/case-studies/verdurepax/showcase_3.jpeg",
+    "image": "/images/case-studies/verdurepax/showcase_1.png",
     "slug": "verdurepax",
     "featured": false
   },
