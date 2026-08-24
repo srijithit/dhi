@@ -131,7 +131,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Sanika’s Indian Cuisine",
     "category": "Hospitality & Ordering",
     "description": "Sanika’s Indian Cuisine brings the rich flavours of Indian cooking to Mt.",
-    "image": "/images/case-studies/sanikas/logo.png",
+    "image": "/images/case-studies/sanikas-restaurant/hero.png",
     "slug": "sanikas-restaurant",
     "featured": false
   },
@@ -140,7 +140,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Thoorigai",
     "category": "Event Platform",
     "description": "Thoorigai is a modern digital platform designed to simplify the way users discover and book events.",
-    "image": "/images/case-studies/clean-culture/showcase_2.png",
+    "image": "/images/case-studies/thoorigai/hero.png",
     "slug": "thoorigai",
     "featured": false
   },
@@ -149,7 +149,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Gigabull",
     "category": "E-Commerce",
     "description": "Gigabull is a modern e-commerce platform created for a leather products brand serving customers and international buyers with high-quality leather goods at competitive prices.",
-    "image": "/images/case-studies/gigabull/brand1-product1.png",
+    "image": "/images/case-studies/gigabull/hero.png",
     "slug": "gigabull",
     "featured": false
   },

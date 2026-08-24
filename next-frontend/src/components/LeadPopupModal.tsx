@@ -6,13 +6,11 @@ import { X, Sparkles, CheckCircle2, Loader2, ArrowRight } from 'lucide-react';
 interface LeadPopupModalProps {
   isOpen?: boolean;
   onClose?: () => void;
-  autoPopupDelay?: number;
 }
 
 export default function LeadPopupModal({
   isOpen: controlledIsOpen,
-  onClose,
-  autoPopupDelay = 10000 // 10 seconds
+  onClose
 }: LeadPopupModalProps) {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -25,27 +23,10 @@ export default function LeadPopupModal({
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Auto popup in 10 seconds
-  useEffect(() => {
-    if (autoPopupDelay <= 0) return;
-
-    const isDismissed = typeof window !== 'undefined' && sessionStorage.getItem('lead_popup_closed') === 'true';
-    if (isDismissed) return;
-
-    const timer = setTimeout(() => {
-      setInternalIsOpen(true);
-    }, autoPopupDelay);
-
-    return () => clearTimeout(timer);
-  }, [autoPopupDelay]);
-
   const showModal = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
 
   const handleClose = () => {
     setInternalIsOpen(false);
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('lead_popup_closed', 'true');
-    }
     if (onClose) onClose();
   };
 

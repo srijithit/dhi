@@ -75,7 +75,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built a complete mobility ecosystem — from the first ride request to the final destination."
     ],
     "link": "Playstore: https://play.google.com/store/apps/details?id=com.akirva.user.akirva_user   Appstore: Not Launched",
-    "image": "/images/cc_highlight_product.jpg"
+    "image": "/images/case-studies/akirva/hero.png"
   },
   {
     "slug": "clean-culture",
@@ -545,7 +545,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built a digital gateway connecting sustainable Indian manufacturing with global markets."
     ],
     "link": "https://amaravathycoir.com/",
-    "image": "/images/cc_highlight_store.jpg"
+    "image": "/images/case-studies/amaravathy/hero.png"
   },
   {
     "slug": "sales-app",
@@ -629,7 +629,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built a digital experience designed to create trust."
     ],
     "link": "https://kiipl.co.in/",
-    "image": "/images/cc_highlight_category.jpg"
+    "image": "/images/case-studies/keystone/hero.png"
   },
   {
     "slug": "vectra-mechnovations",
@@ -733,7 +733,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "We built a digital experience that makes people hungry."
     ],
     "link": "https://sanikasrestaurant.com/",
-    "image": "/images/case-studies/sanikas-restaurant/showcase_3.png"
+    "image": "/images/case-studies/sanikas-restaurant/hero.png"
   },
   {
     "slug": "thoorigai",
@@ -779,7 +779,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "Rather than simply building an event website, we created a digital experience designed around how users discover, evaluate, and book events."
     ],
     "link": "https://www.thoorigai.net/",
-    "image": "/images/cc_highlight_category.jpg"
+    "image": "/images/case-studies/thoorigai/hero.png"
   },
   {
     "slug": "gigabull",
@@ -822,7 +822,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
       "By combining a premium design language with a scalable technical foundation, the website is prepared to support future product additions, category expansion, and broader customer acquisition initiatives."
     ],
     "link": "https://www.gigabull.in/",
-    "image": "/images/cc_highlight_store.jpg"
+    "image": "/images/case-studies/gigabull/hero.png"
   },
   {
     "slug": "startten",
