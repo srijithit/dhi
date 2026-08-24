@@ -641,17 +641,14 @@ export default function CleanCulturePage() {
           </svg>
         </div>
 
-        {/* ── 2. SOLUTION (CIRCULAR ARC MOTION & FADE TRANSITION ENGINE) ── */}
+        {/* ── 2. SOLUTION (CLEAN CIRCULAR ARC MOTION ENGINE) ── */}
         <section
           id="solution-overview"
           ref={solutionSectionRef}
           onMouseEnter={() => setSolutionIsHovered(true)}
           onMouseLeave={() => setSolutionIsHovered(false)}
-          className="bg-white text-slate-900 h-auto relative w-full overflow-hidden flex items-center justify-center py-10 lg:py-16 border-b border-slate-200/80"
+          className="bg-white text-slate-900 h-auto relative w-full overflow-hidden flex items-center justify-center py-12 lg:py-20 border-b border-slate-200"
         >
-          {/* Ambient Background Circular Arc */}
-          <div className="rounded-full border-solid border-[rgba(33,150,232,0.06)] border-[40px] lg:border-[80px] w-[500px] h-[500px] lg:w-[950px] lg:h-[950px] absolute left-[50%] lg:left-[-400px] bottom-[-200px] lg:bottom-auto lg:top-[50%] -translate-x-1/2 lg:translate-x-0 lg:-translate-y-1/2 pointer-events-none z-0" />
-          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 relative z-10 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12 xl:gap-16">
             
             {/* LEFT COLUMN: TITLE, OVERVIEW & ARROW CONTROLS */}
@@ -720,10 +717,6 @@ export default function CleanCulturePage() {
 
             {/* RIGHT COLUMN: DYNAMIC MOTION CARD STAGE */}
             <div className="relative flex items-center justify-center w-full lg:flex-1 xl:w-[540px] xl:flex-none h-[480px] sm:h-[460px] lg:h-[440px]">
-              
-              {/* Stacked Preview Background Outline */}
-              <div className="absolute top-2 -right-4 sm:-right-6 w-full max-w-[340px] sm:max-w-[380px] h-[380px] bg-gradient-to-bl from-slate-100/70 to-blue-50/40 rounded-2xl border border-slate-200/60 p-6 pointer-events-none select-none opacity-40 hidden sm:block [transform:scale(0.94)]" />
-
               <div id="solutionCardStage" className="relative w-full h-full flex items-center justify-center">
                 <AnimatePresence mode="wait" custom={solutionDirection}>
                   <motion.div
@@ -796,12 +789,7 @@ export default function CleanCulturePage() {
                     </div>
 
                     {/* Content Card Body */}
-                    <div className="relative flex flex-col gap-3 w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[390px] order-1 lg:order-2 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-xl overflow-hidden group">
-                      
-                      {/* Geometric Corner Lines */}
-                      <div className="absolute -top-12 -right-12 w-28 h-28 border border-blue-400/25 rounded-full pointer-events-none" />
-                      <div className="absolute -bottom-10 -left-10 w-24 h-24 border border-cyan-400/25 rounded-full pointer-events-none" />
-
+                    <div className="relative flex flex-col gap-3 w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[390px] order-1 lg:order-2 bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-xl overflow-hidden group">
                       <div className="flex items-center justify-between">
                         <div className="font-bold text-[48px] lg:text-[56px] leading-none text-[#2196E8]/20 select-none font-mono">
                           {solutionSlides[solutionIdx].num}
