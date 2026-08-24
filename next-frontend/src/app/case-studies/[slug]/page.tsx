@@ -898,28 +898,29 @@ export default function DynamicCaseStudyPage({
           </svg>
         </div>
 
-        {/* ── 2. SOLUTION (CLEAN CIRCULAR ARC MOTION ENGINE) ── */}
+        {/* ── 2. SOLUTION (CIRCULAR ARC MOTION ANIMATION STAGE WITH REALISTIC IMAGES) ── */}
         <section
           id="solution-overview"
           ref={solutionSectionRef}
           onMouseEnter={() => setSolutionIsHovered(true)}
           onMouseLeave={() => setSolutionIsHovered(false)}
-          className="bg-white text-slate-900 h-auto relative w-full overflow-hidden flex items-center justify-center py-12 lg:py-20 border-b border-slate-200"
+          className="bg-white text-slate-900 h-auto relative w-full overflow-hidden flex items-center justify-center py-6 lg:py-8 border-b border-slate-200/80"
         >
+          {/* Ambient Background Arc */}
+          <div className="rounded-full border-solid border-[rgba(74,114,232,0.06)] border-[40px] lg:border-[80px] w-[500px] h-[500px] lg:w-[950px] lg:h-[950px] absolute left-[50%] lg:left-[-400px] bottom-[-200px] lg:bottom-auto lg:top-[50%] -translate-x-1/2 lg:translate-x-0 lg:-translate-y-1/2 pointer-events-none z-0" />
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 relative z-10 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12 xl:gap-16">
             
             {/* LEFT COLUMN: TITLE, OVERVIEW & ARROW CONTROLS */}
             <div className="flex flex-col gap-6 lg:gap-8 items-center lg:items-start w-full lg:w-[380px] xl:w-[440px] shrink-0 z-20 mt-2 lg:-mt-2">
-              <div className="text-center lg:text-left w-full space-y-3">
-                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-[#2196E8] text-[11px] font-bold font-mono uppercase tracking-wider shadow-xs mb-1">
-                  <span className="w-2 h-2 rounded-full bg-[#2196E8] animate-pulse" />
-                  <span>ARCHITECTURE &amp; SOLUTIONS</span>
-                </div>
-                <h2 className="text-slate-900 font-body text-4xl sm:text-5xl lg:text-[52px] xl:text-[58px] leading-tight font-extrabold tracking-tight">
+              
+              {/* Section Heading & Overview */}
+              <div className="text-center lg:text-left w-full">
+                <h2 className="text-slate-900 font-sans text-4xl sm:text-5xl lg:text-[54px] xl:text-[62px] leading-tight font-extrabold tracking-tight">
                   Solution
                 </h2>
-                <div className="w-16 h-1.5 bg-[#2196E8] rounded-full mx-auto lg:mx-0" />
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium pt-2 max-w-[400px] mx-auto lg:mx-0">
+                <div className="w-16 h-1.5 bg-[#4A72E8] rounded-full mt-3 mx-auto lg:mx-0" />
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium mt-4 max-w-[390px] mx-auto lg:mx-0">
                   To address core delivery challenges, our team architected isolated execution sessions, a centralized calculation engine, and strict validation safeguards with responsive visual interfaces.
                 </p>
               </div>
@@ -930,7 +931,7 @@ export default function DynamicCaseStudyPage({
                   id="solutionPrevBtn"
                   onClick={handlePrevSolution}
                   aria-label="Previous solution item"
-                  className="shrink-0 w-11 h-11 rounded-xl bg-slate-900 hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-md hover:scale-105 active:scale-95"
+                  className="shrink-0 w-11 h-11 rounded-xl bg-slate-900 hover:bg-[#4A72E8] text-white flex items-center justify-center transition-all cursor-pointer shadow-md hover:scale-105 active:scale-95"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -938,14 +939,10 @@ export default function DynamicCaseStudyPage({
                   id="solutionNextBtn"
                   onClick={handleNextSolution}
                   aria-label="Next solution item"
-                  className="shrink-0 w-11 h-11 rounded-xl bg-slate-900 hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-md hover:scale-105 active:scale-95"
+                  className="shrink-0 w-11 h-11 rounded-xl bg-slate-900 hover:bg-[#4A72E8] text-white flex items-center justify-center transition-all cursor-pointer shadow-md hover:scale-105 active:scale-95"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
-
-                <span className="text-xs font-mono font-bold text-slate-400 ml-2">
-                  0{solutionIdx + 1} / 0{solutionDeck.length}
-                </span>
               </div>
 
               {/* Solution Dots Indicator */}
@@ -964,18 +961,19 @@ export default function DynamicCaseStudyPage({
                     }}
                     className={
                       idx === solutionIdx
-                        ? 'w-7 h-2.5 rounded-full bg-[#2196E8] transition-all duration-300 cursor-pointer shadow-sm'
-                        : 'w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-500 transition-all duration-300 cursor-pointer'
+                        ? 'w-7 h-2.5 rounded-full bg-[#4A72E8] transition-all duration-300 cursor-pointer shadow-sm'
+                        : 'w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all duration-300 cursor-pointer'
                     }
                   />
                 ))}
               </div>
+
             </div>
 
-            {/* RIGHT COLUMN: DYNAMIC MOTION CARD STAGE */}
+            {/* RIGHT COLUMN: DYNAMIC MOTION CARD STAGE (CIRCULAR ARC TRANSITION) */}
             <div className="relative flex items-center justify-center w-full lg:flex-1 xl:w-[540px] xl:flex-none h-[480px] sm:h-[460px] lg:h-[440px]">
               <div id="solutionCardStage" className="relative w-full h-full flex items-center justify-center">
-                <AnimatePresence mode="wait" custom={solutionDirection}>
+                <AnimatePresence initial={false} custom={solutionDirection}>
                   <motion.div
                     key={solutionIdx}
                     custom={solutionDirection}
@@ -1036,43 +1034,36 @@ export default function DynamicCaseStudyPage({
                     }}
                     className="solution-card-item absolute inset-0 flex flex-col lg:flex-row items-center justify-center w-full h-full cursor-grab active:cursor-grabbing select-none"
                   >
-                    {/* Era Line Indicator & Step Tag */}
+                    {/* Connector (Step tag & Era line indicator) */}
                     <div className="hidden lg:flex items-center translate-y-10 mr-4 xl:mr-[18px] shrink-0 order-2 lg:order-1 select-none">
-                      <span className="text-[#2196E8] font-bold text-[11px] tracking-wider uppercase font-mono">
+                      <span className="text-[#4A72E8] font-bold text-[11px] tracking-wider uppercase font-sans">
                         {solutionDeck[solutionIdx].tag}
                       </span>
                       <div className="border-t border-slate-300 w-[30px] xl:w-[60px] h-0 mx-2.5" />
-                      <div className="bg-[#2196E8] rounded-full w-3 h-3 shrink-0 shadow-sm" />
+                      <div className="bg-[#4A72E8] rounded-full w-3 h-3 shrink-0 shadow-sm" />
                     </div>
 
                     {/* Content Card Body */}
-                    <div className="relative flex flex-col gap-3 w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[390px] order-1 lg:order-2 bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-xl overflow-hidden group">
-                      <div className="flex items-center justify-between">
-                        <div className="font-bold text-[48px] lg:text-[56px] leading-none text-[#2196E8]/20 select-none font-mono">
+                    <div className="flex flex-col gap-3 w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[390px] order-1 lg:order-2 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-lg">
+                      <div className="flex flex-col gap-px">
+                        <div className="font-bold text-[54px] lg:text-[64px] leading-none text-[#4A72E8]/20 select-none font-mono">
                           {solutionDeck[solutionIdx].num}
                         </div>
-                        <span className="px-3 py-1 rounded-full bg-blue-50 text-[#2196E8] text-[10px] font-extrabold font-mono tracking-wider uppercase border border-blue-100">
-                          {solutionDeck[solutionIdx].tag}
-                        </span>
-                      </div>
-
-                      <div className="font-extrabold text-lg lg:text-xl leading-tight text-slate-900 tracking-tight font-body line-clamp-2">
-                        {solutionDeck[solutionIdx].title}
+                        <div className="font-extrabold text-xl lg:text-2xl leading-tight text-slate-900 tracking-tight font-body">
+                          {solutionDeck[solutionIdx].title}
+                        </div>
                       </div>
                       
-                      <p className="font-body text-xs sm:text-sm leading-relaxed text-slate-600 font-normal line-clamp-3">
-                        {solutionDeck[solutionIdx].desc}
-                      </p>
-
-                      <div className="w-full aspect-[16/9] h-[140px] sm:h-[160px] lg:h-[175px] relative overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 shadow-inner">
-                        <img
-                          src={solutionDeck[solutionIdx].img}
-                          alt={solutionDeck[solutionIdx].title}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                        <div className="absolute bottom-2 right-2.5 text-[9px] font-mono text-white/90 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md">
-                          Swipe to explore ↔
+                      <div className="flex flex-col gap-3">
+                        <p className="font-sans text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
+                          {solutionDeck[solutionIdx].desc}
+                        </p>
+                        <div className="w-full aspect-[16/9] h-[140px] sm:h-[160px] lg:h-[175px] relative overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 shadow-sm">
+                          <img
+                            src={solutionDeck[solutionIdx].img}
+                            alt={solutionDeck[solutionIdx].title}
+                            className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                          />
                         </div>
                       </div>
                     </div>

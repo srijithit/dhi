@@ -1,0 +1,3269 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DhiGrowth — Case Study | Clean Culture App</title>
+    <meta name="description"
+        content="Detailed Case Study of Clean Culture App developed by DhiGrowth - Premium Subscription E-Commerce Platform for Coconuts, Fresh Milk, Water & Daily Essentials.">
+    <!-- Google Fonts: Bebas Neue, Zen Dots, Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Zen+Dots&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            sky: '#2196E8',
+                            blue: '#4A72E8', // Royal Blue - Main Brand Color
+                            lightBlue: '#A9C0F5',
+                            dark: '#000000',
+                            gray: '#333333',
+                            bgLight: '#F8FAFC'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Bebas Neue', 'sans-serif'],
+                        bebas: ['Bebas Neue', 'sans-serif'],
+                        numeric: ['Zen Dots', 'cursive', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Lenis Smooth Scroll CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css">
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+    <!-- GSAP & ScrollTrigger JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* CONVERTED FROM FRAMER MOTION BLUR-FADE */
+        .blur-fade-item {
+            opacity: 0;
+            filter: blur(8px);
+            transform: translateY(8px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, filter, transform;
+        }
+
+        .blur-fade-item.in-view {
+            opacity: 1;
+            filter: blur(0px);
+            transform: translateY(0px);
+        }
+
+        /* SIDE CANNONS CONFETTI CSS ANIMATION */
+        @keyframes sideCannonLeft {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(0.5);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translate(38vw, -150px) rotate(360deg) scale(1.2);
+                opacity: 0.95;
+            }
+
+            100% {
+                transform: translate(65vw, 280px) rotate(720deg) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sideCannonRight {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(0.5);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translate(-38vw, -150px) rotate(-360deg) scale(1.2);
+                opacity: 0.95;
+            }
+
+            100% {
+                transform: translate(-65vw, 280px) rotate(-720deg) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        .cannon-particle-left {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            pointer-events: none;
+            animation: sideCannonLeft 3.5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+        }
+
+        .cannon-particle-right {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            pointer-events: none;
+            animation: sideCannonRight 3.5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+        }
+
+        .zoom-logo-effect {
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .zoom-logo-effect:hover {
+            transform: scale(1.22) rotate(-1deg);
+        }
+
+        /* FAST ZOOM IN / ZOOM OUT SPEED (0.75 Seconds Fast Pulse Cycle) */
+        @keyframes subtleZoom {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.18);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .logo-pulse {
+            animation: subtleZoom 0.75s ease-in-out infinite;
+        }
+
+        /* ==========================================================================
+           SOLUTION CARDS MOVING BORDER BEAM & FLOATING AMBIENT ICONS ANIMATION
+           ========================================================================== */
+        @keyframes borderGlowRotate {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 300% 0%;
+            }
+        }
+
+        @keyframes floatAmbient1 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-14px) rotate(8deg); }
+        }
+
+        @keyframes floatAmbient2 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(12px) rotate(-10deg); }
+        }
+
+        @keyframes floatAmbient3 {
+            0%, 100% { transform: translateX(0px) translateY(0px); }
+            50% { transform: translateX(-10px) translateY(-10px); }
+        }
+
+        @keyframes floatAmbient4 {
+            0%, 100% { transform: translateX(0px) translateY(0px); }
+            50% { transform: translateX(10px) translateY(10px); }
+        }
+
+        .animated-solution-card {
+            position: relative;
+            background: #ffffff;
+            border-radius: 1.25rem;
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.22);
+            transition: all 0.4s ease;
+        }
+
+        /* Moving Blue Glow Border Beam around the box */
+        .animated-solution-card::before {
+            content: '';
+            position: absolute;
+            inset: -2.5px;
+            border-radius: 1.35rem;
+            padding: 2.5px;
+            background: linear-gradient(90deg, #1d4ed8, #3b82f6, #60a5fa, #38bdf8, #2563eb, #1d4ed8);
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderGlowRotate 2.8s linear infinite;
+            pointer-events: none;
+        }
+
+        .animated-solution-card:hover {
+            box-shadow: 0 20px 45px -5px rgba(59, 130, 246, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .animate-float-1 { animation: floatAmbient1 4s ease-in-out infinite; }
+        .animate-float-2 { animation: floatAmbient2 4.5s ease-in-out infinite; }
+        .animate-float-3 { animation: floatAmbient3 3.8s ease-in-out infinite; }
+        .animate-float-4 { animation: floatAmbient4 4.2s ease-in-out infinite; }
+
+        /* ==========================================================================
+           SCOPE CIRCULAR ARC MOTION & SCROLL REVEAL ANIMATIONS
+           ========================================================================== */
+        .scope-reveal {
+            opacity: 0;
+            transition: opacity 0.5s cubic-bezier(0, 0, 0.2, 1), transform 0.5s cubic-bezier(0, 0, 0.2, 1);
+            will-change: opacity, transform;
+        }
+        .scope-reveal-title {
+            transform: translateY(30px);
+            transition-delay: 0.1s;
+        }
+        .scope-reveal-controls {
+            transform: translateY(30px);
+            transition-delay: 0.2s;
+        }
+        .scope-reveal-card {
+            transform: translateY(40px);
+            transition-delay: 0.3s;
+        }
+        .scope-in-view .scope-reveal {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .scope-card-item {
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        /* Technology Stack Infinite Marquee */
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .animate-scroll-left {
+            display: flex;
+            width: max-content;
+            animation: scrollLeft 25s linear infinite;
+        }
+
+        .animate-scroll-left:hover {
+            animation-play-state: paused;
+        }
+
+        /* ==========================================================================
+           EXACT DHIGROWTH OFFICIAL LOGO ANIMATED BUILD SEQUENCE
+           ========================================================================== */
+        .dhigrowth-animated-brand {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            height: 3.5rem;
+            cursor: pointer;
+            background: transparent !important;
+        }
+
+        /* Step 1: Rapid Growth Graph Bars & Swooping Upward Arrow with Glowing Apex Star */
+        .anim-step-1-bars rect {
+            transform-origin: bottom;
+            animation: buildGraphBars 3.0s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        }
+
+        .anim-step-1-bars rect:nth-child(1) {
+            animation-delay: 0.0s;
+        }
+
+        .anim-step-1-bars rect:nth-child(2) {
+            animation-delay: 0.05s;
+        }
+
+        .anim-step-1-bars rect:nth-child(3) {
+            animation-delay: 0.10s;
+        }
+
+        .anim-step-1-bars rect:nth-child(4) {
+            animation-delay: 0.15s;
+        }
+
+        .anim-step-1-bars rect:nth-child(5) {
+            animation-delay: 0.20s;
+        }
+
+        @keyframes buildGraphBars {
+            0% {
+                transform: scaleY(0);
+                opacity: 0;
+            }
+
+            12% {
+                transform: scaleY(1);
+                opacity: 1;
+            }
+
+            28% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+
+            38% {
+                opacity: 0;
+                transform: scaleY(0);
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .anim-step-1-arrow-path {
+            stroke-dasharray: 120;
+            stroke-dashoffset: 120;
+            animation: sweepUpwardArrow 3.0s ease-in-out infinite;
+        }
+
+        @keyframes sweepUpwardArrow {
+            0% {
+                stroke-dashoffset: 120;
+                opacity: 0;
+            }
+
+            8% {
+                opacity: 1;
+            }
+
+            28% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+
+            38% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .anim-step-1-star-burst {
+            transform-origin: 38px 8px;
+            animation: burstApexStar 3.0s ease-in-out infinite;
+        }
+
+        @keyframes burstApexStar {
+
+            0%,
+            20% {
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            28% {
+                transform: scale(1.6) rotate(45deg);
+                opacity: 1;
+                filter: drop-shadow(0 0 10px #00C8FF);
+            }
+
+            34% {
+                transform: scale(1) rotate(90deg);
+                opacity: 0.9;
+            }
+
+            38% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Step 2: Speedy Circle Draw */
+        .anim-step-2-circle {
+            stroke-dasharray: 240;
+            stroke-dashoffset: 240;
+            animation: drawSpeedyCircle 3.0s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        @keyframes drawSpeedyCircle {
+
+            0%,
+            20% {
+                stroke-dashoffset: 240;
+                opacity: 0;
+            }
+
+            22% {
+                opacity: 1;
+            }
+
+            42% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+        }
+
+        /* Step 3: Exact Official Center Star-Arrow Emblem Materializes */
+        .anim-step-3-center-emblem {
+            transform-origin: 26px 26px;
+            animation: popCenterEmblem 3.0s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        @keyframes popCenterEmblem {
+
+            0%,
+            42% {
+                transform: scale(0) rotate(-30deg);
+                opacity: 0;
+            }
+
+            54% {
+                transform: scale(1.15) rotate(4deg);
+                opacity: 1;
+            }
+
+            62% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        /* Step 4: Text DHI GROWTH Slides In */
+        .anim-step-4-text {
+            animation: slideDhiGrowthText 3.0s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        }
+
+        @keyframes slideDhiGrowthText {
+
+            0%,
+            62% {
+                transform: translateX(25px);
+                opacity: 0;
+                filter: blur(3px);
+            }
+
+            76% {
+                transform: translateX(0);
+                opacity: 1;
+                filter: blur(0);
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        /* Step 5: Seamless Master Resting Pulse */
+        .anim-master-pulse {
+            animation: brandMasterPulse 3.0s ease-in-out infinite;
+        }
+
+        @keyframes brandMasterPulse {
+
+            0%,
+            78% {
+                transform: scale(1);
+            }
+
+            85% {
+                transform: scale(1.16);
+                filter: drop-shadow(0 0 12px rgba(37, 99, 235, 0.7));
+            }
+
+            92% {
+                transform: scale(0.98);
+            }
+
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 4px rgba(37, 99, 235, 0.3));
+            }
+        }
+
+        @keyframes finalMasterPulse {
+
+            0%,
+            82% {
+                transform: scale(1);
+            }
+
+            90% {
+                transform: scale(1.12);
+                filter: drop-shadow(0 0 10px rgba(0, 132, 255, 0.6));
+            }
+
+            95% {
+                transform: scale(0.98);
+            }
+
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 4px rgba(0, 132, 255, 0.3));
+            }
+        }
+
+        /* ANNOUNCEMENT MOVING BORDER & LUSTER ANIMATIONS */
+        @keyframes movingGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animate-moving-border {
+            background-size: 200% 200%;
+            animation: movingGradient 3s linear infinite;
+        }
+
+        /* Mega menu hover trigger */
+        .group:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* 3D Mobile Phone Mockup Styles */
+        .phone-3d-perspective {
+            perspective: 1200px;
+        }
+
+        .phone-3d-card {
+            transform: rotateY(-14deg) rotateX(6deg) rotateZ(1.5deg);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -20px 25px 50px -10px rgba(0, 0, 0, 0.35), 0 0 30px rgba(74, 114, 232, 0.15);
+        }
+
+        .phone-3d-card:hover {
+            transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.02);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-brand-gray font-sans antialiased selection:bg-brand-blue selection:text-white">
+
+    <!-- MAIN NAVBAR AT THE VERY TOP (INCREASED LENGTH & TALLER HEIGHT MAX-W-[1600PX]) -->
+    <header
+        class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all duration-300">
+        <div class="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-14">
+            <div class="flex justify-between items-center h-26 sm:h-28">
+
+                <!-- DHIGROWTH OFFICIAL BRAND LOGO VIDEO -->
+                <a href="#" class="flex items-center group py-1 flex-shrink-0">
+                    <div class="relative flex items-center justify-center bg-transparent flex-shrink-0">
+                        <video id="logoVideo" src="./video/rocket_transparent.webm" autoplay loop muted playsinline
+                            class="h-20 sm:h-24 md:h-28 w-auto max-w-[550px] sm:max-w-[700px] object-contain transition-transform duration-300 group-hover:scale-105"
+                            onloadedmetadata="this.playbackRate = 1.35;">
+                            <source src="./video/rocket_transparent.webm" type="video/webm">
+                        </video>
+                    </div>
+                </a>
+
+                <!-- NAV MENU ITEMS WITH GENEROUS SPACING -->
+                <nav class="hidden lg:flex items-center space-x-2 font-semibold text-slate-800 text-base">
+                    <a href="#home"
+                        class="px-5 py-2.5 hover:text-brand-blue transition-colors rounded-xl hover:bg-slate-100/80">Home</a>
+                    <a href="#about"
+                        class="px-5 py-2.5 hover:text-brand-blue transition-colors rounded-xl hover:bg-slate-100/80">About</a>
+                    <a href="#services"
+                        class="px-5 py-2.5 hover:text-brand-blue transition-colors rounded-xl hover:bg-slate-100/80">Services</a>
+                    <a href="#why-us"
+                        class="px-5 py-2.5 hover:text-brand-blue transition-colors rounded-xl hover:bg-slate-100/80">Why
+                        Us</a>
+                    <a href="#process"
+                        class="px-5 py-2.5 hover:text-brand-blue transition-colors rounded-xl hover:bg-slate-100/80">Process</a>
+                    <a href="#clients"
+                        class="px-5 py-2.5 hover:text-brand-blue transition-colors rounded-xl hover:bg-slate-100/80">Clients</a>
+
+                    <!-- CASE STUDY DROPDOWN -->
+                    <div class="relative group" id="caseStudyGroup">
+                        <button id="caseStudyBtn"
+                            class="px-5 py-2.5 text-slate-800 hover:text-brand-blue font-bold flex items-center space-x-2 rounded-xl hover:bg-slate-100/80 transition-all cursor-pointer">
+                            <span>Case Study</span>
+                            <i id="caseStudyChevron" class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                        </button>
+
+                        <!-- MEGA MENU DROPDOWN PANEL -->
+                        <div id="megaMenuDropdown"
+                            class="mega-menu absolute top-full right-0 lg:-right-20 w-[680px] pt-4 z-50 transition-all duration-300">
+                            <div
+                                class="bg-white rounded-2xl shadow-2xl border border-slate-100 p-6 ring-1 ring-slate-900/5">
+
+                                <!-- Header & Badges -->
+                                <div class="border-b border-slate-100 pb-3 mb-4 flex justify-between items-center">
+                                    <div>
+                                        <h4 class="font-heading text-2xl text-slate-900 tracking-wide">Case Studies &
+                                            Success Stories</h4>
+                                        <p class="text-xs text-slate-500">Explore digital transformations and apps built
+                                            by DhiGrowth</p>
+                                    </div>
+                                    <span
+                                        class="text-xs font-numeric font-semibold px-3 py-1 bg-brand-lightBlue/30 text-brand-blue rounded-full border border-brand-blue/20">19
+                                        Projects</span>
+                                </div>
+
+                                <!-- Projects Grid -->
+                                <div
+                                    class="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-[380px] overflow-y-auto no-scrollbar">
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Infinite Structure Business</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Akirva</span>
+                                    </a>
+
+                                    <!-- Clean Culture -->
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg bg-emerald-50 border border-emerald-200 font-sans text-sm font-bold text-emerald-900 hover:bg-emerald-100 transition-all flex items-center justify-between">
+                                        <span>Clean Culture</span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Nest Pilot Pg Management software</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Judah https</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Ruts N Rides Website</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Ruts N Rides Admin Software</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Venture Pax</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Befhue</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Squirlio Details</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Amaravati</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Sales App</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Keystone</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Vectra Mechnovation</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Sanika Restaurant</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Thoorigai</span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Giga Bull</span>
+                                    </a>
+
+                                    <!-- Startten -->
+                                    <a href="startten.html"
+                                        class="p-2 rounded-lg bg-red-50 border border-red-200 font-sans text-sm font-bold text-red-900 hover:bg-red-100 transition-all flex items-center justify-between">
+                                        <span>Startten</span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
+                                    </a>
+
+                                    <a href="#clean-culture-section" onclick="showCleanCulturePage()"
+                                        class="p-2 rounded-lg hover:bg-slate-100 font-sans text-sm font-semibold text-slate-800 hover:text-brand-blue transition-all">
+                                        <span>Splendour Park</span>
+                                    </a>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- RIGHT CTA BUTTON -->
+                <div class="flex items-center space-x-4">
+                    <a href="#contact"
+                        class="hidden sm:inline-flex items-center justify-center px-7 py-3 rounded-full text-base font-bold text-white bg-brand-blue hover:bg-brand-sky hover:shadow-xl hover:shadow-brand-blue/30 hover:scale-105 transition-all duration-300">
+                        Schedule a Free Consultation
+                    </a>
+
+                    <!-- Mobile Hamburger -->
+                    <button id="mobileMenuBtn"
+                        class="lg:hidden p-2.5 rounded-xl text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main id="main-content">
+
+        <!-- HERO SECTION (FULL SIZE CAROUSEL TOUCHING BOTH ENDS AND TOUCHING NAVBAR) -->
+        <section id="home" class="relative p-0 bg-slate-950 overflow-hidden w-full">
+
+            <!-- FULL-SIZE HERO CAROUSEL TOUCHING NAVBAR & BOTH ENDS -->
+            <div class="relative w-full overflow-hidden group">
+
+                <!-- CAROUSEL TRACK -->
+                <div id="carouselTrack" class="flex transition-transform duration-700 ease-out">
+
+                    <!-- Slide 1: Daily Fresh Vegetables & Organic Fruits -->
+                    <div class="w-full flex-shrink-0 relative h-[560px] sm:h-[640px]">
+                        <img src="./assets/carousel_2.png" alt="Daily Fresh Vegetables & Organic Fruits"
+                            class="w-full h-full object-cover">
+                    </div>
+
+                    <!-- Slide 2: Tender Coconut, Farm Milk & Water -->
+                    <div class="w-full flex-shrink-0 relative h-[560px] sm:h-[640px]">
+                        <img src="./assets/carousel_1.png" alt="Fresh Coconuts and Farm Milk"
+                            class="w-full h-full object-cover">
+                    </div>
+
+                    <!-- Slide 3: Delivery Boy in Orange Uniform -->
+                    <div class="w-full flex-shrink-0 relative h-[560px] sm:h-[640px]">
+                        <img src="./assets/carousel_3.png" alt="Clean Culture Delivery Executive"
+                            class="w-full h-full object-cover">
+                    </div>
+
+                </div>
+
+                <!-- OVERLAY CONTENT PLACED DIRECTLY ON THE HERO CAROUSEL IMAGE -->
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/30 flex items-center justify-center p-6 sm:p-12 text-center z-10">
+                    <div class="max-w-4xl mx-auto space-y-6">
+
+                        <!-- HEADLINE IN BEBAS NEUE FONT STYLE -->
+                        <h1
+                            class="font-heading text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-wide leading-tight uppercase drop-shadow-md">
+                            Building Digital Growth Through <span class="text-brand-sky">Tailored Innovation</span>
+                        </h1>
+
+                        <!-- SUBTITLE TEXT -->
+                        <p
+                            class="text-slate-200 text-base sm:text-xl font-normal leading-relaxed max-w-3xl mx-auto drop-shadow-sm">
+                            Discover how DhiGrowth transformed everyday organic grocery & coconut subscriptions into a
+                            seamless, fast, minimal mobile application for <strong
+                                class="text-white font-semibold">Clean Culture</strong>.
+                        </p>
+
+                        <!-- CTA BUTTON WITH CLEAN CULTURE LOGO ON HERO CAROUSEL -->
+                        <div class="pt-2 flex justify-center">
+                            <a href="#clean-culture-section"
+                                class="px-6 py-3.5 rounded-xl border border-white/30 bg-slate-900/85 hover:bg-slate-900 text-white font-bold text-sm shadow-xl hover:shadow-2xl hover:border-white/60 transition-all flex items-center space-x-3 backdrop-blur-md group">
+                                <img src="./assets/clean_culture_logo.png" alt="Clean Culture Logo"
+                                    class="w-6 h-6 rounded object-contain border border-emerald-400">
+                                <span>Jump to Clean Culture Case Study</span>
+                                <i
+                                    class="fa-solid fa-arrow-down text-xs text-emerald-400 group-hover:translate-y-0.5 transition-transform"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Carousel Controls -->
+                <button id="carouselPrevBtn"
+                    class="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-slate-950/70 text-white hover:bg-brand-blue transition-all flex items-center justify-center backdrop-blur-md border border-white/20 z-20">
+                    <i class="fa-solid fa-chevron-left text-base"></i>
+                </button>
+                <button id="carouselNextBtn"
+                    class="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-slate-950/70 text-white hover:bg-brand-blue transition-all flex items-center justify-center backdrop-blur-md border border-white/20 z-20">
+                    <i class="fa-solid fa-chevron-right text-base"></i>
+                </button>
+
+                <!-- Carousel Indicators -->
+                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2.5 z-20">
+                    <button onclick="goToSlide(0)"
+                        class="carousel-dot w-3 h-3 rounded-full bg-white transition-all"></button>
+                    <button onclick="goToSlide(1)"
+                        class="carousel-dot w-3 h-3 rounded-full bg-white/40 transition-all"></button>
+                    <button onclick="goToSlide(2)"
+                        class="carousel-dot w-3 h-3 rounded-full bg-white/40 transition-all"></button>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- CLEAN CULTURE CASE STUDY SECTION -->
+        <!-- ========================================================================= -->
+        <section id="clean-culture-section"
+            class="py-4 sm:py-5 bg-white border-t border-slate-100 relative overflow-hidden">
+            <div id="about" class="absolute -top-28"></div>
+
+            <!-- WATERMARK TEXT -->
+            <div
+                class="absolute right-0 top-1/3 pointer-events-none select-none opacity-5 font-bebas text-[180px] tracking-widest text-brand-blue uppercase hidden lg:block">
+                CLEAN CULTURE
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <!-- CLEAN CULTURE SECTION CONTAINER -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-center">
+
+                    <!-- LEFT COLUMN: TOPIC & DESCRIPTION -->
+                    <div class="lg:col-span-6 space-y-3">
+
+                        <div class="flex items-center space-x-3">
+                            <img src="./assets/clean_culture_logo.png" alt="Clean Culture Logo"
+                                class="w-12 h-12 rounded-xl shadow-md object-cover border-2 border-emerald-400">
+                            <div>
+                                <h2
+                                    class="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-wide leading-tight">
+                                    About us
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div class="text-slate-700 text-sm sm:text-base leading-loose font-normal space-y-3">
+                            <p>
+                                Clean Culture is a modern daily essentials delivery platform designed to simplify everyday household purchases. Customers can order fresh milk, tender coconuts, protein meals, RO water, oils, and other essentials.
+                            </p>
+                            <p>
+                                The platform supports both one-time orders and flexible product subscriptions. It connects customers, vendors, products, payments, orders, and deliveries in one seamless ecosystem. Our goal was to create a convenient, reliable, and predictable daily delivery experience.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT COLUMN: CONSTANT SLANTING MOBILE PHONE WITH AUTO-SWIPING CLEAN CULTURE APP SCREENS -->
+                    <div class="lg:col-span-6 flex justify-center py-1 pb-7">
+
+                        <div class="relative w-[340px] sm:w-[420px] lg:w-[460px] group">
+
+                            <!-- CONSTANT SLANTING REAL MOBILE PHONE DISPLAY CONTAINER -->
+                            <div
+                                class="relative w-full h-[300px] sm:h-[380px] lg:h-[400px] flex items-center justify-center filter drop-shadow-2xl">
+
+                                <!-- STACKED MOCKUP SCREENS (ALL SHARING THE EXACT SAME CONSTANT SLANTING PHONE FRAME) -->
+                                <div id="slantPhoneContainer"
+                                    class="relative w-full h-full flex items-center justify-center">
+
+                                    <!-- Mockup Screen 1: Home & 1 Store -->
+                                    <img id="slantPhoneSlide0" src="./assets/mockup_screen_1.png"
+                                        alt="Clean Culture App Screen 1"
+                                        class="slant-phone-slide absolute inset-0 w-full h-full object-contain transition-all duration-700 opacity-100 scale-100 z-20">
+
+                                    <!-- Mockup Screen 2: Fresh Milk & Subscription -->
+                                    <img id="slantPhoneSlide1" src="./assets/mockup_screen_2.png"
+                                        alt="Clean Culture App Screen 2"
+                                        class="slant-phone-slide absolute inset-0 w-full h-full object-contain transition-all duration-700 opacity-0 scale-95 z-10">
+
+                                    <!-- Mockup Screen 3: Category Browse -->
+                                    <img id="slantPhoneSlide2" src="./assets/mockup_screen_3.png"
+                                        alt="Clean Culture App Screen 3"
+                                        class="slant-phone-slide absolute inset-0 w-full h-full object-contain transition-all duration-700 opacity-0 scale-95 z-10">
+
+                                </div>
+
+                                <!-- OVERLAY: SWIPE NAVIGATION INDICATOR DOTS AT BOTTOM -->
+                                <div
+                                    class="absolute -bottom-7 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-2 bg-slate-900/90 px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 shadow-xl">
+                                    <button onclick="goToPhoneSlide(0)"
+                                        class="phone-slider-dot w-5 h-2 rounded-full bg-emerald-400 transition-all cursor-pointer"
+                                        title="Screen 1: Home & Offers"></button>
+                                    <button onclick="goToPhoneSlide(1)"
+                                        class="phone-slider-dot w-2 h-2 rounded-full bg-white/40 transition-all cursor-pointer"
+                                        title="Screen 2: Fresh Milk Details"></button>
+                                    <button onclick="goToPhoneSlide(2)"
+                                        class="phone-slider-dot w-2 h-2 rounded-full bg-white/40 transition-all cursor-pointer"
+                                        title="Screen 3: Fresh Categories"></button>
+                                </div>
+
+                                <!-- OVERLAY: MANUAL PREV / NEXT CHEVRONS -->
+                                <button onclick="prevPhoneSlide()"
+                                    class="absolute -left-2 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-slate-900/80 hover:bg-brand-blue text-white flex items-center justify-center backdrop-blur border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                                </button>
+                                <button onclick="nextPhoneSlide()"
+                                    class="absolute -right-2 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-slate-900/80 hover:bg-brand-blue text-white flex items-center justify-center backdrop-blur border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TOP CURVED ARC BORDER FOR EXPERIENCE CLEAN CULTURE SECTION (EXACT MATCH FOR USER IMAGE 1) -->
+        <div class="w-full overflow-hidden leading-none bg-white -mb-1">
+            <svg class="relative block w-full h-12 sm:h-20 text-slate-950" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0 C300,90 900,90 1200,0 L1200,120 L0,120 Z" fill="currentColor"></path>
+            </svg>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- VIDEO OVERVIEW & KEY TECHNICAL CHALLENGES SECTION -->
+        <!-- ========================================================================= -->
+        <section id="video-overview" class="w-full bg-slate-950 text-white py-3 sm:py-5 border-b border-slate-800 relative overflow-hidden">
+            <!-- Subtle background accent glow -->
+            <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-blue/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+                <!-- CENTERED SECTION HEADER: CHALLENGES -->
+                <div class="text-center max-w-2xl mx-auto mb-4 sm:mb-6">
+                    <h2 class="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-wide mb-1.5">
+                        Challenges
+                    </h2>
+                    <div class="w-14 h-1 bg-brand-blue mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+
+                    <!-- Video Player Column (LEFT SIDE) -->
+                    <div class="lg:col-span-5 flex flex-col justify-center">
+                        <div class="relative rounded-xl overflow-hidden shadow-xl border-2 border-brand-blue/40 group">
+                            <video id="cleanCultureVideo" controls autoplay loop muted
+                                class="w-full h-[280px] sm:h-[320px] object-cover bg-black">
+                                <source src="./video/PixVerse_V6_Image_Text_540P_I_didi_t_want_real.mp4"
+                                    type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+
+                            <!-- Audio Toggle Icon-Only Button at Bottom Right of Video -->
+                            <button onclick="toggleVideoMute()" title="Toggle Mute / Unmute"
+                                class="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-slate-950/80 hover:bg-brand-blue text-white backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg transition-all z-20 hover:scale-110">
+                                <i id="muteIcon" class="fa-solid fa-volume-xmark text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Content Column: Key Challenges Section (1 PARAGRAPH + 6 TICK POINTS) -->
+                    <div class="lg:col-span-7 space-y-3">
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-normal mb-1">
+                            Engineering the Clean Culture platform required building a high-concurrency delivery engine capable of handling complex session management, real-time inventory validation, and dynamic checkout calculations.
+                        </p>
+                        
+                        <!-- 6 TICK SYMBOL POINTS GRID -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                            <div class="flex items-center space-x-2.5 p-2.5 rounded-lg bg-slate-900/90 border border-slate-800 shadow-sm">
+                                <i class="fa-solid fa-circle-check text-emerald-400 text-base flex-shrink-0"></i>
+                                <span class="text-slate-200 text-xs font-semibold">High-Concurrency Traffic & Session Management</span>
+                            </div>
+                            <div class="flex items-center space-x-2.5 p-2.5 rounded-lg bg-slate-900/90 border border-slate-800 shadow-sm">
+                                <i class="fa-solid fa-circle-check text-emerald-400 text-base flex-shrink-0"></i>
+                                <span class="text-slate-200 text-xs font-semibold">Real-Time Pincode & Serviceability Validation</span>
+                            </div>
+                            <div class="flex items-center space-x-2.5 p-2.5 rounded-lg bg-slate-900/90 border border-slate-800 shadow-sm">
+                                <i class="fa-solid fa-circle-check text-emerald-400 text-base flex-shrink-0"></i>
+                                <span class="text-slate-200 text-xs font-semibold">Automated Subscription & Daily Delivery Engine</span>
+                            </div>
+                            <div class="flex items-center space-x-2.5 p-2.5 rounded-lg bg-slate-900/90 border border-slate-800 shadow-sm">
+                                <i class="fa-solid fa-circle-check text-emerald-400 text-base flex-shrink-0"></i>
+                                <span class="text-slate-200 text-xs font-semibold">Multi-Cart & Zero-Latency Reordering Architecture</span>
+                            </div>
+                            <div class="flex items-center space-x-2.5 p-2.5 rounded-lg bg-slate-900/90 border border-slate-800 shadow-sm">
+                                <i class="fa-solid fa-circle-check text-emerald-400 text-base flex-shrink-0"></i>
+                                <span class="text-slate-200 text-xs font-semibold">Dynamic GST, Coupon & Delivery Calculations</span>
+                            </div>
+                            <div class="flex items-center space-x-2.5 p-2.5 rounded-lg bg-slate-900/90 border border-slate-800 shadow-sm">
+                                <i class="fa-solid fa-circle-check text-emerald-400 text-base flex-shrink-0"></i>
+                                <span class="text-slate-200 text-xs font-semibold">Unified Payment Gateway & Order Tracking Pipeline</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- THE SOLUTION SECTION (CIRCULAR ARC MOTION ANIMATION STAGE WITH REALISTIC IMAGES) -->
+        <!-- ========================================================================= -->
+        <section id="solution-overview" class="bg-white text-slate-900 h-auto relative w-full overflow-hidden flex items-center justify-center py-6 lg:py-8 border-b border-slate-200/80">
+            
+            <!-- Ambient Background Arc -->
+            <div class="rounded-full border-solid border-[rgba(59,130,246,0.06)] border-[40px] lg:border-[80px] w-[500px] h-[500px] lg:w-[950px] lg:h-[950px] absolute left-[50%] lg:left-[-400px] bottom-[-200px] lg:bottom-auto lg:top-[50%] -translate-x-1/2 lg:translate-x-0 lg:-translate-y-1/2 pointer-events-none z-0"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 relative z-10 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12 xl:gap-16">
+                
+                <!-- LEFT COLUMN: TITLE, OVERVIEW & ARROW CONTROLS -->
+                <div class="flex flex-col gap-6 lg:gap-8 items-center lg:items-start w-full lg:w-[380px] xl:w-[440px] shrink-0 z-20 mt-2 lg:-mt-2">
+                    
+                    <!-- Section Heading & Overview -->
+                    <div class="text-center lg:text-left w-full">
+                        <h2 class="text-slate-900 font-sans text-4xl sm:text-5xl lg:text-[54px] xl:text-[62px] leading-tight font-extrabold tracking-tight">
+                            Solution
+                        </h2>
+                        <div class="w-16 h-1.5 bg-brand-blue rounded-full mt-3 mx-auto lg:mx-0"></div>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed font-medium mt-4 max-w-[390px] mx-auto lg:mx-0">
+                            To address high-concurrency delivery challenges, our team architected isolated checkout sessions, a centralized calculation engine, and strict stock validation with realistic visual interfaces.
+                        </p>
+                    </div>
+
+                    <!-- Arrow Navigation Controls -->
+                    <div class="flex flex-row gap-4 items-center">
+                        <button 
+                            id="solutionPrevBtn"
+                            onclick="paginateSolution(-1)"
+                            aria-label="Previous solution item"
+                            class="shrink-0 w-11 h-11 rounded-xl bg-slate-900 hover:bg-brand-blue text-white flex items-center justify-center transition-all cursor-pointer shadow-md disabled:opacity-30 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
+                        >
+                            <i class="fa-solid fa-chevron-left text-sm"></i>
+                        </button>
+                        <button 
+                            id="solutionNextBtn"
+                            onclick="paginateSolution(1)"
+                            aria-label="Next solution item"
+                            class="shrink-0 w-11 h-11 rounded-xl bg-slate-900 hover:bg-brand-blue text-white flex items-center justify-center transition-all cursor-pointer shadow-md disabled:opacity-30 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
+                        >
+                            <i class="fa-solid fa-chevron-right text-sm"></i>
+                        </button>
+                    </div>
+
+                    <!-- Solution Dots Indicator -->
+                    <div id="solutionDots" class="flex items-center justify-center lg:justify-start gap-2 pt-1">
+                        <!-- Dots injected by JS -->
+                    </div>
+
+                </div>
+
+                <!-- RIGHT COLUMN: DYNAMIC CARD CONTAINER STAGE (CIRCULAR ARC TRANSITION) -->
+                <div class="relative flex items-center justify-center w-full lg:flex-1 xl:w-[540px] xl:flex-none h-[480px] sm:h-[460px] lg:h-[440px]">
+                    <div id="solutionCardStage" class="relative w-full h-full flex items-center justify-center">
+                        <!-- Dynamic Motion Card injected by JS -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PRODUCT EXPERIENCE TOPIC (WIDE CONTAINER WITH LEFT IMAGE & 4 RIGHT CARDS) -->
+        <section id="product-experience" class="w-full bg-white text-slate-900 py-6 sm:py-8 border-b border-slate-200 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- SECTION TITLE -->
+                <div class="text-center max-w-3xl mx-auto mb-5 sm:mb-6">
+                    <h2 class="font-sans text-3xl sm:text-4xl lg:text-[48px] font-extrabold text-slate-900 tracking-wide mb-2">
+                        Product experience
+                    </h2>
+                    <div class="w-14 h-1 bg-brand-blue mx-auto rounded-full mb-3"></div>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-medium">
+                        Squirlio delivers a visually rich, premium, and highly responsive shopping experience designed to simplify daily essential ordering.
+                    </p>
+                </div>
+
+                <!-- WIDE CONTENT CONTAINER: LARGER LEFT IMAGE + RIGHT 4 RECTANGULAR CARDS WITH READ MORE -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                    
+                    <!-- LEFT SIDE: Cutout Image asset (LARGER DISPLAY) -->
+                    <div class="lg:col-span-5 flex justify-center items-center">
+                        <div class="relative w-full max-w-md lg:max-w-lg flex items-center justify-center p-2 group">
+                            <img src="./assets/image.png" alt="Product Experience Clean Culture"
+                                class="w-full h-auto max-h-[420px] sm:max-h-[480px] object-contain transition-transform duration-700 group-hover:scale-105 relative z-10">
+                        </div>
+                    </div>
+
+                    <!-- RIGHT SIDE: 4 WIDE RECTANGULAR CARDS (ALL EQUAL HEIGHT & SIZE) -->
+                    <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 items-stretch">
+                        
+                        <!-- Card 1: Visually Rich UI -->
+                        <div class="animated-solution-card p-5 rounded-2xl bg-white border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 relative group flex flex-col justify-between h-full min-h-[160px]">
+                            <div class="flex items-start space-x-3.5 mb-1 h-full flex-col justify-between">
+                                <div class="flex items-start space-x-3.5 w-full">
+                                    <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 text-brand-blue flex items-center justify-center text-lg shrink-0 group-hover:scale-110 transition-transform mt-0.5">
+                                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="text-slate-900 font-extrabold text-sm sm:text-base mb-1 tracking-wide group-hover:text-brand-blue transition-colors">
+                                            Visually Rich UI & Micro-Animations
+                                        </h3>
+                                        <div class="card-text-wrapper text-slate-600 text-xs leading-relaxed font-normal">
+                                            <p class="short-text line-clamp-2">Squirlio delivers a visually rich, premium, and responsive shopping experience powered by dynamic micro-animations.</p>
+                                            <p class="full-text hidden">Squirlio delivers a visually rich, premium, and responsive shopping experience powered by dynamic micro-animations, glassmorphic UI cards, real-time stock indicators, and seamless page transitions designed to engage customers instantly.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="toggleCardReadMore(this)" class="mt-2.5 inline-flex items-center text-[11px] font-bold text-brand-blue hover:text-blue-700 transition-colors focus:outline-none cursor-pointer">
+                                    <span class="btn-text">Read More</span>
+                                    <i class="fa-solid fa-chevron-down text-[9px] ml-1 transition-transform"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Real-Time Stock Indicators -->
+                        <div class="animated-solution-card p-5 rounded-2xl bg-white border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 relative group flex flex-col justify-between h-full min-h-[160px]">
+                            <div class="flex items-start space-x-3.5 mb-1 h-full flex-col justify-between">
+                                <div class="flex items-start space-x-3.5 w-full">
+                                    <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 text-brand-blue flex items-center justify-center text-lg shrink-0 group-hover:scale-110 transition-transform mt-0.5">
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="text-slate-900 font-extrabold text-sm sm:text-base mb-1 tracking-wide group-hover:text-brand-blue transition-colors">
+                                            Real-Time Stock Indicators
+                                        </h3>
+                                        <div class="card-text-wrapper text-slate-600 text-xs leading-relaxed font-normal">
+                                            <p class="short-text line-clamp-2">Clear real-time stock indicators keep inventory dynamic and accurately displayed across all product variations and weights.</p>
+                                            <p class="full-text hidden">Clear real-time stock indicators keep inventory dynamic and accurately displayed across all product variations, weights, and bundled pack options, preventing out-of-stock ordering errors before payment.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="toggleCardReadMore(this)" class="mt-2.5 inline-flex items-center text-[11px] font-bold text-brand-blue hover:text-blue-700 transition-colors focus:outline-none cursor-pointer">
+                                    <span class="btn-text">Read More</span>
+                                    <i class="fa-solid fa-chevron-down text-[9px] ml-1 transition-transform"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Intuitive Stepper Checkout -->
+                        <div class="animated-solution-card p-5 rounded-2xl bg-white border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 relative group flex flex-col justify-between h-full min-h-[160px]">
+                            <div class="flex items-start space-x-3.5 mb-1 h-full flex-col justify-between">
+                                <div class="flex items-start space-x-3.5 w-full">
+                                    <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 text-brand-blue flex items-center justify-center text-lg shrink-0 group-hover:scale-110 transition-transform mt-0.5">
+                                        <i class="fa-solid fa-list-check"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="text-slate-900 font-extrabold text-sm sm:text-base mb-1 tracking-wide group-hover:text-brand-blue transition-colors">
+                                            Intuitive Stepper Checkout
+                                        </h3>
+                                        <div class="card-text-wrapper text-slate-600 text-xs leading-relaxed font-normal">
+                                            <p class="short-text line-clamp-2">An intuitive multi-step checkout process keeps users informed, guided, and confident at every stage of their order.</p>
+                                            <p class="full-text hidden">An intuitive multi-step checkout process keeps users informed, guided, and confident at every stage of their order—from cart confirmation to delivery address validation and instant Razorpay payment completion.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="toggleCardReadMore(this)" class="mt-2.5 inline-flex items-center text-[11px] font-bold text-brand-blue hover:text-blue-700 transition-colors focus:outline-none cursor-pointer">
+                                    <span class="btn-text">Read More</span>
+                                    <i class="fa-solid fa-chevron-down text-[9px] ml-1 transition-transform"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Frictionless Reorder System -->
+                        <div class="animated-solution-card p-5 rounded-2xl bg-white border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 relative group flex flex-col justify-between h-full min-h-[160px]">
+                            <div class="flex items-start space-x-3.5 mb-1 h-full flex-col justify-between">
+                                <div class="flex items-start space-x-3.5 w-full">
+                                    <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 text-brand-blue flex items-center justify-center text-lg shrink-0 group-hover:scale-110 transition-transform mt-0.5">
+                                        <i class="fa-solid fa-bolt"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="text-slate-900 font-extrabold text-sm sm:text-base mb-1 tracking-wide group-hover:text-brand-blue transition-colors">
+                                            Frictionless Reorder System
+                                        </h3>
+                                        <div class="card-text-wrapper text-slate-600 text-xs leading-relaxed font-normal">
+                                            <p class="short-text line-clamp-2">Customers can easily manage complex carts with varied weights or use 1-click reorder to complete repeat purchases in seconds.</p>
+                                            <p class="full-text hidden">Customers can easily manage complex carts with varied weights or use 1-click reorder to complete repeat purchases in seconds, bypassing redundant cart steps while keeping their primary shopping cart untouched.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="toggleCardReadMore(this)" class="mt-2.5 inline-flex items-center text-[11px] font-bold text-brand-blue hover:text-blue-700 transition-colors focus:outline-none cursor-pointer">
+                                    <span class="btn-text">Read More</span>
+                                    <i class="fa-solid fa-chevron-down text-[9px] ml-1 transition-transform"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- HIGHLIGHTS (3D COVERFLOW CAROUSEL SHOWCASE & INTERACTIVE CARDS) -->
+        <!-- ========================================================================= -->
+        <section class="py-6 sm:py-8 bg-gradient-to-b from-white via-slate-50 to-slate-100 border-b border-slate-200 overflow-hidden relative">
+            <div id="highlights" class="absolute -top-24"></div>
+
+            <!-- Ambient Background Accent Glows -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-brand-blue/10 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute top-1/3 right-10 w-[400px] h-[300px] bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+                <!-- CENTERED SECTION HEADER -->
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <h2 class="font-sans text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-wide">
+                        Highlights
+                    </h2>
+                    <div class="w-14 h-1 bg-brand-blue mx-auto rounded-full mt-3"></div>
+                </div>
+
+                <!-- 3D COVERFLOW CAROUSEL CONTAINER -->
+                <div id="coverflowCarouselContainer" class="w-full relative py-6">
+
+                    <!-- 3D CAROUSEL STAGE -->
+                    <div id="coverflowFrame" tabIndex="0"
+                        class="cursor-grab overflow-hidden py-10 outline-none active:cursor-grabbing select-none relative"
+                        style="perspective: 900px; touch-action: pan-y;">
+                        <div id="coverflowStage" class="relative select-none h-[240px] sm:h-[280px] md:h-[320px]"
+                            style="transform-style: preserve-3d;">
+                            <!-- Coverflow Cards injected by JS -->
+                        </div>
+                    </div>
+
+                    <!-- NAVIGATION CHEVRON BUTTONS -->
+                    <button id="cfPrevBtn" type="button" aria-label="Previous slide"
+                        class="absolute left-2 sm:left-6 top-1/2 z-[200] -translate-y-1/2 rounded-full bg-slate-900/80 p-3 text-white backdrop-blur transition hover:bg-brand-blue border border-white/20 shadow-xl opacity-90 hover:opacity-100 cursor-pointer">
+                        <i class="fa-solid fa-chevron-left text-base"></i>
+                    </button>
+                    <button id="cfNextBtn" type="button" aria-label="Next slide"
+                        class="absolute right-2 sm:right-6 top-1/2 z-[200] -translate-y-1/2 rounded-full bg-slate-900/80 p-3 text-white backdrop-blur transition hover:bg-brand-blue border border-white/20 shadow-xl opacity-90 hover:opacity-100 cursor-pointer">
+                        <i class="fa-solid fa-chevron-right text-base"></i>
+                    </button>
+
+                    <!-- PAGINATION DOTS -->
+                    <div id="cfPagination" class="mt-6 flex items-center justify-center gap-2.5">
+                        <!-- Dots injected by JS -->
+                    </div>
+
+                </div>
+
+                <!-- HIGHLIGHTS INTERACTIVE FEATURE CARDS -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mt-10 max-w-6xl mx-auto">
+                    <!-- Highlight 1 -->
+                    <div id="highlight-card-0" onclick="if(window.goToCoverflowSlide) window.goToCoverflowSlide(0)" class="highlight-interactive-card p-6 sm:p-7 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-2xl transition-all duration-300 relative group overflow-hidden cursor-pointer">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-brand-blue border border-blue-200 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-slate-900 font-bold text-lg mb-2 group-hover:text-brand-blue transition-colors">Direct-to-payment reorder</h3>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                            A 1-click reorder system that validates past purchases against live inventory and fast-forwards the user directly to the payment step.
+                        </p>
+                    </div>
+
+                    <!-- Highlight 2 -->
+                    <div id="highlight-card-1" onclick="if(window.goToCoverflowSlide) window.goToCoverflowSlide(1)" class="highlight-interactive-card p-6 sm:p-7 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-2xl transition-all duration-300 relative group overflow-hidden cursor-pointer">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-brand-blue border border-blue-200 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <h3 class="text-slate-900 font-bold text-lg mb-2 group-hover:text-brand-blue transition-colors">Real-time delivery & COD validation</h3>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                            Instant pincode serviceability checks that automatically calculate estimated delivery days and dynamically enable or disable Cash on Delivery (COD).
+                        </p>
+                    </div>
+
+                    <!-- Highlight 3 -->
+                    <div id="highlight-card-2" onclick="if(window.goToCoverflowSlide) window.goToCoverflowSlide(2)" class="highlight-interactive-card p-6 sm:p-7 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-2xl transition-all duration-300 relative group overflow-hidden cursor-pointer">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-brand-blue border border-blue-200 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <h3 class="text-slate-900 font-bold text-lg mb-2 group-hover:text-brand-blue transition-colors">Single source of truth</h3>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                            Synchronized state management ensuring that the frontend UI and backend PostgreSQL database always reflect the exact same pricing and inventory data.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- TECHNOLOGY STACK SECTION (INFINITE MOVING MARQUEE EFFECT) -->
+        <!-- ========================================================================= -->
+        <section id="tech-stack" class="w-full bg-white text-slate-900 py-10 sm:py-14 lg:py-16 border-b border-slate-200 overflow-hidden relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center">
+                <h2 class="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-wide mb-2">
+                    Technology stack
+                </h2>
+                <div class="w-14 h-1 bg-brand-blue mx-auto rounded-full mb-3"></div>
+                <p class="text-slate-600 text-xs sm:text-sm max-w-xl mx-auto font-medium">
+                    Built with modern, scalable, high-performance web and backend technologies.
+                </p>
+            </div>
+
+            <!-- INFINITE SCROLLING MARQUEE CONTAINER WITH FADE OVERLAYS -->
+            <div class="relative w-full overflow-hidden py-4">
+                <!-- Left & Right Fade Gradients -->
+                <div class="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+                <!-- Scrolling Row (Duplicated for seamless loop) -->
+                <div class="animate-scroll-left flex items-center space-x-8 sm:space-x-12">
+                    
+                    <!-- ITEM: Next.js -->
+                    <div class="flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <div class="w-9 h-9 rounded-xl bg-black text-white flex items-center justify-center font-bold text-lg">N</div>
+                        <span class="text-slate-900 font-bold text-base sm:text-lg">Next.js</span>
+                    </div>
+
+                    <!-- ITEM: Tailwind CSS -->
+                    <div class="flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <svg class="w-9 h-9 text-teal-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C7.666 17.818 9.027 19.2 12.001 19.2c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z"/></svg>
+                        <span class="text-slate-900 font-bold text-base sm:text-lg">Tailwind CSS</span>
+                    </div>
+
+                    <!-- ITEM: TypeScript -->
+                    <div class="flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <div class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-extrabold text-sm tracking-tighter">TS</div>
+                        <span class="text-slate-900 font-bold text-base sm:text-lg">TypeScript</span>
+                    </div>
+
+                    <!-- ITEM: Node.js -->
+                    <div class="flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <i class="fa-brands fa-node-js text-emerald-500 text-3xl"></i>
+                        <span class="text-slate-900 font-bold text-base sm:text-lg">Node.js</span>
+                    </div>
+
+                    <!-- ITEM: Express -->
+                    <div class="flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <i class="fa-solid fa-server text-slate-700 text-2xl"></i>
+                        <span class="text-slate-900 font-bold text-base sm:text-lg">Express</span>
+                    </div>
+
+                    <!-- ITEM: PostgreSQL -->
+                    <div class="flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <i class="fa-solid fa-database text-indigo-500 text-2xl"></i>
+                        <span class="text-slate-900 font-bold text-base sm:text-lg">PostgreSQL</span>
+                    </div>
+
+                    <!-- DUPLICATED SET FOR INFINITE SCROLL -->
+                    <!-- ITEM: Next.js -->
+                    <div class="flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <div class="w-9 h-9 rounded-xl bg-black text-white flex items-center justify-center font-bold text-lg">N</div>
+                        <span class="text-slate-900 font-bold text-base sm:text-lg">Next.js</span>
+                    </div>
+
+                    <!-- ITEM: Tailwind CSS -->
+                    <div class="flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <svg class="w-9 h-9 text-teal-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C7.666 17.818 9.027 19.2 12.001 19.2c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z"/></svg>
+                        <span class="text-slate-900 font-bold text-base sm:text-lg">Tailwind CSS</span>
+                    </div>
+
+                    <!-- ITEM: TypeScript -->
+                    <div class="flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <div class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-extrabold text-sm tracking-tighter">TS</div>
+                        <span class="text-slate-900 font-bold text-base sm:text-lg">TypeScript</span>
+                    </div>
+
+                    <!-- ITEM: Node.js -->
+                    <div class="flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <i class="fa-brands fa-node-js text-emerald-500 text-3xl"></i>
+                        <span class="text-slate-900 font-bold text-base sm:text-lg">Node.js</span>
+                    </div>
+
+                    <!-- ITEM: Express -->
+                    <div class="flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <i class="fa-solid fa-server text-slate-700 text-2xl"></i>
+                        <span class="text-slate-900 font-bold text-base sm:text-lg">Express</span>
+                    </div>
+
+                    <!-- ITEM: PostgreSQL -->
+                    <div class="flex items-center space-x-3 px-6 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+                        <i class="fa-solid fa-database text-indigo-500 text-2xl"></i>
+                        <span class="text-slate-900 font-bold text-base sm:text-lg">PostgreSQL</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- SCOPE INTERACTIVE TIMELINE SECTION (WHITE BACKGROUND, COMPACT CARD & ARC ANIMATION) -->
+        <!-- ========================================================================= -->
+        <section id="scope" class="w-full bg-slate-50 text-slate-900 py-10 sm:py-14 lg:py-16 border-b border-slate-200 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                
+                <!-- SECTION TITLE -->
+                <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+                    <h2 class="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-wide mb-2">
+                        Scope
+                    </h2>
+                    <div class="w-14 h-1 bg-brand-blue mx-auto rounded-full mb-3"></div>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-medium">
+                        Explore the core operational scope of the Clean Culture platform — engineered for performance, reliability, and continuous scalability.
+                    </p>
+                </div>
+
+                <!-- 6 SCOPE CARDS GRID WITH CONTINUOUS ROTATING BLUE BORDER GLOW (EQUAL SIZE) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+                    
+                    <!-- Scope Card 1 -->
+                    <div class="animated-solution-card p-6 sm:p-7 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-2xl transition-all duration-300 relative group flex flex-col justify-between h-full">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-3xl font-extrabold text-brand-blue font-numeric">01</span>
+                                <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-blue bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Storefront & Catalog</span>
+                            </div>
+                            <h3 class="text-slate-900 font-extrabold text-lg sm:text-xl mb-2 tracking-wide group-hover:text-brand-blue transition-colors">
+                                Product Discovery Pages
+                            </h3>
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                                Rich product listings featuring multi-weight selectors (100g, 250g, 500g packs), real-time stock availability badges, and fluid search filters engineered for instant conversion.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Scope Card 2 -->
+                    <div class="animated-solution-card p-6 sm:p-7 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-2xl transition-all duration-300 relative group flex flex-col justify-between h-full">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-3xl font-extrabold text-brand-blue font-numeric">02</span>
+                                <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-blue bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Checkout Core</span>
+                            </div>
+                            <h3 class="text-slate-900 font-extrabold text-lg sm:text-xl mb-2 tracking-wide group-hover:text-brand-blue transition-colors">
+                                Dynamic Cart Engine
+                            </h3>
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                                High-performance cart management supporting multi-item weight calculations, real-time total updates, discount coupon application, and instant weight package bundling.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Scope Card 3 -->
+                    <div class="animated-solution-card p-6 sm:p-7 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-2xl transition-all duration-300 relative group flex flex-col justify-between h-full">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-3xl font-extrabold text-brand-blue font-numeric">03</span>
+                                <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-blue bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Security & Profiles</span>
+                            </div>
+                            <h3 class="text-slate-900 font-extrabold text-lg sm:text-xl mb-2 tracking-wide group-hover:text-brand-blue transition-colors">
+                                User Authentication
+                            </h3>
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                                Frictionless onboarding experience powered by secure OTP phone verification, Google One-Tap Sign-In, saved session persistence, and unified account profile settings.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Scope Card 4 -->
+                    <div class="animated-solution-card p-6 sm:p-7 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-2xl transition-all duration-300 relative group flex flex-col justify-between h-full">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-3xl font-extrabold text-brand-blue font-numeric">04</span>
+                                <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-blue bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Logistics & COD</span>
+                            </div>
+                            <h3 class="text-slate-900 font-extrabold text-lg sm:text-xl mb-2 tracking-wide group-hover:text-brand-blue transition-colors">
+                                Address Book & Serviceability
+                            </h3>
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                                Instant pincode validation engine that checks delivery serviceability in real-time, calculates estimated delivery days, and dynamically enables or disables Cash-on-Delivery (COD).
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Scope Card 5 -->
+                    <div class="animated-solution-card p-6 sm:p-7 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-2xl transition-all duration-300 relative group flex flex-col justify-between h-full">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-3xl font-extrabold text-brand-blue font-numeric">05</span>
+                                <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-blue bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Order Lifecycle</span>
+                            </div>
+                            <h3 class="text-slate-900 font-extrabold text-lg sm:text-xl mb-2 tracking-wide group-hover:text-brand-blue transition-colors">
+                                Order Tracking & History
+                            </h3>
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                                Comprehensive order management dashboard providing real-time status updates, past invoice downloads, itemized receipts, and a 1-click repeat reorder pipeline.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Scope Card 6 -->
+                    <div class="animated-solution-card p-6 sm:p-7 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-2xl transition-all duration-300 relative group flex flex-col justify-between h-full">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-3xl font-extrabold text-brand-blue font-numeric">06</span>
+                                <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-blue bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Gateway Integration</span>
+                            </div>
+                            <h3 class="text-slate-900 font-extrabold text-lg sm:text-xl mb-2 tracking-wide group-hover:text-brand-blue transition-colors">
+                                Secure Multi-Step Checkout
+                            </h3>
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                                Bank-grade checkout pipeline integrated with Razorpay payment gateway, supporting UPI, credit/debit cards, net banking, automated stock hold, and instant order confirmation.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- RESULTS / CLIENT TESTIMONIAL SECTION (BG: #F7FBFB - ENLARGED CONTAINER) -->
+        <!-- ========================================================================= -->
+        <section id="results" class="bg-[#F7FBFB] text-slate-900 pt-6 sm:pt-8 pb-6 sm:pb-8 relative w-full overflow-hidden border-t border-slate-200/60">
+            
+            <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10 w-full">
+                
+                <!-- SECTION TITLE (BLACK HEADING, CENTER ALIGNED) -->
+                <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+                    <h2 class="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold text-black tracking-tight">
+                        Results
+                    </h2>
+                </div>
+
+                <!-- 4 METRIC CARDS GRID (EQUAL SIZE) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 sm:mb-10 items-stretch">
+                    
+                    <!-- Card 1: Contests / Month -->
+                    <div class="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col justify-center">
+                        <div class="text-4xl sm:text-5xl font-extrabold text-[#3B82F6] font-sans tracking-tight mb-2">
+                            <span class="results-counter" data-target="8640" data-suffix="+">8,640+</span>
+                        </div>
+                        <div class="text-[11px] sm:text-xs font-mono font-bold text-slate-500 tracking-wider uppercase">
+                            Contests / Month
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Verifiable Ledger -->
+                    <div class="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col justify-center">
+                        <div class="text-4xl sm:text-5xl font-extrabold text-[#059669] font-sans tracking-tight mb-2">
+                            <span class="results-counter" data-target="100" data-suffix="%">100%</span>
+                        </div>
+                        <div class="text-[11px] sm:text-xs font-mono font-bold text-slate-500 tracking-wider uppercase">
+                            Verifiable Ledger
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Public Profit Share -->
+                    <div class="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col justify-center">
+                        <div class="text-4xl sm:text-5xl font-extrabold text-[#D97706] font-sans tracking-tight mb-2">
+                            <span class="results-counter" data-target="50" data-suffix="%">50%</span>
+                        </div>
+                        <div class="text-[11px] sm:text-xs font-mono font-bold text-slate-500 tracking-wider uppercase">
+                            Public Profit Share
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Startup Reinvestment -->
+                    <div class="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col justify-center">
+                        <div class="text-4xl sm:text-5xl font-extrabold text-[#9333EA] font-sans tracking-tight mb-2">
+                            <span class="results-counter" data-target="90" data-suffix="%">90%</span>
+                        </div>
+                        <div class="text-[11px] sm:text-xs font-mono font-bold text-slate-500 tracking-wider uppercase">
+                            Startup Reinvestment
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ENLARGED WHITE CARD CONTAINER: LEFT SIDE FLOATING TEXT + RIGHT SIDE VIDEO -->
+                <div class="bg-white border border-slate-200/80 rounded-[36px] shadow-2xl p-8 sm:p-12 lg:p-16 relative overflow-hidden">
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+                        
+                        <!-- LEFT SIDE CONTENT (STATIC & PERMANENTLY VISIBLE) -->
+                        <div class="lg:col-span-7 space-y-6">
+                            
+                            <!-- TOP LEFT TOPIC & CLIENT INFO -->
+                            <div class="space-y-2 border-l-4 border-brand-blue pl-4 sm:pl-5">
+                                <span class="block text-xs sm:text-sm font-extrabold uppercase tracking-widest text-brand-blue font-sans">
+                                    What Our Clients Say
+                                </span>
+                                <h3 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 font-sans tracking-tight">
+                                    DhineshKumar
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-500 font-bold uppercase tracking-wider">
+                                    Clean Culture
+                                </p>
+                            </div>
+
+                            <!-- CLIENT SUCCESS STORIES & QUOTE -->
+                            <div class="space-y-4 pt-1">
+                                <h4 class="text-lg sm:text-xl font-extrabold text-brand-blue font-sans tracking-wide">
+                                    Client Success Stories
+                                </h4>
+
+                                <!-- QUOTE TEXT WITH DECORATIVE QUOTATION MARKS -->
+                                <blockquote class="text-xl sm:text-2xl lg:text-3xl font-sans font-extrabold text-slate-900 leading-relaxed tracking-tight">
+                                    &ldquo;We didn't just build an e-commerce app. We built a system that turns everyday purchases into an automated habit.&rdquo;
+                                </blockquote>
+
+                                <!-- REFINED SHORTENED IMPACT SUMMARY -->
+                                <p class="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed font-medium">
+                                    We helped our client turn their vision into a successful digital solution — delivering strong business results and generating lakhs in value and profit.
+                                </p>
+
+                                <!-- HIGHLIGHT TAG -->
+                                <div class="pt-3">
+                                    <span class="inline-flex items-center px-6 py-3 rounded-full bg-brand-blue/10 border border-brand-blue/30 text-brand-blue font-extrabold text-xs sm:text-sm lg:text-base tracking-wide shadow-md">
+                                        Happy Client. Successful Project. Real Results.
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- RIGHT SIDE VIDEO CONTAINER -->
+                        <div class="lg:col-span-5 relative">
+                            <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 bg-slate-900 group">
+                                <video src="./video/PixVerse_V6_Image_Text_540P_I_didi_t_want_real.mp4" 
+                                    autoplay loop muted playsinline 
+                                    class="w-full h-auto object-cover rounded-3xl transform transition-transform duration-500 group-hover:scale-105">
+                                </video>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- PRE-FOOTER: CLEAN CULTURE "APP IS LIVE!" FULL-BLEED SHOWCASE WITH CONFETTI SIDE CANNONS -->
+        <section id="app-is-live-section"
+            class="py-8 sm:py-10 bg-[#05080C] text-white relative overflow-hidden w-full m-0 p-0 border-none">
+
+            <!-- Confetti Canvas Embedded inside Section Only -->
+            <canvas id="confetti-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-10"></canvas>
+
+            <!-- CSS CONFETTI SIDE CANNONS (LEFT & RIGHT CONTINUOUS FLYING PARTICLES) -->
+            <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+
+                <!-- Left Side Cannon Streams -->
+                <div class="cannon-particle-left w-3 h-3 bg-[#a786ff] rounded-sm" style="animation-delay: 0s;"></div>
+                <div class="cannon-particle-left w-2.5 h-4 bg-[#fd8bbc] rotate-45" style="animation-delay: 0.5s;"></div>
+                <div class="cannon-particle-left w-3 h-2 bg-[#eca184] -rotate-12" style="animation-delay: 1.0s;"></div>
+                <div class="cannon-particle-left w-3.5 h-3.5 rounded-full bg-[#f8deb1]" style="animation-delay: 1.5s;">
+                </div>
+                <div class="cannon-particle-left w-2 h-4 bg-[#10b981] rotate-12" style="animation-delay: 2.0s;"></div>
+                <div class="cannon-particle-left w-3 h-3 bg-[#38bdf8] rotate-45" style="animation-delay: 2.5s;"></div>
+                <div class="cannon-particle-left w-4 h-2 bg-[#facc15] -rotate-30" style="animation-delay: 3.0s;"></div>
+
+                <!-- Right Side Cannon Streams -->
+                <div class="cannon-particle-right w-3 h-3 bg-[#fd8bbc] rounded-sm" style="animation-delay: 0.2s;"></div>
+                <div class="cannon-particle-right w-3 h-4 bg-[#a786ff] -rotate-45" style="animation-delay: 0.7s;"></div>
+                <div class="cannon-particle-right w-2.5 h-2.5 rounded-full bg-[#10b981]" style="animation-delay: 1.2s;">
+                </div>
+                <div class="cannon-particle-right w-3.5 h-2 bg-[#f8deb1] rotate-30" style="animation-delay: 1.7s;">
+                </div>
+                <div class="cannon-particle-right w-3 h-3 bg-[#eca184] rotate-12" style="animation-delay: 2.2s;"></div>
+                <div class="cannon-particle-right w-2 h-4 bg-[#facc15] -rotate-12" style="animation-delay: 2.7s;"></div>
+                <div class="cannon-particle-right w-3.5 h-3 bg-[#38bdf8] rotate-45" style="animation-delay: 3.2s;">
+                </div>
+
+                <!-- Center Ambient Radial Glow behind Icon -->
+                <div
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none">
+                </div>
+
+            </div>
+
+            <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-20 space-y-8 py-8">
+
+                <!-- Clean Culture Original Logo Image with Glow -->
+                <div class="flex justify-center">
+                    <div class="relative group cursor-pointer" onclick="triggerSideCannons()">
+                        <div
+                            class="absolute -inset-3 rounded-3xl bg-emerald-500/40 blur-2xl group-hover:bg-emerald-400/60 transition-all">
+                        </div>
+                        <img src="./assets/clean_culture_logo.png" alt="Clean Culture Logo"
+                            class="relative w-24 sm:w-32 h-24 sm:h-32 rounded-3xl border-2 border-emerald-400/80 object-cover shadow-[0_0_50px_rgba(16,185,129,0.5)] transform transition hover:scale-105">
+                    </div>
+                </div>
+
+                <!-- Clean Culture Title & Description -->
+                <div class="space-y-3">
+                    <h2 class="font-sans text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight">
+                        Clean Culture
+                    </h2>
+                    <p class="text-slate-300 text-base sm:text-xl font-normal leading-relaxed max-w-2xl mx-auto">
+                        Fresh milk, tender coconuts, protein meals, RO water, oils & more — delivered to your doorstep!
+                    </p>
+                </div>
+
+                <!-- 🎉 App is Live! Badge with Side Cannon Trigger 🎉 -->
+                <div onclick="triggerSideCannons()"
+                    class="inline-flex items-center space-x-3 px-7 py-3.5 rounded-full bg-[#0A0F17] hover:bg-[#121B2B] border border-emerald-500/50 text-emerald-400 text-lg sm:text-xl font-extrabold shadow-[0_0_35px_rgba(16,185,129,0.35)] cursor-pointer transform transition hover:scale-105">
+                    <span class="text-2xl animate-bounce"></span>
+                    <span
+                        class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300 bg-clip-text text-transparent tracking-wide">App
+                        is Live!</span>
+                    <span class="text-2xl animate-bounce">🎉</span>
+                </div>
+
+                <!-- Direct App Store & Play Store Download Buttons -->
+                <div class="flex flex-wrap items-center justify-center gap-5 pt-4">
+                    <!-- Google Play Button -->
+                    <a href="#" onclick="triggerSideCannons()"
+                        class="inline-flex items-center space-x-4 px-8 py-4 rounded-2xl bg-[#090E17] hover:bg-[#0E1524] border border-emerald-500/40 hover:border-emerald-400 text-white font-medium shadow-[0_0_25px_rgba(16,185,129,0.25)] transition-all transform hover:-translate-y-1">
+                        <i class="fa-brands fa-google-play text-3xl text-emerald-400"></i>
+                        <div class="text-left">
+                            <span
+                                class="text-[10px] uppercase tracking-wider text-slate-400 block leading-none font-bold">GET
+                                IT ON</span>
+                            <span class="text-lg font-extrabold text-white leading-tight">Google Play</span>
+                        </div>
+                    </a>
+
+                    <!-- App Store Button -->
+                    <a href="#" onclick="triggerSideCannons()"
+                        class="inline-flex items-center space-x-4 px-8 py-4 rounded-2xl bg-[#090E17] hover:bg-[#0E1524] border border-slate-700/80 hover:border-slate-500 text-white font-medium shadow-[0_0_25px_rgba(255,255,255,0.1)] transition-all transform hover:-translate-y-1">
+                        <i class="fa-brands fa-apple text-3xl text-white"></i>
+                        <div class="text-left">
+                            <span
+                                class="text-[10px] uppercase tracking-wider text-slate-400 block leading-none font-bold">DOWNLOAD
+                                ON THE</span>
+                            <span class="text-lg font-extrabold text-white leading-tight">App Store</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PRE-FOOTER FEATURE STRIP (MOVING MARQUEE EFFECT - IMAGE 1 DESIGN) -->
+        <section class="w-full bg-white border-y border-slate-200 py-6 overflow-hidden relative">
+            
+            <!-- Fade Overlay Gradients at Left & Right Edges -->
+            <div class="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+            <!-- MOVING MARQUEE TRACK -->
+            <div class="animate-scroll-left flex items-center space-x-12 sm:space-x-16">
+                
+                <!-- ITEM 1: End-to-End Digital Solutions -->
+                <div class="flex items-center space-x-4 flex-shrink-0">
+                    <div class="w-12 h-12 rounded-full border border-slate-300 bg-slate-50 flex items-center justify-center text-slate-800 text-xl shadow-sm">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-slate-900 font-extrabold text-base sm:text-lg leading-snug">End-to-end digital solutions</h4>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium leading-tight">From idea to launch &bull; Complete solutions under one roof</p>
+                    </div>
+                </div>
+
+                <!-- ITEM 2: Quality-Driven Development -->
+                <div class="flex items-center space-x-4 flex-shrink-0">
+                    <div class="w-12 h-12 rounded-full border border-slate-300 bg-slate-50 flex items-center justify-center text-slate-800 text-xl shadow-sm">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-slate-900 font-extrabold text-base sm:text-lg leading-snug">Quality-driven development</h4>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium leading-tight">Modern & reliable solutions &bull; Built for performance and scalability</p>
+                    </div>
+                </div>
+
+                <!-- ITEM 3: On-Time Delivery -->
+                <div class="flex items-center space-x-4 flex-shrink-0">
+                    <div class="w-12 h-12 rounded-full border border-slate-300 bg-slate-50 flex items-center justify-center text-slate-800 text-xl shadow-sm">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-slate-900 font-extrabold text-base sm:text-lg leading-snug">On-time delivery</h4>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium leading-tight">Efficient project execution &bull; Delivered with clarity and commitment</p>
+                    </div>
+                </div>
+
+                <!-- ITEM 4: Client Success -->
+                <div class="flex items-center space-x-4 flex-shrink-0">
+                    <div class="w-12 h-12 rounded-full border border-slate-300 bg-slate-50 flex items-center justify-center text-slate-800 text-xl shadow-sm">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-slate-900 font-extrabold text-base sm:text-lg leading-snug">Client success</h4>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium leading-tight">Turning ideas into successful products &bull; Focused on value, results & long-term growth</p>
+                    </div>
+                </div>
+
+                <!-- DUPLICATED SET FOR SEAMLESS INFINITE LOOP -->
+                <!-- ITEM 1: End-to-End Digital Solutions -->
+                <div class="flex items-center space-x-4 flex-shrink-0">
+                    <div class="w-12 h-12 rounded-full border border-slate-300 bg-slate-50 flex items-center justify-center text-slate-800 text-xl shadow-sm">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-slate-900 font-extrabold text-base sm:text-lg leading-snug">End-to-end digital solutions</h4>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium leading-tight">From idea to launch &bull; Complete solutions under one roof</p>
+                    </div>
+                </div>
+
+                <!-- ITEM 2: Quality-Driven Development -->
+                <div class="flex items-center space-x-4 flex-shrink-0">
+                    <div class="w-12 h-12 rounded-full border border-slate-300 bg-slate-50 flex items-center justify-center text-slate-800 text-xl shadow-sm">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-slate-900 font-extrabold text-base sm:text-lg leading-snug">Quality-driven development</h4>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium leading-tight">Modern & reliable solutions &bull; Built for performance and scalability</p>
+                    </div>
+                </div>
+
+                <!-- ITEM 3: On-Time Delivery -->
+                <div class="flex items-center space-x-4 flex-shrink-0">
+                    <div class="w-12 h-12 rounded-full border border-slate-300 bg-slate-50 flex items-center justify-center text-slate-800 text-xl shadow-sm">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-slate-900 font-extrabold text-base sm:text-lg leading-snug">On-time delivery</h4>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium leading-tight">Efficient project execution &bull; Delivered with clarity and commitment</p>
+                    </div>
+                </div>
+
+                <!-- ITEM 4: Client Success -->
+                <div class="flex items-center space-x-4 flex-shrink-0">
+                    <div class="w-12 h-12 rounded-full border border-slate-300 bg-slate-50 flex items-center justify-center text-slate-800 text-xl shadow-sm">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-slate-900 font-extrabold text-base sm:text-lg leading-snug">Client success</h4>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium leading-tight">Turning ideas into successful products &bull; Focused on value, results & long-term growth</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer id="contact" class="bg-[#05080C] text-slate-300 pt-8 pb-8 w-full m-0 border-none">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
+
+                    <!-- COLUMN 1: DHIGROWTH BRAND & ABOUT -->
+                    <div class="lg:col-span-4 space-y-4">
+                        <a href="#" class="inline-block py-1">
+                            <img src="./assets/dhigrowth_logo.png" alt="DhiGrowth Logo"
+                                class="h-10 w-auto object-contain filter brightness-110">
+                        </a>
+                        <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+                            Coimbatore's Leading Digital Growth Partner — Technology, Marketing & AI under one roof.
+                        </p>
+
+                        <!-- Social Media Icons -->
+                        <div class="flex space-x-3 pt-2">
+                            <a href="#"
+                                class="w-10 h-10 rounded-xl bg-slate-900 text-slate-300 hover:bg-brand-blue hover:text-white transition-all flex items-center justify-center border border-slate-800">
+                                <i class="fa-brands fa-instagram text-base"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-xl bg-slate-900 text-slate-300 hover:bg-brand-blue hover:text-white transition-all flex items-center justify-center border border-slate-800">
+                                <i class="fa-brands fa-linkedin-in text-base"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-xl bg-slate-900 text-slate-300 hover:bg-brand-blue hover:text-white transition-all flex items-center justify-center border border-slate-800">
+                                <i class="fa-brands fa-facebook-f text-base"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-xl bg-slate-900 text-slate-300 hover:bg-brand-blue hover:text-white transition-all flex items-center justify-center border border-slate-800">
+                                <i class="fa-brands fa-youtube text-base"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- COLUMN 2: SERVICES -->
+                    <div class="lg:col-span-3 space-y-3">
+                        <h4 class="text-white text-xs font-heading tracking-widest text-brand-blue font-bold">Services
+                        </h4>
+                        <ul class="space-y-2.5 text-sm text-slate-400">
+                            <li><a href="#" class="hover:text-white transition-colors">Website Development</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">App Development</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">AI Development</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">AI Automation</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">WhatsApp Marketing</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">SEO Services</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Meta & Google Ads</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- COLUMN 3: COMPANY -->
+                    <div class="lg:col-span-2 space-y-3">
+                        <h4 class="text-white text-xs font-heading tracking-widest text-brand-blue font-bold">Company
+                        </h4>
+                        <ul class="space-y-2.5 text-sm text-slate-400">
+                            <li><a href="#about" class="hover:text-white transition-colors">About DhiGrowth</a></li>
+                            <li><a href="#why-us" class="hover:text-white transition-colors">Why Choose Us</a></li>
+                            <li><a href="#process" class="hover:text-white transition-colors">Our Process</a></li>
+                            <li><a href="#services" class="hover:text-white transition-colors">Industries</a></li>
+                            <li><a href="#clients" class="hover:text-white transition-colors">Client Reviews</a></li>
+                            <li><a href="#contact" class="hover:text-white transition-colors">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- COLUMN 4: CONTACT -->
+                    <div class="lg:col-span-3 space-y-3">
+                        <h4 class="text-white text-xs font-heading tracking-widest text-brand-blue font-bold">Contact
+                        </h4>
+                        <ul class="space-y-3 text-sm text-slate-400">
+                            <li class="flex items-start space-x-3">
+                                <i class="fa-solid fa-location-dot text-brand-blue mt-1"></i>
+                                <span>Coimbatore, Tamil Nadu, India</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-phone text-brand-blue"></i>
+                                <span class="font-numeric">+91 99999 99999</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-envelope text-brand-blue"></i>
+                                <span>hello@dhigrowth.com</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- BOTTOM COPYRIGHT BAR -->
+                <div
+                    class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 space-y-4 md:space-y-0 font-numeric">
+                    <div>
+                        © 2024 DhiGrowth. All rights reserved. | <span class="text-slate-400">Coimbatore's Leading
+                            Digital Agency</span>
+                    </div>
+                    <div class="flex space-x-6">
+                        <a href="#" class="hover:text-slate-300 transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-slate-300 transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // CAROUSEL ENGINE
+        let currentSlide = 0;
+        const slidesCount = 3;
+        const carouselTrack = document.getElementById('carouselTrack');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function updateCarousel() {
+            if (!carouselTrack) return;
+            carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.remove('bg-white/40');
+                    dot.classList.add('bg-white', 'w-6');
+                } else {
+                    dot.classList.remove('bg-white', 'w-6');
+                    dot.classList.add('bg-white/40');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slidesCount;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slidesCount) % slidesCount;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        document.getElementById('carouselNextBtn')?.addEventListener('click', nextSlide);
+        document.getElementById('carouselPrevBtn')?.addEventListener('click', prevSlide);
+
+        // Auto play carousel every 5 seconds
+        setInterval(nextSlide, 5000);
+        updateCarousel();
+
+        // LOGO VIDEO PLAYBACK SPEED CONTROL
+        const logoVideo = document.getElementById('logoVideo');
+        if (logoVideo) {
+            logoVideo.playbackRate = 1.35;
+            logoVideo.addEventListener('canplay', () => {
+                logoVideo.playbackRate = 1.35;
+            });
+        }
+
+        // VIDEO CONTROLS
+        function toggleVideoMute() {
+            const video = document.getElementById('cleanCultureVideo');
+            const muteIcon = document.getElementById('muteIcon');
+            if (video) {
+                video.muted = !video.muted;
+                if (video.muted) {
+                    muteIcon.className = 'fa-solid fa-volume-xmark text-sm';
+                } else {
+                    muteIcon.className = 'fa-solid fa-volume-high text-sm text-brand-blue';
+                }
+            }
+        }
+
+        // CASE STUDY MEGA MENU TOGGLE LOGIC
+        const caseStudyBtn = document.getElementById('caseStudyBtn');
+        const caseStudyGroup = document.getElementById('caseStudyGroup');
+        const megaMenuDropdown = document.getElementById('megaMenuDropdown');
+        const caseStudyChevron = document.getElementById('caseStudyChevron');
+
+        let isDropdownOpen = false;
+
+        function toggleDropdown(open) {
+            isDropdownOpen = open !== undefined ? open : !isDropdownOpen;
+            if (isDropdownOpen) {
+                megaMenuDropdown.classList.remove('opacity-0', 'visibility-hidden', 'pointer-events-none');
+                megaMenuDropdown.classList.add('opacity-100', 'visible', 'pointer-events-auto');
+                megaMenuDropdown.style.opacity = '1';
+                megaMenuDropdown.style.visibility = 'visible';
+                megaMenuDropdown.style.transform = 'translateY(0)';
+                if (caseStudyChevron) caseStudyChevron.style.transform = 'rotate(180deg)';
+            } else {
+                megaMenuDropdown.style.opacity = '0';
+                megaMenuDropdown.style.visibility = 'hidden';
+                megaMenuDropdown.style.transform = 'translateY(12px)';
+                if (caseStudyChevron) caseStudyChevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        if (caseStudyBtn) {
+            caseStudyBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleDropdown();
+            });
+        }
+
+        if (caseStudyGroup) {
+            caseStudyGroup.addEventListener('mouseenter', () => toggleDropdown(true));
+            caseStudyGroup.addEventListener('mouseleave', () => toggleDropdown(false));
+        }
+
+        document.addEventListener('click', (e) => {
+            if (caseStudyGroup && !caseStudyGroup.contains(e.target)) {
+                toggleDropdown(false);
+            }
+        });
+
+        // SCROLL TO CLEAN CULTURE SECTION
+        function showCleanCulturePage() {
+            toggleDropdown(false);
+            const section = document.getElementById('clean-culture-section');
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // REAL MOBILE PHONE SCREEN AUTO-SWIPE CAROUSEL ENGINE
+        let currentPhoneSlide = 0;
+        const phoneSlidesCount = 3;
+        const phoneDots = document.querySelectorAll('.phone-slider-dot');
+
+        function updatePhoneSlider() {
+            for (let i = 0; i < phoneSlidesCount; i++) {
+                const slide = document.getElementById(`slantPhoneSlide${i}`);
+                const dot = phoneDots[i];
+                if (slide) {
+                    if (i === currentPhoneSlide) {
+                        slide.classList.remove('opacity-0', 'scale-95', 'z-10');
+                        slide.classList.add('opacity-100', 'scale-100', 'z-20');
+                    } else {
+                        slide.classList.remove('opacity-100', 'scale-100', 'z-20');
+                        slide.classList.add('opacity-0', 'scale-95', 'z-10');
+                    }
+                }
+                if (dot) {
+                    if (i === currentPhoneSlide) {
+                        dot.classList.remove('bg-white/40', 'w-2.5');
+                        dot.classList.add('bg-emerald-400', 'w-6');
+                    } else {
+                        dot.classList.remove('bg-emerald-400', 'w-6');
+                        dot.classList.add('bg-white/40', 'w-2.5');
+                    }
+                }
+            }
+        }
+
+        function nextPhoneSlide() {
+            currentPhoneSlide = (currentPhoneSlide + 1) % phoneSlidesCount;
+            updatePhoneSlider();
+        }
+
+        function prevPhoneSlide() {
+            currentPhoneSlide = (currentPhoneSlide - 1 + phoneSlidesCount) % phoneSlidesCount;
+            updatePhoneSlider();
+        }
+
+        function goToPhoneSlide(index) {
+            currentPhoneSlide = index;
+            updatePhoneSlider();
+        }
+
+        // Auto play phone screen auto-swipe every 3.5 seconds
+        let phoneSlideInterval = setInterval(nextPhoneSlide, 3500);
+
+        const slantContainer = document.getElementById('slantPhoneContainer');
+        if (slantContainer) {
+            slantContainer.addEventListener('mouseenter', () => clearInterval(phoneSlideInterval));
+            slantContainer.addEventListener('mouseleave', () => {
+                clearInterval(phoneSlideInterval);
+                phoneSlideInterval = setInterval(nextPhoneSlide, 3500);
+            });
+        }
+
+        updatePhoneSlider();
+
+        // =========================================================================
+        // 3D COVERFLOW CAROUSEL ENGINE (3 HIGHLIGHT FEATURES DYNAMIC DISPLAY)
+        // =========================================================================
+        const COVERFLOW_SLIDES = [
+            {
+                src: "./assets/highlight_realistic_reorder.png",
+                alt: "Direct-to-payment reorder",
+                title: "Direct-to-payment reorder",
+                subtitle: "A 1-click reorder system that validates past purchases against live inventory and fast-forwards the user directly to the payment step.",
+                icon: "fa-bolt"
+            },
+            {
+                src: "./assets/highlight_realistic_delivery.png",
+                alt: "Real-time delivery & COD validation",
+                title: "Real-time delivery & COD validation",
+                subtitle: "Instant pincode serviceability checks that automatically calculate estimated delivery days and dynamically enable or disable Cash on Delivery (COD).",
+                icon: "fa-location-dot"
+            },
+            {
+                src: "./assets/highlight_realistic_sync.png",
+                alt: "Single source of truth",
+                title: "Single source of truth",
+                subtitle: "Synchronized state management ensuring that the frontend UI and backend PostgreSQL database always reflect the exact same pricing and inventory data.",
+                icon: "fa-database"
+            }
+        ];
+
+        (function initCoverflowCarousel() {
+            const frame = document.getElementById('coverflowFrame');
+            const stage = document.getElementById('coverflowStage');
+            const prevBtn = document.getElementById('cfPrevBtn');
+            const nextBtn = document.getElementById('cfNextBtn');
+            const pagination = document.getElementById('cfPagination');
+            const titleEl = document.getElementById('cfActiveTitle');
+            const subtitleEl = document.getElementById('cfActiveSubtitle');
+
+            if (!frame || !stage) return;
+
+            const count = COVERFLOW_SLIDES.length;
+            const rotate = 44;
+            const depth = 0.6;
+            const falloff = 0.56;
+            const fade = 0.1;
+            const gap = 0.08;
+            const loop = true;
+
+            let pos = 0;
+            let targetPos = 0;
+            let width = 0;
+            let rafId = null;
+            let dragInfo = null;
+            let selectedIndex = 0;
+            let autoTimer = null;
+
+            const cards = [];
+
+            // Build DOM elements for slides
+            COVERFLOW_SLIDES.forEach((slide, idx) => {
+                const card = document.createElement('div');
+                card.className = 'absolute left-1/2 top-0 aspect-square overflow-hidden rounded-2xl bg-slate-900 shadow-2xl transition-shadow duration-300 border border-white/10 will-change-transform cursor-pointer group';
+                card.style.width = 'clamp(200px, 26vw, 290px)';
+
+                const img = document.createElement('img');
+                img.src = slide.src;
+                img.alt = slide.alt;
+                img.draggable = false;
+                img.className = 'h-full w-full select-none object-cover transition-transform duration-500 group-hover:scale-105';
+
+                card.appendChild(img);
+                card.addEventListener('click', () => goTo(idx));
+                stage.appendChild(card);
+                cards.push(card);
+            });
+
+            // Build Pagination Dots
+            pagination.innerHTML = '';
+            const dots = [];
+            COVERFLOW_SLIDES.forEach((_, idx) => {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.ariaLabel = `Go to slide ${idx + 1}`;
+                dot.className = `h-2.5 rounded-full transition-all duration-300 cursor-pointer ${idx === 0 ? 'w-7 bg-brand-blue shadow-md' : 'w-2.5 bg-slate-300 hover:bg-slate-400'}`;
+                dot.addEventListener('click', () => goTo(idx));
+                pagination.appendChild(dot);
+                dots.push(dot);
+            });
+
+            function indexAt(p) {
+                return ((Math.round(p) % count) + count) % count;
+            }
+
+            function paint() {
+                if (!width && cards[0]) {
+                    width = cards[0].offsetWidth;
+                }
+                if (!width) return;
+
+                const pitch = width * (1 + gap);
+
+                cards.forEach((card, idx) => {
+                    let offset = idx - pos;
+                    if (loop) {
+                        offset = ((offset % count) + count) % count;
+                        if (offset > count / 2) offset -= count;
+                    }
+
+                    const distance = Math.abs(offset);
+                    const ramp = Math.pow(distance, falloff);
+                    const tilt = Math.min(rotate * ramp, 82) * Math.sign(offset);
+
+                    card.style.transform = `translateX(calc(-50% + ${offset * pitch}px)) translateZ(${-depth * width * ramp}px) rotateY(${-tilt}deg)`;
+
+                    const edge = loop ? Math.min(1, Math.max(0, count / 2 - distance)) : 1;
+                    card.style.opacity = String(Math.max(0, 1 - fade * distance) * edge);
+                    card.style.zIndex = String(100 - Math.round(distance));
+                });
+            }
+
+            function updateCaption(idx) {
+                const realIdx = indexAt(idx);
+                const slide = COVERFLOW_SLIDES[realIdx];
+                if (!slide) return;
+
+                if (titleEl) titleEl.textContent = slide.title;
+                if (subtitleEl) subtitleEl.textContent = slide.subtitle;
+
+                const iconEl = document.getElementById('cfActiveIcon');
+                if (iconEl && slide.icon) {
+                    iconEl.className = `fa-solid ${slide.icon}`;
+                }
+
+                if (dots) {
+                    dots.forEach((d, i) => {
+                        if (i === realIdx) {
+                            d.className = 'h-2.5 w-7 rounded-full bg-brand-blue shadow-md transition-all duration-300 cursor-pointer';
+                        } else {
+                            d.className = 'h-2.5 w-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all duration-300 cursor-pointer';
+                        }
+                    });
+                }
+
+                // Update active state on the 3 interactive feature cards below
+                [0, 1, 2].forEach(cardIdx => {
+                    const cardEl = document.getElementById(`highlight-card-${cardIdx}`);
+                    if (cardEl) {
+                        if (cardIdx === realIdx) {
+                            cardEl.className = 'highlight-interactive-card p-6 sm:p-7 rounded-2xl bg-white border-2 border-brand-blue shadow-2xl scale-[1.03] transition-all duration-300 relative group overflow-hidden cursor-pointer ring-4 ring-brand-blue/15';
+                        } else {
+                            cardEl.className = 'highlight-interactive-card p-6 sm:p-7 rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-xl opacity-75 hover:opacity-100 transition-all duration-300 relative group overflow-hidden cursor-pointer';
+                        }
+                    }
+                });
+            }
+
+            function settle(target) {
+                if (rafId !== null) cancelAnimationFrame(rafId);
+                targetPos = target;
+                const newIdx = indexAt(target);
+                if (newIdx !== selectedIndex) {
+                    selectedIndex = newIdx;
+                    updateCaption(selectedIndex);
+                }
+
+                const step = () => {
+                    const remaining = targetPos - pos;
+                    if (Math.abs(remaining) < 0.0004) {
+                        pos = targetPos;
+                        paint();
+                        rafId = null;
+                        return;
+                    }
+                    pos += remaining * 0.16;
+                    paint();
+                    rafId = requestAnimationFrame(step);
+                };
+                rafId = requestAnimationFrame(step);
+            }
+
+            function clamp(p) {
+                return loop ? p : Math.max(0, Math.min(count - 1, p));
+            }
+
+            function goTo(idx) {
+                const target = loop
+                    ? idx + Math.round((targetPos - idx) / count) * count
+                    : idx;
+                settle(clamp(target));
+            }
+
+            window.goToCoverflowSlide = goTo;
+
+            function nudge(by) {
+                settle(clamp(Math.round(targetPos) + by));
+            }
+
+            if (prevBtn) prevBtn.addEventListener('click', () => { resetAutoTimer(); nudge(-1); });
+            if (nextBtn) nextBtn.addEventListener('click', () => { resetAutoTimer(); nudge(1); });
+
+            // Pointer drag events
+            frame.addEventListener('pointerdown', (e) => {
+                if (rafId !== null) cancelAnimationFrame(rafId);
+                frame.setPointerCapture(e.pointerId);
+                targetPos = pos;
+                dragInfo = {
+                    id: e.pointerId,
+                    x: e.clientX,
+                    pos: pos,
+                    v: 0,
+                    t: performance.now()
+                };
+                stopAutoTimer();
+            });
+
+            frame.addEventListener('pointermove', (e) => {
+                if (!dragInfo || dragInfo.id !== e.pointerId) return;
+                const pitch = width * (1 + gap);
+                if (!pitch) return;
+
+                const now = performance.now();
+                const prev = pos;
+                pos = clamp(dragInfo.pos - (e.clientX - dragInfo.x) / pitch);
+                dragInfo.v = ((pos - prev) / Math.max(now - dragInfo.t, 1)) * 1000;
+                dragInfo.t = now;
+
+                const currentIdx = indexAt(pos);
+                if (currentIdx !== selectedIndex) {
+                    selectedIndex = currentIdx;
+                    updateCaption(selectedIndex);
+                }
+                paint();
+            });
+
+            const endDrag = (e) => {
+                if (!dragInfo || dragInfo.id !== e.pointerId) return;
+                dragInfo = null;
+                const carried = Math.max(-2, Math.min(2, dragInfo.v * 0.18));
+                settle(clamp(Math.round(pos + carried)));
+                startAutoTimer();
+            };
+
+            frame.addEventListener('pointerup', endDrag);
+            frame.addEventListener('pointercancel', endDrag);
+
+            frame.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') { e.preventDefault(); resetAutoTimer(); nudge(-1); }
+                else if (e.key === 'ArrowRight') { e.preventDefault(); resetAutoTimer(); nudge(1); }
+            });
+
+            // Resize Observer to adjust card width
+            const resizeObserver = new ResizeObserver(() => {
+                if (cards[0]) {
+                    width = cards[0].offsetWidth;
+                    paint();
+                }
+            });
+            resizeObserver.observe(frame);
+
+            // Auto Play Timer
+            function startAutoTimer() {
+                stopAutoTimer();
+                autoTimer = setInterval(() => {
+                    nudge(1);
+                }, 3800);
+            }
+
+            function stopAutoTimer() {
+                if (autoTimer) clearInterval(autoTimer);
+            }
+
+            function resetAutoTimer() {
+                stopAutoTimer();
+                startAutoTimer();
+            }
+
+            frame.addEventListener('mouseenter', stopAutoTimer);
+            frame.addEventListener('mouseleave', startAutoTimer);
+
+            // Initial Paint & Caption
+            width = cards[0] ? cards[0].offsetWidth : 260;
+            paint();
+            updateCaption(0);
+            startAutoTimer();
+        })();
+
+        // =========================================================================
+        // LENIS SMOOTH SCROLLING + GSAP SCROLLTRIGGER ENGINE
+        // =========================================================================
+        let lenis;
+        if (typeof Lenis !== 'undefined') {
+            lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smoothWheel: true,
+                touchMultiplier: 1.5
+            });
+
+            // Sync Lenis with GSAP ScrollTrigger
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+
+                lenis.on('scroll', ScrollTrigger.update);
+
+                gsap.ticker.add((time) => {
+                    lenis.raf(time * 1000);
+                });
+
+                gsap.ticker.lagSmoothing(0);
+
+                // Add GSAP ScrollTrigger reveal animations on scroll
+                gsap.utils.toArray('h2.font-heading').forEach((heading) => {
+                    gsap.from(heading, {
+                        scrollTrigger: {
+                            trigger: heading,
+                            start: 'top 85%',
+                            toggleActions: 'play none none reverse'
+                        },
+                        y: 30,
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: 'power3.out'
+                    });
+                });
+
+                const cleanCultureSection = document.getElementById('clean-culture-section');
+                if (cleanCultureSection) {
+                    gsap.from(cleanCultureSection.children, {
+                        scrollTrigger: {
+                            trigger: cleanCultureSection,
+                            start: 'top 80%',
+                            toggleActions: 'play none none reverse'
+                        },
+                        y: 40,
+                        opacity: 0,
+                        duration: 1,
+                        stagger: 0.2,
+                        ease: 'power3.out'
+                    });
+                }
+            }
+
+            // Smooth scroll for internal anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId && targetId !== '#') {
+                        const targetEl = document.querySelector(targetId);
+                        if (targetEl) {
+                            e.preventDefault();
+                            lenis.scrollTo(targetEl, { duration: 1.2, offset: -20 });
+                        }
+                    }
+                });
+            });
+        }
+
+        // CONFETTI SIDE CANNONS ANIMATION ENGINE (ISOLATED INSIDE APP-IS-LIVE SECTION ONLY)
+        let confettiInstance = null;
+        let animationFrameId = null;
+        let isConfettiActive = false;
+
+        function initConfettiCanvas() {
+            const canvas = document.getElementById('confetti-canvas');
+            if (canvas && typeof confetti !== 'undefined') {
+                confettiInstance = confetti.create(canvas, {
+                    resize: true,
+                    useWorker: true
+                });
+            }
+        }
+
+        function triggerSideCannons() {
+            const canvas = document.getElementById('confetti-canvas');
+            if (!confettiInstance && canvas && typeof confetti !== 'undefined') {
+                initConfettiCanvas();
+            }
+
+            const fire = confettiInstance || confetti;
+            if (typeof fire !== 'function') return;
+
+            const end = Date.now() + 3.5 * 1000;
+            const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1", "#10b981", "#38bdf8", "#facc15"];
+
+            isConfettiActive = true;
+
+            const frame = () => {
+                if (!isConfettiActive || Date.now() > end) {
+                    stopSideCannons();
+                    return;
+                }
+
+                // Left Cannon Stream
+                fire({
+                    particleCount: 2,
+                    angle: 60,
+                    spread: 55,
+                    startVelocity: 55,
+                    origin: { x: 0, y: 0.6 },
+                    colors: colors
+                });
+
+                // Right Cannon Stream
+                fire({
+                    particleCount: 2,
+                    angle: 120,
+                    spread: 55,
+                    startVelocity: 55,
+                    origin: { x: 1, y: 0.6 },
+                    colors: colors
+                });
+
+                animationFrameId = requestAnimationFrame(frame);
+            };
+
+            frame();
+        }
+
+        function stopSideCannons() {
+            isConfettiActive = false;
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
+            if (confettiInstance && typeof confettiInstance.reset === 'function') {
+                confettiInstance.reset();
+            }
+        }
+
+        // Auto Trigger Side Cannons ONLY when in view; STOP completely when scrolled away
+        window.addEventListener('DOMContentLoaded', () => {
+            initConfettiCanvas();
+            const section = document.getElementById('app-is-live-section');
+            if (section && 'IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            triggerSideCannons();
+                        } else {
+                            stopSideCannons();
+                        }
+                    });
+                }, { threshold: 0.15 });
+                observer.observe(section);
+            }
+        });
+        // =========================================================================
+        // SOLUTION INTERACTIVE ENGINE WITH CIRCULAR ARC MOTION & REVEAL
+        // =========================================================================
+        const SOLUTION_CAROUSEL_DATA = [
+            {
+                id: "01",
+                step: "01 / 06",
+                tag: "High conversion storefront",
+                title: "Mobile-first storefront",
+                desc: "Sub-second product pages, multi-weight quantity selectors, dynamic pricing preview, and real-time inventory sync designed for high conversion.",
+                img: "./assets/scope_product_discovery.png",
+                alt: "Mobile-first storefront visual"
+            },
+            {
+                id: "02",
+                step: "02 / 06",
+                tag: "Checkout core",
+                title: "1-click direct reorder",
+                desc: "Past purchase validation against live stock, instant reorder bundling, and automatic skip-to-payment step reducing drop-offs by 60%.",
+                img: "./assets/scope_cart_engine.png",
+                alt: "1-click direct reorder visual"
+            },
+            {
+                id: "03",
+                step: "03 / 06",
+                tag: "Logistics engine",
+                title: "Pincode & COD validation",
+                desc: "Live address serviceability verification, automated ETA calculation, dynamic Cash-on-Delivery toggling, and courier routing API.",
+                img: "./assets/scope_address_book.png",
+                alt: "Pincode & COD validation visual"
+            },
+            {
+                id: "04",
+                step: "04 / 06",
+                tag: "Secure payments",
+                title: "Razorpay checkout",
+                desc: "Seamless UPI Intent payment flow, credit/debit card vaulting, net banking fallback, instant payment status callbacks, and zero-latency order booking.",
+                img: "./assets/scope_secure_checkout.png",
+                alt: "Razorpay checkout visual"
+            },
+            {
+                id: "05",
+                step: "05 / 06",
+                tag: "Customer engagement",
+                title: "WhatsApp order updates",
+                desc: "Automated WhatsApp notifications for order confirmation, dispatch tracking links, delivery ETA alerts, and instant customer feedback loop.",
+                img: "./assets/scope_order_tracking.png",
+                alt: "WhatsApp order updates visual"
+            },
+            {
+                id: "06",
+                step: "06 / 06",
+                tag: "Data engine",
+                title: "Real-time DB sync",
+                desc: "Event-driven PostgreSQL database replication ensuring synchronized cart, pricing, and stock state between mobile clients and admin portals.",
+                img: "./assets/scope_user_auth.png",
+                alt: "Real-time DB sync visual"
+            }
+        ];
+
+        let currentSolutionIndex = 0;
+        let solutionIsAnimating = false;
+
+        function getCircularVariant(position, direction) {
+            const radius = 320;
+            if (position === 'enter') {
+                const angle = direction > 0 ? 45 : -45;
+                const rad = (angle * Math.PI) / 180;
+                const tx = Math.sin(rad) * radius;
+                const ty = (1 - Math.cos(rad)) * radius;
+                return {
+                    transform: `translate3d(${tx}px, ${ty}px, 0px) rotate(${angle}deg)`,
+                    opacity: 0
+                };
+            }
+            if (position === 'exit') {
+                const angle = direction > 0 ? -45 : 45;
+                const rad = (angle * Math.PI) / 180;
+                const tx = Math.sin(rad) * radius;
+                const ty = (1 - Math.cos(rad)) * radius;
+                return {
+                    transform: `translate3d(${tx}px, ${ty}px, 0px) rotate(${angle}deg)`,
+                    opacity: 0
+                };
+            }
+            return {
+                transform: 'translate3d(0px, 0px, 0px) rotate(0deg)',
+                opacity: 1
+            };
+        }
+
+        function createSolutionCardHTML(item) {
+            return `
+                <!-- Connector (Step tag & Era line indicator) -->
+                <div class="hidden lg:flex items-center translate-y-10 mr-4 xl:mr-[18px] shrink-0 order-2 lg:order-1">
+                    <span class="text-brand-blue font-bold text-[11px] tracking-wider uppercase font-sans">
+                        ${item.tag}
+                    </span>
+                    <div class="border-t border-slate-300 w-[30px] xl:w-[60px] h-0 mx-2.5"></div>
+                    <div class="bg-brand-blue rounded-full w-3 h-3 shrink-0 shadow-sm"></div>
+                </div>
+
+                <!-- Content Card -->
+                <div class="flex flex-col gap-3 w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[390px] order-1 lg:order-2 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-lg">
+                    <div class="flex flex-col gap-px">
+                        <div class="heading-font font-bold text-[54px] lg:text-[64px] leading-none text-brand-blue/20 select-none">
+                            ${item.id}
+                        </div>
+                        <div class="font-extrabold text-xl lg:text-2xl leading-tight text-slate-900 tracking-tight">
+                            ${item.title}
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col gap-3">
+                        <p class="font-sans text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
+                            ${item.desc}
+                        </p>
+                        <div class="w-full aspect-[16/9] h-[140px] sm:h-[160px] lg:h-[175px] relative overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 shadow-sm">
+                            <img
+                                src="${item.img}"
+                                alt="${item.alt}"
+                                class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                            />
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function paginateSolution(newDirection) {
+            if (solutionIsAnimating) return;
+            let nextIndex = currentSolutionIndex + newDirection;
+            if (nextIndex < 0) {
+                nextIndex = SOLUTION_CAROUSEL_DATA.length - 1;
+            } else if (nextIndex >= SOLUTION_CAROUSEL_DATA.length) {
+                nextIndex = 0;
+            }
+
+            solutionIsAnimating = true;
+            const direction = newDirection;
+            const stage = document.getElementById('solutionCardStage');
+            if (!stage) {
+                solutionIsAnimating = false;
+                return;
+            }
+
+            const oldCard = stage.querySelector('.solution-card-item');
+
+            const newCard = document.createElement('div');
+            newCard.className = 'solution-card-item absolute inset-0 flex flex-col lg:flex-row items-center justify-center w-full h-full';
+            
+            const item = SOLUTION_CAROUSEL_DATA[nextIndex];
+            newCard.innerHTML = createSolutionCardHTML(item);
+
+            const transitionStr = 'transform 1.1s cubic-bezier(0.33, 1, 0.68, 1), opacity 1.1s cubic-bezier(0.33, 1, 0.68, 1)';
+            newCard.style.transition = transitionStr;
+            if (oldCard) oldCard.style.transition = transitionStr;
+
+            const enterStyles = getCircularVariant('enter', direction);
+            newCard.style.transform = enterStyles.transform;
+            newCard.style.opacity = enterStyles.opacity;
+
+            stage.appendChild(newCard);
+
+            newCard.offsetHeight;
+
+            requestAnimationFrame(() => {
+                const centerStyles = getCircularVariant('center', direction);
+                newCard.style.transform = centerStyles.transform;
+                newCard.style.opacity = centerStyles.opacity;
+
+                if (oldCard) {
+                    const exitStyles = getCircularVariant('exit', direction);
+                    oldCard.style.transform = exitStyles.transform;
+                    oldCard.style.opacity = exitStyles.opacity;
+                }
+            });
+
+            currentSolutionIndex = nextIndex;
+            updateSolutionButtons();
+            renderSolutionDots();
+
+            setTimeout(() => {
+                if (oldCard && oldCard.parentNode) {
+                    oldCard.parentNode.removeChild(oldCard);
+                }
+                solutionIsAnimating = false;
+            }, 1100);
+        }
+
+        function renderSolutionInitial() {
+            const stage = document.getElementById('solutionCardStage');
+            if (!stage) return;
+            stage.innerHTML = '';
+            
+            const card = document.createElement('div');
+            card.className = 'solution-card-item absolute inset-0 flex flex-col lg:flex-row items-center justify-center w-full h-full';
+            const item = SOLUTION_CAROUSEL_DATA[currentSolutionIndex];
+            card.innerHTML = createSolutionCardHTML(item);
+            
+            const centerStyles = getCircularVariant('center', 0);
+            card.style.transform = centerStyles.transform;
+            card.style.opacity = centerStyles.opacity;
+            
+            stage.appendChild(card);
+            updateSolutionButtons();
+            renderSolutionDots();
+        }
+
+        function updateSolutionButtons() {
+            const prevBtn = document.getElementById('solutionPrevBtn');
+            const nextBtn = document.getElementById('solutionNextBtn');
+            if (prevBtn) prevBtn.disabled = false;
+            if (nextBtn) nextBtn.disabled = false;
+        }
+
+        function renderSolutionDots() {
+            const dotsContainer = document.getElementById('solutionDots');
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            SOLUTION_CAROUSEL_DATA.forEach((_, idx) => {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.ariaLabel = `Go to solution slide ${idx + 1}`;
+                dot.className = idx === currentSolutionIndex
+                    ? 'w-7 h-2.5 rounded-full bg-brand-blue transition-all duration-300 cursor-pointer shadow-sm'
+                    : 'w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-500 transition-all duration-300 cursor-pointer';
+                dot.onclick = () => {
+                    if (idx !== currentSolutionIndex && !solutionIsAnimating) {
+                        const dir = idx > currentSolutionIndex ? 1 : -1;
+                        currentSolutionIndex = idx - dir;
+                        paginateSolution(dir);
+                    }
+                };
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        let solutionAutoTimer = null;
+        let solutionFirstTriggerTimeout = null;
+
+        function startSolutionAutoPlay() {
+            if (solutionAutoTimer) return;
+            solutionFirstTriggerTimeout = setTimeout(() => {
+                paginateSolution(1);
+            }, 600);
+
+            solutionAutoTimer = setInterval(() => {
+                paginateSolution(1);
+            }, 5000);
+        }
+
+        function stopSolutionAutoPlay() {
+            if (solutionFirstTriggerTimeout) {
+                clearTimeout(solutionFirstTriggerTimeout);
+                solutionFirstTriggerTimeout = null;
+            }
+            if (solutionAutoTimer) {
+                clearInterval(solutionAutoTimer);
+                solutionAutoTimer = null;
+            }
+        }
+
+        // =========================================================================
+        // SCOPE INTERACTIVE TIMELINE ENGINE WITH CIRCULAR ARC MOTION & REVEAL
+        // =========================================================================
+        const SCOPE_CAROUSEL_DATA = [
+            {
+                id: "01",
+                step: "01 / 06",
+                tag: "STOREFRONT & CATALOG",
+                title: "Product Discovery Pages",
+                desc: "Rich product listings featuring multi-weight selectors (100g, 250g, 500g packs), real-time stock availability badges, and fluid search filters engineered for instant conversion.",
+                img: "./assets/scope_product_discovery.png",
+                alt: "Product Discovery Pages Scope Visual"
+            },
+            {
+                id: "02",
+                step: "02 / 06",
+                tag: "CHECKOUT CORE",
+                title: "Dynamic Cart Engine",
+                desc: "High-performance cart management supporting multi-item weight calculations, real-time total updates, discount coupon application, and instant weight package bundling.",
+                img: "./assets/scope_cart_engine.png",
+                alt: "Dynamic Cart Engine Scope Visual"
+            },
+            {
+                id: "03",
+                step: "03 / 06",
+                tag: "SECURITY & PROFILES",
+                title: "User Authentication",
+                desc: "Frictionless onboarding experience powered by secure OTP phone verification, Google One-Tap Sign-In, saved session persistence, and unified account profile settings.",
+                img: "./assets/scope_user_auth.png",
+                alt: "User Authentication Scope Visual"
+            },
+            {
+                id: "04",
+                step: "04 / 06",
+                tag: "LOGISTICS & COD",
+                title: "Address Book & Serviceability",
+                desc: "Instant pincode validation engine that checks delivery serviceability in real-time, calculates estimated delivery days, and dynamically enables or disables Cash-on-Delivery (COD).",
+                img: "./assets/scope_address_book.png",
+                alt: "Address Book & Serviceability Scope Visual"
+            },
+            {
+                id: "05",
+                step: "05 / 06",
+                tag: "ORDER LIFECYCLE",
+                title: "Order Tracking & History",
+                desc: "Comprehensive order management dashboard providing real-time status updates, past invoice downloads, itemized receipts, and a 1-click repeat reorder pipeline.",
+                img: "./assets/scope_order_tracking.png",
+                alt: "Order Tracking Scope Visual"
+            },
+            {
+                id: "06",
+                step: "06 / 06",
+                tag: "GATEWAY INTEGRATION",
+                title: "Secure Multi-Step Checkout",
+                desc: "Bank-grade checkout pipeline integrated with Razorpay payment gateway, supporting UPI, credit/debit cards, net banking, automated stock hold, and instant order confirmation.",
+                img: "./assets/scope_secure_checkout.png",
+                alt: "Secure Checkout Scope Visual"
+            }
+        ];
+
+        let currentScopeIndex = 0;
+        let scopeIsAnimating = false;
+
+        function getCircularVariant(type, direction) {
+            const isMobile = window.innerWidth < 1024;
+            if (type === 'center') {
+                return {
+                    transform: 'translate3d(0px, 0px, 0px) rotate(0deg)',
+                    opacity: '1'
+                };
+            }
+            if (type === 'enter') {
+                if (isMobile) {
+                    const x = direction > 0 ? 300 : -300;
+                    const y = 100;
+                    const rotate = direction > 0 ? 15 : -15;
+                    return {
+                        transform: `translate3d(${x}px, ${y}px, 0px) rotate(${rotate}deg)`,
+                        opacity: '0'
+                    };
+                } else {
+                    const y = direction > 0 ? 350 : -350;
+                    const x = -50;
+                    const rotate = direction > 0 ? 15 : -15;
+                    return {
+                        transform: `translate3d(${x}px, ${y}px, 0px) rotate(${rotate}deg)`,
+                        opacity: '0'
+                    };
+                }
+            }
+            if (type === 'exit') {
+                if (isMobile) {
+                    const x = direction > 0 ? -300 : 300;
+                    const y = 100;
+                    const rotate = direction > 0 ? -15 : 15;
+                    return {
+                        transform: `translate3d(${x}px, ${y}px, 0px) rotate(${rotate}deg)`,
+                        opacity: '0'
+                    };
+                } else {
+                    const y = direction > 0 ? -350 : 350;
+                    const x = -50;
+                    const rotate = direction > 0 ? -15 : 15;
+                    return {
+                        transform: `translate3d(${x}px, ${y}px, 0px) rotate(${rotate}deg)`,
+                        opacity: '0'
+                    };
+                }
+            }
+        }
+
+        function createScopeCardHTML(item) {
+            return `
+                <!-- Connector (Step tag & Era line indicator) -->
+                <div class="hidden lg:flex items-center translate-y-10 mr-4 xl:mr-[18px] shrink-0 order-2 lg:order-1">
+                    <span class="text-brand-blue font-bold text-[11px] tracking-wider uppercase font-sans">
+                        ${item.tag}
+                    </span>
+                    <div class="border-t border-slate-300 w-[30px] xl:w-[60px] h-0 mx-2.5"></div>
+                    <div class="bg-brand-blue rounded-full w-3 h-3 shrink-0 shadow-sm"></div>
+                </div>
+
+                <!-- Content Card -->
+                <div class="flex flex-col gap-3 w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[390px] order-1 lg:order-2 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-lg">
+                    <div class="flex flex-col gap-px">
+                        <div class="heading-font font-bold text-[54px] lg:text-[64px] leading-none text-brand-blue/20 select-none">
+                            ${item.id}
+                        </div>
+                        <div class="font-extrabold text-xl lg:text-2xl leading-tight text-slate-900 tracking-tight">
+                            ${item.title}
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col gap-3">
+                        <p class="font-sans text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
+                            ${item.desc}
+                        </p>
+                        <div class="w-full aspect-[16/9] h-[140px] sm:h-[160px] lg:h-[175px] relative overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 shadow-sm">
+                            <img
+                                src="${item.img}"
+                                alt="${item.alt}"
+                                class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                            />
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function paginateScope(newDirection) {
+            if (scopeIsAnimating) return;
+            const nextIndex = currentScopeIndex + newDirection;
+            if (nextIndex < 0 || nextIndex >= SCOPE_CAROUSEL_DATA.length) return;
+
+            scopeIsAnimating = true;
+            const direction = newDirection;
+            const stage = document.getElementById('scopeCardStage');
+            if (!stage) {
+                scopeIsAnimating = false;
+                return;
+            }
+
+            const oldCard = stage.querySelector('.scope-card-item');
+
+            const newCard = document.createElement('div');
+            newCard.className = 'scope-card-item absolute inset-0 flex flex-col lg:flex-row items-center justify-center w-full h-full';
+            
+            const item = SCOPE_CAROUSEL_DATA[nextIndex];
+            newCard.innerHTML = createScopeCardHTML(item);
+
+            const transitionStr = 'transform 0.7s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.7s cubic-bezier(0.42, 0, 0.58, 1)';
+            newCard.style.transition = transitionStr;
+            if (oldCard) oldCard.style.transition = transitionStr;
+
+            const enterStyles = getCircularVariant('enter', direction);
+            newCard.style.transform = enterStyles.transform;
+            newCard.style.opacity = enterStyles.opacity;
+
+            stage.appendChild(newCard);
+
+            // Force reflow
+            newCard.offsetHeight;
+
+            requestAnimationFrame(() => {
+                const centerStyles = getCircularVariant('center', direction);
+                newCard.style.transform = centerStyles.transform;
+                newCard.style.opacity = centerStyles.opacity;
+
+                if (oldCard) {
+                    const exitStyles = getCircularVariant('exit', direction);
+                    oldCard.style.transform = exitStyles.transform;
+                    oldCard.style.opacity = exitStyles.opacity;
+                }
+            });
+
+            currentScopeIndex = nextIndex;
+            updateScopeButtons();
+            renderScopeDots();
+
+            setTimeout(() => {
+                if (oldCard && oldCard.parentNode) {
+                    oldCard.parentNode.removeChild(oldCard);
+                }
+                scopeIsAnimating = false;
+            }, 700);
+        }
+
+        function renderScopeInitial() {
+            const stage = document.getElementById('scopeCardStage');
+            if (!stage) return;
+            stage.innerHTML = '';
+            
+            const card = document.createElement('div');
+            card.className = 'scope-card-item absolute inset-0 flex flex-col lg:flex-row items-center justify-center w-full h-full';
+            const item = SCOPE_CAROUSEL_DATA[currentScopeIndex];
+            card.innerHTML = createScopeCardHTML(item);
+            
+            const centerStyles = getCircularVariant('center', 0);
+            card.style.transform = centerStyles.transform;
+            card.style.opacity = centerStyles.opacity;
+            
+            stage.appendChild(card);
+            updateScopeButtons();
+            renderScopeDots();
+        }
+
+        function updateScopeButtons() {
+            const prevBtn = document.getElementById('scopePrevBtn');
+            const nextBtn = document.getElementById('scopeNextBtn');
+            if (prevBtn) {
+                prevBtn.disabled = currentScopeIndex === 0;
+            }
+            if (nextBtn) {
+                nextBtn.disabled = currentScopeIndex === SCOPE_CAROUSEL_DATA.length - 1;
+            }
+        }
+
+        function renderScopeDots() {
+            const dotsContainer = document.getElementById('scopeDots');
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            SCOPE_CAROUSEL_DATA.forEach((_, idx) => {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.ariaLabel = `Go to scope slide ${idx + 1}`;
+                dot.className = idx === currentScopeIndex
+                    ? 'w-7 h-2.5 rounded-full bg-brand-blue transition-all duration-300 cursor-pointer shadow-sm'
+                    : 'w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-500 transition-all duration-300 cursor-pointer';
+                dot.onclick = () => {
+                    if (idx !== currentScopeIndex && !scopeIsAnimating) {
+                        const dir = idx > currentScopeIndex ? 1 : -1;
+                        currentScopeIndex = idx - dir;
+                        paginateScope(dir);
+                    }
+                };
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        // =========================================================================
+        // RESULTS METRIC COUNTER ANIMATION (ON INTERSECTION)
+        // =========================================================================
+        let resultsAnimated = false;
+        function animateResultsCounters() {
+            if (resultsAnimated) return;
+            resultsAnimated = true;
+            const counters = document.querySelectorAll('.results-counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const suffix = counter.getAttribute('data-suffix') || '';
+                const prefix = counter.getAttribute('data-prefix') || '';
+                let count = 0;
+                const duration = 1600;
+                const stepTime = 20;
+                const totalSteps = duration / stepTime;
+                const increment = target / totalSteps;
+
+                const timer = setInterval(() => {
+                    count += increment;
+                    if (count >= target) {
+                        count = target;
+                        clearInterval(timer);
+                    }
+                    counter.innerText = prefix + Math.floor(count).toLocaleString() + suffix;
+                }, stepTime);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSolutionInitial();
+            renderScopeInitial();
+
+            const solutionSection = document.getElementById('solution-overview');
+            if (solutionSection) {
+                const checkSolutionInView = () => {
+                    const rect = solutionSection.getBoundingClientRect();
+                    const inView = (rect.top <= window.innerHeight * 0.85 && rect.bottom >= 0);
+                    if (inView) {
+                        startSolutionAutoPlay();
+                    } else {
+                        stopSolutionAutoPlay();
+                    }
+                };
+
+                if ('IntersectionObserver' in window) {
+                    const solutionObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                startSolutionAutoPlay();
+                            } else {
+                                stopSolutionAutoPlay();
+                            }
+                        });
+                    }, { threshold: 0.05 });
+                    solutionObserver.observe(solutionSection);
+                }
+
+                window.addEventListener('scroll', checkSolutionInView, { passive: true });
+                checkSolutionInView();
+
+                solutionSection.addEventListener('mouseenter', stopSolutionAutoPlay);
+                solutionSection.addEventListener('mouseleave', startSolutionAutoPlay);
+            }
+
+            const scopeSection = document.getElementById('scope');
+            if (scopeSection) {
+                const scopeObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            scopeSection.classList.add('scope-in-view');
+                        }
+                    });
+                }, { threshold: 0.15 });
+                scopeObserver.observe(scopeSection);
+            }
+
+            const resultsSection = document.getElementById('results');
+            if (resultsSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateResultsCounters();
+                        }
+                    });
+                }, { threshold: 0.2 });
+                observer.observe(resultsSection);
+            }
+
+            const blurFadeItems = document.querySelectorAll('.blur-fade-item');
+            if (blurFadeItems.length > 0) {
+                const blurFadeObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const delay = entry.target.getAttribute('data-delay') || '0';
+                            setTimeout(() => {
+                                entry.target.classList.add('in-view');
+                            }, parseFloat(delay) * 1000);
+                            blurFadeObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+                blurFadeItems.forEach(el => blurFadeObserver.observe(el));
+            }
+        });
+
+        function toggleCardReadMore(btn) {
+            const textWrapper = btn.previousElementSibling;
+            const shortText = textWrapper.querySelector('.short-text');
+            const fullText = textWrapper.querySelector('.full-text');
+            const btnText = btn.querySelector('.btn-text');
+            const icon = btn.querySelector('i');
+
+            if (fullText.classList.contains('hidden')) {
+                fullText.classList.remove('hidden');
+                shortText.classList.add('hidden');
+                btnText.textContent = 'Read Less';
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                fullText.classList.add('hidden');
+                shortText.classList.remove('hidden');
+                btnText.textContent = 'Read More';
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+    </script>
+</body>
+
+</html>
