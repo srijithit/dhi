@@ -208,6 +208,40 @@ export default function CleanCulturePage() {
     return () => clearInterval(timer);
   }, [solutionInView, solutionIsHovered, solutionSlides.length]);
 
+  // Touch / Drag Swipe Handlers for Overview & Highlights Carousels
+  const [touchStartXOverview, setTouchStartXOverview] = useState<number | null>(null);
+  const [touchStartXHighlight, setTouchStartXHighlight] = useState<number | null>(null);
+
+  const handleTouchStartOverview = (clientX: number) => {
+    setTouchStartXOverview(clientX);
+  };
+
+  const handleTouchEndOverview = (clientX: number) => {
+    if (touchStartXOverview === null) return;
+    const diff = touchStartXOverview - clientX;
+    if (diff > 35) {
+      setCurrentCoverSlide((prev) => (prev === 2 ? 0 : prev + 1));
+    } else if (diff < -35) {
+      setCurrentCoverSlide((prev) => (prev === 0 ? 2 : prev - 1));
+    }
+    setTouchStartXOverview(null);
+  };
+
+  const handleTouchStartHighlight = (clientX: number) => {
+    setTouchStartXHighlight(clientX);
+  };
+
+  const handleTouchEndHighlight = (clientX: number) => {
+    if (touchStartXHighlight === null) return;
+    const diff = touchStartXHighlight - clientX;
+    if (diff > 35) {
+      setHighlightIdx((prev) => (prev + 1) % 3);
+    } else if (diff < -35) {
+      setHighlightIdx((prev) => (prev - 1 + 3) % 3);
+    }
+    setTouchStartXHighlight(null);
+  };
+
   const confettiCanvasRef = useRef<HTMLCanvasElement>(null);
   const confettiInstanceRef = useRef<any>(null);
   const animationFrameRef = useRef<number | null>(null);
@@ -493,10 +527,16 @@ export default function CleanCulturePage() {
                 </div>
               </div>
 
-              {/* Right Column: 3D iPhone Slideshow with Dark Pill Pagination & Hover Nav Arrows */}
+              {/* Right Column: 3D iPhone Slideshow with Dark Pill Pagination & Hover Nav Arrows & Touch Swipe */}
               <div className="lg:col-span-6 flex justify-center py-2">
                 <div className="relative w-[300px] sm:w-[380px] group">
-                  <div className="relative w-full h-[420px] sm:h-[480px] flex items-center justify-center drop-shadow-2xl">
+                  <div
+                    onTouchStart={(e) => handleTouchStartOverview(e.touches[0].clientX)}
+                    onTouchEnd={(e) => handleTouchEndOverview(e.changedTouches[0].clientX)}
+                    onMouseDown={(e) => handleTouchStartOverview(e.clientX)}
+                    onMouseUp={(e) => handleTouchEndOverview(e.clientX)}
+                    className="relative w-full h-[420px] sm:h-[480px] flex items-center justify-center drop-shadow-2xl cursor-grab active:cursor-grabbing select-none"
+                  >
                     {['/images/cc_overview_slide1.png', '/images/cc_overview_slide2.png', '/images/cc_overview_slide3.png'].map((src, idx) => (
                       <img
                         key={idx}
@@ -507,11 +547,6 @@ export default function CleanCulturePage() {
                         }`}
                       />
                     ))}
-
-                    {/* Top-Left Ambient Floating Icon Badge */}
-                    <div className="absolute top-2 -left-2 sm:-left-4 z-30 w-9 h-9 rounded-xl bg-slate-900/90 border border-white/20 text-white flex items-center justify-center shadow-lg backdrop-blur-md animate-float-1 pointer-events-none">
-                      <Zap className="w-4 h-4 text-[#2196E8]" />
-                    </div>
 
                     {/* Left & Right Slider Arrow Buttons (Visible on Hover) */}
                     <button
@@ -889,9 +924,15 @@ export default function CleanCulturePage() {
               </h2>
             </div>
 
-            {/* 3D Perspective Phone Showcase with Dynamic Auto-Centering */}
+            {/* 3D Perspective Phone Showcase with Touch / Drag Swipe */}
             <div className="relative max-w-4xl mx-auto mb-8">
-              <div className="flex items-center justify-center gap-4 sm:gap-8 py-4">
+              <div
+                onTouchStart={(e) => handleTouchStartHighlight(e.touches[0].clientX)}
+                onTouchEnd={(e) => handleTouchEndHighlight(e.changedTouches[0].clientX)}
+                onMouseDown={(e) => handleTouchStartHighlight(e.clientX)}
+                onMouseUp={(e) => handleTouchEndHighlight(e.clientX)}
+                className="flex items-center justify-center gap-4 sm:gap-8 py-4 cursor-grab active:cursor-grabbing select-none"
+              >
                 {/* Left Screen Card (Tilted Angle) */}
                 <div
                   onClick={() => setHighlightIdx((highlightIdx - 1 + 3) % 3)}
@@ -900,7 +941,7 @@ export default function CleanCulturePage() {
                   <img
                     src={highlightItems[(highlightIdx + 2) % 3].screen}
                     alt="Previous Screen"
-                    className="w-full h-full object-contain drop-shadow-md transition-all duration-700"
+                    className="w-full h-full object-contain drop-shadow-md transition-all duration-700 pointer-events-none"
                   />
                 </div>
 
@@ -911,7 +952,7 @@ export default function CleanCulturePage() {
                   <img
                     src={highlightItems[highlightIdx].screen}
                     alt="Active Screen"
-                    className="w-full h-full object-contain drop-shadow-xl transition-all duration-700"
+                    className="w-full h-full object-contain drop-shadow-xl transition-all duration-700 pointer-events-none"
                   />
                 </div>
 
@@ -923,7 +964,7 @@ export default function CleanCulturePage() {
                   <img
                     src={highlightItems[(highlightIdx + 1) % 3].screen}
                     alt="Next Screen"
-                    className="w-full h-full object-contain drop-shadow-md transition-all duration-700"
+                    className="w-full h-full object-contain drop-shadow-md transition-all duration-700 pointer-events-none"
                   />
                 </div>
               </div>
