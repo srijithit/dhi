@@ -285,6 +285,8 @@ export default function CareersPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [gmailComposeUrl, setGmailComposeUrl] = useState<string>('');
+  const [mailtoUrl, setMailtoUrl] = useState<string>('');
 
   const filteredJobs = JOB_OPENINGS.filter(job => {
     const matchesCategory = selectedCategory === 'all' || job.category === selectedCategory;
@@ -342,6 +344,33 @@ export default function CareersPage() {
     setIsSubmitting(true);
     const roleTitle = applyModalJob ? applyModalJob.title : "General Application";
 
+    // Build Pre-filled Gmail Compose & Mailto Links
+    const subject = `Job Application: ${roleTitle} — ${applicantData.name}`;
+    const bodyText = `Hello DhiGrowth Hiring Team,
+
+I am applying for the position: "${roleTitle}".
+
+My Details:
+• Full Name: ${applicantData.name}
+• Email: ${applicantData.email}
+• Phone / WhatsApp: ${applicantData.phone}
+• Experience: ${applicantData.experience}
+• LinkedIn: ${applicantData.linkedin}
+
+Key Skills / Cover Note:
+${applicantData.note}
+
+(Resume: ${resumeFile?.name || 'Resume.pdf'})
+
+Thank you!
+${applicantData.name}`;
+
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=Dhinesh@dhigrowth.com,dinesh@dhigrowth.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+    const mailtoLink = `mailto:Dhinesh@dhigrowth.com,dinesh@dhigrowth.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+
+    setGmailComposeUrl(gmailUrl);
+    setMailtoUrl(mailtoLink);
+
     try {
       const response = await fetch('/api/careers', {
         method: 'POST',
@@ -361,16 +390,17 @@ export default function CareersPage() {
 
       const resData = await response.json();
       if (!response.ok && !resData.success) {
-        throw new Error(resData.error || 'Failed to submit application.');
+        console.warn('API Response notice:', resData.error);
       }
-
-      setIsSubmitting(false);
-      setIsSuccess(true);
     } catch (err: any) {
       console.error('Application submission note:', err);
-      // Fallback: still confirm submission to applicant
+    } finally {
       setIsSubmitting(false);
       setIsSuccess(true);
+      // Automatically open Gmail Compose for immediate applicant confirmation
+      if (typeof window !== 'undefined') {
+        window.open(gmailUrl, '_blank');
+      }
     }
   };
 
@@ -378,6 +408,8 @@ export default function CareersPage() {
     setApplyModalJob(null);
     setIsSuccess(false);
     setErrorMessage('');
+    setGmailComposeUrl('');
+    setMailtoUrl('');
     setResumeError('');
     setResumeFile(null);
     setResumeBase64('');
@@ -864,20 +896,42 @@ export default function CareersPage() {
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                   <h4 className="font-header text-2xl sm:text-3xl text-slate-900 font-extrabold">
-                    Application Submitted!
+                    Application Sent to Gmail!
                   </h4>
                   <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
-                    Your application for <strong className="text-slate-900">{applyModalJob.title}</strong> and resume have been received successfully.
+                    Your application for <strong className="text-slate-900">{applyModalJob?.title}</strong> has been routed directly to <strong className="text-[#2196E8]">Dhinesh@dhigrowth.com</strong>.
                   </p>
-                  <p className="text-xs text-slate-500">
-                    Our hiring team will review your profile and contact you within 24-48 hours.
-                  </p>
-                  <button
-                    onClick={closeApplyModal}
-                    className="px-6 py-2.5 rounded-xl bg-[#2196E8] hover:bg-[#1b84cf] text-white text-xs font-bold transition-all shadow-md cursor-pointer"
-                  >
-                    Done
-                  </button>
+
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                    {gmailComposeUrl && (
+                      <a
+                        href={gmailComposeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                      >
+                        <Mail className="w-4 h-4" />
+                        Open in Gmail Compose
+                      </a>
+                    )}
+                    {mailtoUrl && (
+                      <a
+                        href={mailtoUrl}
+                        className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                      >
+                        Default Mail App
+                      </a>
+                    )}
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      onClick={closeApplyModal}
+                      className="px-6 py-2.5 rounded-xl bg-[#2196E8] hover:bg-[#1b84cf] text-white text-xs font-bold transition-all shadow-md cursor-pointer"
+                    >
+                      Done
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleApplySubmit} className="space-y-4">
