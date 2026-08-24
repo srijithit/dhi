@@ -1149,7 +1149,7 @@ export default function DynamicCaseStudyPage({
             </div>
 
             {/* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe */}
-            <div className="relative max-w-5xl mx-auto mb-8 px-4 sm:px-10 md:px-14">
+            <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-10 md:px-14">
               <motion.div
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
@@ -1161,43 +1161,43 @@ export default function DynamicCaseStudyPage({
                     setHighlightIdx((prev) => (prev - 1 + 3) % 3);
                   }
                 }}
-                className="flex items-center justify-center gap-4 sm:gap-8 py-4 cursor-grab active:cursor-grabbing select-none"
+                className="flex items-center justify-center gap-1.5 sm:gap-6 md:gap-8 py-4 cursor-grab active:cursor-grabbing select-none"
               >
                 {/* Left Screen Card (Tilted Angle) */}
                 <div
                   onClick={() => setHighlightIdx((highlightIdx - 1 + 3) % 3)}
-                  className="relative w-48 sm:w-64 h-[340px] sm:h-[400px] rounded-3xl p-3 sm:p-4 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                  className="relative w-[115px] xs:w-[140px] sm:w-56 md:w-64 h-[240px] xs:h-[280px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
                 >
                   <img
                     src={highlightItems[(highlightIdx + 2) % 3].screen}
                     alt="Previous Screen"
                     draggable={false}
-                    className="w-full h-full object-contain drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full object-contain scale-[1.08] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
 
                 {/* Center Main Screen Card (Active Blue Border Focus) */}
                 <div
-                  className="relative w-56 sm:w-72 h-[380px] sm:h-[450px] rounded-3xl p-4 sm:p-5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
+                  className="relative w-[150px] xs:w-[185px] sm:w-64 md:w-72 h-[290px] xs:h-[340px] sm:h-[400px] md:h-[450px] rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
                 >
                   <img
                     src={highlightItems[highlightIdx].screen}
                     alt="Active Screen"
                     draggable={false}
-                    className="w-full h-full object-contain drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full object-contain scale-[1.08] sm:scale-100 drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
 
                 {/* Right Screen Card (Tilted Angle) */}
                 <div
                   onClick={() => setHighlightIdx((highlightIdx + 1) % 3)}
-                  className="relative w-48 sm:w-64 h-[340px] sm:h-[400px] rounded-3xl p-3 sm:p-4 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                  className="relative w-[115px] xs:w-[140px] sm:w-56 md:w-64 h-[240px] xs:h-[280px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
                 >
                   <img
                     src={highlightItems[(highlightIdx + 1) % 3].screen}
                     alt="Next Screen"
                     draggable={false}
-                    className="w-full h-full object-contain drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full object-contain scale-[1.08] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
               </motion.div>
@@ -1205,16 +1205,16 @@ export default function DynamicCaseStudyPage({
               <button
                 onClick={() => setHighlightIdx((prev) => (prev - 1 + 3) % 3)}
                 aria-label="Previous highlight screen"
-                className="absolute -left-2 sm:-left-6 md:-left-10 lg:-left-12 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
+                className="absolute -left-1 sm:-left-6 md:-left-10 lg:-left-12 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
               <button
                 onClick={() => setHighlightIdx((prev) => (prev + 1) % 3)}
                 aria-label="Next highlight screen"
-                className="absolute -right-2 sm:-right-6 md:-right-10 lg:-right-12 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
+                className="absolute -right-1 sm:-right-6 md:-right-10 lg:-right-12 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
               >
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
               <div className="flex justify-center items-center gap-2 mt-4">
