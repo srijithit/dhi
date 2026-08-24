@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -157,19 +157,24 @@ export default function CleanCulturePage() {
   }, []);
 
   const [solutionDirection, setSolutionDirection] = useState(1);
-  const solutionSectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: solutionScrollProgress } = useScroll({
-    target: solutionSectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const parallaxSphereY1 = useTransform(solutionScrollProgress, [0, 1], [-60, 80]);
-  const parallaxSphereY2 = useTransform(solutionScrollProgress, [0, 1], [80, -70]);
-  const parallaxRotate = useTransform(solutionScrollProgress, [0, 1], [-20, 25]);
-  const parallaxBackCardY = useTransform(solutionScrollProgress, [0, 1], [30, -30]);
-
   const [solutionInView, setSolutionInView] = useState(false);
   const [solutionIsHovered, setSolutionIsHovered] = useState(false);
+  const solutionSectionRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress: solutionScrollProgress } = useScroll({
+    target: solutionSectionRef,
+    offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(solutionScrollProgress, "change", (latest) => {
+    const total = solutionSlides.length;
+    if (total <= 1) return;
+    const targetIdx = Math.min(total - 1, Math.max(0, Math.floor(latest * total)));
+    if (targetIdx !== solutionIdx) {
+      setSolutionDirection(targetIdx > solutionIdx ? 1 : -1);
+      setSolutionIdx(targetIdx);
+    }
+  });
 
   const paginateSolution = (newDirection: number) => {
     setSolutionDirection(newDirection);
@@ -183,30 +188,6 @@ export default function CleanCulturePage() {
 
   const handleNextSolution = () => paginateSolution(1);
   const handlePrevSolution = () => paginateSolution(-1);
-
-  // Viewport-aware autoplay & pause on hover (5s interval)
-  useEffect(() => {
-    const el = solutionSectionRef.current;
-    if (!el || typeof IntersectionObserver === 'undefined') return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setSolutionInView(entry.isIntersecting);
-        });
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!solutionInView || solutionIsHovered) return;
-    const timer = setInterval(() => {
-      paginateSolution(1);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [solutionInView, solutionIsHovered, solutionSlides.length]);
 
   // Touch / Drag Swipe Handlers for Overview & Highlights Carousels
   const [touchStartXOverview, setTouchStartXOverview] = useState<number | null>(null);
@@ -676,180 +657,160 @@ export default function CleanCulturePage() {
           </svg>
         </div>
 
-        {/* ── 2. SOLUTION (CIRCULAR ARC MOTION ANIMATION STAGE WITH REALISTIC IMAGES) ── */}
+        {/* ── 2. SOLUTION (SCROLL-DRIVEN CARD STACKING ANIMATION) ── */}
         <section
           id="solution-overview"
           ref={solutionSectionRef}
-          onMouseEnter={() => setSolutionIsHovered(true)}
-          onMouseLeave={() => setSolutionIsHovered(false)}
-          className="bg-white text-slate-900 h-auto relative w-full overflow-hidden flex items-center justify-center py-6 lg:py-8 border-b border-slate-200/80"
+          className="relative w-full bg-white text-slate-900 border-b border-slate-200/80 min-h-[220vh] sm:min-h-[260vh]"
         >
-          {/* Ambient Background Arc */}
-          <div className="rounded-full border-solid border-[rgba(74,114,232,0.06)] border-[40px] lg:border-[80px] w-[500px] h-[500px] lg:w-[950px] lg:h-[950px] absolute left-[50%] lg:left-[-400px] bottom-[-200px] lg:bottom-auto lg:top-[50%] -translate-x-1/2 lg:translate-x-0 lg:-translate-y-1/2 pointer-events-none z-0" />
+          {/* Sticky Pin Container for Card Stacking */}
+          <div className="sticky top-16 sm:top-20 w-full min-h-[calc(100vh-5rem)] flex items-center justify-center py-6 lg:py-8 overflow-hidden">
+            {/* Ambient Background Arc */}
+            <div className="rounded-full border-solid border-[rgba(74,114,232,0.06)] border-[40px] lg:border-[80px] w-[500px] h-[500px] lg:w-[950px] lg:h-[950px] absolute left-[50%] lg:left-[-400px] bottom-[-200px] lg:bottom-auto lg:top-[50%] -translate-x-1/2 lg:translate-x-0 lg:-translate-y-1/2 pointer-events-none z-0" />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 relative z-10 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12 xl:gap-16">
-            
-            {/* LEFT COLUMN: TITLE, OVERVIEW & ARROW CONTROLS (STRICTLY LEFT ALIGNED) */}
-            <div className="flex flex-col gap-6 lg:gap-8 items-start text-left w-full lg:w-[380px] xl:w-[440px] shrink-0 z-20 mt-2 lg:-mt-2">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 relative z-10 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12 xl:gap-16">
               
-              {/* Section Heading & Overview */}
-              <div className="text-left w-full">
-                <h2 className="text-slate-900 font-sans text-4xl sm:text-5xl lg:text-[54px] xl:text-[62px] leading-tight font-extrabold tracking-tight text-left">
-                  Solution
-                </h2>
-                <div className="w-16 h-1.5 bg-[#4A72E8] rounded-full mt-3 mx-0" />
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium mt-4 max-w-[390px] mx-0 text-left">
-                  To address high-concurrency delivery challenges, our team architected isolated checkout sessions, a centralized calculation engine, and strict stock validation with realistic visual interfaces.
-                </p>
-              </div>
+              {/* LEFT COLUMN: TITLE, OVERVIEW & ARROW CONTROLS (STRICTLY LEFT ALIGNED) */}
+              <div className="flex flex-col gap-6 lg:gap-8 items-start text-left w-full lg:w-[380px] xl:w-[440px] shrink-0 z-20 mt-2 lg:-mt-2">
+                
+                {/* Section Heading & Overview */}
+                <div className="text-left w-full">
+                  <h2 className="text-slate-900 font-sans text-4xl sm:text-5xl lg:text-[54px] xl:text-[62px] leading-tight font-extrabold tracking-tight text-left">
+                    Solution
+                  </h2>
+                  <div className="w-16 h-1.5 bg-[#4A72E8] rounded-full mt-3 mx-0" />
+                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium mt-4 max-w-[390px] mx-0 text-left">
+                    To address high-concurrency delivery challenges, our team architected isolated checkout sessions, a centralized calculation engine, and strict stock validation with realistic visual interfaces.
+                  </p>
+                </div>
 
-              {/* Arrow Navigation Controls */}
-              <div className="flex flex-row gap-4 items-center justify-start">
-                <button
-                  id="solutionPrevBtn"
-                  onClick={handlePrevSolution}
-                  aria-label="Previous solution item"
-                  className="shrink-0 w-11 h-11 rounded-xl bg-slate-900 hover:bg-[#4A72E8] text-white flex items-center justify-center transition-all cursor-pointer shadow-md hover:scale-105 active:scale-95"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  id="solutionNextBtn"
-                  onClick={handleNextSolution}
-                  aria-label="Next solution item"
-                  className="shrink-0 w-11 h-11 rounded-xl bg-slate-900 hover:bg-[#4A72E8] text-white flex items-center justify-center transition-all cursor-pointer shadow-md hover:scale-105 active:scale-95"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Solution Dots Indicator */}
-              <div id="solutionDots" className="flex items-center justify-start gap-2 pt-1">
-                {solutionSlides.map((_, idx) => (
+                {/* Arrow Navigation Controls */}
+                <div className="flex flex-row gap-4 items-center justify-start">
                   <button
-                    key={idx}
-                    type="button"
-                    aria-label={`Go to solution slide ${idx + 1}`}
-                    onClick={() => {
-                      if (idx !== solutionIdx) {
-                        const dir = idx > solutionIdx ? 1 : -1;
-                        setSolutionDirection(dir);
-                        setSolutionIdx(idx);
-                      }
-                    }}
-                    className={
-                      idx === solutionIdx
-                        ? 'w-7 h-2.5 rounded-full bg-[#4A72E8] transition-all duration-300 cursor-pointer shadow-sm'
-                        : 'w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all duration-300 cursor-pointer'
-                    }
-                  />
-                ))}
-              </div>
-
-            </div>
-
-            {/* RIGHT COLUMN: DYNAMIC MOTION CARD STAGE (CIRCULAR ARC TRANSITION) */}
-            <div className="relative flex items-center justify-center w-full lg:flex-1 xl:w-[540px] xl:flex-none h-[480px] sm:h-[460px] lg:h-[440px]">
-              <div id="solutionCardStage" className="relative w-full h-full flex items-center justify-center">
-                <AnimatePresence initial={false} custom={solutionDirection}>
-                  <motion.div
-                    key={solutionIdx}
-                    custom={solutionDirection}
-                    variants={{
-                      enter: (dir: number) => {
-                        const radius = 320;
-                        const angle = dir > 0 ? 45 : -45;
-                        const rad = (angle * Math.PI) / 180;
-                        const tx = Math.sin(rad) * radius;
-                        const ty = (1 - Math.cos(rad)) * radius;
-                        return {
-                          x: tx,
-                          y: ty,
-                          rotate: angle,
-                          opacity: 0,
-                        };
-                      },
-                      center: {
-                        x: 0,
-                        y: 0,
-                        rotate: 0,
-                        opacity: 1,
-                        transition: {
-                          duration: 1.1,
-                          ease: [0.33, 1, 0.68, 1],
-                        },
-                      },
-                      exit: (dir: number) => {
-                        const radius = 320;
-                        const angle = dir > 0 ? -45 : 45;
-                        const rad = (angle * Math.PI) / 180;
-                        const tx = Math.sin(rad) * radius;
-                        const ty = (1 - Math.cos(rad)) * radius;
-                        return {
-                          x: tx,
-                          y: ty,
-                          rotate: angle,
-                          opacity: 0,
-                          transition: {
-                            duration: 1.1,
-                            ease: [0.33, 1, 0.68, 1],
-                          },
-                        };
-                      },
-                    }}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    drag="x"
-                    dragConstraints={{ left: 0, right: 0 }}
-                    dragElastic={0.25}
-                    onDragEnd={(_, info) => {
-                      if (info.offset.x < -50) {
-                        handleNextSolution();
-                      } else if (info.offset.x > 50) {
-                        handlePrevSolution();
-                      }
-                    }}
-                    className="solution-card-item absolute inset-0 flex flex-col lg:flex-row items-center justify-center w-full h-full cursor-grab active:cursor-grabbing select-none"
+                    id="solutionPrevBtn"
+                    onClick={handlePrevSolution}
+                    aria-label="Previous solution item"
+                    className="shrink-0 w-11 h-11 rounded-xl bg-slate-900 hover:bg-[#4A72E8] text-white flex items-center justify-center transition-all cursor-pointer shadow-md hover:scale-105 active:scale-95"
                   >
-                    {/* Connector (Step tag & Era line indicator) */}
-                    <div className="hidden lg:flex items-center translate-y-10 mr-4 xl:mr-[18px] shrink-0 order-2 lg:order-1 select-none">
-                      <span className="text-[#4A72E8] font-bold text-[11px] tracking-wider uppercase font-sans">
-                        {solutionSlides[solutionIdx].tag}
-                      </span>
-                      <div className="border-t border-slate-300 w-[30px] xl:w-[60px] h-0 mx-2.5" />
-                      <div className="bg-[#4A72E8] rounded-full w-3 h-3 shrink-0 shadow-sm" />
-                    </div>
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    id="solutionNextBtn"
+                    onClick={handleNextSolution}
+                    aria-label="Next solution item"
+                    className="shrink-0 w-11 h-11 rounded-xl bg-slate-900 hover:bg-[#4A72E8] text-white flex items-center justify-center transition-all cursor-pointer shadow-md hover:scale-105 active:scale-95"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
 
-                    {/* Content Card Body */}
-                    <div className="flex flex-col gap-3 w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[390px] order-1 lg:order-2 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-lg">
-                      <div className="flex flex-col gap-px">
-                        <div className="font-bold text-[54px] lg:text-[64px] leading-none text-[#4A72E8]/20 select-none font-mono">
-                          {solutionSlides[solutionIdx].num}
-                        </div>
-                        <div className="font-extrabold text-xl lg:text-2xl leading-tight text-slate-900 tracking-tight font-body">
-                          {solutionSlides[solutionIdx].title}
-                        </div>
-                      </div>
-                      
-                      <div className="flex flex-col gap-3">
-                        <p className="font-sans text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
-                          {solutionSlides[solutionIdx].desc}
-                        </p>
-                        <div className="w-full aspect-[16/9] h-[140px] sm:h-[160px] lg:h-[175px] relative overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 shadow-sm">
-                          <img
-                            src={solutionSlides[solutionIdx].img}
-                            alt={solutionSlides[solutionIdx].title}
-                            className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
+                {/* Solution Dots Indicator */}
+                <div id="solutionDots" className="flex items-center justify-start gap-2 pt-1">
+                  {solutionSlides.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      aria-label={`Go to solution slide ${idx + 1}`}
+                      onClick={() => {
+                        setSolutionDirection(idx > solutionIdx ? 1 : -1);
+                        setSolutionIdx(idx);
+                      }}
+                      className={
+                        idx === solutionIdx
+                          ? 'w-7 h-2.5 rounded-full bg-[#4A72E8] transition-all duration-300 cursor-pointer shadow-sm'
+                          : 'w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all duration-300 cursor-pointer'
+                      }
+                    />
+                  ))}
+                </div>
+
               </div>
-            </div>
 
+              {/* RIGHT COLUMN: SCROLL-DRIVEN CARD STACKING STAGE */}
+              <div className="relative flex items-center justify-center w-full lg:flex-1 xl:w-[540px] xl:flex-none h-[480px] sm:h-[460px] lg:h-[440px]">
+                <div id="solutionCardStage" className="relative w-full h-full flex items-center justify-center">
+                  {solutionSlides.map((card, idx) => {
+                    const offset = idx - solutionIdx;
+                    const isCurrent = offset === 0;
+                    const isPast = offset < 0;
+                    const isFuture = offset > 0;
+
+                    const yVal = isCurrent ? 0 : isPast ? offset * 14 : 90;
+                    const scaleVal = isCurrent ? 1 : isPast ? 1 + offset * 0.04 : 0.94;
+                    const opacityVal = isCurrent ? 1 : isPast ? Math.max(0.15, 1 + offset * 0.35) : 0;
+                    const zIndexVal = isCurrent ? 30 : isPast ? 20 + idx : 5;
+
+                    return (
+                      <motion.div
+                        key={idx}
+                        animate={{
+                          y: yVal,
+                          scale: scaleVal,
+                          opacity: opacityVal,
+                          zIndex: zIndexVal,
+                        }}
+                        transition={{
+                          duration: 0.55,
+                          ease: [0.33, 1, 0.68, 1],
+                        }}
+                        className={`solution-card-item absolute inset-0 flex flex-col lg:flex-row items-center justify-center w-full h-full select-none ${
+                          isCurrent ? 'pointer-events-auto cursor-grab active:cursor-grabbing' : 'pointer-events-none'
+                        }`}
+                        drag={isCurrent ? "x" : false}
+                        dragConstraints={{ left: 0, right: 0 }}
+                        dragElastic={0.25}
+                        onDragEnd={(_, info) => {
+                          if (info.offset.x < -50) {
+                            handleNextSolution();
+                          } else if (info.offset.x > 50) {
+                            handlePrevSolution();
+                          }
+                        }}
+                      >
+                        {/* Connector (Step tag & Era line indicator) */}
+                        <div className={`hidden lg:flex items-center translate-y-10 mr-4 xl:mr-[18px] shrink-0 order-2 lg:order-1 transition-opacity duration-300 ${isCurrent ? 'opacity-100' : 'opacity-0'}`}>
+                          <span className="text-[#4A72E8] font-bold text-[11px] tracking-wider uppercase font-sans">
+                            {card.tag}
+                          </span>
+                          <div className="border-t border-slate-300 w-[30px] xl:w-[60px] h-0 mx-2.5" />
+                          <div className="bg-[#4A72E8] rounded-full w-3 h-3 shrink-0 shadow-sm" />
+                        </div>
+
+                        {/* Content Card Body */}
+                        <div className="flex flex-col gap-3 w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[390px] order-1 lg:order-2 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-xl">
+                          <div className="flex items-center justify-between">
+                            <div className="font-bold text-[54px] lg:text-[64px] leading-none text-[#4A72E8]/20 select-none font-mono">
+                              {card.num}
+                            </div>
+                            <div className="w-6 h-6 rounded-full border-2 border-blue-500 flex items-center justify-center p-0.5 shadow-xs">
+                              <div className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+                            </div>
+                          </div>
+
+                          <div className="font-extrabold text-xl lg:text-2xl leading-tight text-slate-900 tracking-tight font-body line-clamp-2">
+                            {card.title}
+                          </div>
+                          
+                          <div className="flex flex-col gap-3">
+                            <p className="font-sans text-xs sm:text-sm leading-relaxed text-slate-600 font-normal line-clamp-3">
+                              {card.desc}
+                            </p>
+                            <div className="w-full aspect-[16/9] h-[140px] sm:h-[160px] lg:h-[175px] relative overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 shadow-sm">
+                              <img
+                                src={card.img}
+                                alt={card.title}
+                                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+
+            </div>
           </div>
         </section>
 
