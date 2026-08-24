@@ -611,7 +611,7 @@ export default function DynamicCaseStudyPage({
     ? study.link.match(/https:\/\/apps\.apple\.com[^\s\)]+/)?.[0] || 'https://apple.com/app-store'
     : '';
 
-  const allUrls = study.link.match(/https?:\/\/[^\s\)]+/g) || [];
+  const allUrls: string[] = study.link.match(/https?:\/\/[^\s\)]+/g) || [];
   const webLink = allUrls.find(
     (u) =>
       !u.includes('play.google.com') &&
@@ -1055,35 +1055,40 @@ export default function DynamicCaseStudyPage({
                   <motion.div
                     key={solutionIdx}
                     custom={solutionDirection}
-                    initial={(dir: number) => ({
-                      opacity: 0,
-                      x: dir > 0 ? 140 : -140,
-                      rotateY: dir > 0 ? 32 : -32,
-                      scale: 0.88,
-                      z: -100,
-                    })}
-                    animate={{
-                      opacity: 1,
-                      x: 0,
-                      rotateY: 0,
-                      scale: 1,
-                      z: 0,
-                      transition: {
-                        duration: 0.85,
-                        ease: [0.33, 1, 0.68, 1],
+                    variants={{
+                      enter: (dir: number) => ({
+                        opacity: 0,
+                        x: dir > 0 ? 140 : -140,
+                        rotateY: dir > 0 ? 32 : -32,
+                        scale: 0.88,
+                        z: -100,
+                      }),
+                      center: {
+                        opacity: 1,
+                        x: 0,
+                        rotateY: 0,
+                        scale: 1,
+                        z: 0,
+                        transition: {
+                          duration: 0.85,
+                          ease: [0.33, 1, 0.68, 1],
+                        },
                       },
+                      exit: (dir: number) => ({
+                        opacity: 0,
+                        x: dir > 0 ? -140 : 140,
+                        rotateY: dir > 0 ? -32 : 32,
+                        scale: 0.88,
+                        z: -100,
+                        transition: {
+                          duration: 0.65,
+                          ease: [0.33, 1, 0.68, 1],
+                        },
+                      }),
                     }}
-                    exit={(dir: number) => ({
-                      opacity: 0,
-                      x: dir > 0 ? -140 : 140,
-                      rotateY: dir > 0 ? -32 : 32,
-                      scale: 0.88,
-                      z: -100,
-                      transition: {
-                        duration: 0.65,
-                        ease: [0.33, 1, 0.68, 1],
-                      },
-                    })}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
                     dragElastic={0.25}
