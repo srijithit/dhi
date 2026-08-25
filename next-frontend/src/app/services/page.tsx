@@ -181,7 +181,7 @@ export default function ServicesPage() {
 
                         {/* Bottom Action */}
                         <div className="relative z-10 pt-3 border-t border-slate-100 dark:border-slate-800/80">
-                          <div className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#2196E8] group-hover/back:bg-brand-bright text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md group-hover/back:shadow-lg group-hover/back:scale-102">
+                          <div className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#2196E8] group-hover/back:bg-brand-bright text-white font-bold text-sm tracking-wide transition-all duration-300 shadow-md group-hover/back:shadow-lg group-hover/back:scale-102">
                             <span>Explore Service</span>
                             <ArrowRight className="w-4 h-4 group-hover/back:translate-x-1 transition-transform" />
                           </div>

@@ -178,7 +178,7 @@ export default function ServicesSection() {
                     </div>
 
                     <div className="relative z-10 pt-2 border-t border-slate-100 dark:border-slate-800/80">
-                      <div className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-[#2196E8] group-hover/back:bg-brand-bright text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-sm group-hover/back:shadow group-hover/back:scale-102">
+                      <div className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-[#2196E8] group-hover/back:bg-brand-bright text-white font-bold text-xs tracking-wide transition-all duration-300 shadow-sm group-hover/back:shadow group-hover/back:scale-102">
                         <span>Explore Service</span>
                         <ArrowUpRight className="w-3.5 h-3.5 group-hover/back:translate-x-0.5 group-hover/back:-translate-y-0.5 transition-transform" />
                       </div>
