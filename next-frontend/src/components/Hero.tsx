@@ -92,7 +92,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
               variants={fadeInUp}
               className="font-header text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide text-slate-900 dark:text-white text-left leading-[1.08] mb-1"
             >
-              Coimbatore's Leading <span className="text-[#2196E8]">Digital Growth</span> Partner <br />
+              Coimbatore&apos;s <span className="text-[#2196E8]">Digital Growth</span> Partner <br />
               <span className="text-[#4A72EB] text-xl sm:text-2xl md:text-3xl block mt-2 font-semibold">
                 Web, App, AI &amp; Marketing Solutions
               </span>
@@ -102,7 +102,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
               variants={fadeInUp}
               className="text-base sm:text-lg text-slate-700 dark:text-slate-300 font-medium leading-relaxed font-body text-left max-w-xl"
             >
-              DhiGrowth is a full-service digital agency in Coimbatore helping businesses scale faster with cutting-edge website development, mobile app development, AI automation, and result-driven digital marketing. From Meta Ads and Google Ads to WhatsApp marketing, SEO, and video production, we build everything your business needs to grow online.
+              DhiGrowth is a full-service digital agency helping businesses scale faster with modern website development, mobile app development, AI automation, and result-driven digital marketing. From Meta Ads and Google Ads to WhatsApp marketing, SEO, and video production — we build everything your business needs to grow online.
             </motion.p>
  
             <motion.div 

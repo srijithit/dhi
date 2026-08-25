@@ -906,38 +906,38 @@ export default function CleanCulturePage() {
                 {/* Left Screen Card (Tilted Angle) */}
                 <div
                   onClick={() => setHighlightIdx((highlightIdx - 1 + 3) % 3)}
-                  className="relative w-[115px] xs:w-[140px] sm:w-56 md:w-64 h-[240px] xs:h-[280px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                  className="relative w-[130px] xs:w-[155px] sm:w-56 md:w-64 h-[280px] xs:h-[330px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
                 >
                   <img
                     src={highlightItems[(highlightIdx + 2) % 3].screen}
                     alt="Previous Screen"
                     draggable={false}
-                    className="w-full h-full object-contain scale-[1.08] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full object-cover sm:object-contain object-top sm:object-center scale-[1.25] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
 
-                {/* Center Main Screen Card (Active Blue Border Focus) */}
+                {/* Center Main Screen Card (Active Blue Focus - Zoomed In on Mobile, Pure Original on Desktop) */}
                 <div
-                  className="relative w-[150px] xs:w-[185px] sm:w-64 md:w-72 h-[290px] xs:h-[340px] sm:h-[400px] md:h-[450px] rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
+                  className="relative w-[185px] xs:w-[220px] sm:w-64 md:w-72 h-[370px] xs:h-[430px] sm:h-[400px] md:h-[450px] rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
                 >
                   <img
                     src={highlightItems[highlightIdx].screen}
                     alt="Active Screen"
                     draggable={false}
-                    className="w-full h-full object-contain scale-[1.08] sm:scale-100 drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full object-cover sm:object-contain object-top sm:object-center scale-[1.3] sm:scale-100 drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
 
                 {/* Right Screen Card (Tilted Angle) */}
                 <div
                   onClick={() => setHighlightIdx((highlightIdx + 1) % 3)}
-                  className="relative w-[115px] xs:w-[140px] sm:w-56 md:w-64 h-[240px] xs:h-[280px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                  className="relative w-[130px] xs:w-[155px] sm:w-56 md:w-64 h-[280px] xs:h-[330px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
                 >
                   <img
                     src={highlightItems[(highlightIdx + 1) % 3].screen}
                     alt="Next Screen"
                     draggable={false}
-                    className="w-full h-full object-contain scale-[1.08] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full object-cover sm:object-contain object-top sm:object-center scale-[1.25] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
               </motion.div>

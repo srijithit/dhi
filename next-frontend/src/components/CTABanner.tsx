@@ -46,7 +46,7 @@ export default function CTABanner({ onOpenAudit }: CTABannerProps) {
         </h2>
 
         <p className="font-body text-slate-350 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-          Talk to our digital growth experts today. Get a free audit of your website, ads, or social media and a custom roadmap to scale your business faster.
+          Talk to our digital growth experts today. Get a free audit of your website, ads, or social media — and a custom roadmap to scale faster.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">

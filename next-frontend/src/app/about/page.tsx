@@ -75,10 +75,10 @@ export default function AboutPage() {
               variants={fadeInUp}
             >
               <p>
-                DhiGrowth is a full-service digital agency headquartered in Coimbatore, India. We help startups, SMEs, and enterprises build a powerful digital presence and grow their business through smart technology and data-driven marketing.
+                DhiGrowth is a full-service digital agency headquartered in Coimbatore, India. We help startups, SMEs, and enterprises build a powerful digital presence and grow through smart technology and data-driven marketing.
               </p>
               <p>
-                From building high-performance websites and mobile applications to deploying AI automation, running paid ad campaigns, and creating compelling video content, we are the one-stop partner for every digital need your business has. We are not just a service provider. We are your growth partner invested in your success, committed to measurable outcomes, and driven by a passion for innovation.
+                From building high-performance websites and mobile apps to deploying AI automation, running paid ad campaigns, and creating compelling video content — we&apos;re the one-stop partner for every digital need your business has. We&apos;re not just a service provider; we&apos;re your growth partner, invested in your success and driven by a passion for innovation.
               </p>
             </motion.div>
           </div>
@@ -107,13 +107,13 @@ export default function AboutPage() {
                 </h2>
                 <div className="text-slate-650 dark:text-slate-350 text-base leading-relaxed space-y-4 font-normal">
                   <p>
-                    DhiGrowth was founded in Coimbatore with one simple observation: most local businesses had great products and services but struggled to reach the right audience in the digital world.
+                    DhiGrowth was founded with one simple observation: many local businesses had great products and services but struggled to reach the right audience online.
                   </p>
                   <p>
-                    We started as a small team of passionate developers, designers, marketers, and strategists who believed that technology and creativity combined could transform any business. We began by helping Coimbatore businesses with their websites and social media, and the results spoke for themselves.
+                    We started as a small team of developers, designers, marketers, and strategists who believed technology and creativity combined could transform any business. We began by helping local businesses with websites and social media, and the results spoke for themselves.
                   </p>
                   <p>
-                    Today, DhiGrowth has grown into a comprehensive digital agency offering 13+ services from AI development and business automation to video production and performance marketing. Our journey is fuelled by every client who trusted us with their growth.
+                    Today, DhiGrowth has grown into a comprehensive digital agency offering 13+ services — from AI development and business automation to video production and performance marketing. Our journey is fuelled by every client who trusted us with their growth.
                   </p>
                 </div>
               </motion.div>
@@ -134,7 +134,7 @@ export default function AboutPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6">
                     <p className="text-xs font-bold tracking-widest text-[#2196E8] mb-1 font-body">The DhiGrowth Ethos</p>
                     <blockquote className="text-white italic font-body text-sm sm:text-base leading-relaxed">
-                      "Deep local roots coupled with global technical benchmarks form the core foundation of our service delivery framework."
+                      &ldquo;Deep local roots coupled with global technical benchmarks form the core foundation of our service delivery framework.&rdquo;
                     </blockquote>
                   </div>
                 </div>

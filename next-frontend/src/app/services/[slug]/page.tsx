@@ -214,14 +214,11 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   Core Expertise
                 </span>
                 <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-[#4A72EB] leading-none">
-                  Leading {service.name} Company in Coimbatore
+                  {introSection?.heading || "Overview"}
                 </h2>
                 <div className="space-y-4 text-slate-700 dark:text-slate-350 text-base sm:text-lg leading-relaxed font-body">
                   <p>
-                    {introSection?.content || `DhiGrowth is a trusted ${service.name.toLowerCase()} company in Coimbatore with proven expertise in building custom solutions for businesses across all industries. We blend creativity, technology, and strategy to deliver solutions that perform powerfully.`}
-                  </p>
-                  <p>
-                    From your first business website to a complete digital revamp, we are the {service.name.toLowerCase()} company in Coimbatore that businesses rely on for quality, speed, and results.
+                    {introSection?.content || `DhiGrowth is a trusted partner with proven expertise in delivering tailored solutions for businesses across diverse industries. We blend creativity, technology, and strategy to build solutions that perform powerfully.`}
                   </p>
                 </div>
               </div>
@@ -236,7 +233,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6 text-left">
                     <p className="text-xs font-bold tracking-widest text-[#2196E8] mb-1 font-body">The DhiGrowth Commitment</p>
                     <blockquote className="text-white italic font-body text-xs sm:text-sm leading-relaxed">
-                      "{SERVICE_QUOTE_MAP[service.id] || "We build custom, fast, and high-converting systems for your brand in Coimbatore."}"
+                      &ldquo;{SERVICE_QUOTE_MAP[service.id] || "We build custom, fast, and high-converting systems tailored to accelerate your growth."}&rdquo;
                     </blockquote>
                   </div>
                 </div>
@@ -256,7 +253,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   Core Offerings
                 </span>
                 <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
-                  Our {service.name} Services in Coimbatore
+                  {offeringsSection.heading || "What We Build"}
                 </h2>
               </div>
 
@@ -282,7 +279,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </section>
         )}
 
-        {/* Why Coimbatore Businesses Trust DhiGrowth */}
+        {/* Why Businesses Trust Us */}
         <section className="py-24 bg-white dark:bg-[#000000] transition-colors">
           <div className="max-w-5xl mx-auto px-6">
             
@@ -291,7 +288,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 Our Guarantee
               </span>
               <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
-                Why Coimbatore Businesses Trust DhiGrowth for {service.name}
+                {customFeaturesSection?.heading || "Why Businesses Trust Us"}
               </h2>
             </div>
 
@@ -332,7 +329,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 Methodology
               </span>
               <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
-                How We Build Your {service.name === 'Website Development' ? 'Website' : service.name}
+                {customStepsSection?.heading || "Our Process"}
               </h2>
             </div>
 
@@ -373,10 +370,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               Versatility
             </span>
             <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
-              {service.name} for Every Industry in Coimbatore
+              Industries We Serve
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-2xl mx-auto">
-              We have built websites for businesses across a wide range of industries in Coimbatore and India, bringing deep domain understanding to every project we take on.
+              We work with businesses across textile and manufacturing, retail, healthcare, education, hospitality, real estate, and technology — bringing deep domain understanding to every project.
             </p>
             
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 pt-4">

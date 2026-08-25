@@ -12,7 +12,7 @@ export default function WhyChooseUs() {
     {
       badge: "01 • Integrated Agency",
       title: "One agency, every solution",
-      desc: "From logo to landing page to lead generation, we handle it all under one roof.",
+      desc: "From logo to landing page to lead generation — we handle it all under one roof.",
       image: "/images/natural_tech.png"
     },
     {
@@ -24,19 +24,19 @@ export default function WhyChooseUs() {
     {
       badge: "03 • Transparent Data",
       title: "Transparent reporting",
-      desc: "Real-time dashboards and monthly reports: you always know where your money goes.",
+      desc: "Real-time dashboards and monthly reports — you always know where your money goes.",
       image: "/images/natural_ai.png"
     },
     {
       badge: "04 • Local Insight",
-      title: "Coimbatore-focused strategy",
+      title: "Market-focused strategy",
       desc: "We understand the local market, culture, and audience better than any remote agency.",
       image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&auto=format&fit=crop&q=80"
     },
     {
       badge: "05 • Accountability",
       title: "End-to-end ownership",
-      desc: "From strategy to execution to optimisation, we own the entire journey.",
+      desc: "From strategy to execution to optimisation — we own the entire journey.",
       image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80"
     }
   ];
@@ -89,11 +89,11 @@ export default function WhyChooseUs() {
             </span>
             
             <h2 className="font-header text-4xl sm:text-6xl text-white tracking-wide leading-none">
-              Why Coimbatore Businesses Choose DhiGrowth.
+              Why Businesses Choose DhiGrowth.
             </h2>
             
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              We combine local Coimbatore expertise with world-class tech, data-driven performance marketing, and AI automation to deliver unmatched digital growth for your brand.
+              We combine deep domain understanding with world-class tech, data-driven performance marketing, and AI automation to deliver unmatched digital growth for your brand.
             </p>
 
             <div className="pt-2">

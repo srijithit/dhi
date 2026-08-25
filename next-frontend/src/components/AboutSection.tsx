@@ -25,14 +25,14 @@ export default function AboutSection() {
     {
       icon: TrendingUp,
       title: "Marketing That Converts",
-      desc: "Data-driven SEO, paid ads, and social media strategies that bring real ROI.",
+      desc: "Data-driven SEO, paid ads, and social strategies that bring real ROI.",
       colorClass: "border-l-[#4A72EB] hover:border-[#4A72EB] text-[#4A72EB]",
       bgClass: "bg-[#4A72EB]/5 border-[#4A72EB]/20"
     },
     {
       icon: Compass,
-      title: "Coimbatore Roots, Global Standards",
-      desc: "Local expertise with world-class execution for businesses of all sizes.",
+      title: "Local Roots, Global Standards",
+      desc: "Deep regional market knowledge with world-class execution, for businesses of any size.",
       colorClass: "border-l-[#A9C0F5] hover:border-l-[#A9C0F5] hover:border-[#A9C0F5] text-[#A9C0F5]",
       bgClass: "bg-[#A9C0F5]/5 border-[#A9C0F5]/20"
     }
@@ -57,10 +57,10 @@ export default function AboutSection() {
             Who We Are
           </span>
           <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6">
-            Coimbatore's Premier <span className="text-[#2196E8]">Digital Growth</span> Partner
+            Driving Digital <span className="text-[#2196E8]">Growth &amp; Transformation</span>
           </h2>
           <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed font-body">
-            We are DhiGrowth, a Coimbatore-based digital agency that combines technology, creativity, and strategy to deliver measurable business results. Whether you are a startup, SME, or enterprise, our end-to-end digital solutions are built to accelerate your growth.
+            We are DhiGrowth — a digital agency that combines technology, creativity, and strategy to deliver measurable business results. Whether you&apos;re a startup, SME, or enterprise, our end-to-end digital solutions are built to accelerate your growth.
           </p>
         </motion.div>
 

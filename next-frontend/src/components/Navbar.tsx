@@ -63,12 +63,12 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
   ];
 
   const col3 = [
-    { name: "Clean Culture", slug: "clean-culture", type: "live" },
+    { name: "Clean Culture", slug: "clean-culture" },
     { name: "Ruts N Rides", slug: "ruts-n-rides" },
     { name: "Befhue Creative Agency", slug: "befhue" },
     { name: "Sales CRM App", slug: "sales-app" },
     { name: "Sanika's Cuisine", slug: "sanikas-restaurant" },
-    { name: "Startten Platform", slug: "startten", type: "new" },
+    { name: "Startten Platform", slug: "startten" },
     { name: "Biscuit Defect AI", slug: "bad-biscuit-detection" }
   ];
 
@@ -210,45 +210,16 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
 
                           {/* Column 3 */}
                           <div className="space-y-3">
-                            {col3.map((project, idx) => {
-                              const href = `/case-studies/${project.slug}`;
-                              if (project.type === "live") {
-                                return (
-                                  <Link
-                                    key={idx}
-                                    href={href}
-                                    onClick={() => setDropdownOpen(false)}
-                                    className="border border-emerald-200 bg-emerald-50 text-emerald-800 font-semibold px-3 py-1.5 rounded-xl flex items-center justify-between text-[13.5px] transition-all hover:bg-emerald-100 hover:border-emerald-400 shadow-sm font-body"
-                                  >
-                                    <span>{project.name}</span>
-                                    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 ml-2" />
-                                  </Link>
-                                );
-                              } else if (project.type === "new") {
-                                return (
-                                  <Link
-                                    key={idx}
-                                    href={href}
-                                    onClick={() => setDropdownOpen(false)}
-                                    className="border border-rose-200 bg-rose-50 text-rose-800 font-semibold px-3 py-1.5 rounded-xl flex items-center justify-between text-[13.5px] transition-all hover:bg-rose-100 hover:border-rose-400 shadow-sm font-body"
-                                  >
-                                    <span>{project.name}</span>
-                                    <span className="w-2 h-2 rounded-full bg-rose-500 shrink-0 ml-2" />
-                                  </Link>
-                                );
-                              } else {
-                                return (
-                                  <Link
-                                    key={idx}
-                                    href={href}
-                                    onClick={() => setDropdownOpen(false)}
-                                    className="text-slate-800 hover:text-[#2196E8] text-[13.5px] font-medium transition-colors duration-200 py-1 block font-body"
-                                  >
-                                    {project.name}
-                                  </Link>
-                                );
-                              }
-                            })}
+                            {col3.map((project, idx) => (
+                              <Link
+                                key={idx}
+                                href={`/case-studies/${project.slug}`}
+                                onClick={() => setDropdownOpen(false)}
+                                className="text-slate-800 hover:text-[#2196E8] text-[13.5px] font-medium transition-colors duration-200 py-1 block font-body"
+                              >
+                                {project.name}
+                              </Link>
+                            ))}
                           </div>
                         </div>
                       </motion.div>

@@ -54,40 +54,21 @@ export default function CaseStudiesPage() {
 
       <main className="pt-[80px] pb-24 font-body bg-white">
         
-        {/* ── HERO SECTION (BLUE & WHITE THEME) ── */}
-        <section className="relative w-full py-16 sm:py-24 overflow-hidden bg-gradient-to-b from-blue-50/70 via-slate-50/30 to-white border-b border-blue-100/60">
-          {/* Subtle Radial Blue Glows */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[360px] bg-[#2196E8]/10 rounded-full blur-[140px] pointer-events-none" />
+        {/* ── HERO SECTION (MATCHING SERVICES HERO THEME & FONT) ── */}
+        <section className="relative py-24 bg-slate-50 dark:bg-[#0b0f19] text-slate-900 dark:text-white overflow-hidden bg-dot-matrix border-b border-slate-200 dark:border-slate-800 transition-colors">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#2196E8]/5 rounded-full blur-[120px] pointer-events-none" />
           <div className="absolute top-0 right-1/4 w-[350px] h-[350px] bg-blue-400/10 rounded-full blur-[100px] pointer-events-none" />
           
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-5">
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/25 text-[#2196E8] text-xs font-bold tracking-wide font-body shadow-sm"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Our Work</span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="font-body text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 max-w-4xl mx-auto leading-tight"
-            >
-              Case Studies &amp; <span className="text-[#2196E8] whitespace-nowrap">Success Stories</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed font-body"
-            >
-              Explore How DhiGrowth Helps Businesses Scale With High-Performance Web Apps, AI Automation, And Result-Driven Engineering.
-            </motion.p>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
+            <span className="text-[#2196E8] font-bold text-sm tracking-widest block font-body">
+              Coimbatore Digital Agency
+            </span>
+            <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wide leading-none text-slate-900 dark:text-white">
+              Case Studies &amp; <span className="text-[#2196E8]">Success Stories</span>
+            </h1>
+            <p className="text-slate-600 dark:text-slate-350 text-lg sm:text-xl max-w-2xl mx-auto font-body leading-relaxed">
+              Explore how DhiGrowth helps businesses scale with high-performance web apps, AI automation, and result-driven digital marketing.
+            </p>
           </div>
         </section>
 

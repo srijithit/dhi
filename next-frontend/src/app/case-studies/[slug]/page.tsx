@@ -419,8 +419,39 @@ export default function DynamicCaseStudyPage({
     ],
   };
 
+  const heroBannerMap: Record<string, string> = {
+    'clean-culture': '/images/cc_overview_slide1.png',
+    'ruts-n-rides': '/images/case-studies/ruts-n-rides/tp1.jpg',
+    'ruts-n-rides-admin': '/images/case-studies/ruts-n-rides/tp1.jpg',
+    'infragen': '/images/case-studies/infragen/property.jpg',
+    'verdurepax': '/images/case-studies/verdurepax/showcase_1.png',
+    'befhue': '/images/case-studies/befhue/showcase_3.webp',
+    'squirlio': '/images/case-studies/squirlio/banner_1.jpeg',
+    'sanikas-restaurant': '/images/case-studies/sanikas-restaurant/showcase_1.webp',
+    'sanikas': '/images/case-studies/sanikas-restaurant/showcase_1.webp',
+    'amaravathy-coir': '/images/case-studies/amaravathy/hero.png',
+    'amaravathy': '/images/case-studies/amaravathy/hero.png',
+    'keystone': '/images/case-studies/keystone/showcase_1.webp',
+    'kiipl': '/images/case-studies/keystone/showcase_1.webp',
+    'thoorigai': '/images/case-studies/thoorigai/showcase_1.webp',
+    'gigabull': '/images/case-studies/gigabull/showcase_1.webp',
+    'startten': '/images/case-studies/startten/showcase_1.png',
+    'akirva': '/images/case-studies/akirva/showcase_1.png',
+    'judah': '/images/case-studies/judah/showcase_1.png',
+    'nestpilot': '/images/case-studies/nestpilot/showcase_1.png',
+    'ai-invoice-processing': '/images/case-studies/ai-invoice-processing/showcase_3.png',
+    'bad-biscuit-detection': '/images/case-studies/bad-biscuit-detection/showcase_5.png',
+    'fabric-defect-detection': 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80',
+    'dhigrowth-ai-chatbot': 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=80',
+    'sales-app': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80',
+    'vectra-mechnovations': 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=80',
+    'splendour-park': 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1600&q=80',
+  };
+
+  const heroImage = heroBannerMap[study.slug] || showcaseImageMap[study.slug]?.[0] || study.image || 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80';
+
   const projectImages = showcaseImageMap[study.slug] || [
-    '/images/cc_overview_slide1.png',
+    heroImage,
     '/images/cc_overview_slide2.png',
     '/images/cc_overview_slide3.png',
   ];
@@ -766,7 +797,7 @@ export default function DynamicCaseStudyPage({
         <section className="relative w-full h-[400px] sm:h-[480px] lg:h-[540px] overflow-hidden bg-slate-950 flex items-center justify-center font-body group">
           <div className="absolute inset-0 z-0">
             <img
-              src={study.image || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80'}
+              src={heroImage}
               alt={`${study.title} Cover Banner`}
               className="w-full h-full object-cover scale-105 transition-transform duration-1000 group-hover:scale-110 opacity-70"
             />
@@ -1262,38 +1293,38 @@ export default function DynamicCaseStudyPage({
                 {/* Left Screen Card (Tilted Angle) */}
                 <div
                   onClick={() => setHighlightIdx((highlightIdx - 1 + 3) % 3)}
-                  className="relative w-[115px] xs:w-[140px] sm:w-56 md:w-64 h-[240px] xs:h-[280px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                  className="relative w-[130px] xs:w-[155px] sm:w-56 md:w-64 h-[280px] xs:h-[330px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
                 >
                   <img
                     src={highlightItems[(highlightIdx + 2) % 3].screen}
                     alt="Previous Screen"
                     draggable={false}
-                    className="w-full h-full object-contain scale-[1.08] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full object-cover sm:object-contain object-top sm:object-center scale-[1.25] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
 
-                {/* Center Main Screen Card (Active Blue Border Focus) */}
+                {/* Center Main Screen Card (Active Blue Border Focus - Zoomed In on Mobile, Pure Original on Desktop) */}
                 <div
-                  className="relative w-[150px] xs:w-[185px] sm:w-64 md:w-72 h-[290px] xs:h-[340px] sm:h-[400px] md:h-[450px] rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
+                  className="relative w-[185px] xs:w-[220px] sm:w-64 md:w-72 h-[370px] xs:h-[430px] sm:h-[400px] md:h-[450px] rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
                 >
                   <img
                     src={highlightItems[highlightIdx].screen}
                     alt="Active Screen"
                     draggable={false}
-                    className="w-full h-full object-contain scale-[1.08] sm:scale-100 drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full object-cover sm:object-contain object-top sm:object-center scale-[1.3] sm:scale-100 drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
 
                 {/* Right Screen Card (Tilted Angle) */}
                 <div
                   onClick={() => setHighlightIdx((highlightIdx + 1) % 3)}
-                  className="relative w-[115px] xs:w-[140px] sm:w-56 md:w-64 h-[240px] xs:h-[280px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                  className="relative w-[130px] xs:w-[155px] sm:w-56 md:w-64 h-[280px] xs:h-[330px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
                 >
                   <img
                     src={highlightItems[(highlightIdx + 1) % 3].screen}
                     alt="Next Screen"
                     draggable={false}
-                    className="w-full h-full object-contain scale-[1.08] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full object-cover sm:object-contain object-top sm:object-center scale-[1.25] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
               </motion.div>

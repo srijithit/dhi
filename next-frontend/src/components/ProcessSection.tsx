@@ -18,21 +18,21 @@ export default function ProcessSection() {
     {
       num: 2,
       title: "2. Strategise",
-      desc: "Our team crafts a data-backed digital strategy aligned to your industry and target audience.",
+      desc: "Our team crafts a data-backed strategy aligned to your industry and audience.",
       // Step 2: Wall-mounted analytics strategy dashboard with team analyzing growth charts
       image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1200&auto=format&fit=crop&q=80"
     },
     {
       num: 3,
       title: "3. Execute",
-      desc: "From development to campaigns, we build, launch, and manage with precision.",
+      desc: "From development to campaigns — we build, launch, and manage with precision.",
       // Step 3: Software developers working at multi-monitor code workstation
       image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&auto=format&fit=crop&q=80"
     },
     {
       num: 4,
       title: "4. Grow",
-      desc: "We monitor, optimise, and scale, continuously improving your results month after month.",
+      desc: "We monitor, optimise, and scale — continuously improving your results month after month.",
       // Step 4: Exponential business growth analytics monitor presentation with executive
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80"
     }
