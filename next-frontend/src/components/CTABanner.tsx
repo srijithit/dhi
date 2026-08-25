@@ -46,21 +46,21 @@ export default function CTABanner({ onOpenAudit }: CTABannerProps) {
         </h2>
 
         <p className="font-body text-slate-350 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-          Talk to our digital growth experts today. Get a free audit of your website, ads, or social media — and a custom roadmap to scale your business faster.
+          Talk to our digital growth experts today. Get a free audit of your website, ads, or social media and a custom roadmap to scale your business faster.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
           <button 
             onClick={handleConsultationClick}
-            className="w-full sm:w-auto px-8 py-4 bg-[#4A72EB] hover:bg-[#2196E8] text-white font-bold rounded-2xl border-2 border-transparent hover:shadow-lg transition-all duration-250 flex items-center justify-center gap-2 text-base tracking-wider shadow-md cursor-pointer"
+            className="w-full sm:w-[280px] h-[56px] px-6 bg-[#4A72EB] hover:bg-[#2196E8] text-white font-bold rounded-2xl border-2 border-transparent hover:shadow-lg transition-all duration-250 flex items-center justify-center gap-2 text-base tracking-wider shadow-md cursor-pointer text-center"
           >
-            <PhoneCall className="w-5 h-5" />
-            <span>Book a Call</span>
+            <PhoneCall className="w-5 h-5 shrink-0" />
+            <span>Book a Free Consultation</span>
           </button>
           
           <button 
             onClick={handleWhatsAppClick}
-            className="w-full sm:w-auto px-8 py-4 border-2 border-emerald-500 text-emerald-500 font-bold rounded-2xl hover:bg-emerald-500 hover:text-white transition-colors duration-250 flex items-center justify-center gap-2 text-base tracking-wider bg-transparent cursor-pointer"
+            className="w-full sm:w-[280px] h-[56px] px-6 border-2 border-emerald-500 text-emerald-500 font-bold rounded-2xl hover:bg-emerald-500 hover:text-white transition-colors duration-250 flex items-center justify-center gap-2 text-base tracking-wider bg-transparent cursor-pointer text-center"
           >
             <MessageCircle className="w-5 h-5 shrink-0" />
             <span>WhatsApp Us Now</span>

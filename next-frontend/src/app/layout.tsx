@@ -22,7 +22,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata = {
-  title: "DhiGrowth — India's Leading Digital Growth Partner",
+  title: "DhiGrowth | Digital Agency in Coimbatore | Web, AI & Marketing",
   description: "DhiGrowth is Coimbatore's top digital agency offering website development, AI solutions, SEO, Meta & Google Ads, social media, and business automation services.",
   keywords: "Digital Agency Coimbatore, Website Development Coimbatore, Mobile App Development Coimbatore, AI Development Coimbatore, WhatsApp Marketing, SEO Coimbatore, Google Ads",
   robots: "index, follow",

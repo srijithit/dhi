@@ -88,7 +88,7 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Services Grid Section */}
+        {/* Services Grid Section with 3D Card Flip */}
         <section className="py-24 bg-slate-50 dark:bg-[#080b11]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
@@ -102,42 +102,94 @@ export default function ServicesPage() {
                 const IconComponent = ICON_MAP[service.iconName] || Globe;
 
                 return (
-                  <Link key={service.id} href={`/services/${service.id}`} className="flex w-full">
-                    <motion.div 
-                      variants={cardVariants}
-                      className="bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-800/80 hover:border-[#2196E8] rounded-3xl flex flex-col justify-between shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 relative group overflow-hidden w-full cursor-pointer"
-                    >
-                      {/* Top image */}
-                      <div className="relative h-48 w-full overflow-hidden">
-                        <img 
-                          src={SERVICE_IMAGE_MAP[service.id] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=80"} 
-                          alt={service.name} 
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute top-4 left-4 bg-white/95 dark:bg-[#090d18]/95 backdrop-blur-md p-2.5 rounded-xl border border-slate-200 dark:border-slate-850 shadow-md">
-                          <IconComponent className="w-5 h-5 text-[#2196E8]" />
+                  <div 
+                    key={service.id} 
+                    className="w-full h-[460px] flip-card group cursor-pointer"
+                  >
+                    <div className="flip-card-inner">
+                      
+                      {/* FRONT OF CARD */}
+                      <div className="flip-card-front bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-800/80 rounded-3xl flex flex-col justify-between shadow-sm group-hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                        {/* Top Image */}
+                        <div className="relative h-48 w-full overflow-hidden shrink-0">
+                          <img 
+                            src={SERVICE_IMAGE_MAP[service.id] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=80"} 
+                            alt={service.name} 
+                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                          <div className="absolute top-4 left-4 bg-white/95 dark:bg-[#090d18]/95 backdrop-blur-md p-2.5 rounded-xl border border-slate-200 dark:border-slate-850 shadow-md">
+                            <IconComponent className="w-5 h-5 text-[#2196E8]" />
+                          </div>
+                          {service.badge && (
+                            <span className="absolute top-4 right-4 text-[9px] font-bold tracking-wider px-2.5 py-1 rounded-full bg-[#2196E8] text-white shadow-md font-body">
+                              {service.badge}
+                            </span>
+                          )}
                         </div>
-                        {service.badge && (
-                          <span className="absolute top-4 right-4 text-[9px] font-bold tracking-wider px-2.5 py-1 rounded-full bg-[#2196E8] text-white shadow-md font-body">
-                            {service.badge}
-                          </span>
-                        )}
+
+                        {/* Front Content */}
+                        <div className="p-6 sm:p-7 flex flex-col justify-between flex-grow space-y-3">
+                          <div className="space-y-2">
+                            <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wider group-hover:text-[#2196E8] transition-colors duration-300">
+                              {service.name}
+                            </h3>
+
+                            {service.headline && (
+                              <h4 className="text-xs sm:text-sm font-semibold text-[#2196E8] leading-snug line-clamp-2">
+                                {service.headline}
+                              </h4>
+                            )}
+
+                            <p className="text-slate-650 dark:text-slate-350 text-sm leading-relaxed line-clamp-2">
+                              {service.shortCopy}
+                            </p>
+                          </div>
+                        </div>
                       </div>
 
-                      <div className="p-6 sm:p-8 flex flex-col justify-between flex-grow space-y-4">
-                        <div>
-                          <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wider group-hover:text-[#2196E8] transition-colors duration-300">
-                            {service.name}
-                          </h3>
+                      {/* BACK OF CARD (Flipped State - Entire Card Clickable Link) */}
+                      <Link 
+                        href={`/services/${service.id}`}
+                        className="flip-card-back bg-white dark:bg-[#0b0f19] border-2 border-[#2196E8] rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-2xl overflow-hidden relative cursor-pointer group/back"
+                      >
+                        {/* Subtle background glow */}
+                        <div className="absolute -top-16 -right-16 w-40 h-40 bg-[#2196E8]/15 rounded-full blur-2xl pointer-events-none" />
+                        <div className="absolute -bottom-16 -left-16 w-40 h-40 bg-[#4A72EB]/15 rounded-full blur-2xl pointer-events-none" />
 
-                          <p className="text-slate-650 dark:text-slate-350 text-sm leading-relaxed line-clamp-3">
-                            {service.shortCopy}
+                        {/* Top Header */}
+                        <div className="relative z-10 flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800/80">
+                          <div className="flex items-center gap-2.5">
+                            <div className="p-2 rounded-lg bg-[#2196E8]/10 text-[#2196E8]">
+                              <IconComponent className="w-4 h-4" />
+                            </div>
+                            <h4 className="font-header text-lg text-slate-900 dark:text-white tracking-wide group-hover/back:text-[#2196E8] transition-colors">
+                              {service.name}
+                            </h4>
+                          </div>
+                          <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#2196E8]/15 text-[#2196E8]">
+                            Overview
+                          </span>
+                        </div>
+
+                        {/* Full Description Body */}
+                        <div className="relative z-10 my-auto py-2 overflow-y-auto max-h-[250px] no-scrollbar">
+                          <p className="text-slate-700 dark:text-slate-200 text-[13.5px] leading-relaxed font-body">
+                            {service.fullDescription || service.shortCopy}
                           </p>
                         </div>
 
-                      </div>
-                    </motion.div>
-                  </Link>
+                        {/* Bottom Action */}
+                        <div className="relative z-10 pt-3 border-t border-slate-100 dark:border-slate-800/80">
+                          <div className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#2196E8] group-hover/back:bg-brand-bright text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md group-hover/back:shadow-lg group-hover/back:scale-102">
+                            <span>Explore Service</span>
+                            <ArrowRight className="w-4 h-4 group-hover/back:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      </Link>
+
+                    </div>
+                  </div>
                 );
               })}
             </motion.div>

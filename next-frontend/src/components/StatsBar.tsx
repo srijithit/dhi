@@ -4,10 +4,10 @@ import { AnimatedCounter } from './AnimatedCounter';
 
 export default function StatsBar() {
   const stats = [
-    { target: 100, suffix: "+", label: "Projects Delivered", sublabel: "Since 2021" },
-    { target: 50, suffix: "+", label: "Coimbatore Brands", sublabel: "Served Locally" },
-    { target: 5, suffix: "+", label: "Years of Agency", sublabel: "Growth Expertise" },
-    { target: 13, suffix: "+", label: "Client Solutions", sublabel: "Under One Roof" },
+    { target: 100, suffix: "+", label: "Projects Delivered", sublabel: "Successfully Completed" },
+    { target: 50, suffix: "+", label: "Clients in Coimbatore", sublabel: "Local Business Partners" },
+    { target: 5, suffix: "+", label: "Years of Expertise", sublabel: "Proven Track Record" },
+    { target: 13, suffix: "+", label: "Services Offered", sublabel: "Full Stack Growth" },
   ];
 
   return (

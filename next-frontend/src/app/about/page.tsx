@@ -67,15 +67,20 @@ export default function AboutPage() {
             >
               About DhiGrowth
             </motion.h2>
-            <motion.p 
-              className="text-slate-700 dark:text-slate-300 text-lg sm:text-xl leading-relaxed font-normal"
+            <motion.div 
+              className="text-slate-700 dark:text-slate-300 text-lg sm:text-xl leading-relaxed font-normal space-y-5"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeInUp}
             >
-              DhiGrowth is a full-service digital agency headquartered in Coimbatore, India. We help startups, SMEs, and enterprises build a powerful digital presence and grow their business through smart technology and data-driven marketing. From building high-performance websites and mobile applications to deploying AI automation, running paid ad campaigns, and creating compelling video content — we are the one-stop partner for every digital need your business has. We are not just a service provider. We are your growth partner invested in your success, committed to measurable outcomes, and driven by a passion for innovation.
-            </motion.p>
+              <p>
+                DhiGrowth is a full-service digital agency headquartered in Coimbatore, India. We help startups, SMEs, and enterprises build a powerful digital presence and grow their business through smart technology and data-driven marketing.
+              </p>
+              <p>
+                From building high-performance websites and mobile applications to deploying AI automation, running paid ad campaigns, and creating compelling video content, we are the one-stop partner for every digital need your business has. We are not just a service provider. We are your growth partner invested in your success, committed to measurable outcomes, and driven by a passion for innovation.
+              </p>
+            </motion.div>
           </div>
         </section>
 
@@ -100,18 +105,15 @@ export default function AboutPage() {
                 <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wider leading-none">
                   Our Story
                 </h2>
-                <h3 className="font-body font-bold text-slate-800 dark:text-slate-200 text-lg">
-                  Building Coimbatore's Digital Future
-                </h3>
-                <div className="text-slate-600 dark:text-slate-350 text-base leading-relaxed space-y-4">
+                <div className="text-slate-650 dark:text-slate-350 text-base leading-relaxed space-y-4 font-normal">
                   <p>
                     DhiGrowth was founded in Coimbatore with one simple observation: most local businesses had great products and services but struggled to reach the right audience in the digital world.
                   </p>
                   <p>
-                    We started as a passionate team of developers, designers, marketers, and strategists who believed that technology and creativity combined could transform any business. We began by helping Coimbatore businesses with their websites and social media, and the results spoke for themselves.
+                    We started as a small team of passionate developers, designers, marketers, and strategists who believed that technology and creativity combined could transform any business. We began by helping Coimbatore businesses with their websites and social media, and the results spoke for themselves.
                   </p>
                   <p>
-                    Today, DhiGrowth has grown into a comprehensive digital agency offering 13+ services from AI development and business automation to video production and performance marketing.
+                    Today, DhiGrowth has grown into a comprehensive digital agency offering 13+ services from AI development and business automation to video production and performance marketing. Our journey is fuelled by every client who trusted us with their growth.
                   </p>
                 </div>
               </motion.div>
@@ -170,12 +172,12 @@ export default function AboutPage() {
                     Our Vision
                   </h2>
 
-                  <div className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed space-y-4 font-normal">
+                  <div className="text-slate-650 dark:text-slate-300 text-sm sm:text-base leading-relaxed space-y-4 font-normal">
                     <p>
-                      To become South India's most trusted digital agency and technology partner by delivering transparent, sustainable, and value-driven business solutions.
+                      To be the most trusted digital growth partner for businesses in Coimbatore and across India empowering every brand to thrive in the digital age.
                     </p>
                     <p>
-                      We measure success not by the number of deals we close, but by the long-term value, revenue growth, and confidence we create for the clients who choose us.
+                      We envision a future where every business in Coimbatore, regardless of size or industry, has access to world-class digital tools, AI-powered solutions, and marketing expertise. DhiGrowth is building that future, one client at a time.
                     </p>
                   </div>
                 </div>
@@ -203,12 +205,12 @@ export default function AboutPage() {
                     Our Mission
                   </h2>
 
-                  <div className="text-slate-600 dark:text-slate-350 text-sm sm:text-base leading-relaxed space-y-4 font-normal">
+                  <div className="text-slate-650 dark:text-slate-300 text-sm sm:text-base leading-relaxed space-y-4 font-normal">
                     <p>
-                      Provide end-to-end digital solutions — from web engineering and mobile app development to performance marketing, valuation, and ongoing management, all under one roof.
+                      To deliver innovative, result-oriented digital solutions that help businesses grow faster, operate smarter, and connect deeper with their customers.
                     </p>
                     <p>
-                      Offer hassle-free growth strategies for local and global clients — so business owners can rely on secure, transparent, fully reported digital expansion.
+                      We build with purpose, market with data, and grow with integrity because your success is the only metric that matters to us.
                     </p>
                   </div>
                 </div>

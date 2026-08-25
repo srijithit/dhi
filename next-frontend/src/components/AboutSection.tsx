@@ -60,7 +60,7 @@ export default function AboutSection() {
             Coimbatore's Premier <span className="text-[#2196E8]">Digital Growth</span> Partner
           </h2>
           <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed font-body">
-            We are DhiGrowth — a Coimbatore-based digital agency that combines technology, creativity, and strategy to deliver measurable business results. Whether you are a startup, SME, or enterprise, our end-to-end digital solutions are built to accelerate your growth.
+            We are DhiGrowth, a Coimbatore-based digital agency that combines technology, creativity, and strategy to deliver measurable business results. Whether you are a startup, SME, or enterprise, our end-to-end digital solutions are built to accelerate your growth.
           </p>
         </motion.div>
 

@@ -8,7 +8,7 @@ interface HeroProps {
   onExploreServices: () => void;
 }
 
-export default function Hero({ onOpenAudit }: HeroProps) {
+export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
@@ -94,7 +94,7 @@ export default function Hero({ onOpenAudit }: HeroProps) {
             >
               Coimbatore's Leading <span className="text-[#2196E8]">Digital Growth</span> Partner <br />
               <span className="text-[#4A72EB] text-xl sm:text-2xl md:text-3xl block mt-2 font-semibold">
-                Web, App, AI &amp; Performance Marketing
+                Web, App, AI &amp; Marketing Solutions
               </span>
             </motion.h1>
  
@@ -102,7 +102,7 @@ export default function Hero({ onOpenAudit }: HeroProps) {
               variants={fadeInUp}
               className="text-base sm:text-lg text-slate-700 dark:text-slate-300 font-medium leading-relaxed font-body text-left max-w-xl"
             >
-              We help businesses grow through high-performance websites, mobile apps, AI automation, and performance marketing.
+              DhiGrowth is a full-service digital agency in Coimbatore helping businesses scale faster with cutting-edge website development, mobile app development, AI automation, and result-driven digital marketing. From Meta Ads and Google Ads to WhatsApp marketing, SEO, and video production, we build everything your business needs to grow online.
             </motion.p>
  
             <motion.div 
@@ -115,8 +115,17 @@ export default function Hero({ onOpenAudit }: HeroProps) {
                 whileTap={{ scale: 0.98 }}
                 className="btn-primary group !py-3 !px-7 cursor-pointer w-full sm:w-auto !rounded-xl shadow-md hover:shadow-lg text-sm"
               >
-                <span>Book a Call</span>
+                <span>Get a Free Consultation</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </motion.button>
+
+              <motion.button 
+                onClick={onExploreServices}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="px-6 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-white font-semibold text-sm transition-all duration-200 shadow-sm cursor-pointer"
+              >
+                <span>Explore Our Services</span>
               </motion.button>
             </motion.div>
  

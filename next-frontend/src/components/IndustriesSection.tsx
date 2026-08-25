@@ -129,7 +129,7 @@ export default function IndustriesSection({ onOpenAudit }: IndustriesSectionProp
             Industries We <span className="text-[#2196E8]">Serve In Coimbatore</span>
           </h2>
           <p className="text-slate-650 dark:text-slate-300 text-base sm:text-lg text-center">
-            We work with businesses across Coimbatore and India — from B2B manufacturing and local healthcare to e-commerce, real estate, and education.
+            We work with businesses across Coimbatore and India: from textile and manufacturing to retail, healthcare, education, hospitality, real estate, and technology startups.
           </p>
         </div>
 

@@ -181,15 +181,15 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
               </h2>
 
               <p className="text-slate-650 dark:text-slate-355 text-xs sm:text-sm leading-relaxed mb-6 font-body max-w-xl">
-                Talk to our digital growth experts today. Get a free audit of your website, ads, or social media — and a custom roadmap to scale your business faster.
+                Talk to our digital growth experts today. Get a free audit of your website, ads, or social media and a custom roadmap to scale your business faster.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-4 w-full max-w-xl">
+              <div className="flex items-center justify-center w-full pt-1">
                 <button 
                   onClick={() => onOpenWhatsApp(budget, estimatedReach, estimatedLeads)}
-                  className="bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg cursor-pointer tracking-wider font-body text-xs sm:text-sm"
+                  className="bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-3.5 px-8 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg cursor-pointer tracking-wider font-body text-xs sm:text-sm mx-auto"
                 >
-                  <MessageCircle className="w-4 h-4" />
+                  <MessageCircle className="w-4 h-4 shrink-0" />
                   <span>WhatsApp Us Now</span>
                 </button>
               </div>

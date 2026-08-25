@@ -75,6 +75,44 @@ const SERVICE_QUOTE_MAP: Record<string, string> = {
   "video-editing": "Creative post-production timelines, sound engineering, and visual color grading."
 };
 
+function formatHeroTitle(title: string) {
+  if (title.includes(" Company in Coimbatore")) {
+    const parts = title.split(" Company in Coimbatore");
+    return (
+      <>
+        {parts[0]} <span className="text-[#2196E8]">Company in Coimbatore</span>
+      </>
+    );
+  }
+  if (title.includes(" Services in Coimbatore")) {
+    const parts = title.split(" Services in Coimbatore");
+    return (
+      <>
+        {parts[0]} <span className="text-[#2196E8]">Services in Coimbatore</span>
+      </>
+    );
+  }
+  if (title.includes(" in Coimbatore")) {
+    const parts = title.split(" in Coimbatore");
+    return (
+      <>
+        {parts[0]} <span className="text-[#2196E8]">in Coimbatore</span>
+      </>
+    );
+  }
+  const words = title.split(" ");
+  if (words.length > 2) {
+    const splitIndex = Math.ceil(words.length / 2);
+    return (
+      <>
+        {words.slice(0, splitIndex).join(" ")}{" "}
+        <span className="text-[#2196E8]">{words.slice(splitIndex).join(" ")}</span>
+      </>
+    );
+  }
+  return <span className="text-[#2196E8]">{title}</span>;
+}
+
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params;
   const service = SERVICES_DATA.find(s => s.id === slug || (slug === 'business-automation' && s.id === 'business-growth-automation'));
@@ -114,8 +152,16 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const steps = customStepsSection ? customStepsSection.steps : defaultSteps;
 
   const industries = [
-    "Textile", "Manufacturing", "Retail", "Healthcare", 
-    "Education", "Hospitality", "Real Estate", "Tech Startups"
+    "Retail & E-Commerce",
+    "Healthcare & Clinics",
+    "Education & Institutions",
+    "Manufacturing & Textile",
+    "Real Estate & Construction",
+    "Hospitality & Restaurants",
+    "Logistics & Transportation",
+    "Professional Services & Consultancy",
+    "Startups & Technology Companies",
+    "Non-Profit & Government Organisations"
   ];
 
   return (
@@ -125,33 +171,40 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
       <main className="subpage-padding-top">
         
-        {/* Service Hero (Dark Header Pattern) */}
-        <section className="relative py-24 bg-slate-50 dark:bg-[#0b0f19] text-slate-900 dark:text-white overflow-hidden bg-dot-matrix border-b border-slate-200 dark:border-slate-800">
-          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#2196E8]/5 rounded-full blur-[130px] pointer-events-none" />
+        {/* Service Hero */}
+        <section className="relative py-24 sm:py-28 bg-slate-50 dark:bg-[#0b0f19] text-slate-900 dark:text-white overflow-hidden bg-dot-matrix border-b border-slate-200 dark:border-slate-800">
+          <div className="absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-[#2196E8]/10 rounded-full blur-[140px] pointer-events-none" />
+          <div className="absolute top-1/2 right-1/4 w-[350px] h-[350px] bg-[#4A72EB]/10 rounded-full blur-[120px] pointer-events-none" />
           
           <div className="max-w-6xl mx-auto px-6 relative z-10 text-center space-y-6">
-            <span className="text-[#2196E8] font-body text-xs font-bold tracking-widest block">
+            <span className="text-[#2196E8] font-body text-xs sm:text-sm font-bold tracking-widest block uppercase">
               Coimbatore Digital Agency
             </span>
             <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider leading-none">
-              {service.heroTitle || service.name}
+              {formatHeroTitle(service.heroTitle || `${service.name} Company in Coimbatore`)}
             </h1>
-            <p className="text-slate-600 dark:text-slate-300 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed font-body">
               {service.heroSub}
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <a 
                 href="#service-inquiry-form"
-                className="btn-primary w-full sm:w-auto px-8 py-3.5 bg-brand text-white font-bold rounded-lg hover:bg-brand-bright transition-colors tracking-wider text-sm font-body shadow-lg hover:scale-105 cursor-pointer"
+                className="w-full sm:w-[260px] h-[52px] px-6 bg-[#4A72EB] hover:bg-[#2196E8] text-white font-bold rounded-xl tracking-wider text-sm font-body shadow-lg hover:scale-105 cursor-pointer transition-all flex items-center justify-center text-center"
               >
-                Book a Call
+                <span>Get a Free Consultation</span>
               </a>
+              <Link 
+                href="/case-studies"
+                className="w-full sm:w-[260px] h-[52px] px-6 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/80 dark:bg-[#0d111c]/80 text-slate-800 dark:text-white font-bold text-sm hover:border-[#2196E8] transition-all tracking-wider font-body cursor-pointer shadow-sm hover:scale-105 flex items-center justify-center text-center"
+              >
+                <span>View Our Portfolio</span>
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* Intro Section (Light BG) */}
+        {/* Intro Section */}
         <section className="py-24 bg-white dark:bg-[#000000] transition-colors">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -163,9 +216,14 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-[#4A72EB] leading-none">
                   Leading {service.name} Company in Coimbatore
                 </h2>
-                <p className="text-slate-700 dark:text-slate-350 text-base sm:text-lg leading-relaxed font-body">
-                  {introSection?.content || ""}
-                </p>
+                <div className="space-y-4 text-slate-700 dark:text-slate-350 text-base sm:text-lg leading-relaxed font-body">
+                  <p>
+                    {introSection?.content || `DhiGrowth is a trusted ${service.name.toLowerCase()} company in Coimbatore with proven expertise in building custom solutions for businesses across all industries. We blend creativity, technology, and strategy to deliver solutions that perform powerfully.`}
+                  </p>
+                  <p>
+                    From your first business website to a complete digital revamp, we are the {service.name.toLowerCase()} company in Coimbatore that businesses rely on for quality, speed, and results.
+                  </p>
+                </div>
               </div>
 
               <div className="lg:col-span-5 flex justify-center w-full">
@@ -188,7 +246,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </div>
         </section>
 
-        {/* Sub-services breakdown grid */}
+        {/* Sub-services / Offerings breakdown grid */}
         {offeringsSection && offeringsSection.items && (
           <section className="py-24 bg-slate-50 dark:bg-[#080b11] border-y border-slate-200 dark:border-slate-900 transition-colors">
             <div className="max-w-7xl mx-auto px-6">
@@ -198,7 +256,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   Core Offerings
                 </span>
                 <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
-                  Our {service.name} Sub-Services
+                  Our {service.name} Services in Coimbatore
                 </h2>
               </div>
 
@@ -206,14 +264,16 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 {offeringsSection.items.map((item, idx) => (
                   <div 
                     key={idx}
-                    className="glass-card p-8 bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-900 hover:border-[#2196E8] rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300"
+                    className="glass-card p-8 bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-900 hover:border-[#2196E8] rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
                   >
-                    <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wider mb-3">
-                      {item.title}
-                    </h3>
-                    <p className="text-slate-600 dark:text-slate-350 text-sm leading-relaxed">
-                      {item.desc}
-                    </p>
+                    <div>
+                      <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wider mb-3">
+                        {item.title}
+                      </h3>
+                      <p className="text-slate-600 dark:text-slate-350 text-sm leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -231,7 +291,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 Our Guarantee
               </span>
               <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
-                Why Coimbatore Businesses Trust DhiGrowth
+                Why Coimbatore Businesses Trust DhiGrowth for {service.name}
               </h2>
             </div>
 
@@ -272,14 +332,13 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 Methodology
               </span>
               <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
-                How We Build
+                How We Build Your {service.name === 'Website Development' ? 'Website' : service.name}
               </h2>
             </div>
 
             <div className="space-y-6">
               {steps?.map((step, idx) => {
-                // Split step number vs description
-                const textContent = step.replace(/^\d+\.\s*/, ""); // remove 1. or 2.
+                const textContent = step.replace(/^\d+\.\s*/, "");
                 const titleText = textContent.split(" — ")[0] || "";
                 const descText = textContent.split(" — ")[1] || "";
 
@@ -309,26 +368,54 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
         {/* For Every Industry Tag Grid */}
         <section className="py-24 bg-white dark:bg-[#000000] transition-colors border-t border-slate-200 dark:border-slate-900">
-          <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
+          <div className="max-w-5xl mx-auto px-6 text-center space-y-8">
             <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
               Versatility
             </span>
             <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
-              For Every Industry
+              {service.name} for Every Industry in Coimbatore
             </h2>
-            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
-              We apply our {service.name} framework to all key industries in Coimbatore to capture transaction intent and automate operations.
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-2xl mx-auto">
+              We have built websites for businesses across a wide range of industries in Coimbatore and India, bringing deep domain understanding to every project we take on.
             </p>
             
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 pt-4">
               {industries.map((ind) => (
-                <span 
+                <div 
                   key={ind}
-                  className="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0d111c] text-slate-700 dark:text-slate-300 font-semibold text-xs tracking-wider font-body"
+                  className="px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0d111c] text-slate-800 dark:text-slate-200 font-semibold text-xs tracking-wide font-body hover:border-[#2196E8] transition-colors flex items-center justify-center text-center shadow-sm"
                 >
                   {ind}
-                </span>
+                </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Dynamic Ready to Build / Transform Bottom Action Section */}
+        <section className="py-20 bg-slate-50 dark:bg-[#080b11] border-t border-slate-200 dark:border-slate-900 transition-colors">
+          <div className="max-w-4xl mx-auto px-6 text-center space-y-6">
+            <h2 className="font-header text-4xl sm:text-6xl tracking-wider text-slate-900 dark:text-white">
+              {service.bottomCtaHeading || `Transform Your Business with ${service.name}`}
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed font-body">
+              {service.bottomCtaSub || `Get started with Coimbatore's most trusted ${service.name.toLowerCase()} company. Let our experts build high-performing digital solutions tailored for your business growth.`}
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              <a 
+                href="#service-inquiry-form"
+                className="w-full sm:w-[260px] h-[52px] px-6 bg-[#4A72EB] hover:bg-[#2196E8] text-white font-bold rounded-xl tracking-wider text-sm font-body shadow-lg hover:scale-105 cursor-pointer transition-all flex items-center justify-center text-center"
+              >
+                <span>Book a Free Consultation</span>
+              </a>
+              <a 
+                href={`https://wa.me/919342700346?text=Hi%20DhiGrowth,%20I'm%20interested%20in%20${encodeURIComponent(service.name)}%20services!`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-[260px] h-[52px] px-6 rounded-xl border border-emerald-500/30 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm tracking-wider font-body cursor-pointer shadow-lg hover:scale-105 transition-all flex items-center justify-center text-center"
+              >
+                <span>WhatsApp Us Now</span>
+              </a>
             </div>
           </div>
         </section>

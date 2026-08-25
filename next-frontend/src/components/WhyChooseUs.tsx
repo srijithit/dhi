@@ -11,32 +11,32 @@ export default function WhyChooseUs() {
   const differentiators = [
     {
       badge: "01 • Integrated Agency",
-      title: "One Agency, Every Solution",
-      desc: "From logo to landing page to lead generation — we handle it all under one roof.",
+      title: "One agency, every solution",
+      desc: "From logo to landing page to lead generation, we handle it all under one roof.",
       image: "/images/natural_tech.png"
     },
     {
       badge: "02 • Future Ready",
-      title: "AI-Powered Edge",
+      title: "AI-powered edge",
       desc: "We integrate AI into your business before your competitors even consider it.",
       image: "/images/natural_marketing.png"
     },
     {
       badge: "03 • Transparent Data",
-      title: "Transparent Reporting",
-      desc: "Real-time dashboards and monthly reports — you always know where your money goes.",
+      title: "Transparent reporting",
+      desc: "Real-time dashboards and monthly reports: you always know where your money goes.",
       image: "/images/natural_ai.png"
     },
     {
       badge: "04 • Local Insight",
-      title: "Coimbatore-Focused Strategy",
+      title: "Coimbatore-focused strategy",
       desc: "We understand the local market, culture, and audience better than any remote agency.",
       image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&auto=format&fit=crop&q=80"
     },
     {
       badge: "05 • Accountability",
-      title: "End-To-End Ownership",
-      desc: "From strategy to execution to optimisation — we own the entire journey.",
+      title: "End-to-end ownership",
+      desc: "From strategy to execution to optimisation, we own the entire journey.",
       image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80"
     }
   ];
