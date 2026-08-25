@@ -85,6 +85,13 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     }
   };
 
+  const handleLinkClick = (href: string) => (e: React.MouseEvent) => {
+    if (pathname === href) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   // Home page hero is light, so when not scrolled on Home page, nav text must be dark.
   // Subpages (About, Services, Contact) still have dark heroes, so when not scrolled on those pages, nav text is white.
   const isHome = pathname === '/';
@@ -115,7 +122,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between relative z-10">
         
         {/* Logo */}
-        <Link href="/" className="flex items-center group">
+        <Link href="/" onClick={handleLinkClick('/')} className="flex items-center group">
           <img 
             src="/logo.png" 
             alt="DhiGrowth Logo" 
@@ -138,6 +145,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                 >
                   <Link 
                     href={link.path} 
+                    onClick={handleLinkClick(link.path)}
                     className={`flex items-center gap-1.5 transition-colors py-2 ${navLinkTextClass(isActive)}`}
                   >
                     <span>{link.name}</span>
@@ -233,6 +241,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
               <Link 
                 key={link.name} 
                 href={link.path} 
+                onClick={handleLinkClick(link.path)}
                 className={`transition-colors ${navLinkTextClass(isActive)}`}
               >
                 {link.name}
@@ -285,7 +294,10 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                       <div className="pl-4 border-l-2 border-slate-100 space-y-2.5 pt-1 animate-fadeIn">
                         <Link 
                           href="/case-studies" 
-                          onClick={() => setMobileMenuOpen(false)}
+                          onClick={(e) => {
+                            setMobileMenuOpen(false);
+                            handleLinkClick('/case-studies')(e);
+                          }}
                           className="text-sm font-bold text-[#2196E8] hover:underline block py-1"
                         >
                           View All 19 Projects →
@@ -296,7 +308,10 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                             <Link
                               key={idx}
                               href={`/case-studies/${p.slug}`}
-                              onClick={() => setMobileMenuOpen(false)}
+                              onClick={(e) => {
+                                setMobileMenuOpen(false);
+                                handleLinkClick(`/case-studies/${p.slug}`)(e);
+                              }}
                               className="hover:text-[#2196E8] py-1 block truncate font-medium"
                             >
                               {p.name}
@@ -313,7 +328,10 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                 <Link 
                   key={link.name} 
                   href={link.path} 
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    setMobileMenuOpen(false);
+                    handleLinkClick(link.path)(e);
+                  }}
                   className="text-base font-semibold text-slate-600 hover:text-black transition-colors"
                 >
                   {link.name}

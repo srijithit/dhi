@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Zap, MapPin, Mail, Phone, Award, ShieldCheck, Globe, Star } from 'lucide-react';
 import { SERVICES_DATA } from '../data/servicesData';
@@ -11,6 +12,15 @@ interface FooterProps {
 }
 
 export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
+  const pathname = usePathname();
+
+  const handleLinkClick = (href: string) => (e: React.MouseEvent) => {
+    if (pathname === href) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const handleServiceClick = (service: any) => {
     if (onSelectService) {
       onSelectService(service);
@@ -23,6 +33,9 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
     if (onOpenAudit) {
       e.preventDefault();
       onOpenAudit();
+    } else if (pathname === '/audit') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -55,7 +68,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
           
           {/* Brand Column */}
           <motion.div variants={itemVariants} className="lg:col-span-2 space-y-6">
-            <Link href="/" className="flex items-center group">
+            <Link href="/" onClick={handleLinkClick('/')} className="flex items-center group">
               <img 
                 src="/logo.png" 
                 alt="DhiGrowth Logo" 
@@ -112,13 +125,21 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
               Company
             </h4>
             <ul className="space-y-2.5 text-sm">
-              <li><Link href="/" className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455">Home</Link></li>
-              <li><Link href="/services" className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455">Services</Link></li>
-              <li><Link href="/about" className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455">About Us</Link></li>
-              <li><Link href="/case-studies" className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455">Case Study</Link></li>
-              <li><Link href="/careers" className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455">Careers &amp; Jobs</Link></li>
-              <li><Link href="/contact" className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455">Contact &amp; Support</Link></li>
-              <li><button onClick={onOpenAudit} className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455 text-left cursor-pointer">Book a Call</button></li>
+              <li><Link href="/" onClick={handleLinkClick('/')} className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455 block">Home</Link></li>
+              <li><Link href="/services" onClick={handleLinkClick('/services')} className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455 block">Services</Link></li>
+              <li><Link href="/about" onClick={handleLinkClick('/about')} className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455 block">About Us</Link></li>
+              <li><Link href="/case-studies" onClick={handleLinkClick('/case-studies')} className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455 block">Case Study</Link></li>
+              <li><Link href="/careers" onClick={handleLinkClick('/careers')} className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455 block">Careers &amp; Jobs</Link></li>
+              <li><Link href="/contact" onClick={handleLinkClick('/contact')} className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455 block">Contact &amp; Support</Link></li>
+              <li>
+                <Link 
+                  href="/audit" 
+                  onClick={handleAuditClick}
+                  className="hover:text-[#2196E8] transition-colors text-slate-600 dark:text-slate-455 block"
+                >
+                  Book a Call
+                </Link>
+              </li>
             </ul>
           </motion.div>
 
@@ -130,12 +151,13 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
             <ul className="space-y-2 text-sm">
               {SERVICES_DATA.slice(0, 6).map((service) => (
                 <li key={service.id}>
-                  <button 
-                    onClick={() => handleServiceClick(service)}
-                    className="hover:text-[#2196E8] transition-colors text-left text-slate-600 dark:text-slate-455 cursor-pointer"
+                  <Link 
+                    href={`/services/${service.id}`}
+                    onClick={handleLinkClick(`/services/${service.id}`)}
+                    className="hover:text-[#2196E8] transition-colors text-left text-slate-600 dark:text-slate-455 block"
                   >
                     {service.name}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -149,12 +171,13 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
             <ul className="space-y-2 text-sm">
               {SERVICES_DATA.slice(6, 13).map((service) => (
                 <li key={service.id}>
-                  <button 
-                    onClick={() => handleServiceClick(service)}
-                    className="hover:text-[#2196E8] transition-colors text-left text-slate-600 dark:text-slate-455 cursor-pointer"
+                  <Link 
+                    href={`/services/${service.id}`}
+                    onClick={handleLinkClick(`/services/${service.id}`)}
+                    className="hover:text-[#2196E8] transition-colors text-left text-slate-600 dark:text-slate-455 block"
                   >
                     {service.name}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
