@@ -10,6 +10,7 @@ import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import { detailedCaseStudies } from '@/data/caseStudiesFull';
+import { caseStudies } from '@/data/caseStudies';
 import {
   ChevronLeft,
   ChevronRight,
@@ -32,6 +33,10 @@ import {
   ChevronUp,
   Globe,
   ExternalLink,
+  Hammer,
+  Clock,
+  ArrowRight,
+  Cpu
 } from 'lucide-react';
 
 export default function DynamicCaseStudyPage({
@@ -40,7 +45,91 @@ export default function DynamicCaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const resolvedParams = use(params);
+  const basicStudy = caseStudies.find((s) => s.slug === resolvedParams.slug);
   const study = detailedCaseStudies.find((s) => s.slug === resolvedParams.slug);
+
+  // If this study is marked as Under Construction
+  if (basicStudy?.underConstruction) {
+    return (
+      <div className="min-h-screen bg-slate-50 dark:bg-[#070910] text-slate-900 dark:text-white font-body selection:bg-[#2196E8] selection:text-white">
+        <CustomCursor />
+        <Navbar />
+
+        <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-sm text-slate-500 mb-8 font-medium">
+            <Link href="/case-studies" className="hover:text-[#2196E8] transition-colors flex items-center gap-1">
+              <ChevronLeft className="w-4 h-4" />
+              <span>Case Studies</span>
+            </Link>
+            <span>/</span>
+            <span className="text-slate-800 dark:text-slate-300">{basicStudy.title}</span>
+          </div>
+
+          {/* Under Construction Hero Card */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 sm:p-12 shadow-xl relative overflow-hidden text-center flex flex-col items-center"
+          >
+            {/* Background decorative glow */}
+            <div className="absolute -top-24 -right-24 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-[#2196E8]/10 rounded-full blur-3xl pointer-events-none" />
+
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-6">
+              <Hammer className="w-4 h-4 animate-bounce" />
+              <span>Case Study Under Construction</span>
+            </div>
+
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4 max-w-2xl font-header">
+              {basicStudy.title}
+            </h1>
+
+            <div className="inline-block bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold px-3.5 py-1 rounded-full uppercase tracking-wider mb-6">
+              {basicStudy.category}
+            </div>
+
+            <p className="text-slate-600 dark:text-slate-350 text-base sm:text-lg max-w-2xl leading-relaxed mb-8">
+              {basicStudy.description}
+            </p>
+
+            {/* In-Progress Documentation Note */}
+            <div className="w-full max-w-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 mb-10 text-left">
+              <div className="flex items-center gap-2.5 font-bold text-slate-900 dark:text-white text-sm mb-3">
+                <Clock className="w-4 h-4 text-[#2196E8]" />
+                <span>Active Documentation in Progress</span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Our solutions engineering team is finalizing the architecture diagrams, live metric verifications, and technical deep-dive writeups for this project. Check back shortly for the full interactive showcase.
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <Link
+                href="/case-studies"
+                className="px-6 py-3 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-white font-semibold text-sm transition-all"
+              >
+                ← Explore Other Case Studies
+              </Link>
+              <Link
+                href="/contact"
+                className="btn-primary !py-3 !px-7 text-sm rounded-xl font-bold flex items-center gap-2"
+              >
+                <span>Request Project Brief</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </motion.div>
+        </main>
+
+        <Footer />
+        <FloatingWhatsApp />
+      </div>
+    );
+  }
 
   if (!study) {
     notFound();

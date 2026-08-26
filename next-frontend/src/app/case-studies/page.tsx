@@ -142,12 +142,17 @@ export default function CaseStudiesPage() {
                       {capitalizeText(study.category)}
                     </div>
 
-                    {study.slug && (
+                    {study.underConstruction ? (
+                      <div className="absolute top-5 right-5 bg-amber-500 text-white font-bold text-[10px] px-3 py-1 rounded-full border border-amber-400/40 tracking-wide shadow-md font-body flex items-center gap-1.5 z-20">
+                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                        <span>Under Construction</span>
+                      </div>
+                    ) : study.slug ? (
                       <div className="absolute top-5 right-5 bg-emerald-500 text-white font-bold text-[10px] px-3 py-1 rounded-full border border-emerald-400/40 tracking-wide shadow-md font-body flex items-center gap-1.5 z-20">
                         <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                         <span>Live Study</span>
                       </div>
-                    )}
+                    ) : null}
                   </div>
 
                   {/* Card Details */}
@@ -159,12 +164,19 @@ export default function CaseStudiesPage() {
                       {study.description}
                     </p>
 
-                    {/* Bottom Link in Capitalized Case with Blue Accent */}
+                    {/* Bottom Link */}
                     <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-                      <span className="inline-flex items-center gap-2 text-sm font-bold text-[#2196E8] group-hover:text-blue-600 transition-colors font-body">
-                        <span>Read Case Study</span>
-                        <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5" />
-                      </span>
+                      {study.underConstruction ? (
+                        <span className="inline-flex items-center gap-2 text-sm font-bold text-amber-600 group-hover:text-amber-700 transition-colors font-body">
+                          <span>Case Study Under Construction</span>
+                          <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5" />
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-2 text-sm font-bold text-[#2196E8] group-hover:text-blue-600 transition-colors font-body">
+                          <span>Read Case Study</span>
+                          <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5" />
+                        </span>
+                      )}
                     </div>
                   </div>
                 </motion.div>

@@ -177,20 +177,31 @@ export default function Home() {
 // Sub-Component: Trusted Brands Logos
 function ClientLogos() {
   const logos = [
-    { src: "/images/client_ruts.svg", alt: "Ruts N Rides", className: "h-10 md:h-12" },
-    { src: "/images/client_sanika.svg", alt: "Sanika's Indian Cuisine", className: "h-10 md:h-12" },
-    { src: "/images/client_karisal.webp", alt: "Karisal", className: "h-12 md:h-14" },
-    { src: "/images/client_thooriga.png", alt: "Thoorigai", className: "h-10 md:h-12" },
-    { src: "/images/client_gigabull.webp", alt: "Gigabull", className: "h-10 md:h-12" }
+    { src: "/images/case-studies/logos/infragen.png", alt: "Infragen Realtors", className: "h-8 md:h-10" },
+    { src: "/images/case-studies/logos/akirva.webp", alt: "Akirva Mobility", className: "h-8 md:h-10" },
+    { src: "/images/case-studies/logos/clean_culture.png", alt: "Clean Culture", className: "h-8 md:h-10" },
+    { src: "/images/case-studies/logos/nestpilot.png", alt: "NestPilot PG SaaS", className: "h-7 md:h-9" },
+    { src: "/images/case-studies/logos/judah.png", alt: "Judah Food Logistics", className: "h-8 md:h-10" },
+    { src: "/images/client_ruts.svg", alt: "Ruts N Rides", className: "h-9 md:h-11" },
+    { src: "/images/case-studies/logos/verdurepax.webp", alt: "VerdurePax Lifestyle", className: "h-8 md:h-10" },
+    { src: "/images/case-studies/logos/befhue.png", alt: "Befhue Creative Agency", className: "h-8 md:h-10" },
+    { src: "/images/case-studies/logos/squirlio.png", alt: "Squirlio Snacks", className: "h-8 md:h-10" },
+    { src: "/images/case-studies/logos/amaravathy.webp", alt: "Amaravathy Coir", className: "h-8 md:h-10" },
+    { src: "/images/case-studies/logos/keystone.png", alt: "Keystone Enterprise", className: "h-8 md:h-10" },
+    { src: "/images/client_sanika.svg", alt: "Sanika's Indian Cuisine", className: "h-9 md:h-11" },
+    { src: "/images/client_karisal.webp", alt: "Karisal", className: "h-10 md:h-12" },
+    { src: "/images/client_thooriga.png", alt: "Thoorigai Events", className: "h-8 md:h-10" },
+    { src: "/images/client_gigabull.webp", alt: "Gigabull Luxury", className: "h-8 md:h-10" },
+    { src: "/images/case-studies/logos/startten.png", alt: "Startten Platform", className: "h-8 md:h-10" }
   ];
 
-  // Duplicate the array 4 times to ensure continuous marquee scrolling space
-  const duplicatedLogos = [...logos, ...logos, ...logos, ...logos];
+  // Duplicate the array 3 times to ensure smooth, seamless infinite ticker scrolling
+  const duplicatedLogos = [...logos, ...logos, ...logos];
 
   return (
     <section className="py-10 bg-slate-50 border-y border-slate-200/60 dark:bg-[#070910] dark:border-slate-900 overflow-hidden select-none">
       <div className="max-w-7xl mx-auto px-6 text-center mb-8">
-        <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-wider block font-body">
+        <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block font-body">
           Our Trusted Clients
         </span>
       </div>
@@ -198,20 +209,20 @@ function ClientLogos() {
       {/* Infinite Horizontal Scrolling Ticker Container */}
       <div className="relative w-full overflow-hidden flex [mask-image:_linear-gradient(to_right,_transparent_0,_black_128px,_black_calc(100%_-_128px),_transparent_100%)]">
         <motion.div 
-          animate={{ x: ["0%", "-50%"] }}
+          animate={{ x: ["0%", "-33.333%"] }}
           transition={{ 
-            duration: 25, 
+            duration: 35, 
             repeat: Infinity, 
             ease: "linear" 
           }}
-          className="flex items-center gap-16 md:gap-24 shrink-0 py-2"
+          className="flex items-center gap-12 md:gap-16 shrink-0 py-2"
         >
           {duplicatedLogos.map((logo, idx) => (
-            <div key={idx} className="flex items-center justify-center shrink-0">
+            <div key={idx} className="flex items-center justify-center shrink-0 px-2">
               <img 
                 src={logo.src} 
                 alt={logo.alt} 
-                className={`${logo.className} w-auto object-contain select-none pointer-events-none opacity-90 hover:opacity-100 dark:brightness-110 transition-opacity duration-300`}
+                className={`${logo.className} w-auto max-w-[150px] object-contain select-none pointer-events-none opacity-85 hover:opacity-100 transition-opacity duration-300 dark:brightness-110`}
               />
             </div>
           ))}

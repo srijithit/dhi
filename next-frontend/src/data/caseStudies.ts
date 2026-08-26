@@ -6,6 +6,7 @@ export interface CaseStudy {
   image: string;
   slug: string;
   featured?: boolean;
+  underConstruction?: boolean;
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -101,12 +102,13 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     "id": "sales-app",
-    "title": "Sales App",
+    "title": "Sales CRM App",
     "category": "Enterprise App",
     "description": "LeadNova CRM is a mobile-based customer relationship management application designed to help sales teams manage leads, follow-ups, activities, and the complete sales pipeline efficiently.",
-    "image": "/images/case-studies/clean-culture/showcase_1.png",
+    "image": "/images/cc_overview_slide1.png",
     "slug": "sales-app",
-    "featured": false
+    "featured": false,
+    "underConstruction": true
   },
   {
     "id": "keystone",
@@ -164,12 +166,13 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     "id": "splendour-park",
-    "title": "Splendour Park",
+    "title": "Splendour Park ERP",
     "category": "Internal System",
     "description": "Splendour Park is a multi-branch ERP system built for end-to-end management of bulk trading desks, retail counters, wholesale billing, and warehouse inventory.",
     "image": "/images/case-studies/startten/showcase_1.png",
     "slug": "splendour-park",
-    "featured": false
+    "featured": false,
+    "underConstruction": true
   },
   {
     "id": "infragen",
@@ -182,38 +185,42 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     "id": "bad-biscuit-detection",
-    "title": "Bad Biscuit Detection and Rejection",
+    "title": "Biscuit Defect AI",
     "category": "AI & Computer Vision",
-    "description": "https://www.techasoft.com/bad-biscuit-detection-and-rejection-case-study",
-    "image": "/images/case-studies/infragen/showcase_3.jpg",
+    "description": "Real-time industrial automated high-speed visual inspection and defect rejection system for biscuit manufacturing lines.",
+    "image": "/images/cc_highlight_category.jpg",
     "slug": "bad-biscuit-detection",
-    "featured": false
+    "featured": false,
+    "underConstruction": true
   },
   {
     "id": "fabric-defect-detection",
-    "title": "Fabric Defect detection",
+    "title": "Fabric Defect AI",
     "category": "AI & Computer Vision",
-    "description": "https://www.techasoft.com/fabric-defect-detection-case-study",
+    "description": "Automated textile vision inspection system detecting fabric flaws, weave imperfections, and color variations in high-speed spinning mills.",
     "image": "/images/cc_highlight_category.jpg",
     "slug": "fabric-defect-detection",
-    "featured": false
+    "featured": false,
+    "underConstruction": true
   },
   {
     "id": "dhigrowth-ai-chatbot",
-    "title": "Dhigrowth",
+    "title": "AI Chatbot Assistant",
     "category": "AI Automation",
-    "description": "https://www.techasoft.com/techasoft-ai-chatbot-case-study",
+    "description": "Next-generation RAG conversational AI assistant for 24/7 lead qualification, booking management, and customer support automation.",
     "image": "/images/cc_highlight_store.jpg",
     "slug": "dhigrowth-ai-chatbot",
-    "featured": false
+    "featured": false,
+    "underConstruction": true
   },
   {
     "id": "ai-invoice-processing",
-    "title": "Ai Invoice Processing",
+    "title": "AI Invoice Processing",
     "category": "AI & Document Intelligence",
-    "description": "https://www.techasoft.com/ai-invoice-processing-case-study",
-    "image": "/images/case-studies/ai-invoice-processing/showcase_3.png",
+    "description": "Intelligent OCR and multi-format document parser extracting line items, tax totals, and ledger entries directly into accounting databases.",
+    "image": "/images/case-studies/infragen/showcase_3.jpg",
     "slug": "ai-invoice-processing",
-    "featured": false
+    "featured": false,
+    "underConstruction": true
   }
 ];

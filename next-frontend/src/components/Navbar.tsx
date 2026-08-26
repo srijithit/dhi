@@ -47,8 +47,8 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     { name: "Squirlio Snacks", slug: "squirlio" },
     { name: "Keystone Enterprise", slug: "keystone" },
     { name: "Thoorigai Events", slug: "thoorigai" },
-    { name: "Splendour Park ERP", slug: "splendour-park" },
-    { name: "AI Chatbot Assistant", slug: "dhigrowth-ai-chatbot" }
+    { name: "Splendour Park ERP", slug: "splendour-park", underConstruction: true },
+    { name: "AI Chatbot Assistant", slug: "dhigrowth-ai-chatbot", underConstruction: true }
   ];
 
   const col2 = [
@@ -58,18 +58,18 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     { name: "Amaravathy Coir", slug: "amaravathy-coir" },
     { name: "Vectra Mechnovations", slug: "vectra-mechnovations" },
     { name: "Gigabull Luxury", slug: "gigabull" },
-    { name: "Fabric Defect AI", slug: "fabric-defect-detection" },
-    { name: "AI Invoice Processing", slug: "ai-invoice-processing" }
+    { name: "Fabric Defect AI", slug: "fabric-defect-detection", underConstruction: true },
+    { name: "AI Invoice Processing", slug: "ai-invoice-processing", underConstruction: true }
   ];
 
   const col3 = [
     { name: "Clean Culture", slug: "clean-culture" },
     { name: "Ruts N Rides", slug: "ruts-n-rides" },
     { name: "Befhue Creative Agency", slug: "befhue" },
-    { name: "Sales CRM App", slug: "sales-app" },
     { name: "Sanika's Cuisine", slug: "sanikas-restaurant" },
     { name: "Startten Platform", slug: "startten" },
-    { name: "Biscuit Defect AI", slug: "bad-biscuit-detection" }
+    { name: "Biscuit Defect AI", slug: "bad-biscuit-detection", underConstruction: true },
+    { name: "Sales CRM App", slug: "sales-app", underConstruction: true }
   ];
 
   const handleApplyClick = () => {
@@ -160,7 +160,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute right-[-240px] top-[100%] mt-3 w-[760px] bg-white text-slate-900 border border-slate-150 rounded-[28px] shadow-2xl p-8 z-50"
+                        className="absolute right-[-300px] top-[100%] mt-3 w-[880px] bg-white text-slate-900 border border-slate-150 rounded-[28px] shadow-2xl p-8 z-50"
                       >
                         {/* Header */}
                         <div className="flex justify-between items-center">
@@ -189,43 +189,58 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                         {/* Grid */}
                         <div className="grid grid-cols-3 gap-x-8 gap-y-3.5 text-left pt-2">
                           {/* Column 1 */}
-                          <div className="space-y-3">
+                          <div className="space-y-2.5">
                             {col1.map((project, idx) => (
                               <Link
                                 key={idx}
                                 href={`/case-studies/${project.slug}`}
                                 onClick={() => setDropdownOpen(false)}
-                                className="text-slate-800 hover:text-[#2196E8] text-[13.5px] font-medium transition-colors duration-200 py-1 block font-body"
+                                className="text-slate-800 hover:text-[#2196E8] text-[13.5px] font-medium transition-colors duration-200 py-1 flex items-center justify-between gap-2 font-body group"
                               >
-                                {project.name}
+                                <span className="truncate">{project.name}</span>
+                                {project.underConstruction && (
+                                  <span className="text-[9px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-300/80 px-1.5 py-0.5 rounded shrink-0">
+                                    Under Construction
+                                  </span>
+                                )}
                               </Link>
                             ))}
                           </div>
 
                           {/* Column 2 */}
-                          <div className="space-y-3">
+                          <div className="space-y-2.5">
                             {col2.map((project, idx) => (
                               <Link
                                 key={idx}
                                 href={`/case-studies/${project.slug}`}
                                 onClick={() => setDropdownOpen(false)}
-                                className="text-slate-800 hover:text-[#2196E8] text-[13.5px] font-medium transition-colors duration-200 py-1 block font-body"
+                                className="text-slate-800 hover:text-[#2196E8] text-[13.5px] font-medium transition-colors duration-200 py-1 flex items-center justify-between gap-2 font-body group"
                               >
-                                {project.name}
+                                <span className="truncate">{project.name}</span>
+                                {project.underConstruction && (
+                                  <span className="text-[9px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-300/80 px-1.5 py-0.5 rounded shrink-0">
+                                    Under Construction
+                                  </span>
+                                )}
                               </Link>
                             ))}
                           </div>
 
                           {/* Column 3 */}
-                          <div className="space-y-3">
+                          <div className="space-y-2.5">
                             {col3.map((project, idx) => (
                               <Link
                                 key={idx}
                                 href={`/case-studies/${project.slug}`}
                                 onClick={() => setDropdownOpen(false)}
-                                className="text-slate-800 hover:text-[#2196E8] text-[13.5px] font-medium transition-colors duration-200 py-1 block font-body"
+                                className="text-slate-800 hover:text-[#2196E8] text-[13.5px] font-medium transition-colors duration-200 py-1 flex items-center justify-between gap-2 font-body group"
                               >
-                                {project.name}
+                                <span className="truncate">{project.name}</span>
+                                {project.underConstruction && (
+                                  <span className="text-[9px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-300/80 px-1.5 py-0.5 rounded shrink-0">
+                                    Under Construction
+                                  </span>
+                                )}
                               </Link>
                             ))}
                           </div>
