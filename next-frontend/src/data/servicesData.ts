@@ -360,8 +360,8 @@ export const SERVICES_DATA: Service[] = [
     category: "marketing",
     iconName: "MessageSquare",
     badge: "98% Open Rate",
-    heroTitle: "WhatsApp Marketing Services in Coimbatore Reach Customers Where They Are",
-    heroSub: "With over 500 million users in India, WhatsApp is the most direct channel to your customers. DhiGrowth's WhatsApp marketing services help businesses in Coimbatore run targeted broadcast campaigns, automate customer conversations, send promotional messages, and drive sales all through the WhatsApp Business API. We create personalised, high-engagement campaigns that cut through the noise and deliver your message directly into the hands of your audience. Higher open rates. Better conversions. Real results.",
+    heroTitle: "WhatsApp Marketing Company in Coimbatore",
+    heroSub: "At DHI Growth, we are a leading WhatsApp Marketing Company in Coimbatore, helping businesses connect with customers through one of the most widely used messaging platforms in the world. Our team specialises in creating targeted campaigns that drive engagement, build trust, and deliver measurable results. With expertise in digital communication and customer engagement, we ensure your brand reaches the right audience at the right time.",
     bottomCtaHeading: "Transform Your Business with WhatsApp Marketing",
     bottomCtaSub: "WhatsApp is no longer just a messaging app it is a powerful business tool. Partner with DHI Growth, your trusted WhatsApp Marketing Company in Coimbatore, to create campaigns that elevate your brand and connect you with your audience.",
     sections: [
