@@ -877,8 +877,8 @@ export const SERVICES_DATA: Service[] = [
     category: "creative",
     iconName: "Video",
     badge: "Cinema Quality",
-    heroTitle: "Ad Film & Commercial Shooting Services in Coimbatore",
-    heroSub: "Great advertising starts with great visuals. DhiGrowth offers professional ad film and commercial shooting services in Coimbatore for brands that want to make a powerful impact on screen. Our creative team handles everything from concept development and scriptwriting to location scouting, direction, and production delivering camera-ready ad content for television, YouTube, Instagram, and digital platforms. Whether it is a 15 second reel ad or a full brand film, we bring your vision to life with cinematic quality and a clear marketing objective.",
+    heroTitle: "Ads Shooting Company in Coimbatore",
+    heroSub: "At DHI Growth, we are a leading Ads Shooting Company in Coimbatore, specialising in creating high‑quality advertisements that captivate audiences and strengthen brand identity. Our team of creative directors, cinematographers, and marketing strategists work together to deliver ads that are visually compelling, strategically aligned, and results‑driven. Whether you are a start‑up, SME, or established enterprise, we provide tailored ad shooting solutions that elevate your brand presence.",
     bottomCtaHeading: "Transform Your Business with Ads Shooting",
     bottomCtaSub: "Advertising is no longer optional it is essential for growth. Partner with DHI Growth, your trusted Ads Shooting Company in Coimbatore, to create campaigns that elevate your brand and connect you with your audience.",
     sections: [
