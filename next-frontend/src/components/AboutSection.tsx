@@ -25,14 +25,14 @@ export default function AboutSection() {
     {
       icon: TrendingUp,
       title: "Marketing That Converts",
-      desc: "Data-driven SEO, paid ads, and social strategies that bring real ROI.",
+      desc: "Data-driven SEO, paid ads, and social media strategies that bring real ROI.",
       colorClass: "border-l-[#4A72EB] hover:border-[#4A72EB] text-[#4A72EB]",
       bgClass: "bg-[#4A72EB]/5 border-[#4A72EB]/20"
     },
     {
       icon: Compass,
-      title: "Local Roots, Global Standards",
-      desc: "Deep regional market knowledge with world-class execution, for businesses of any size.",
+      title: "Coimbatore Roots, Global Standards",
+      desc: "Local expertise with world-class execution for businesses of all sizes.",
       colorClass: "border-l-[#A9C0F5] hover:border-l-[#A9C0F5] hover:border-[#A9C0F5] text-[#A9C0F5]",
       bgClass: "bg-[#A9C0F5]/5 border-[#A9C0F5]/20"
     }
