@@ -637,8 +637,8 @@ export const SERVICES_DATA: Service[] = [
     category: "marketing",
     iconName: "BarChart3",
     badge: "Full Funnel",
-    heroTitle: "Digital Marketing Services in Coimbatore Full-Funnel Growth for Your Business",
-    heroSub: "Digital marketing is more than running ads or posting on social media it is a connected strategy that attracts, engages, and converts your ideal customers at every stage of their journey. DhiGrowth provides end-to-end digital marketing services in Coimbatore including SEO, paid advertising, content marketing, email marketing, and conversion rate optimization. We build integrated campaigns backed by data, creativity, and a deep understanding of your market delivering measurable ROI on every rupee spent.",
+    heroTitle: "Digital Marketing Company in Coimbatore",
+    heroSub: "At DHI Growth, we are a leading Digital Marketing Company in Coimbatore, dedicated to helping businesses build a strong online presence, attract qualified leads, and achieve sustainable growth. Our team of digital marketing specialists combines creativity with technical expertise to deliver strategies that drive measurable results. Whether you are a start‑up, SME, or established enterprise, we provide tailored solutions that align with your business goals and market opportunities.",
     bottomCtaHeading: "Transform Your Business with Digital Marketing",
     bottomCtaSub: "Digital marketing is no longer optional it is essential for growth. Partner with DHI Growth, your trusted Digital Marketing Company in Coimbatore, to create strategies that elevate your business and connect you with your audience.",
     sections: [
