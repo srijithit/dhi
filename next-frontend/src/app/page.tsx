@@ -172,7 +172,7 @@ function ClientLogos() {
   return (
     <section className="py-10 bg-slate-50 border-y border-slate-200/60 dark:bg-[#070910] dark:border-slate-900 overflow-hidden select-none">
       <div className="max-w-7xl mx-auto px-6 text-center mb-8">
-        <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block font-body">
+        <span className="text-xs font-bold tracking-wider text-slate-500 dark:text-slate-400 block font-body">
           Our Trusted Clients
         </span>
       </div>

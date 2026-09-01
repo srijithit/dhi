@@ -25,11 +25,11 @@ export default function IndustriesSection({ onOpenAudit }) {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-[#2196E8] font-semibold text-sm uppercase tracking-widest block mb-2">
+          <span className="text-[#2196E8] font-semibold text-sm tracking-widest block mb-2">
             Tailored Industry Solutions
           </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-white uppercase tracking-wide mb-6">
-            INDUSTRIES WE <span className="text-[#2196E8]">SERVE IN COIMBATORE</span>
+          <h2 className="font-header text-4xl sm:text-6xl text-white tracking-wide mb-6">
+            Industries We <span className="text-[#2196E8]">Serve in Coimbatore</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg text-center max-w-3xl">
             We work with businesses across Coimbatore and India from textile and manufacturing to retail, healthcare, education, hospitality, real estate, and technology startups.
