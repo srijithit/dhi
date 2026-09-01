@@ -5,7 +5,7 @@ import { AnimatedCounter } from './AnimatedCounter';
 export default function StatsBar() {
   const stats = [
     { target: 100, suffix: "+", label: "Projects Delivered", sublabel: "Successfully Completed" },
-    { target: 50, suffix: "+", label: "Clients", sublabel: "Trusted Growth Partners" },
+    { target: 50, suffix: "+", label: "Clients in Coimbatore", sublabel: "Trusted Growth Partners" },
     { target: 5, suffix: "+", label: "Years of Expertise", sublabel: "Proven Track Record" },
     { target: 13, suffix: "+", label: "Services Offered", sublabel: "Full Stack Growth" },
   ];
