@@ -124,8 +124,8 @@ export const SERVICES_DATA: Service[] = [
     category: "tech",
     iconName: "Smartphone",
     badge: "High Growth",
-    heroTitle: "Mobile & Web Application Development in Coimbatore",
-    heroSub: "In a mobile-first world, your business needs an app that performs flawlessly. DhiGrowth builds custom iOS, Android, and cross-platform mobile applications tailored to your business goals. From customer-facing apps and on-demand platforms to internal business tools and SaaS products we handle the full development lifecycle from ideation to deployment. Our apps are built for speed, security, and scalability so your users always get the best experience.",
+    heroTitle: "Mobile App Development Company in Coimbatore",
+    heroSub: "At DHI Growth, we are a leading Mobile App Development Company in Coimbatore, dedicated to building innovative, user-friendly, and scalable mobile applications for businesses across industries. Our team of experienced developers and designers combines technical expertise with creativity to deliver apps that drive growth and enhance digital presence.",
     bottomCtaHeading: "Transform Your Business with Mobile Apps",
     bottomCtaSub: "Mobile applications are no longer optional they are essential for growth. Partner with DHI Growth, your trusted Mobile App Development Company in Coimbatore, to create apps that elevate your business and connect you with your audience.",
     sections: [
