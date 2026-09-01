@@ -797,8 +797,8 @@ export const SERVICES_DATA: Service[] = [
     category: "marketing",
     iconName: "Target",
     badge: "ROI Focused",
-    heroTitle: "Meta Ads & Google Ads Management in Coimbatore Targeted Ads That Deliver Real ROI",
-    heroSub: "Stop wasting money on ads that do not convert. DhiGrowth's paid advertising specialists in Coimbatore design and manage high-performing Meta Ads (Facebook & Instagram) and Google Ads campaigns that target the right audience at the right time with the right message. We handle everything from campaign strategy, audience research, and creative design to A/B testing, budget optimisation, and detailed performance reporting. Our goal is simple: maximise your return on every rupee you invest in advertising.",
+    heroTitle: "Google Ads Company in Coimbatore",
+    heroSub: "At DHI Growth, we are a leading Google Ads Company in Coimbatore, helping businesses maximise their online visibility and drive targeted traffic through effective advertising campaigns. Our team of certified Google Ads specialists combines technical expertise with creative strategies to deliver measurable results. Whether you are a start‑up, SME, or established enterprise, we provide tailored solutions that align with your business goals and market opportunities.",
     bottomCtaHeading: "Transform Your Business with Google Ads",
     bottomCtaSub: "Google Ads is no longer optional it is essential for growth. Partner with DHI Growth, your trusted Google Ads Company in Coimbatore, to create campaigns that elevate your business and connect you with your audience.",
     sections: [
