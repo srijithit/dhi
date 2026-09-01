@@ -717,8 +717,8 @@ export const SERVICES_DATA: Service[] = [
     category: "marketing",
     iconName: "Share2",
     badge: "Brand Voice",
-    heroTitle: "Social Media Marketing in Coimbatore Build Your Brand. Grow Your Audience.",
-    heroSub: "Social media is where your customers spend their time and DhiGrowth makes sure your brand shows up powerfully. We manage your presence across Instagram, Facebook, LinkedIn, and YouTube with a strategic mix of content creation, community management, and audience growth tactics. From eye-catching creatives and engaging captions to story campaigns and influencer collaborations our social media marketing team in Coimbatore builds brands that people follow, trust, and buy from.",
+    heroTitle: "Social Media Marketing Company in Coimbatore",
+    heroSub: "At DHI Growth, we are a leading Social Media Marketing Company in Coimbatore, helping businesses build strong digital identities and connect with audiences across platforms. Our team of social media specialists combines creativity, analytics, and strategy to deliver campaigns that drive engagement, brand awareness, and measurable growth. Whether you are a start‑up, SME, or established enterprise, we provide tailored solutions that align with your goals and market opportunities.",
     bottomCtaHeading: "Transform Your Business with Social Media Marketing",
     bottomCtaSub: "Social media is no longer optional—it is essential for growth. Partner with DHI Growth, your trusted Social Media Marketing Company in Coimbatore, to create strategies that elevate your business and connect you with your audience.",
     sections: [
