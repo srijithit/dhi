@@ -200,8 +200,8 @@ export const SERVICES_DATA: Service[] = [
     category: "ai",
     iconName: "Cpu",
     badge: "Future Tech",
-    heroTitle: "AI Development Services in Coimbatore Smart Solutions for Modern Businesses",
-    heroSub: "Artificial intelligence is no longer the future, it is the present. DhiGrowth builds custom AI solutions that give your business a competitive edge. We develop intelligent chatbots, recommendation engines, predictive analytics tools, natural language processing systems, and machine learning models tailored to your industry. Whether you want to automate customer interactions, analyse large datasets, or build a smart product from scratch our AI development team in Coimbatore delivers solutions that are practical, powerful, and built to scale.",
+    heroTitle: "AI Development Company in Coimbatore",
+    heroSub: "At DHI Growth, we are a trusted AI Development Company in Coimbatore, delivering innovative artificial intelligence solutions that empower businesses to thrive in the digital age. Our team of skilled engineers and data scientists specialise in building AI-driven applications tailored to diverse industries, ensuring measurable impact and sustainable growth.",
     bottomCtaHeading: "Transform Your Business with AI",
     bottomCtaSub: "Artificial intelligence is no longer optional—it is essential for growth. Partner with DHI Growth, your trusted AI Development Company in Coimbatore, to create AI applications that elevate your business and connect you with your audience.",
     sections: [
