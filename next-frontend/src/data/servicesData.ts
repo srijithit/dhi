@@ -443,39 +443,39 @@ export const SERVICES_DATA: Service[] = [
     badge: "Cost Savings",
     heroTitle: "Business Automation Agency in Coimbatore",
     heroSub: "As a full-service Business Automation Agency in Coimbatore, DHI Growth provides end-to-end automation solutions designed to simplify business operations, improve productivity, and reduce repetitive manual tasks. From strategy and process analysis to implementation and ongoing support, our team helps businesses adopt smart automation solutions that support sustainable growth.",
-    bottomCtaHeading: "Ready to spend less time on busywork?",
-    bottomCtaSub: "Partner with a trusted automation team in Coimbatore and get hours back every week.",
+    bottomCtaHeading: "Transform Your Business with DHI Growth",
+    bottomCtaSub: "Business automation is becoming essential for companies looking to improve efficiency and stay competitive. Partner with DHI Growth, your trusted provider of Business Automation Services in Coimbatore, and discover how automation and AI-powered solutions can reduce repetitive work, improve productivity, and create better opportunities for business growth.",
     sections: [
       {
-        heading: "Why Businesses Trust Us",
-        features: [
-          "Practical Automation Experience — Solutions proven across industries.",
-          "Custom-Fit Systems — Built around how your business actually operates.",
-          "Right-Tool Integration — We pick the tools that fit, not the trendiest ones.",
-          "Ongoing Optimisation — We keep refining after launch, not just at handoff."
-        ]
-      },
-      {
-        heading: "Overview",
-        content: "Running a business involves hundreds of repetitive tasks that eat into your team's time and energy. Based in Coimbatore, we help identify, digitise, and automate those processes — from CRM workflows to invoicing, HR, and customer onboarding — so your business runs more efficiently."
-      },
-      {
-        heading: "What We Automate",
+        heading: "Business Automation Services in Coimbatore",
+        intro: "Our Business Automation Services in Coimbatore include:",
         items: [
-          { title: "CRM & Sales Pipelines", desc: "Automated follow-ups and lead tracking." },
-          { title: "Invoice & Billing Generation", desc: "Fewer manual errors, faster turnaround." },
-          { title: "HR Management", desc: "Onboarding, leave tracking, and routine HR tasks." },
-          { title: "Customer Onboarding", desc: "Smooth, consistent experiences at scale." }
+          { title: "Process Automation", desc: "Business process automation and workflow optimization." },
+          { title: "AI Solutions", desc: "AI-powered business automation solutions." },
+          { title: "CRM & Sales", desc: "CRM and sales process automation." },
+          { title: "Lead & Communication", desc: "Lead management and customer communication automation." },
+          { title: "Marketing & Email", desc: "Marketing and email automation." },
+          { title: "Data Entry & Routine Tasks", desc: "Data entry and repetitive task automation." },
+          { title: "Reporting & Analytics", desc: "Automated reporting and business analytics." },
+          { title: "Tools Integration", desc: "Integration of business tools and software." }
+        ],
+        outro: "These solutions help businesses save time, minimize manual errors, improve operational efficiency, and allow teams to focus on more important business activities."
+      },
+      {
+        heading: "Benefits of Partnering with Us",
+        features: [
+          "Local Expertise: Strong understanding of the business environment and requirements of companies in Coimbatore.",
+          "Smart Automation: We identify repetitive processes and implement suitable automation solutions.",
+          "AI-Driven Approach: Leverage AI and modern technologies to improve productivity and business operations.",
+          "Scalable Solutions: Automation systems can be designed to grow along with your business.",
+          "Dedicated Support: Ongoing technical assistance and optimization to ensure your automation continues to deliver value."
         ]
       },
       {
-        heading: "Our Process",
-        steps: [
-          "1. Requirement Analysis — Understanding your business goals and challenges.",
-          "2. Strategy Design — Mapping which processes to automate first.",
-          "3. Implementation — Building and integrating the automation.",
-          "4. Monitoring & Optimisation — Tracking performance and refining.",
-          "5. Support & Growth — Ongoing guidance as your needs evolve."
+        heading: "Commitment to Quality and Innovation",
+        paragraphs: [
+          "Our approach to Business Automation in Coimbatore focuses on creating practical, reliable, and scalable solutions. We analyze existing business processes, identify areas where automation can make a difference, and implement technology that improves efficiency without unnecessarily complicating your operations.",
+          "Whether you are looking to automate sales, marketing, customer support, internal workflows, reporting, or repetitive administrative tasks, our team can help you build a more efficient and connected business environment."
         ]
       }
     ]
