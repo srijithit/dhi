@@ -488,8 +488,8 @@ export const SERVICES_DATA: Service[] = [
     category: "strategy",
     iconName: "TrendingUp",
     badge: "Strategic",
-    heroTitle: "Business Development Services in Coimbatore Strategy, Growth & Execution",
-    heroSub: "Growth does not happen by accident. DhiGrowth's business development services help companies in Coimbatore identify new market opportunities, build strategic partnerships, develop revenue-generating plans, and execute with precision. We work closely with founders and business leaders to understand their goals and craft customized growth strategies covering market research, competitor analysis, sales funnel development, and expansion planning. Whether you are entering a new market or scaling an existing one, we are the partner you need.",
+    heroTitle: "Business Development in Coimbatore",
+    heroSub: "At DHI Growth, we specialise in Business Development in Coimbatore, helping organisations expand their reach, strengthen customer relationships, and achieve sustainable growth. Our team of experts combines strategic insight with practical solutions to deliver measurable results. Whether you are a start‑up, SME, or established enterprise, we provide tailored strategies that align with your goals and market opportunities.",
     bottomCtaHeading: "Transform Your Business with DHI Growth",
     bottomCtaSub: "Business development is no longer optional it is essential for growth. Partner with DHI Growth, your trusted provider of Business Development in Coimbatore, to create strategies that elevate your business and connect you with your audience.",
     sections: [
