@@ -557,8 +557,8 @@ export const SERVICES_DATA: Service[] = [
     category: "marketing",
     iconName: "Search",
     badge: "Organic Reach",
-    heroTitle: "SEO Services in Coimbatore Rank Higher, Get Found, Grow Faster",
-    heroSub: "When your customers search for your services online, you need to be at the top. DhiGrowth offers comprehensive SEO services in Coimbatore covering technical SEO, on-page optimisation, content strategy, local SEO, and high-quality link building. We audit your website, identify ranking opportunities, and execute a proven strategy to improve your visibility on Google and drive consistent organic traffic. Our SEO approach is transparent, white-hat, and focused entirely on long-term results that compound over time.",
+    heroTitle: "SEO Company in Coimbatore",
+    heroSub: "At DHI Growth, we are a leading SEO Company in Coimbatore, dedicated to helping businesses improve their online visibility, attract qualified leads, and achieve sustainable growth. Our team of SEO specialists combines technical expertise with creative strategies to deliver measurable results. Whether you are a start‑up, SME, or established enterprise, we provide tailored solutions that align with your business goals and market opportunities.",
     bottomCtaHeading: "Transform Your Business with SEO",
     bottomCtaSub: "SEO is no longer optional it is essential for growth. Partner with DHI Growth, your trusted SEO Company in Coimbatore, to create strategies that elevate your business and connect you with your audience.",
     sections: [
