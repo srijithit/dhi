@@ -957,8 +957,8 @@ export const SERVICES_DATA: Service[] = [
     category: "creative",
     iconName: "Film",
     badge: "Post Production",
-    heroTitle: "Professional Video Editing Services in Coimbatore Content That Captivates",
-    heroSub: "Raw footage is just the beginning. DhiGrowth's video editing team in Coimbatore transforms your raw clips into polished, high-impact video content that captures attention and drives engagement. We edit reels, YouTube videos, brand films, ad creatives, product demos, testimonial videos, and social media content with professional colour grading, motion graphics, subtitles, and sound design. Fast turnaround. Consistent quality. Content your audience will actually watch and share.",
+    heroTitle: "Video Editing Company in Coimbatore",
+    heroSub: "At DHI Growth, we are a leading Video Editing Company in Coimbatore, specialising in creating professional, engaging, and visually compelling videos that help businesses communicate effectively. Our team of editors, designers, and creative strategists work together to deliver content that resonates with audiences and strengthens brand identity. Whether you are a start‑up, SME, or established enterprise, we provide tailored video editing solutions that elevate your digital presence.",
     bottomCtaHeading: "Transform Your Business with Video Editing",
     bottomCtaSub: "Video content is no longer optional it is essential for growth. Partner with DHI Growth, your trusted Video Editing Company in Coimbatore, to create videos that elevate your brand and connect you with your audience.",
     sections: [
