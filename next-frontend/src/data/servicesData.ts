@@ -441,8 +441,8 @@ export const SERVICES_DATA: Service[] = [
     category: "ai",
     iconName: "Sliders",
     badge: "Cost Savings",
-    heroTitle: "Business Automation Services in Coimbatore Streamline Operations & Scale Faster",
-    heroSub: "Running a business involves hundreds of repetitive tasks that consume your team's time and energy. DhiGrowth's business automation services help you identify, digitise, and automate those processes from CRM workflows and invoice generation to HR management, sales pipelines, and customer onboarding. We integrate the right automation tools and custom-built systems to make your entire business run more efficiently. Less manual work. More growth.",
+    heroTitle: "Business Automation Agency in Coimbatore",
+    heroSub: "As a full-service Business Automation Agency in Coimbatore, DHI Growth provides end-to-end automation solutions designed to simplify business operations, improve productivity, and reduce repetitive manual tasks. From strategy and process analysis to implementation and ongoing support, our team helps businesses adopt smart automation solutions that support sustainable growth.",
     bottomCtaHeading: "Ready to spend less time on busywork?",
     bottomCtaSub: "Partner with a trusted automation team in Coimbatore and get hours back every week.",
     sections: [
