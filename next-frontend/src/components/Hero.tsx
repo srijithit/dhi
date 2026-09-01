@@ -84,7 +84,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
             >
               <Sparkles className="w-4 h-4 text-[#2196E8] animate-spin" style={{ animationDuration: '8s' }} />
               <span className="text-xs sm:text-xs md:text-sm font-semibold tracking-wide text-[#2196E8] font-body">
-                Coimbatore's Premier Digital Growth Agency
+                Coimbatore&apos;s Leading Digital Growth Partner
               </span>
             </motion.div>
  
@@ -92,7 +92,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
               variants={fadeInUp}
               className="font-header text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide text-slate-900 dark:text-white text-left leading-[1.08] mb-1"
             >
-              Coimbatore&apos;s <span className="text-[#2196E8]">Digital Growth</span> Partner <br />
+              Coimbatore&apos;s Leading <span className="text-[#2196E8]">Digital Growth</span> Partner <br />
               <span className="text-[#4A72EB] text-xl sm:text-2xl md:text-3xl block mt-2 font-semibold">
                 Web, App, AI &amp; Marketing Solutions
               </span>
