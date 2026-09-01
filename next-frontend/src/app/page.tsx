@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, ArrowRight, ChevronDown, Globe, Calendar, User, ExternalLink, Activity, Target, Cpu } from 'lucide-react';
+import { Star, ArrowRight, ChevronDown, Globe, Calendar, User, ExternalLink } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import StatsBar from '@/components/StatsBar';
@@ -127,9 +127,6 @@ export default function Home() {
         {/* Services Grid Section */}
         <ServicesSection />
 
-        {/* 2. Metrics & Business Outcomes Section */}
-        <MetricsSection />
-
         {/* Why Choose Us Section */}
         <WhyChooseUs />
 
@@ -232,94 +229,7 @@ function ClientLogos() {
   );
 }
 
-// Sub-Component: Case Study Numbers (Business Outcomes)
-function MetricsSection() {
-  const metrics = [
-    {
-      pct: "+430%",
-      label: "Organic Traffic Growth",
-      client: "Covai Organic Foods",
-      desc: "Custom on-page Local SEO strategy resulted in high search listings and organic visitors in 6 months.",
-      icon: Activity
-    },
-    {
-      pct: "+220%",
-      label: "Annual Revenue Growth",
-      client: "Veda Tex & Fabrics",
-      desc: "Integrated B2B e-commerce platform and optimized Google Ads pipeline maximized direct buyer orders.",
-      icon: Target
-    },
-    {
-      pct: "8x",
-      label: "Qualified Inquiry Volume",
-      client: "NexGen Precision",
-      desc: "Deployed customized AI Lead qualification agents across WhatsApp and ads to filter B2B queries.",
-      icon: Cpu
-    }
-  ];
 
-  return (
-    <section className="py-10 md:py-14 bg-white dark:bg-[#000000] relative overflow-hidden border-t border-slate-200 dark:border-slate-900 transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-body">
-        
-        {/* Header */}
-        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-6 w-full">
-          <span className="text-[#2196E8] font-bold text-xs tracking-widest block mb-2 text-center font-body">
-            Proven Outcomes
-          </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">
-            Outcomes That Speak For <span className="text-[#2196E8]">Themselves</span>
-          </h2>
-          <p className="text-slate-605 dark:text-slate-300 text-base sm:text-lg text-center">
-            We don't sell layouts, configurations, or traffic. We design digital engines that deliver real business outcomes.
-          </p>
-        </div>
-
-        {/* Metrics Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {metrics.map((m, idx) => {
-            const Icon = m.icon;
-            return (
-              <div 
-                key={idx}
-                className="bg-slate-50/50 dark:bg-[#0b0e17] border border-slate-200/80 dark:border-slate-900 rounded-3xl p-8 flex flex-col justify-between hover:border-[#2196E8] transition-all duration-300 shadow-sm hover:shadow-lg group"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="font-numeric text-4xl sm:text-5xl font-bold text-[#2196E8]">
-                      {m.pct}
-                    </span>
-                    <div className="w-10 h-10 rounded-xl bg-[#2196E8]/10 border border-[#2196E8]/20 flex items-center justify-center text-[#2196E8]">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                  </div>
-                  
-                  <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wide mb-1">
-                    {m.label}
-                  </h3>
-                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 tracking-wider block mb-4 font-body">
-                    Client: {m.client}
-                  </span>
-                  <p className="text-slate-600 dark:text-slate-355 text-sm leading-relaxed mb-6">
-                    {m.desc}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-slate-100 dark:border-slate-850 flex justify-end">
-                  <a href="#free-audit-form" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#2196E8] hover:text-[#4A72EB] uppercase tracking-wider transition-colors">
-                    <span>See Roadmap</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-      </div>
-    </section>
-  );
-}
 
 
 
