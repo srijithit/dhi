@@ -149,7 +149,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
               Tech &amp; AI
             </h4>
             <ul className="space-y-2 text-sm">
-              {SERVICES_DATA.slice(0, 6).map((service) => (
+              {SERVICES_DATA.filter(s => !s.hidden && (s.category === 'tech' || s.category === 'ai')).map((service) => (
                 <li key={service.id}>
                   <Link 
                     href={`/services/${service.id}`}
@@ -169,7 +169,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
               Marketing &amp; Media
             </h4>
             <ul className="space-y-2 text-sm">
-              {SERVICES_DATA.slice(6, 13).map((service) => (
+              {SERVICES_DATA.filter(s => !s.hidden && (s.category === 'marketing' || s.category === 'creative' || s.category === 'strategy')).map((service) => (
                 <li key={service.id}>
                   <Link 
                     href={`/services/${service.id}`}

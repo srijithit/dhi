@@ -98,7 +98,7 @@ export default function ServicesPage() {
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
             >
-              {SERVICES_DATA.map((service) => {
+              {SERVICES_DATA.filter(s => !s.hidden).map((service) => {
                 const IconComponent = ICON_MAP[service.iconName] || Globe;
 
                 return (

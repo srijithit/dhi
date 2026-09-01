@@ -28,7 +28,10 @@ export default function ServicesSection() {
   const [filter, setFilter] = useState<'all' | 'tech' | 'ai' | 'marketing' | 'creative'>('all');
   const [showAll, setShowAll] = useState(false);
 
-  const filteredServices = SERVICES_DATA.filter(service => {
+  const allActiveServices = SERVICES_DATA.filter(s => !s.hidden);
+  const activeCount = allActiveServices.length;
+
+  const filteredServices = allActiveServices.filter(service => {
     if (filter === 'all') return true;
     return service.category === filter;
   });
@@ -69,14 +72,14 @@ export default function ServicesSection() {
               Our End-to-End Capabilities
             </span>
             <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide">
-              13<span className="text-[#2196E8]">+</span> Digital Growth Solutions
+              {activeCount}<span className="text-[#2196E8]">+</span> Digital Growth Solutions
             </h2>
           </div>
           
           {/* Service Filters */}
           <div className="flex flex-nowrap gap-2 sm:gap-2.5 items-center justify-start md:justify-end shrink-0 overflow-x-auto no-scrollbar scroll-smooth max-w-full pb-1 md:pb-0 font-body">
             {[
-              { id: 'all', label: 'All Services (13)' },
+              { id: 'all', label: `All Services (${activeCount})` },
               { id: 'tech', label: 'Tech' },
               { id: 'ai', label: 'AI' },
               { id: 'marketing', label: 'Marketing' },
@@ -167,7 +170,7 @@ export default function ServicesSection() {
               onClick={() => setShowAll(!showAll)}
               className="btn-primary !px-8 !py-3.5 bg-[#4A72EB] text-white font-bold rounded-xl tracking-wider font-body text-xs cursor-pointer hover:bg-[#2196E8] transition-all duration-300 hover:scale-102"
             >
-              {showAll ? 'Show Less Services' : 'View All Services (13+)'}
+              {showAll ? 'Show Less Services' : `View All Services (${activeCount}+)`}
             </button>
           </div>
         )}
