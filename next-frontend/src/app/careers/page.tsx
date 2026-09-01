@@ -397,10 +397,6 @@ ${applicantData.name}`;
     } finally {
       setIsSubmitting(false);
       setIsSuccess(true);
-      // Automatically open Gmail Compose for immediate applicant confirmation
-      if (typeof window !== 'undefined') {
-        window.open(gmailUrl, '_blank');
-      }
     }
   };
 
@@ -891,45 +887,82 @@ ${applicantData.name}`;
               </button>
 
               {isSuccess ? (
-                <div className="text-center py-8 space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-500 mx-auto">
-                    <CheckCircle2 className="w-8 h-8" />
-                  </div>
-                  <h4 className="font-header text-2xl sm:text-3xl text-slate-900 font-extrabold">
-                    Application Sent to Gmail!
-                  </h4>
-                  <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
-                    Your application for <strong className="text-slate-900">{applyModalJob?.title}</strong> has been routed directly to <strong className="text-[#2196E8]">Dhinesh@dhigrowth.com</strong>.
-                  </p>
-
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-                    {gmailComposeUrl && (
-                      <a
-                        href={gmailComposeUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
-                      >
-                        <Mail className="w-4 h-4" />
-                        Open in Gmail Compose
-                      </a>
-                    )}
-                    {mailtoUrl && (
-                      <a
-                        href={mailtoUrl}
-                        className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
-                      >
-                        Default Mail App
-                      </a>
-                    )}
+                <div className="text-center py-4 space-y-5">
+                  <div className="relative inline-block">
+                    <div className="w-16 h-16 rounded-full bg-emerald-50 border-2 border-emerald-500/30 flex items-center justify-center text-emerald-600 mx-auto shadow-lg shadow-emerald-500/10">
+                      <CheckCircle2 className="w-9 h-9" />
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 p-1 bg-white rounded-full shadow-sm">
+                      <ShieldCheck className="w-4 h-4 text-[#2196E8]" />
+                    </div>
                   </div>
 
-                  <div className="pt-2">
+                  <div className="space-y-1.5">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>Application Received</span>
+                    </div>
+                    <h4 className="font-header text-2xl sm:text-3xl text-slate-900 font-extrabold tracking-tight">
+                      Submitted Successfully!
+                    </h4>
+                    <p className="text-slate-600 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+                      Thank you <strong className="text-slate-900">{applicantData.name}</strong>. Your job application for <strong className="text-[#2196E8]">{applyModalJob?.title}</strong> has been successfully received by our hiring team.
+                    </p>
+                  </div>
+
+                  {/* Applicant Details Summary Card */}
+                  <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-left space-y-2.5 text-xs">
+                    <div className="flex items-center justify-between pb-2 border-b border-slate-200/80">
+                      <span className="font-bold text-slate-500 uppercase tracking-wider text-[10px]">Application Receipt</span>
+                      <span className="text-emerald-600 font-bold flex items-center gap-1">
+                        <CheckCircle2 className="w-3.5 h-3.5" /> Verified Submission
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-slate-700">
+                      <div>
+                        <span className="text-slate-400 block text-[10px] font-bold">Applicant Name</span>
+                        <span className="font-semibold text-slate-900">{applicantData.name || "N/A"}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400 block text-[10px] font-bold">Applied Position</span>
+                        <span className="font-semibold text-slate-900">{applyModalJob?.title}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400 block text-[10px] font-bold">Email ID</span>
+                        <span className="font-semibold text-slate-900">{applicantData.email || "N/A"}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400 block text-[10px] font-bold">Phone / WhatsApp</span>
+                        <span className="font-semibold text-slate-900">{applicantData.phone || "N/A"}</span>
+                      </div>
+                    </div>
+                    {resumeFile && (
+                      <div className="pt-2.5 border-t border-slate-200/80 flex items-center gap-2 text-slate-800">
+                        <div className="w-7 h-7 rounded-lg bg-blue-100 text-[#2196E8] flex items-center justify-center shrink-0">
+                          <FileText className="w-4 h-4" />
+                        </div>
+                        <div className="overflow-hidden flex-1">
+                          <p className="font-bold text-slate-900 truncate text-xs">{resumeFile.name}</p>
+                          <p className="text-[10px] text-emerald-600 font-medium">✓ PDF Uploaded & Attached ({(resumeFile.size / (1024 * 1024)).toFixed(2)} MB)</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Hiring Process Note */}
+                  <div className="p-3 bg-blue-50/70 border border-blue-200/80 rounded-xl text-left flex items-start gap-2.5">
+                    <Clock className="w-4 h-4 text-[#2196E8] shrink-0 mt-0.5" />
+                    <div className="text-[11px] text-slate-600 leading-relaxed">
+                      <strong className="text-slate-800 font-bold">What happens next?</strong> Our recruitment team reviews each application carefully. Shortlisted candidates will be contacted within <strong className="text-slate-900">24–48 hours</strong> via WhatsApp / Email.
+                    </div>
+                  </div>
+
+                  <div className="pt-1">
                     <button
                       onClick={closeApplyModal}
-                      className="px-6 py-2.5 rounded-xl bg-[#2196E8] hover:bg-[#1b84cf] text-white text-xs font-bold transition-all shadow-md cursor-pointer"
+                      className="w-full py-3 rounded-xl bg-[#2196E8] hover:bg-[#1b84cf] text-white text-xs font-bold transition-all shadow-md shadow-blue-500/20 cursor-pointer flex items-center justify-center gap-2"
                     >
-                      Done
+                      <span>Close & Return to Careers</span>
                     </button>
                   </div>
                 </div>
