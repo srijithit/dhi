@@ -280,8 +280,8 @@ export const SERVICES_DATA: Service[] = [
     category: "ai",
     iconName: "Zap",
     badge: "Efficiency",
-    heroTitle: "AI Automation Services in Coimbatore Work Smarter, Not Harder",
-    heroSub: "Manual tasks slow your business down. DhiGrowth's AI automation solutions eliminate repetitive processes and replace them with intelligent, self-running systems that save time, reduce errors, and cut operational costs. From automating customer support and lead follow-ups to inventory management and reporting workflows we design AI-powered automation pipelines that integrate seamlessly with your existing tools and platforms. Let your team focus on what truly matters while AI handles the rest.",
+    heroTitle: "AI Automation Development Company in Coimbatore",
+    heroSub: "At DHI Growth, we are a leading AI Automation Development Company in Coimbatore, specialising in building intelligent automation solutions that streamline operations, reduce costs, and enhance productivity. Our team of skilled engineers and data scientists combines technical expertise with innovation to deliver AI‑driven automation tailored to your business needs.",
     bottomCtaHeading: "Transform Your Business with AI Automation",
     bottomCtaSub: "Automation is no longer optional—it is essential for growth. Partner with DHI Growth, your trusted AI Automation Development Company in Coimbatore, to create intelligent automation solutions that elevate your business and connect you with your audience.",
     sections: [
