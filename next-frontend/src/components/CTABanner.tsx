@@ -42,11 +42,11 @@ export default function CTABanner({ onOpenAudit }: CTABannerProps) {
         </div>
 
         <h2 className="font-header text-5xl sm:text-7xl tracking-wider max-w-3xl mx-auto leading-none">
-          Ready to Grow Your Business in <span className="text-[#2196E8]">Coimbatore?</span>
+          Ready to grow your business in <span className="text-[#2196E8]">Coimbatore?</span>
         </h2>
 
         <p className="font-body text-slate-350 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-          Talk to our digital growth experts today. Get a free audit of your website, ads, or social media — and a custom roadmap to scale faster.
+          Talk to our digital growth experts today. Get a free audit of your website, ads, or social media and a custom roadmap to scale your business faster.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">

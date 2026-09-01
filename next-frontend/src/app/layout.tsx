@@ -22,8 +22,8 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata = {
-  title: "DhiGrowth — Coimbatore's Leading Digital Growth Partner | Web, App, AI & Marketing Solutions",
-  description: "DhiGrowth is Coimbatore's leading digital growth partner offering website development, mobile apps, AI automation, and ROI-driven digital marketing solutions.",
+  title: "DhiGrowth Digital Agency in Coimbatore | Web, AI & Marketing",
+  description: "DhiGrowth is Coimbatore's top digital agency offering website development, AI solutions, SEO, Meta & Google Ads, social media, and business automation services.",
   keywords: "Digital Agency Coimbatore, Website Development, Mobile App Development, AI Development, WhatsApp Marketing, SEO, Meta Google Ads, Video Editing",
   robots: "index, follow",
   icons: {
@@ -36,6 +36,8 @@ export const metadata = {
   },
 };
 
+import CustomCursor from '@/components/CustomCursor';
+
 export default function RootLayout({
   children,
 }: {
@@ -44,6 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${bebasNeue.variable} ${zenDots.variable} ${plusJakartaSans.variable} scroll-smooth`}>
       <body className="bg-white dark:bg-[#000000] text-slate-900 dark:text-white font-body antialiased selection:bg-[#2196E8] selection:text-white">
+        <CustomCursor />
         {children}
       </body>
     </html>

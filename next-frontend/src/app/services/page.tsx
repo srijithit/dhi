@@ -129,19 +129,13 @@ export default function ServicesPage() {
                         </div>
 
                         {/* Front Content */}
-                        <div className="p-6 sm:p-7 flex flex-col justify-between flex-grow space-y-3">
-                          <div className="space-y-2">
+                        <div className="p-6 sm:p-7 flex flex-col justify-between flex-grow">
+                          <div className="space-y-2.5">
                             <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wider group-hover:text-[#2196E8] transition-colors duration-300">
                               {service.name}
                             </h3>
 
-                            {service.headline && (
-                              <h4 className="text-xs sm:text-sm font-semibold text-[#2196E8] leading-snug line-clamp-2">
-                                {service.headline}
-                              </h4>
-                            )}
-
-                            <p className="text-slate-650 dark:text-slate-350 text-sm leading-relaxed line-clamp-2">
+                            <p className="text-slate-650 dark:text-slate-350 text-sm leading-relaxed">
                               {service.shortCopy}
                             </p>
                           </div>

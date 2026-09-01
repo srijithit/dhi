@@ -4,10 +4,10 @@ import { AnimatedCounter } from './AnimatedCounter';
 
 export default function StatsBar() {
   const stats = [
-    { target: 100, suffix: "+", label: "Projects Delivered", sublabel: "Successfully Completed" },
-    { target: 50, suffix: "+", label: "Clients in Coimbatore", sublabel: "Trusted Growth Partners" },
-    { target: 5, suffix: "+", label: "Years of Expertise", sublabel: "Proven Track Record" },
-    { target: 13, suffix: "+", label: "Services Offered", sublabel: "Full Stack Growth" },
+    { target: 100, suffix: "+", label: "Projects delivered" },
+    { target: 50, suffix: "+", label: "Clients in Coimbatore" },
+    { target: 5, suffix: "+", label: "Years of expertise" },
+    { target: 13, suffix: "+", label: "Services offered" },
   ];
 
   return (
@@ -17,17 +17,14 @@ export default function StatsBar() {
           {stats.map((stat, idx) => (
             <div 
               key={idx} 
-              className="glass-card p-6 bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-800 hover:border-brand/40 shadow-sm flex flex-col items-center justify-center text-center transition-all duration-300"
+              className="glass-card p-6 bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-800 hover:border-brand/40 shadow-sm flex flex-col items-center justify-center text-center transition-all duration-300 rounded-2xl hover:shadow-md"
             >
               <div className="font-numeric text-3xl sm:text-4xl font-bold text-brand-bright dark:text-brand-bright mb-2 flex items-center justify-center">
                 <AnimatedCounter value={stat.target} />
                 <span>{stat.suffix}</span>
               </div>
-              <div className="text-xs sm:text-sm font-bold tracking-wider text-slate-800 dark:text-white font-body">
+              <div className="text-xs sm:text-sm font-semibold tracking-wide text-slate-800 dark:text-slate-200 font-body">
                 {stat.label}
-              </div>
-              <div className="text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 font-body mt-0.5">
-                {stat.sublabel}
               </div>
             </div>
           ))}

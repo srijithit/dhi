@@ -20,8 +20,8 @@ export default function AboutSection() {
           <h2 className="font-header text-4xl sm:text-6xl text-white uppercase tracking-wide mb-6">
             COIMBATORE'S PREMIER <span className="text-[#2196E8]">DIGITAL GROWTH</span> PARTNER
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            We are DhiGrowth — a Coimbatore-based digital agency that combines technology, creativity, and strategy to deliver measurable business results. Whether you are a startup, SME, or enterprise, our end-to-end digital solutions are built to accelerate your growth.
+          <p className="text-gray-400 text-lg leading-relaxed">
+            We are DhiGrowth a Coimbatore-based digital agency that combines technology, creativity, and strategy to deliver measurable business results. Whether you are a startup, SME, or enterprise, our end-to-end digital solutions are built to accelerate your growth.
           </p>
         </div>
 

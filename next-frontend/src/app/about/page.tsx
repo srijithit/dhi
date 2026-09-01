@@ -113,7 +113,7 @@ export default function AboutPage() {
                     We started as a small team of developers, designers, marketers, and strategists who believed technology and creativity combined could transform any business. We began by helping local businesses with websites and social media, and the results spoke for themselves.
                   </p>
                   <p>
-                    Today, DhiGrowth has grown into a comprehensive digital agency offering 13+ services — from AI development and business automation to video production and performance marketing. Our journey is fuelled by every client who trusted us with their growth.
+                    Today, DhiGrowth has grown into a comprehensive digital agency offering 13+ services from AI development and business automation to video production and performance marketing. Our journey is fuelled by every client who trusted us with their growth.
                   </p>
                 </div>
               </motion.div>

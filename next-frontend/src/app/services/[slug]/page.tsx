@@ -177,7 +177,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <div className="absolute top-1/2 right-1/4 w-[350px] h-[350px] bg-[#4A72EB]/10 rounded-full blur-[120px] pointer-events-none" />
           
           <div className="max-w-6xl mx-auto px-6 relative z-10 text-center space-y-6">
-            <span className="text-[#2196E8] font-body text-xs sm:text-sm font-bold tracking-widest block uppercase">
+            <span className="text-[#2196E8] font-body text-xs sm:text-sm font-bold tracking-widest block">
               Coimbatore Digital Agency
             </span>
             <h1 className="font-header text-5xl sm:text-7xl lg:text-8xl tracking-wider leading-none">
@@ -428,8 +428,8 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             return (
               <section key={sIdx} className={`py-24 transition-colors ${bgClass}`}>
                 <div className="max-w-4xl mx-auto px-6 text-center space-y-6">
-                  <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body uppercase">
-                    Our Values
+                  <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
+                    Frequently Asked Questions
                   </span>
                   <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
                     {section.heading}

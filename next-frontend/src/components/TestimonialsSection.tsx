@@ -62,7 +62,7 @@ export default function TestimonialsSection({ showAll = false }: TestimonialsSec
             Social Proof &amp; Client Results
           </span>
           <h2 className="font-header text-3xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white tracking-wide leading-tight">
-            What Our Clients In Coimbatore Say About DhiGrowth
+            What our clients in Coimbatore say about DhiGrowth
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
             Real stories and measurable business growth from founders and enterprises across Coimbatore.

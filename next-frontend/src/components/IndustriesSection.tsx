@@ -126,10 +126,10 @@ export default function IndustriesSection({ onOpenAudit }: IndustriesSectionProp
             Custom Industry Solutions
           </span>
           <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6 text-center">
-            Industries We <span className="text-[#2196E8]">Transform</span>
+            Industries We <span className="text-[#2196E8]">Serve</span>
           </h2>
           <p className="text-slate-650 dark:text-slate-300 text-base sm:text-lg text-center max-w-3xl">
-            We work with businesses across textile and manufacturing, retail, healthcare, education, hospitality, real estate, and technology — bringing deep domain understanding to every project.
+            We work with businesses across Coimbatore and India from textile and manufacturing to retail, healthcare, education, hospitality, real estate, and technology startups.
           </p>
         </div>
 

@@ -75,8 +75,8 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
                 <span className="text-[#2196E8]">IN COIMBATORE?</span>
               </h2>
 
-              <p className="text-slate-300 text-base sm:text-lg leading-relaxed mb-8 font-body">
-                Talk to our digital growth experts today. Get a free audit of your website, ads, or social media — and a custom roadmap to scale your business faster.
+              <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-xl">
+                Talk to our digital growth experts today. Get a free audit of your website, ads, or social media and a custom roadmap to scale your business faster.
               </p>
 
               {/* Interactive ROI Quick Estimator */}
