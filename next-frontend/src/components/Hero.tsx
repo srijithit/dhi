@@ -102,7 +102,7 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
               variants={fadeInUp}
               className="text-base sm:text-lg text-slate-700 dark:text-slate-300 font-medium leading-relaxed font-body text-left max-w-xl"
             >
-              DhiGrowth is a full-service digital agency helping businesses scale faster with modern website development, mobile app development, AI automation, and result-driven digital marketing. From Meta Ads and Google Ads to WhatsApp marketing, SEO, and video production — we build everything your business needs to grow online.
+              DhiGrowth is a full-service digital agency helping businesses scale faster with Modern Website Development, Mobile App Development, AI Automation, and Result-Driven Digital Marketing. From Meta Ads and Google Ads to WhatsApp Marketing, SEO, and Video Production — we build everything your business needs to grow online.
             </motion.p>
  
             <motion.div 

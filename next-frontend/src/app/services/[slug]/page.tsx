@@ -113,6 +113,33 @@ function formatHeroTitle(title: string) {
   return <span className="text-[#2196E8]">{title}</span>;
 }
 
+function parseFeature(text: string) {
+  const clean = text.trim();
+  const colonIdx = clean.indexOf(': ');
+  const emDashIdx = clean.indexOf(' — ');
+  const enDashIdx = clean.indexOf(' – ');
+  const hyphenIdx = clean.indexOf(' - ');
+  
+  if (colonIdx !== -1 && (emDashIdx === -1 || colonIdx < emDashIdx) && (enDashIdx === -1 || colonIdx < enDashIdx) && (hyphenIdx === -1 || colonIdx < hyphenIdx)) {
+    return { title: clean.slice(0, colonIdx).trim(), desc: clean.slice(colonIdx + 2).trim() };
+  }
+  if (emDashIdx !== -1) {
+    return { title: clean.slice(0, emDashIdx).trim(), desc: clean.slice(emDashIdx + 3).trim() };
+  }
+  if (enDashIdx !== -1) {
+    return { title: clean.slice(0, enDashIdx).trim(), desc: clean.slice(enDashIdx + 3).trim() };
+  }
+  if (hyphenIdx !== -1) {
+    return { title: clean.slice(0, hyphenIdx).trim(), desc: clean.slice(hyphenIdx + 3).trim() };
+  }
+  return { title: clean, desc: "" };
+}
+
+function parseStep(text: string) {
+  const clean = text.replace(/^\d+\.\s*/, '').trim();
+  return parseFeature(clean);
+}
+
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params;
   const service = SERVICES_DATA.find(s => s.id === slug || (slug === 'business-automation' && s.id === 'business-growth-automation'));
@@ -121,35 +148,8 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     notFound();
   }
 
-  // Parse sections
-  const introSection = service.sections.find(s => s.content) || service.sections[0];
-  const offeringsSection = service.sections.find(s => s.items);
-  const customFeaturesSection = service.sections.find(s => s.features);
-  const customStepsSection = service.sections.find(s => s.steps);
-
-  // Fallbacks for layout consistency across all 13 services
-  const defaultFeatures = [
-    "100% Custom Solution — Designed and coded from scratch for your brand.",
-    "Coimbatore Local Expertise — Alignment with local consumer trends and market hubs.",
-    "AI-Powered Operations — Automate lead capturing and backend operations.",
-    "SEO Optimized — Built with performance and on-page ranking standards.",
-    "Speed-Optimised Performance — Clean architecture ensuring sub-second loading.",
-    "Dedicated Support — Reliable post-launch maintenance and upgrades.",
-    "Full Ownership — Complete transparency and intellectual property rights."
-  ];
-
-  const defaultSteps = [
-    "1. Discovery & Planning — Analyze requirements, competitors, and growth opportunities.",
-    "2. Wireframing & Design — Mockups and interactive design reviews.",
-    "3. Core Development — Clean, responsive, and secure development.",
-    "4. SEO & Content Integration — Set transactional keywords and optimize metadata.",
-    "5. Quality Assurance — Rigorous speed, safety, and compatibility testing.",
-    "6. Deployment & Launch — Go-live configuration with Google analytics tools.",
-    "7. Ongoing Maintenance — Monthly updates, monitoring, and regular optimization."
-  ];
-
-  const features = customFeaturesSection ? customFeaturesSection.features : defaultFeatures;
-  const steps = customStepsSection ? customStepsSection.steps : defaultSteps;
+  // Find index of first narrative/intro section to display with image card
+  const firstIntroIdx = service.sections.findIndex(s => (s.content || s.paragraphs) && !s.items && !s.features && !s.steps);
 
   const industries = [
     "Retail & E-Commerce",
@@ -204,164 +204,252 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </div>
         </section>
 
-        {/* Intro Section */}
-        <section className="py-24 bg-white dark:bg-[#000000] transition-colors">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              
-              <div className="lg:col-span-7 space-y-6 text-left">
-                <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
-                  Core Expertise
-                </span>
-                <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-[#4A72EB] leading-none">
-                  {introSection?.heading || "Overview"}
-                </h2>
-                <div className="space-y-4 text-slate-700 dark:text-slate-350 text-base sm:text-lg leading-relaxed font-body">
-                  <p>
-                    {introSection?.content || `DhiGrowth is a trusted partner with proven expertise in delivering tailored solutions for businesses across diverse industries. We blend creativity, technology, and strategy to build solutions that perform powerfully.`}
-                  </p>
+        {/* Dynamic Sections Renderer */}
+        {service.sections.map((section, sIdx) => {
+          const isAltBg = sIdx % 2 === 1;
+          const bgClass = isAltBg 
+            ? "bg-slate-50 dark:bg-[#080b11] border-y border-slate-200 dark:border-slate-900" 
+            : "bg-white dark:bg-[#000000]";
+
+          // Render First Intro with Image Card
+          if (sIdx === firstIntroIdx) {
+            return (
+              <section key={sIdx} className="py-24 bg-white dark:bg-[#000000] transition-colors">
+                <div className="max-w-6xl mx-auto px-6">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div className="lg:col-span-7 space-y-6 text-left">
+                      <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
+                        Core Expertise
+                      </span>
+                      <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-[#4A72EB] leading-none">
+                        {section.heading || "Overview"}
+                      </h2>
+                      <div className="space-y-4 text-slate-700 dark:text-slate-350 text-base sm:text-lg leading-relaxed font-body">
+                        {section.paragraphs ? (
+                          section.paragraphs.map((p, pIdx) => (
+                            <p key={pIdx}>{p}</p>
+                          ))
+                        ) : (
+                          <p>
+                            {section.content || `DhiGrowth is a trusted partner with proven expertise in delivering tailored solutions for businesses across diverse industries.`}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="lg:col-span-5 flex justify-center w-full">
+                      <div className="relative w-full max-w-[420px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800/80 group">
+                        <img 
+                          src={SERVICE_IMAGE_MAP[service.id] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80"} 
+                          alt={service.name} 
+                          className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6 text-left">
+                          <p className="text-xs font-bold tracking-widest text-[#2196E8] mb-1 font-body">The DhiGrowth Commitment</p>
+                          <blockquote className="text-white italic font-body text-xs sm:text-sm leading-relaxed">
+                            &ldquo;{SERVICE_QUOTE_MAP[service.id] || "We build custom, fast, and high-converting systems tailored to accelerate your growth."}&rdquo;
+                          </blockquote>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </section>
+            );
+          }
 
-              <div className="lg:col-span-5 flex justify-center w-full">
-                <div className="relative w-full max-w-[420px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800/80 group">
-                  <img 
-                    src={SERVICE_IMAGE_MAP[service.id] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80"} 
-                    alt={service.name} 
-                    className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-6 text-left">
-                    <p className="text-xs font-bold tracking-widest text-[#2196E8] mb-1 font-body">The DhiGrowth Commitment</p>
-                    <blockquote className="text-white italic font-body text-xs sm:text-sm leading-relaxed">
-                      &ldquo;{SERVICE_QUOTE_MAP[service.id] || "We build custom, fast, and high-converting systems tailored to accelerate your growth."}&rdquo;
-                    </blockquote>
+          // Render Items Section (e.g. Services / What We Build)
+          if (section.items && section.items.length > 0) {
+            return (
+              <section key={sIdx} className={`py-24 transition-colors ${bgClass}`}>
+                <div className="max-w-7xl mx-auto px-6">
+                  <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
+                      Core Offerings
+                    </span>
+                    <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
+                      {section.heading}
+                    </h2>
+                    {section.intro && (
+                      <p className="text-slate-650 dark:text-slate-350 text-base leading-relaxed">
+                        {section.intro}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {section.items.map((item, iIdx) => (
+                      <div 
+                        key={iIdx}
+                        className="glass-card p-8 bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-900 hover:border-[#2196E8] rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+                      >
+                        <div>
+                          {item.title && (
+                            <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wider mb-3">
+                              {item.title}
+                            </h3>
+                          )}
+                          <p className="text-slate-600 dark:text-slate-350 text-sm leading-relaxed">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {section.outro && (
+                    <div className="max-w-3xl mx-auto mt-12 text-center">
+                      <p className="text-slate-700 dark:text-slate-300 font-medium text-sm sm:text-base leading-relaxed">
+                        {section.outro}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </section>
+            );
+          }
+
+          // Render Features Section (e.g. Why Choose Us / Benefits)
+          if (section.features && section.features.length > 0) {
+            return (
+              <section key={sIdx} className={`py-24 transition-colors ${bgClass}`}>
+                <div className="max-w-5xl mx-auto px-6">
+                  <div className="text-center mb-16 space-y-4">
+                    <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
+                      Key Highlights
+                    </span>
+                    <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
+                      {section.heading}
+                    </h2>
+                    {section.intro && (
+                      <p className="text-slate-650 dark:text-slate-350 text-base leading-relaxed max-w-2xl mx-auto">
+                        {section.intro}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {section.features.map((feature, fIdx) => {
+                      const { title, desc } = parseFeature(feature);
+
+                      return (
+                        <div 
+                          key={fIdx}
+                          className="glass-card p-6 bg-slate-50/50 dark:bg-[#0d111c]/60 border border-slate-200 dark:border-slate-900/60 rounded-2xl flex items-start gap-4"
+                        >
+                          <CheckCircle2 className="w-6 h-6 text-[#2196E8] shrink-0 mt-0.5" />
+                          <div>
+                            <h4 className="font-body font-bold text-slate-900 dark:text-white text-base">
+                              {title}
+                            </h4>
+                            {desc && (
+                              <p className="text-slate-650 dark:text-slate-350 text-sm mt-1 leading-relaxed">
+                                {desc}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {section.outro && (
+                    <div className="max-w-3xl mx-auto mt-12 text-center">
+                      <p className="text-slate-700 dark:text-slate-300 font-medium text-sm sm:text-base leading-relaxed">
+                        {section.outro}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </section>
+            );
+          }
+
+          // Render Steps Section (e.g. Methodology / Process)
+          if (section.steps && section.steps.length > 0) {
+            return (
+              <section key={sIdx} className={`py-24 transition-colors ${bgClass}`}>
+                <div className="max-w-5xl mx-auto px-6">
+                  <div className="text-center mb-16 space-y-4">
+                    <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
+                      Methodology
+                    </span>
+                    <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
+                      {section.heading}
+                    </h2>
+                    {section.intro && (
+                      <p className="text-slate-650 dark:text-slate-350 text-base leading-relaxed max-w-2xl mx-auto">
+                        {section.intro}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-6">
+                    {section.steps.map((step, stIdx) => {
+                      const { title, desc } = parseStep(step);
+
+                      return (
+                        <div 
+                          key={stIdx}
+                          className="glass-card p-6 bg-white dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 rounded-2xl flex items-start gap-6"
+                        >
+                          <div className="w-10 h-10 rounded-xl bg-[#2196E8]/10 text-[#2196E8] font-numeric font-bold flex items-center justify-center shrink-0">
+                            {stIdx + 1}
+                          </div>
+                          <div>
+                            <h4 className="font-body font-bold text-slate-900 dark:text-white text-base">
+                              {title}
+                            </h4>
+                            {desc && (
+                              <p className="text-slate-600 dark:text-slate-350 text-sm mt-1 leading-relaxed">
+                                {desc}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {section.outro && (
+                    <div className="max-w-3xl mx-auto mt-12 text-center">
+                      <p className="text-slate-700 dark:text-slate-300 font-medium text-sm sm:text-base leading-relaxed">
+                        {section.outro}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </section>
+            );
+          }
+
+          // Render Other Narrative / Content Sections (e.g. Quality and Trust)
+          if (section.content || section.paragraphs) {
+            return (
+              <section key={sIdx} className={`py-24 transition-colors ${bgClass}`}>
+                <div className="max-w-4xl mx-auto px-6 text-center space-y-6">
+                  <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body uppercase">
+                    Our Values
+                  </span>
+                  <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
+                    {section.heading}
+                  </h2>
+                  <div className="space-y-4 text-slate-700 dark:text-slate-300 text-base sm:text-lg leading-relaxed font-body max-w-3xl mx-auto">
+                    {section.paragraphs ? (
+                      section.paragraphs.map((p, pIdx) => (
+                        <p key={pIdx}>{p}</p>
+                      ))
+                    ) : (
+                      <p>{section.content}</p>
+                    )}
                   </div>
                 </div>
-              </div>
+              </section>
+            );
+          }
 
-            </div>
-          </div>
-        </section>
-
-        {/* Sub-services / Offerings breakdown grid */}
-        {offeringsSection && offeringsSection.items && (
-          <section className="py-24 bg-slate-50 dark:bg-[#080b11] border-y border-slate-200 dark:border-slate-900 transition-colors">
-            <div className="max-w-7xl mx-auto px-6">
-              
-              <div className="text-center max-w-3xl mx-auto mb-16">
-                <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
-                  Core Offerings
-                </span>
-                <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
-                  {offeringsSection.heading || "What We Build"}
-                </h2>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {offeringsSection.items.map((item, idx) => (
-                  <div 
-                    key={idx}
-                    className="glass-card p-8 bg-white dark:bg-[#0d111c] border border-slate-200 dark:border-slate-900 hover:border-[#2196E8] rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
-                  >
-                    <div>
-                      <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wider mb-3">
-                        {item.title}
-                      </h3>
-                      <p className="text-slate-600 dark:text-slate-350 text-sm leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-            </div>
-          </section>
-        )}
-
-        {/* Why Businesses Trust Us */}
-        <section className="py-24 bg-white dark:bg-[#000000] transition-colors">
-          <div className="max-w-5xl mx-auto px-6">
-            
-            <div className="text-center mb-16">
-              <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
-                Our Guarantee
-              </span>
-              <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
-                {customFeaturesSection?.heading || "Why Businesses Trust Us"}
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {features?.map((feature, idx) => {
-                const parts = feature.split(" — ");
-                const title = parts[0] || "";
-                const description = parts[1] || "";
-
-                return (
-                  <div 
-                    key={idx}
-                    className="glass-card p-6 bg-slate-50/50 dark:bg-[#0d111c]/60 border border-slate-200 dark:border-slate-900/60 rounded-2xl flex items-start gap-4"
-                  >
-                    <CheckCircle2 className="w-6 h-6 text-[#2196E8] shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="font-body font-bold text-slate-900 dark:text-white text-base">
-                        {title}
-                      </h4>
-                      <p className="text-slate-650 dark:text-slate-350 text-sm mt-1 leading-relaxed">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-          </div>
-        </section>
-
-        {/* How We Build (Steps) */}
-        <section className="py-24 bg-slate-50 dark:bg-[#080b11] border-t border-slate-200 dark:border-slate-900 transition-colors">
-          <div className="max-w-5xl mx-auto px-6">
-            
-            <div className="text-center mb-16">
-              <span className="text-[#2196E8] font-bold text-xs tracking-widest block font-body">
-                Methodology
-              </span>
-              <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
-                {customStepsSection?.heading || "Our Process"}
-              </h2>
-            </div>
-
-            <div className="space-y-6">
-              {steps?.map((step, idx) => {
-                const textContent = step.replace(/^\d+\.\s*/, "");
-                const titleText = textContent.split(" — ")[0] || "";
-                const descText = textContent.split(" — ")[1] || "";
-
-                return (
-                  <div 
-                    key={idx}
-                    className="glass-card p-6 bg-white dark:bg-[#0d111c] border border-slate-205 dark:border-slate-800 rounded-2xl flex items-start gap-6"
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-[#2196E8]/10 text-[#2196E8] font-numeric font-bold flex items-center justify-center shrink-0">
-                      {idx + 1}
-                    </div>
-                    <div>
-                      <h4 className="font-body font-bold text-slate-900 dark:text-white text-base">
-                        {titleText}
-                      </h4>
-                      <p className="text-slate-600 dark:text-slate-350 text-sm mt-1 leading-relaxed">
-                        {descText}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-          </div>
-        </section>
+          return null;
+        })}
 
         {/* For Every Industry Tag Grid */}
         <section className="py-24 bg-white dark:bg-[#000000] transition-colors border-t border-slate-200 dark:border-slate-900">
@@ -370,10 +458,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               Versatility
             </span>
             <h2 className="font-header text-4xl sm:text-5xl tracking-wider text-slate-900 dark:text-white">
-              Industries We Serve
+              {service.industryHeading || "Industries We Serve"}
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-2xl mx-auto">
-              We work with businesses across textile and manufacturing, retail, healthcare, education, hospitality, real estate, and technology — bringing deep domain understanding to every project.
+              {service.industrySub || "We work with businesses across textile and manufacturing, retail, healthcare, education, hospitality, real estate, and technology — bringing deep domain understanding to every project."}
             </p>
             
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 pt-4">
