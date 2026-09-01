@@ -53,11 +53,11 @@ export default function AboutSection() {
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeInUp}
         >
-          <span className="text-[#2196E8] font-bold text-xs tracking-widest block mb-2 font-body">
-            Who We Are
+          <span className="text-[#2196E8] font-bold text-xs tracking-widest uppercase block mb-2 font-body">
+            About DhiGrowth
           </span>
-          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-6">
-            Driving Digital <span className="text-[#2196E8]">Growth &amp; Transformation</span>
+          <h2 className="font-header text-4xl sm:text-6xl text-slate-900 dark:text-white tracking-wide mb-4">
+            Who <span className="text-[#2196E8]">We Are</span>
           </h2>
           <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed font-body">
             We are DhiGrowth — a digital agency that combines technology, creativity, and strategy to deliver measurable business results. Whether you&apos;re a startup, SME, or enterprise, our end-to-end digital solutions are built to accelerate your growth.
