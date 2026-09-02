@@ -47,6 +47,7 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
   }, [auditState]);
 
   const estimatedReach = Math.round(budget * 2.8);
+  const estimatedLeads = Math.round(budget * 0.008);
   const [formError, setFormError] = useState('');
 
   const handleNameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -411,24 +412,6 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
             )}
 
             {auditState === 'results' && (
-              <div className="space-y-6 animate-fadeIn font-body text-left">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-header text-3xl text-slate-900 dark:text-white tracking-wide">
-                    Your Audit Report
-                  </h3>
-                      Analyzing {formData.businessName || "Your Business"}
-                    </h4>
-                    <p className="text-xs text-[#2196E8] font-body mt-1 tracking-widest font-bold">
-                      Step {scanStep + 1} of 5
-                    </p>
-                  </div>
-                  <p className="text-slate-500 dark:text-slate-400 text-sm italic font-body max-w-xs transition-all duration-300">
-                    "{scanSteps[scanStep]}"
-                  </p>
-                </div>
-              )}
-
-              {auditState === 'results' && (
                 <div className="space-y-6 animate-fadeIn font-body text-left">
                   <div className="flex items-center justify-between">
                     <h3 className="font-header text-3xl text-slate-900 dark:text-white tracking-wide">
@@ -498,7 +481,14 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
 
                   <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
                     <button 
-                      onClick={() => onOpenWhatsApp(budget, estimatedReach, estimatedLeads)}
+                      onClick={() => {
+                        if (onOpenWhatsApp) {
+                          onOpenWhatsApp(budget, estimatedReach, estimatedLeads);
+                        } else {
+                          const message = `Name: ${formData.name || 'Website Visitor'}\nPhone: ${formData.phone || 'N/A'}\nCompany: ${formData.businessName || 'N/A'}\nService: ${formData.service}\nBudget: Rs.${budget}\nEst. Reach: ${estimatedReach}\nEst. Leads: ${estimatedLeads}`;
+                          window.location.href = `https://api.whatsapp.com/send?phone=919361088012&text=${encodeURIComponent(message)}`;
+                        }
+                      }}
                       className="btn-primary w-full !py-3 flex items-center justify-center gap-2 cursor-pointer !rounded-2xl shadow-md hover:shadow-lg"
                     >
                       <MessageCircle className="w-4 h-4" />
@@ -515,6 +505,5 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
         </div>
 
       </div>
-    </section>
   );
 }
