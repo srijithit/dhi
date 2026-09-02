@@ -1,53 +1,105 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
 export default function WhyChooseUs() {
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const [cardStep, setCardStep] = useState(344);
-
   const differentiators = [
     {
       badge: "01 • Integrated Agency",
+      category: "Integrated Agency",
+      number: "01",
       title: "One agency, every solution",
-      desc: "From logo to landing page to lead generation — we handle it all under one roof.",
-      image: "/images/natural_tech.png"
+      desc: "From branding and web architecture to performance ad funnels — we handle everything under one roof.",
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&auto=format&fit=crop&q=80"
     },
     {
       badge: "02 • Future Ready",
-      title: "AI-powered edge",
-      desc: "We integrate AI into your business before your competitors even consider it.",
-      image: "/images/natural_marketing.png"
+      category: "Future Ready",
+      number: "02",
+      title: "AI-powered innovation",
+      desc: "We integrate custom AI automations into your workflow before competitors even consider it.",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&auto=format&fit=crop&q=80"
     },
     {
       badge: "03 • Transparent Data",
+      category: "Transparent Data",
+      number: "03",
       title: "Transparent reporting",
-      desc: "Real-time dashboards and monthly reports — you always know where your money goes.",
-      image: "/images/natural_ai.png"
+      desc: "Live dashboards and granular monthly ROAS reports — you always know where every rupee goes.",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&auto=format&fit=crop&q=80"
     },
     {
       badge: "04 • Local Insight",
+      category: "Local Insight",
+      number: "04",
       title: "Market-focused strategy",
-      desc: "We understand the local market, culture, and audience better than any remote agency.",
-      image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&auto=format&fit=crop&q=80"
+      desc: "We understand the local market, culture, and high-intent buyer psychology better than any remote agency.",
+      image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&auto=format&fit=crop&q=80"
     },
     {
       badge: "05 • Accountability",
+      category: "Accountability",
+      number: "05",
       title: "End-to-end ownership",
-      desc: "From strategy to execution to optimisation — we own the entire journey.",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80"
+      desc: "From initial roadmap to rapid execution and continuous optimization — we own the entire growth journey.",
+      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&auto=format&fit=crop&q=80"
     }
   ];
 
+  const N = differentiators.length;
+  // Repeat list 5 times for infinite looping buffer
+  const extendedList = [
+    ...differentiators,
+    ...differentiators,
+    ...differentiators,
+    ...differentiators,
+    ...differentiators,
+  ];
+
+  // Start in the middle set (Set 2 = index 10)
+  const [virtualIndex, setVirtualIndex] = useState(2 * N);
+  const [isInstant, setIsInstant] = useState(false);
+  const [cardStep, setCardStep] = useState(364);
+  const [isPaused, setIsPaused] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Active dot index (0 to 4)
+  const activeDot = ((virtualIndex % N) + N) % N;
+
+  // Auto-advance rotation timer (4.5 seconds)
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = setInterval(() => {
+      setIsInstant(false);
+      setVirtualIndex((prev) => prev + 1);
+    }, 4500);
+
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
+  // Reset instant flag on next frame
+  useEffect(() => {
+    if (isInstant) {
+      const raf = requestAnimationFrame(() => {
+        setIsInstant(false);
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+  }, [isInstant]);
+
+  // Card dimension step calculation
   useEffect(() => {
     const handleResize = () => {
       if (typeof window !== 'undefined') {
         if (window.innerWidth < 640) {
-          setCardStep(290 + 24);
+          setCardStep(300 + 20);
+        } else if (window.innerWidth < 1024) {
+          setCardStep(350 + 24);
         } else {
-          setCardStep(320 + 24);
+          setCardStep(370 + 24);
         }
       }
     };
@@ -56,50 +108,110 @@ export default function WhyChooseUs() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Touch swipe support
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const distance = touchStartX.current - touchEndX.current;
+    if (distance > 45) {
+      handleNext();
+    } else if (distance < -45) {
+      handlePrev();
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
+  // Seamless jump when reaching boundaries
+  const handleAnimationComplete = () => {
+    if (virtualIndex >= 3 * N) {
+      setIsInstant(true);
+      setVirtualIndex((prev) => prev - N);
+    } else if (virtualIndex < 2 * N) {
+      setIsInstant(true);
+      setVirtualIndex((prev) => prev + N);
+    }
+  };
+
   const handleNext = () => {
-    setCurrentIdx((prev) => (prev + 1) % differentiators.length);
+    setIsInstant(false);
+    setVirtualIndex((prev) => prev + 1);
+    setIsPaused(true);
+    setTimeout(() => setIsPaused(false), 7000);
   };
 
   const handlePrev = () => {
-    setCurrentIdx((prev) => (prev - 1 + differentiators.length) % differentiators.length);
+    setIsInstant(false);
+    setVirtualIndex((prev) => prev - 1);
+    setIsPaused(true);
+    setTimeout(() => setIsPaused(false), 7000);
+  };
+
+  const goToSlide = (targetDotIdx: number) => {
+    setIsInstant(false);
+    let diff = targetDotIdx - activeDot;
+    if (diff > 2) diff -= N;
+    if (diff < -2) diff += N;
+    setVirtualIndex((prev) => prev + diff);
+    setIsPaused(true);
+    setTimeout(() => setIsPaused(false), 7000);
   };
 
   return (
-    <section id="why-us" className="py-10 md:py-14 bg-[#0b0f19] text-white relative overflow-hidden transition-colors border-t border-slate-850 font-body">
+    <section 
+      id="why-us" 
+      className="py-14 sm:py-20 md:py-24 bg-[#080c16] dark:bg-[#060911] text-white relative overflow-hidden transition-colors border-t border-slate-800/80 font-body"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       
-      {/* Background Hero Architecture Glow Image */}
-      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+      {/* Background Architectural Ambient Glow */}
+      <div className="absolute inset-0 z-0 opacity-15 pointer-events-none">
         <img 
           src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&auto=format&fit=crop&q=80" 
           alt="Modern Architecture" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0b0f19] via-[#0b0f19]/90 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#080c16] via-[#080c16]/95 to-[#080c16]/80" />
       </div>
 
-      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10 font-body">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 font-body">
         
-        {/* 2-Column Split Section matching reference video (00:37) */}
+        {/* 2-Column Split Section matching reference */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
-          {/* Left Column (5 Cols): Text + Badge + CTA Button */}
-          <div className="lg:col-span-5 space-y-6">
-            <span className="text-slate-400 font-mono text-xs tracking-widest block">
-              02 • Our Edge
-            </span>
+          {/* Left Column (5 Cols): Title + Subtitle + CTA */}
+          <div className="lg:col-span-5 space-y-6 text-left">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-[#2196E8]/30 text-[#2196E8] text-xs font-bold tracking-wider uppercase">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>02 • Our Edge</span>
+            </div>
             
-            <h2 className="font-header text-4xl sm:text-6xl text-white tracking-wide leading-none">
-              Why Businesses Choose DhiGrowth.
+            <h2 className="font-header text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.08] font-bold">
+              Why Businesses <br />
+              <span className="bg-gradient-to-r from-white via-slate-100 to-[#2196E8] bg-clip-text text-transparent">
+                Choose DhiGrowth.
+              </span>
             </h2>
             
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-lg font-body">
               We combine deep domain understanding with world-class tech, data-driven performance marketing, and AI automation to deliver unmatched digital growth for your brand.
             </p>
 
             <div className="pt-2">
               <Link 
                 href="/about" 
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm font-semibold transition-all hover:scale-105"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-[#2196E8] to-[#1b80c9] hover:from-[#1b80c9] hover:to-[#2196E8] text-white text-sm font-bold transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
               >
                 <span>Explore Our Edge</span>
                 <ArrowRight className="w-4 h-4" />
@@ -107,90 +219,120 @@ export default function WhyChooseUs() {
             </div>
           </div>
 
-          {/* Right Column (7 Cols): Horizontal Carousel Cards matching reference site */}
-          <div className="lg:col-span-7 space-y-6">
+          {/* Right Column (7 Cols): Smooth Swipe Carousel */}
+          <div className="lg:col-span-7 space-y-6 relative">
             
-            {/* Cards Carousel Container with Swipe / Drag gestures */}
-            <div className="relative overflow-hidden py-2 cursor-grab active:cursor-grabbing select-none touch-pan-y">
+            {/* Carousel Viewport with Touch & Mouse Swipe */}
+            <div 
+              ref={containerRef}
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
+              className="relative overflow-hidden py-3 cursor-grab active:cursor-grabbing select-none touch-pan-y"
+            >
               <motion.div 
-                className="flex gap-6 select-none"
+                className="flex gap-5 sm:gap-6 select-none"
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.2}
                 onDragEnd={(_, info) => {
-                  if (info.offset.x < -35 || info.velocity.x < -200) {
+                  if (info.offset.x < -35 || info.velocity.x < -180) {
                     handleNext();
-                  } else if (info.offset.x > 35 || info.velocity.x > 200) {
+                  } else if (info.offset.x > 35 || info.velocity.x > 180) {
                     handlePrev();
                   }
                 }}
-                animate={{ x: -currentIdx * cardStep }}
-                transition={{ ease: [0.32, 0.72, 0, 1], duration: 0.45 }}
+                animate={{ x: -virtualIndex * cardStep }}
+                transition={isInstant ? { duration: 0 } : { ease: [0.25, 1, 0.5, 1], duration: 0.55 }}
+                onAnimationComplete={handleAnimationComplete}
               >
-                {differentiators.map((diff, idx) => (
-                  <div 
-                    key={idx}
-                    className="w-[290px] sm:w-[320px] shrink-0 bg-white text-slate-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between group select-none"
-                  >
-                    <div>
-                      {/* Top Header Image */}
-                      <div className="w-full h-44 relative overflow-hidden bg-slate-100">
+                {extendedList.map((diff, idx) => {
+                  const isActive = idx === virtualIndex;
+                  return (
+                    <div 
+                      key={idx}
+                      onClick={() => {
+                        setIsInstant(false);
+                        setVirtualIndex(idx);
+                        setIsPaused(true);
+                        setTimeout(() => setIsPaused(false), 7000);
+                      }}
+                      className={`relative w-[300px] sm:w-[350px] md:w-[370px] h-[460px] sm:h-[480px] md:h-[500px] shrink-0 rounded-[32px] overflow-hidden shadow-2xl group select-none cursor-pointer transition-all duration-300 flex flex-col bg-white border border-slate-200/80 ${
+                        isActive 
+                          ? 'ring-2 ring-[#2196E8] shadow-blue-500/25 scale-[1.01]' 
+                          : 'opacity-90 hover:opacity-100 hover:scale-[1.005]'
+                      }`}
+                    >
+                      {/* Top Half: High-resolution Image */}
+                      <div className="relative w-full h-[230px] sm:h-[250px] md:h-[260px] overflow-hidden bg-slate-900 shrink-0">
                         <img 
                           src={diff.image} 
                           alt={diff.title}
                           draggable={false}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none select-none"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none select-none"
                         />
                       </div>
 
-                      {/* Card Content */}
-                      <div className="p-6 space-y-3">
-                        <span className="text-[11px] font-mono font-bold text-[#2196E8] tracking-wider block">
-                          {diff.badge}
-                        </span>
+                      {/* Bottom Half: Solid White Content Card */}
+                      <div className="flex-1 p-6 sm:p-7 flex flex-col justify-start text-left bg-white text-slate-900 rounded-b-[32px]">
+                        {/* Category Label */}
+                        <div className="text-sm font-bold text-[#2196E8] tracking-tight mb-2 flex items-center gap-1.5">
+                          <span>{diff.badge}</span>
+                        </div>
                         
-                        <h3 className="font-header text-xl text-slate-900 tracking-wide leading-snug">
+                        {/* Title */}
+                        <h3 className="font-header text-xl sm:text-2xl font-extrabold text-slate-900 leading-tight mb-2.5 tracking-tight">
                           {diff.title}
                         </h3>
 
-                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                        {/* Description */}
+                        <p className="text-slate-600 text-sm sm:text-[14px] leading-relaxed font-body">
                           {diff.desc}
                         </p>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </motion.div>
             </div>
 
-            {/* Slider Nav Controls matching reference video */}
-            <div className="flex items-center justify-between pt-4 border-t border-slate-800">
-              {/* Progress Line */}
-              <div className="flex-1 max-w-[200px] h-[3px] bg-slate-800 rounded-full overflow-hidden">
-                <motion.div 
-                  className="h-full bg-[#2196E8] rounded-full"
-                  animate={{ width: `${((currentIdx + 1) / differentiators.length) * 100}%` }}
-                  transition={{ duration: 0.3 }}
-                />
+            {/* Slider Bottom Navigation: Pagination Dots & Arrows */}
+            <div className="flex items-center justify-between pt-2 px-1">
+              
+              {/* Pagination Dots (Matching Reference Video) */}
+              <div className="flex items-center gap-2">
+                {differentiators.map((_, dotIdx) => (
+                  <button
+                    key={dotIdx}
+                    onClick={() => goToSlide(dotIdx)}
+                    className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                      activeDot === dotIdx 
+                        ? 'w-8 bg-[#2196E8] shadow-sm shadow-blue-500/50' 
+                        : 'w-2.5 bg-slate-700 hover:bg-slate-500'
+                    }`}
+                    aria-label={`Go to slide ${dotIdx + 1}`}
+                  />
+                ))}
               </div>
 
-              {/* Navigation Arrow Buttons */}
-              <div className="flex items-center gap-3">
+              {/* Prev / Next Circular Arrow Buttons */}
+              <div className="flex items-center gap-2.5">
                 <button
                   onClick={handlePrev}
-                  className="w-10 h-10 rounded-full border border-slate-700 flex items-center justify-center text-white hover:border-[#2196E8] hover:text-[#2196E8] transition-all cursor-pointer bg-white/5"
-                  aria-label="Previous card"
+                  className="w-10 h-10 rounded-full border border-slate-700/80 bg-slate-900/60 hover:bg-[#2196E8] hover:border-[#2196E8] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-md hover:scale-105 active:scale-95"
+                  aria-label="Previous card (reverse)"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button
                   onClick={handleNext}
-                  className="w-10 h-10 rounded-full border border-slate-700 flex items-center justify-center text-white hover:border-[#2196E8] hover:text-[#2196E8] transition-all cursor-pointer bg-white/5"
+                  className="w-10 h-10 rounded-full border border-slate-700/80 bg-slate-900/60 hover:bg-[#2196E8] hover:border-[#2196E8] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-md hover:scale-105 active:scale-95"
                   aria-label="Next card"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>
+
             </div>
 
           </div>

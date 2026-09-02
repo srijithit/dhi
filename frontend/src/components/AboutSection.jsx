@@ -40,9 +40,9 @@ export default function AboutSection() {
             </p>
           </div>
 
-          <div className="glass-card p-8 relative group border border-[#a9c0f5]/15 hover:border-[#4A72EB]">
-            <div className="w-14 h-14 rounded-2xl bg-[#4A72EB]/10 border border-[#4A72EB]/30 flex items-center justify-center text-[#4A72EB] mb-6 group-hover:scale-110 transition-transform">
-              <TrendingUp className="w-7 h-7 text-[#4A72EB]" />
+          <div className="glass-card p-8 relative group border border-[#a9c0f5]/15 hover:border-[#2196E8]">
+            <div className="w-14 h-14 rounded-2xl bg-[#2196E8]/10 border border-[#2196E8]/30 flex items-center justify-center text-[#2196E8] mb-6 group-hover:scale-110 transition-transform">
+              <TrendingUp className="w-7 h-7 text-[#2196E8]" />
             </div>
             <h3 className="font-header text-2xl text-white uppercase tracking-wide mb-3">
               Marketing That Converts
@@ -52,9 +52,9 @@ export default function AboutSection() {
             </p>
           </div>
 
-          <div className="glass-card p-8 relative group border border-[#a9c0f5]/15 hover:border-[#A9C0F5]">
-            <div className="w-14 h-14 rounded-2xl bg-[#A9C0F5]/10 border border-[#A9C0F5]/30 flex items-center justify-center text-[#A9C0F5] mb-6 group-hover:scale-110 transition-transform">
-              <Compass className="w-7 h-7 text-[#A9C0F5]" />
+          <div className="glass-card p-8 relative group border border-[#a9c0f5]/15 hover:border-[#2196E8]">
+            <div className="w-14 h-14 rounded-2xl bg-[#2196E8]/10 border border-[#2196E8]/30 flex items-center justify-center text-[#2196E8] mb-6 group-hover:scale-110 transition-transform">
+              <Compass className="w-7 h-7 text-[#2196E8]" />
             </div>
             <h3 className="font-header text-2xl text-white uppercase tracking-wide mb-3">
               Coimbatore Roots, Global Standards

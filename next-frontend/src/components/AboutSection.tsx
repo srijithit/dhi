@@ -18,23 +18,17 @@ export default function AboutSection() {
     {
       icon: Cpu,
       title: "Technology-First",
-      desc: "From custom websites to AI-powered automation, we build future-ready digital products.",
-      colorClass: "border-l-[#2196E8] hover:border-[#2196E8] text-[#2196E8]",
-      bgClass: "bg-[#2196E8]/5 border-[#2196E8]/20"
+      desc: "From custom websites to AI-powered automation, we build future-ready digital products."
     },
     {
       icon: TrendingUp,
       title: "Marketing That Converts",
-      desc: "Data-driven SEO, paid ads, and social media strategies that bring real ROI.",
-      colorClass: "border-l-[#4A72EB] hover:border-[#4A72EB] text-[#4A72EB]",
-      bgClass: "bg-[#4A72EB]/5 border-[#4A72EB]/20"
+      desc: "Data-driven SEO, paid ads, and social media strategies that bring real ROI."
     },
     {
       icon: Compass,
       title: "Coimbatore Roots, Global Standards",
-      desc: "Local expertise with world-class execution for businesses of all sizes.",
-      colorClass: "border-l-[#A9C0F5] hover:border-l-[#A9C0F5] hover:border-[#A9C0F5] text-[#A9C0F5]",
-      bgClass: "bg-[#A9C0F5]/5 border-[#A9C0F5]/20"
+      desc: "Local expertise with world-class execution for businesses of all sizes."
     }
   ];
 
@@ -78,10 +72,10 @@ export default function AboutSection() {
               <motion.div 
                 key={idx}
                 variants={fadeInUp}
-                className={`premium-glass-card shine-effect p-8 border-l-4 ${pillar.colorClass} group`}
+                className="premium-glass-card shine-effect p-8 border-l-4 border-l-[#2196E8] hover:border-[#2196E8] group"
               >
-                <div className={`w-14 h-14 rounded-2xl ${pillar.bgClass} border flex items-center justify-center ${pillar.colorClass.split(' ')[2]} mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <IconComponent className="w-7 h-7" />
+                <div className="w-14 h-14 rounded-2xl bg-[#2196E8]/5 border border-[#2196E8]/20 flex items-center justify-center text-[#2196E8] mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <IconComponent className="w-7 h-7 text-[#2196E8]" />
                 </div>
                 <h3 className="font-header text-2xl text-slate-900 dark:text-white tracking-wide mb-3">
                   {pillar.title}

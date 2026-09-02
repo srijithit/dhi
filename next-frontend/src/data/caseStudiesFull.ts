@@ -1067,6 +1067,86 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
     ],
     "link": "",
     "image": "/images/case-studies/ai-invoice-processing/showcase_3.png"
+  },
+  {
+    "slug": "vasantabhavan",
+    "title": "Vasantabhavan",
+    "subtitle": "Global Vegetarian Hospitality & Digital Dining Platform",
+    "category": "F&B Hospitality",
+    "brandColor": "#b45309",
+    "tl": "DhiGrowth Team",
+    "about": "Namma Veedu Vasanta Bhavan has been built on honest food, consistent quality and genuine South Indian hospitality values passed through generations since 1969.\n\nToday, that 60+ year legacy is entering a new chapter with VB World — a contemporary digital expression of their heritage created for a new generation and a growing world. With over 25+ global locations, serving 50,000+ meals daily and 5 Lakh+ guests monthly backed by a 20,000 sq.ft state-of-the-art central kitchen, VB World unites dine-in, online ordering, outdoor catering, and banquet hall reservations into a seamless multi-channel platform.",
+    "challenges": "Scaling a heritage culinary brand into a modern digital powerhouse requires balancing deep-rooted tradition with cutting-edge digital efficiency.\n\nKey challenges included:\n- Unifying multiple sister brands (Vasanta Bhavan, VB World, Cones & Brew) under one coherent digital architecture\n- Connecting 25+ branches with real-time location mapping and branch-specific menus\n- Seamless integration with leading delivery platforms (Swiggy, Zomato) for instantaneous ordering\n- Streamlining banquet hall inquiries and large-scale outdoor catering reservations\n- Delivering blazing-fast page performance with opulent South Indian visual storytelling\n- Ensuring cross-device accessibility for families, corporate diners, and global travelers",
+    "solutions": "We engineered a modern, ultra-responsive digital hospitality platform that captures the warmth of 'Namma Veedu' while providing modern digital booking and ordering convenience.\n\nKey solution components:\n- Modern Next.js web application with bespoke typography and fluid animations\n- Multi-brand unified portal spanning Vasanta Bhavan traditional dining, VB World modern bistro, and Cones & Brew desserts\n- Interactive branch locator and detailed branch showcases across Tamil Nadu and global destinations\n- Integrated food ordering bridge directly connecting diners to Swiggy & Zomato storefronts\n- Banquet & Events booking engine with capacity estimators and tailored catering request workflows\n- Interactive brand timeline celebrating the journey from 1969 in Trichy to modern global presence\n- High-performance image and asset delivery via optimized next-gen WebP formats",
+    "solutionBullets": [
+      "Unified multi-brand digital portal celebrating 60+ years of South Indian culinary heritage",
+      "Branch locator with dynamic routing and location-specific menu previews across 25+ locations",
+      "Frictionless online ordering gateway integrating Swiggy and Zomato storefronts",
+      "Bespoke banquet hall and event catering reservation engine handling thousands of guests",
+      "Award-winning digital design featuring warm ambient lighting and contemporary typography",
+      "Enterprise-grade performance built on modern React and Next.js architecture"
+    ],
+    "productExperience": "The platform delivers a digital ambiance that mirrors entering a Vasanta Bhavan restaurant — warm, inviting, and steeped in tradition yet distinctly contemporary.\n\nVisitors can effortlessly browse digital menus, find their nearest branch, explore banquet hall amenities, or order their favorite dishes with a single click. Every interaction reinforces the brand's core motto: 'Generations of trust, evolving into new experiences for today and tomorrow.'",
+    "highlights": [
+      "Heritage Since 1969 — Over six decades of trusted authentic South Indian vegetarian hospitality",
+      "Scale of Impact — Serving 50,000+ meals daily and over 5,00,000+ happy guests every month",
+      "Global Presence — Spanning 25+ locations across India and international markets",
+      "20,000 Sq. Ft Central Kitchen — State-of-the-art culinary infrastructure powering consistent quality",
+      "Multi-Channel Hospitality — Seamlessly bridging Dine-In, Online Delivery, Banquets, and Outdoor Catering",
+      "Prestigious Accolades — Awarded 'Restaurant of the Year 2024' and 'Retail Dragon Awards 2024'"
+    ],
+    "techStack": [
+      "Frontend Framework: Next.js 15 App Router, React 19, TypeScript. • Styling & Motion: Tailwind CSS, Framer Motion, Lenis Smooth Scroll. • Typography: Satoshi & Cormorant Garamond typography system. • Integrations: Swiggy API, Zomato API, Google Maps Platform. • Performance: Turbopack, Next Image Optimization, Vercel Edge Network."
+    ],
+    "scope": "Complete digital transformation including UX/UI design system, multi-brand information architecture, branch locator, banquet reservation funnels, online delivery bridges, performance engineering, and global SEO optimization.",
+    "results": [
+      "Elevated brand positioning for VB World across domestic and international markets",
+      "Substantial increase in direct digital banquet and catering inquiries",
+      "Smooth digital adoption with 50,000+ daily dining engagements supported seamlessly",
+      "Flawless mobile performance with sub-second page loads across all 25+ branch portals"
+    ],
+    "link": "https://www.vasantabhavan.in/",
+    "image": "/images/case-studies/vasantabhavan/webBanner-1782291959297-578527377.webp"
+  },
+  {
+    "slug": "infinite-structure",
+    "title": "Infinite Structure",
+    "subtitle": "Precision PEB Structures, Kinetic Roofing & Civil Construction",
+    "category": "Civil & Industrial Infra",
+    "brandColor": "#2563eb",
+    "tl": "DhiGrowth Team",
+    "about": "Infinite Structure is a premier engineering and architectural leader specializing in deployable kinetic engineering, precision industrial roofing solutions, pre-engineered buildings (PEB), and full-scale civil construction.\n\nOperating at the intersection of structural engineering and architectural innovation, Infinite Structure delivers turnkey warehouses, industrial manufacturing plants, commercial hangars, and complex kinetic roof installations engineered for maximum durability, wind resistance, and thermal efficiency.",
+    "challenges": "Industrial construction and PEB engineering are complex, technical domains with high-stakes client requirements.\n\nKey challenges included:\n- Translating complex heavy engineering specifications (tensile strength, wind loads, load-bearing capacities) into an intuitive, visually striking web experience\n- Visualizing deployable kinetic roofing and PEB structural assemblies digitally for prospective industrial clients\n- Designing a high-performance web application capable of cinematic split-screen animations without sacrificing load speed\n- Creating an interactive specification comparison tool for engineers, architects, and industrial developers\n- Driving qualified commercial inquiries from industrial park developers and manufacturing enterprises",
+    "solutions": "We designed and engineered a cinematic, blueprint-inspired digital platform featuring interactive structural breakdowns, real-time specifications, and smooth kinetic visual storytelling.\n\nKey solution components:\n- Split cinematic hero section with interactive loading timelapse and blueprint ambient layers\n- Interactive PEB structure visualizer detailing primary framing, secondary members, and insulated roofing panels\n- Kinetic roofing showcase demonstrating automated deployable roof mechanisms for large industrial spaces\n- Detailed technical specifications matrix covering yield strength (345 MPa), wind velocity tolerances (up to 200 km/h), and thermal acoustic insulation\n- Interactive project gallery highlighting completed heavy civil and PEB projects across South India\n- Streamlined industrial RFP inquiry funnel tailored for corporate procurement officers",
+    "solutionBullets": [
+      "High-impact cinematic architectural platform with blueprint grid aesthetics and ambient lighting",
+      "Interactive PEB engineering showcase detailing tapered columns, rafters, and cold-formed purlins",
+      "Precision roofing technology matrix highlighting standing seam, PUF insulated panels, and polycarbonate skylights",
+      "Smooth 60fps animations powered by GSAP ScrollTrigger and Lenis smooth scrolling",
+      "Comprehensive technical specification tables tailored for structural consultants and architects",
+      "Rapid commercial RFP inquiry system generating high-intent qualified leads"
+    ],
+    "productExperience": "The Infinite Structure digital platform feels like stepping into an advanced engineering design studio. Dark blueprint themes, precision wireframes, kinetic typography, and fluid GSAP scroll interactions guide the visitor from initial architectural vision to structural fabrication and on-site civil execution.",
+    "highlights": [
+      "Precision PEB Engineering — Custom engineered buildings designed for rapid erection and zero structural wastage",
+      "Kinetic Roofing Systems — Deployable, motorized architectural roofs engineered for weather versatility",
+      "Heavy Civil Construction — End-to-end site preparation, deep foundation work, and reinforced concrete superstructures",
+      "High-Tolerance Performance — Certified for wind loads up to 200 km/h and seismic compliance standards",
+      "Turnkey Execution — From 3D structural analysis and fabrication to on-site project commissioning",
+      "Sub-Second Performance — Built with modern web architecture achieving 99+ Google Lighthouse performance scores"
+    ],
+    "techStack": [
+      "Core Technologies: Next.js, TypeScript, Tailwind CSS. • Motion & Scroll Physics: GSAP 3.12, ScrollTrigger, Lenis Smooth Scroll. • Typography: Cinzel, Outfit, and Plus Jakarta Sans font families. • Blueprint Graphics: SVG wireframes, Canvas animations, WebP imagery. • Deployment: Vercel Edge Network."
+    ],
+    "scope": "Architectural UI/UX design, blueprint graphical assets, interactive structural visualizers, GSAP animation orchestration, responsive front-end engineering, RFP inquiry form integration, and performance tuning.",
+    "results": [
+      "Established Infinite Structure as the benchmark modern PEB and industrial roofing contractor in the region",
+      "Dramatic increase in enterprise inquiries for multi-acre warehouse and manufacturing plant construction",
+      "Acclaimed user experience blending industrial grit with luxury architectural elegance",
+      "Over 70% increase in session duration driven by interactive GSAP scroll experiences"
+    ],
+    "link": "https://infinitestructure.vercel.app/",
+    "image": "/images/case-studies/infinite-structure/0240.webp"
   }
 ];
 

@@ -506,6 +506,19 @@ export default function DynamicCaseStudyPage({
       '/images/case-studies/gigabull/showcase_5.webp',
       '/images/case-studies/gigabull/showcase_6.webp',
     ],
+    'vasantabhavan': [
+      '/images/case-studies/vasantabhavan/webBanner-1782291959297-578527377.webp',
+      '/images/case-studies/vasantabhavan/homecta-banner.2da0mntsel58o.webp',
+      '/images/case-studies/vasantabhavan/journey_slide_1_1.3pe8iloal08fx.webp',
+      '/images/case-studies/vasantabhavan/home-legacy-built-img6.0bktuehrp0uhn.webp',
+    ],
+    'infinite-structure': [
+      '/images/case-studies/infinite-structure/0240.webp',
+      '/images/case-studies/infinite-structure/canvas_capture_3.webp',
+      '/images/case-studies/infinite-structure/0120.webp',
+      '/images/case-studies/infinite-structure/canvas_capture_1.webp',
+      '/images/case-studies/infinite-structure/0200.webp',
+    ],
   };
 
   const heroBannerMap: Record<string, string> = {
@@ -528,6 +541,8 @@ export default function DynamicCaseStudyPage({
     'akirva': '/images/case-studies/akirva/showcase_1.png',
     'judah': '/images/case-studies/judah/showcase_1.png',
     'nestpilot': '/images/case-studies/nestpilot/showcase_1.png',
+    'vasantabhavan': '/images/case-studies/vasantabhavan/webBanner-1782291959297-578527377.webp',
+    'infinite-structure': '/images/case-studies/infinite-structure/0240.webp',
     'ai-invoice-processing': '/images/case-studies/ai-invoice-processing/showcase_3.png',
     'bad-biscuit-detection': '/images/case-studies/bad-biscuit-detection/showcase_5.png',
     'fabric-defect-detection': 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80',
@@ -763,6 +778,8 @@ export default function DynamicCaseStudyPage({
     'thoorigai': '/images/case-studies/logos/thoorigai.png',
     'gigabull': '/images/case-studies/logos/gigabull.png',
     'squirlio': '/images/case-studies/logos/squirlio.png',
+    'vasantabhavan': '/images/case-studies/vasantabhavan/vb-card-logo-trans-1.1e-qnj4xkg1zo.webp',
+    'infinite-structure': '/images/case-studies/infinite-structure/logo.webp',
   };
   const confettiCanvasRef = useRef<HTMLCanvasElement>(null);
   const confettiInstanceRef = useRef<any>(null);

@@ -332,9 +332,136 @@ export default function CareersPage() {
     setResumeError('');
   };
 
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ' && (e.currentTarget.selectionStart === 0 || e.currentTarget.value.length === 0)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/^\s+/, '');
+    setSearchQuery(val);
+  };
+
+  const handleApplicantNameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ' && (e.currentTarget.selectionStart === 0 || e.currentTarget.value.length === 0)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleApplicantNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/^\s+/, '').replace(/[^a-zA-Z\s.'-]/g, '').replace(/\s{2,}/g, ' ');
+    setApplicantData(prev => ({ ...prev, name: val }));
+    if (errorMessage) setErrorMessage('');
+  };
+
+  const handleApplicantEmailKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  const handleApplicantEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value.replace(/\s/g, '');
+    setApplicantData(prev => ({ ...prev, email: val }));
+    if (errorMessage) setErrorMessage('');
+  };
+
+  const handleApplicantPhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  const handleApplicantPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/\s/g, '');
+    if (val.startsWith('+')) {
+      val = '+' + val.slice(1).replace(/\D/g, '');
+    } else {
+      val = val.replace(/\D/g, '');
+    }
+    if (val.length > 16) val = val.slice(0, 16);
+    setApplicantData(prev => ({ ...prev, phone: val }));
+    if (errorMessage) setErrorMessage('');
+  };
+
+  const handleExperienceKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ' && (e.currentTarget.selectionStart === 0 || e.currentTarget.value.length === 0)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleExperienceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/^\s+/, '');
+    setApplicantData(prev => ({ ...prev, experience: val }));
+    if (errorMessage) setErrorMessage('');
+  };
+
+  const handleLinkedinKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  const handleLinkedinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value.replace(/\s/g, '');
+    setApplicantData(prev => ({ ...prev, linkedin: val }));
+    if (errorMessage) setErrorMessage('');
+  };
+
+  const handleNoteKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === ' ' && (e.currentTarget.selectionStart === 0 || e.currentTarget.value.length === 0)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleNoteChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    let val = e.target.value.replace(/^\s+/, '');
+    setApplicantData(prev => ({ ...prev, note: val }));
+    if (errorMessage) setErrorMessage('');
+  };
+
   const handleApplySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
+
+    const trimmedName = applicantData.name.trim();
+    const trimmedEmail = applicantData.email.trim();
+    const trimmedPhone = applicantData.phone.trim();
+    const trimmedExp = applicantData.experience.trim();
+    const trimmedLinkedin = applicantData.linkedin.trim();
+    const trimmedNote = applicantData.note.trim();
+
+    if (!trimmedName || trimmedName.length < 2) {
+      setErrorMessage('Please enter a valid Full Name (minimum 2 letters, characters only).');
+      return;
+    }
+    if (!/^[a-zA-Z\s.'-]+$/.test(trimmedName)) {
+      setErrorMessage('Name must only contain character strings.');
+      return;
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!trimmedEmail || !emailRegex.test(trimmedEmail)) {
+      setErrorMessage('Please enter a valid Email ID (no spaces allowed).');
+      return;
+    }
+
+    const digitsOnly = trimmedPhone.replace(/\D/g, '');
+    if (!trimmedPhone || digitsOnly.length < 10) {
+      setErrorMessage('Please enter a valid Phone Number (minimum 10 integer digits, numbers only).');
+      return;
+    }
+
+    if (!trimmedExp) {
+      setErrorMessage('Years of Experience cannot be empty or just spaces.');
+      return;
+    }
+
+    if (!trimmedLinkedin) {
+      setErrorMessage('LinkedIn Profile URL cannot be empty or just spaces.');
+      return;
+    }
 
     if (!resumeBase64 || !resumeFile) {
       setResumeError('Resume upload is mandatory. Please upload a PDF under 5MB.');
@@ -345,25 +472,25 @@ export default function CareersPage() {
     const roleTitle = applyModalJob ? applyModalJob.title : "General Application";
 
     // Build Pre-filled Gmail Compose & Mailto Links
-    const subject = `Job Application: ${roleTitle} — ${applicantData.name}`;
+    const subject = `Job Application: ${roleTitle} — ${trimmedName}`;
     const bodyText = `Hello DhiGrowth Hiring Team,
 
 I am applying for the position: "${roleTitle}".
 
 My Details:
-• Full Name: ${applicantData.name}
-• Email: ${applicantData.email}
-• Phone / WhatsApp: ${applicantData.phone}
-• Experience: ${applicantData.experience}
-• LinkedIn: ${applicantData.linkedin}
+• Full Name: ${trimmedName}
+• Email: ${trimmedEmail}
+• Phone / WhatsApp: ${trimmedPhone}
+• Experience: ${trimmedExp}
+• LinkedIn: ${trimmedLinkedin}
 
 Key Skills / Cover Note:
-${applicantData.note}
+${trimmedNote}
 
 (Resume: ${resumeFile?.name || 'Resume.pdf'})
 
 Thank you!
-${applicantData.name}`;
+${trimmedName}`;
 
     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=Dhinesh@dhigrowth.com,dinesh@dhigrowth.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
     const mailtoLink = `mailto:Dhinesh@dhigrowth.com,dinesh@dhigrowth.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
@@ -376,12 +503,12 @@ ${applicantData.name}`;
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: applicantData.name,
-          email: applicantData.email,
-          phone: applicantData.phone,
-          experience: applicantData.experience,
-          linkedin: applicantData.linkedin,
-          note: applicantData.note,
+          name: trimmedName,
+          email: trimmedEmail,
+          phone: trimmedPhone,
+          experience: trimmedExp,
+          linkedin: trimmedLinkedin,
+          note: trimmedNote,
           role: roleTitle,
           resumeBase64: resumeBase64,
           resumeFileName: resumeFile.name
@@ -513,7 +640,8 @@ ${applicantData.name}`;
                   type="text"
                   placeholder="Search role, skills..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={handleSearchKeyDown}
+                  onChange={handleSearchChange}
                   className="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-full text-xs focus:outline-none focus:border-[#2196E8] text-slate-900 transition-colors shadow-sm"
                 />
               </div>
@@ -683,23 +811,21 @@ ${applicantData.name}`;
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
               {HIRING_STEPS.map((step, idx) => (
                 <div
                   key={idx}
-                  className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between"
+                  className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm relative overflow-hidden flex flex-col h-full hover:shadow-md transition-shadow duration-300 text-left"
                 >
-                  <span className="text-3xl font-extrabold text-[#2196E8]/25 font-mono mb-4 block">
+                  <span className="text-3xl font-extrabold text-[#2196E8]/30 font-mono mb-4 block leading-none">
                     {step.step}
                   </span>
-                  <div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-2">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {step.desc}
-                    </p>
-                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2.5 min-h-[52px] sm:min-h-[56px] flex items-start leading-snug">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed flex-1">
+                    {step.desc}
+                  </p>
                 </div>
               ))}
             </div>
@@ -981,6 +1107,13 @@ ${applicantData.name}`;
                   </div>
 
                   <div className="space-y-3 pt-2">
+                    {errorMessage && (
+                      <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 text-xs font-semibold flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4 shrink-0" />
+                        <span>{errorMessage}</span>
+                      </div>
+                    )}
+
                     {/* Full Name (Mandatory) */}
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-1">
@@ -991,7 +1124,8 @@ ${applicantData.name}`;
                         required
                         placeholder="Enter your full name"
                         value={applicantData.name}
-                        onChange={(e) => setApplicantData({ ...applicantData, name: e.target.value })}
+                        onKeyDown={handleApplicantNameKeyDown}
+                        onChange={handleApplicantNameChange}
                         className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 placeholder:text-slate-400"
                       />
                     </div>
@@ -1007,7 +1141,8 @@ ${applicantData.name}`;
                           required
                           placeholder="name@example.com"
                           value={applicantData.email}
-                          onChange={(e) => setApplicantData({ ...applicantData, email: e.target.value })}
+                          onKeyDown={handleApplicantEmailKeyDown}
+                          onChange={handleApplicantEmailChange}
                           className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 placeholder:text-slate-400"
                         />
                       </div>
@@ -1020,7 +1155,8 @@ ${applicantData.name}`;
                           required
                           placeholder="+91 98765 43210"
                           value={applicantData.phone}
-                          onChange={(e) => setApplicantData({ ...applicantData, phone: e.target.value })}
+                          onKeyDown={handleApplicantPhoneKeyDown}
+                          onChange={handleApplicantPhoneChange}
                           className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 placeholder:text-slate-400"
                         />
                       </div>
@@ -1037,7 +1173,8 @@ ${applicantData.name}`;
                           required
                           placeholder="e.g. 3 Years / Fresher"
                           value={applicantData.experience}
-                          onChange={(e) => setApplicantData({ ...applicantData, experience: e.target.value })}
+                          onKeyDown={handleExperienceKeyDown}
+                          onChange={handleExperienceChange}
                           className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 placeholder:text-slate-400"
                         />
                       </div>
@@ -1050,7 +1187,8 @@ ${applicantData.name}`;
                           required
                           placeholder="https://linkedin.com/in/..."
                           value={applicantData.linkedin}
-                          onChange={(e) => setApplicantData({ ...applicantData, linkedin: e.target.value })}
+                          onKeyDown={handleLinkedinKeyDown}
+                          onChange={handleLinkedinChange}
                           className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 placeholder:text-slate-400"
                         />
                       </div>
@@ -1113,7 +1251,8 @@ ${applicantData.name}`;
                         required
                         placeholder="Highlight your key skills, notable projects, or why you want to join DhiGrowth..."
                         value={applicantData.note}
-                        onChange={(e) => setApplicantData({ ...applicantData, note: e.target.value })}
+                        onKeyDown={handleNoteKeyDown}
+                        onChange={handleNoteChange}
                         className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 resize-none placeholder:text-slate-400"
                       />
                     </div>

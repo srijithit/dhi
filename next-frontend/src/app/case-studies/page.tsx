@@ -36,6 +36,8 @@ const CASE_STUDY_LOGOS: Record<string, string> = {
   'fabric-defect-detection': '/images/case-studies/logos/infragen.png',
   'dhigrowth-ai-chatbot': '/images/case-studies/logos/clean_culture.png',
   'ai-invoice-processing': '/images/case-studies/logos/infragen.png',
+  'vasantabhavan': '/images/case-studies/vasantabhavan/vb-card-logo-trans-1.1e-qnj4xkg1zo.webp',
+  'infinite-structure': '/images/case-studies/infinite-structure/logo.webp',
 };
 
 export default function CaseStudiesPage() {

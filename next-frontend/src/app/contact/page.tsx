@@ -45,22 +45,126 @@ export default function ContactPage() {
     }
   }, []);
 
+  const handleNameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ' && (!formData.name || formData.name.length === 0 || formData.name.endsWith(' '))) {
+      e.preventDefault();
+    }
+  };
+
+  const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  const handleCompanyKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ' && (!formData.company || formData.company.length === 0 || formData.company.endsWith(' '))) {
+      e.preventDefault();
+    }
+  };
+
+  const handleMessageKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === ' ' && (!formData.message || formData.message.length === 0)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/^\s+/, '').replace(/[^a-zA-Z\s.'-]/g, '').replace(/\s{2,}/g, ' ');
+    setFormData(prev => ({ ...prev, name: val }));
+    if (errorMsg) setErrorMsg(null);
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/\s+/g, '');
+    if (val.startsWith('+')) {
+      val = '+' + val.slice(1).replace(/\D/g, '');
+    } else {
+      val = val.replace(/\D/g, '');
+    }
+    if (val.length > 16) val = val.slice(0, 16);
+    setFormData(prev => ({ ...prev, phone: val }));
+    if (errorMsg) setErrorMsg(null);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value.replace(/\s+/g, '');
+    setFormData(prev => ({ ...prev, email: val }));
+    if (errorMsg) setErrorMsg(null);
+  };
+
+  const handleCompanyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/^\s+/, '').replace(/\s{2,}/g, ' ');
+    setFormData(prev => ({ ...prev, company: val }));
+    if (errorMsg) setErrorMsg(null);
+  };
+
+  const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    let val = e.target.value.replace(/^\s+/, '');
+    setFormData(prev => ({ ...prev, message: val }));
+    if (errorMsg) setErrorMsg(null);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setErrorMsg(null);
+
+    const trimmedName = formData.name.trim();
+    const trimmedPhone = formData.phone.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedCompany = formData.company.trim();
+    const trimmedMessage = formData.message.trim();
+
+    if (!trimmedName || trimmedName.length < 2) {
+      setErrorMsg('Please enter a valid Name (minimum 2 letters, characters only).');
+      return;
+    }
+    if (!/^[a-zA-Z\s.'-]+$/.test(trimmedName)) {
+      setErrorMsg('Name must only contain character strings.');
+      return;
+    }
+
+    const digitsOnly = trimmedPhone.replace(/\D/g, '');
+    if (!trimmedPhone || digitsOnly.length < 10) {
+      setErrorMsg('Please enter a valid WhatsApp Number (minimum 10 integer digits, numbers only).');
+      return;
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!trimmedEmail || !emailRegex.test(trimmedEmail)) {
+      setErrorMsg('Please enter a valid Email Address (no spaces).');
+      return;
+    }
+
+    if (!trimmedCompany) {
+      setErrorMsg('Company / Business Name cannot be empty or just spaces.');
+      return;
+    }
+
+    if (!trimmedMessage) {
+      setErrorMsg('Goals / Requirements cannot be empty or just spaces.');
+      return;
+    }
+
+    setIsSubmitting(true);
 
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          company: formData.company,
+          name: trimmedName,
+          phone: trimmedPhone,
+          email: trimmedEmail,
+          company: trimmedCompany,
           service: formData.service,
-          message: formData.message
+          message: trimmedMessage
         }),
       });
 
@@ -197,7 +301,8 @@ export default function ContactPage() {
                             required
                             placeholder="e.g. Anand Kumar"
                             value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            onKeyDown={handleNameKeyDown}
+                            onChange={handleNameChange}
                             className="w-full px-4 py-3 bg-white dark:bg-[#121829] border border-slate-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors shadow-sm"
                           />
                         </div>
@@ -213,7 +318,8 @@ export default function ContactPage() {
                               required
                               placeholder="e.g. +91 93610 88012"
                               value={formData.phone}
-                              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                              onKeyDown={handlePhoneKeyDown}
+                              onChange={handlePhoneChange}
                               className="w-full px-4 py-3 bg-white dark:bg-[#121829] border border-slate-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors shadow-sm"
                             />
                           </div>
@@ -227,7 +333,8 @@ export default function ContactPage() {
                               required
                               placeholder="e.g. hello@company.com"
                               value={formData.email}
-                              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                              onKeyDown={handleEmailKeyDown}
+                              onChange={handleEmailChange}
                               className="w-full px-4 py-3 bg-white dark:bg-[#121829] border border-slate-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors shadow-sm"
                             />
                           </div>
@@ -243,7 +350,8 @@ export default function ContactPage() {
                             required
                             placeholder="e.g. My Brand Pvt Ltd"
                             value={formData.company}
-                            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                            onKeyDown={handleCompanyKeyDown}
+                            onChange={handleCompanyChange}
                             className="w-full px-4 py-3 bg-white dark:bg-[#121829] border border-slate-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors shadow-sm"
                           />
                         </div>
@@ -284,7 +392,8 @@ export default function ContactPage() {
                             required
                             placeholder="e.g. Build an iOS/Android e-commerce app with WhatsApp integrations."
                             value={formData.message}
-                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                            onKeyDown={handleMessageKeyDown}
+                            onChange={handleMessageChange}
                             className="w-full px-4 py-3 bg-white dark:bg-[#121829] border border-slate-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 resize-none transition-colors shadow-sm"
                           />
                         </div>

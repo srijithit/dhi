@@ -56,8 +56,9 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     { name: "Judah Food Logistics", slug: "judah" },
     { name: "VerdurePax Lifestyle", slug: "verdurepax" },
     { name: "Amaravathy Coir", slug: "amaravathy-coir" },
-    { name: "Vectra Mechnovations", slug: "vectra-mechnovations" },
+    { name: "Vectra Mechnovations", slug: "vectra-mechnovations", underConstruction: true },
     { name: "Gigabull Luxury", slug: "gigabull" },
+    { name: "Vasantabhavan", slug: "vasantabhavan" },
     { name: "Fabric Defect AI", slug: "fabric-defect-detection", underConstruction: true },
     { name: "AI Invoice Processing", slug: "ai-invoice-processing", underConstruction: true }
   ];
@@ -68,6 +69,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     { name: "Befhue Creative Agency", slug: "befhue" },
     { name: "Sanika's Cuisine", slug: "sanikas-restaurant" },
     { name: "Startten Platform", slug: "startten" },
+    { name: "Infinite Structure", slug: "infinite-structure" },
     { name: "Biscuit Defect AI", slug: "bad-biscuit-detection", underConstruction: true },
     { name: "Sales CRM App", slug: "sales-app", underConstruction: true }
   ];
@@ -92,29 +94,15 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     }
   };
 
-  // Home page hero is light, so when not scrolled on Home page, nav text must be dark.
-  // Subpages (About, Services, Contact) still have dark heroes, so when not scrolled on those pages, nav text is white.
-  const isHome = pathname === '/';
-  const isTransparentHero = !scrolled && (pathname === '/' || pathname === '/about' || pathname.startsWith('/services') || pathname === '/contact');
-  const isLightHeroBackground = !scrolled && isHome;
-
+  // On mobile view, keep the navbar sticky with a solid/frosted white backdrop so it never hides or clashes with page content.
+  // On desktop, keep transparent hero padding when unscrolled, and frosted backdrop when scrolled.
   const headerBgClass = scrolled 
-    ? 'backdrop-blur-md bg-white/80 border-b border-slate-200 py-3 shadow-sm' 
-    : 'bg-transparent py-6';
-
-  const logoTextClass = isLightHeroBackground 
-    ? 'text-slate-900' 
-    : isTransparentHero 
-      ? 'text-white' 
-      : 'text-slate-900';
+    ? 'backdrop-blur-md bg-white/95 border-b border-slate-200 py-3 shadow-sm' 
+    : 'backdrop-blur-md bg-white/95 border-b border-slate-200/80 py-3 shadow-sm md:bg-transparent md:border-transparent md:shadow-none md:py-6';
 
   const navLinkTextClass = (isActive: boolean) => {
     if (isActive) return 'text-[#2196E8]';
-    return isLightHeroBackground
-      ? 'text-slate-600 hover:text-black'
-      : isTransparentHero 
-        ? 'text-slate-300 hover:text-white' 
-        : 'text-slate-600 hover:text-black';
+    return 'text-slate-700 hover:text-black';
   };
 
   return (
@@ -179,7 +167,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                             onClick={() => setDropdownOpen(false)}
                             className="border border-[#2196E8]/20 bg-[#2196E8]/5 hover:bg-[#2196E8]/10 text-[#2196E8] px-3.5 py-1 rounded-full text-xs font-bold font-body transition-colors"
                           >
-                            23 Projects
+                            {col1.length + col2.length + col3.length} Projects
                           </Link>
                         </div>
 
@@ -279,9 +267,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
         <div className="flex items-center gap-2 md:hidden">
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`p-2 hover:text-[#2196E8] transition-colors ${
-              isLightHeroBackground ? 'text-slate-900' : isTransparentHero ? 'text-white' : 'text-slate-900'
-            }`}
+            className="p-2.5 rounded-xl text-slate-900 hover:text-[#2196E8] hover:bg-slate-100 active:scale-95 transition-all cursor-pointer"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
@@ -315,7 +301,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                           }}
                           className="text-sm font-bold text-[#2196E8] hover:underline block py-1"
                         >
-                          View All 19 Projects →
+                          View All {col1.length + col2.length + col3.length} Projects →
                         </Link>
                         
                         <div className="grid grid-cols-2 gap-2 text-xs text-slate-500 pr-2">

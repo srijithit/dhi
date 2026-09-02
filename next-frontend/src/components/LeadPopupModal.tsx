@@ -32,10 +32,109 @@ export default function LeadPopupModal({
 
   if (!showModal) return null;
 
+  const handleNameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ' && (!formData.name || formData.name.length === 0 || formData.name.endsWith(' '))) {
+      e.preventDefault();
+    }
+  };
+
+  const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  const handleMessageKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === ' ' && (!formData.message || formData.message.length === 0)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value;
+    // Disallow leading spaces
+    val = val.replace(/^\s+/, '');
+    // Only accept character strings (letters, spaces between words, dots, hyphens, apostrophes)
+    val = val.replace(/[^a-zA-Z\s.'-]/g, '');
+    // Prevent double spaces
+    val = val.replace(/\s{2,}/g, ' ');
+    setFormData(prev => ({ ...prev, name: val }));
+    if (errorMessage) setErrorMessage('');
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Disallow all spaces in email
+    const val = e.target.value.replace(/\s+/g, '');
+    setFormData(prev => ({ ...prev, email: val }));
+    if (errorMessage) setErrorMessage('');
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/\s+/g, '');
+    // Only accept integer values (digits 0-9 and optional leading +)
+    if (val.startsWith('+')) {
+      val = '+' + val.slice(1).replace(/\D/g, '');
+    } else {
+      val = val.replace(/\D/g, '');
+    }
+    // Limit to max 16 digits
+    if (val.length > 16) val = val.slice(0, 16);
+    setFormData(prev => ({ ...prev, phone: val }));
+    if (errorMessage) setErrorMessage('');
+  };
+
+  const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    let val = e.target.value.replace(/^\s+/, '');
+    setFormData(prev => ({ ...prev, message: val }));
+    if (errorMessage) setErrorMessage('');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setErrorMessage('');
+
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedPhone = formData.phone.trim();
+    const trimmedMessage = formData.message.trim();
+
+    // 1. Name validation: must contain only characters and not be empty/spaces
+    if (!trimmedName || trimmedName.length < 2) {
+      setErrorMessage('Please enter a valid Name (minimum 2 letters, characters only).');
+      return;
+    }
+    if (!/^[a-zA-Z\s.'-]+$/.test(trimmedName)) {
+      setErrorMessage('Name must only contain alphabetic character strings.');
+      return;
+    }
+
+    // 2. Email validation: valid format, no spaces
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!trimmedEmail || !emailRegex.test(trimmedEmail)) {
+      setErrorMessage('Please enter a valid Email Id (no spaces allowed).');
+      return;
+    }
+
+    // 3. Phone validation: only integer digits, minimum 10 digits
+    const digitsOnly = trimmedPhone.replace(/\D/g, '');
+    if (!trimmedPhone || digitsOnly.length < 10) {
+      setErrorMessage('Please enter a valid Phone Number (minimum 10 integer digits, numbers only).');
+      return;
+    }
+
+    // 4. Message validation: cannot be purely whitespace if entered
+    if (formData.message && !trimmedMessage) {
+      setErrorMessage('Message cannot consist solely of spaces.');
+      return;
+    }
+
+    setIsSubmitting(true);
 
     try {
       // Optional background notification
@@ -43,18 +142,18 @@ export default function LeadPopupModal({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
+          name: trimmedName,
+          email: trimmedEmail,
+          phone: trimmedPhone,
           service: 'AI & Digital Audit Consultation',
-          message: formData.message || 'Requested proposal from Lead Popup Modal.'
+          message: trimmedMessage || 'Requested proposal from Lead Popup Modal.'
         })
       }).catch((err) => console.warn('Background sync note:', err));
 
       setIsSubmitting(false);
       setIsSuccess(true);
 
-      const msg = encodeURIComponent(`Hi DhiGrowth! I want to request a proposal.\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nMessage: ${formData.message || 'I would like to discuss a project.'}`);
+      const msg = encodeURIComponent(`Hi DhiGrowth! I want to request a proposal.\nName: ${trimmedName}\nEmail: ${trimmedEmail}\nPhone: ${trimmedPhone}\nMessage: ${trimmedMessage || 'I would like to discuss a project.'}`);
       
       // Direct WhatsApp Redirection
       setTimeout(() => {
@@ -65,7 +164,7 @@ export default function LeadPopupModal({
       console.error('Lead submission failed:', err);
       setIsSubmitting(false);
       setIsSuccess(true);
-      const msg = encodeURIComponent(`Hi DhiGrowth! I want to request a proposal.\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nMessage: ${formData.message || 'I would like to discuss a project.'}`);
+      const msg = encodeURIComponent(`Hi DhiGrowth! I want to request a proposal.\nName: ${trimmedName}\nEmail: ${trimmedEmail}\nPhone: ${trimmedPhone}\nMessage: ${trimmedMessage || 'I would like to discuss a project.'}`);
       setTimeout(() => {
         window.open(`https://api.whatsapp.com/send?phone=919361088012&text=${msg}`, '_blank');
       }, 500);
@@ -148,7 +247,8 @@ export default function LeadPopupModal({
                     required
                     placeholder="Name *"
                     value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    onKeyDown={handleNameKeyDown}
+                    onChange={handleNameChange}
                     className="w-full px-4 py-3 bg-slate-50 dark:bg-[#131927] border border-slate-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 dark:text-white transition-colors"
                   />
                 </div>
@@ -159,7 +259,8 @@ export default function LeadPopupModal({
                     required
                     placeholder="Email Id *"
                     value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    onKeyDown={handleEmailKeyDown}
+                    onChange={handleEmailChange}
                     className="w-full px-4 py-3 bg-slate-50 dark:bg-[#131927] border border-slate-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 dark:text-white transition-colors"
                   />
                 </div>
@@ -170,7 +271,8 @@ export default function LeadPopupModal({
                     required
                     placeholder="Phone Number *"
                     value={formData.phone}
-                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    onKeyDown={handlePhoneKeyDown}
+                    onChange={handlePhoneChange}
                     className="w-full px-4 py-3 bg-slate-50 dark:bg-[#131927] border border-slate-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 dark:text-white transition-colors"
                   />
                 </div>
@@ -180,7 +282,8 @@ export default function LeadPopupModal({
                     rows={3}
                     placeholder="Enter Message / Requirements"
                     value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    onKeyDown={handleMessageKeyDown}
+                    onChange={handleMessageChange}
                     className="w-full px-4 py-3 bg-slate-50 dark:bg-[#131927] border border-slate-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:border-[#2196E8] text-slate-900 dark:text-white transition-colors resize-none"
                   />
                 </div>

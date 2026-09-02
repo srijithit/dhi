@@ -452,22 +452,6 @@ export default function CleanCulturePage() {
             </div>
           </div>
 
-          <Link
-            href="/case-studies/akirva"
-            title="Previous Case Study"
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-[#2196E8] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all shadow-xl hover:scale-110 cursor-pointer"
-          >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-          </Link>
-
-          <Link
-            href="/case-studies/startten"
-            title="Next Case Study"
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-[#2196E8] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all shadow-xl hover:scale-110 cursor-pointer"
-          >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-          </Link>
-
           <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-black/50 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">
             <span className="w-6 h-2 rounded-full bg-[#2196E8] transition-all" />
             <span className="w-2 h-2 rounded-full bg-white/40" />

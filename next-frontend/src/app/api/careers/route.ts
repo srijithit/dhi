@@ -3,12 +3,27 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, experience, linkedin, note, role, resumeBase64, resumeFileName } = body;
+    const name = (body.name || '').trim();
+    const email = (body.email || '').trim();
+    const phone = (body.phone || '').trim();
+    const experience = (body.experience || '').trim();
+    const linkedin = (body.linkedin || '').trim();
+    const note = (body.note || '').trim();
+    const role = (body.role || '').trim();
+    const resumeBase64 = body.resumeBase64;
+    const resumeFileName = body.resumeFileName;
 
-    // Strict validation: all fields are mandatory
+    // Strict validation: all fields are mandatory and cannot be whitespace only
     if (!name || !email || !phone || !experience || !linkedin || !note || !resumeBase64) {
       return NextResponse.json(
-        { success: false, error: 'All fields including Resume (PDF under 5MB) and LinkedIn URL are mandatory.' },
+        { success: false, error: 'All fields including Resume (PDF under 5MB) and LinkedIn URL are mandatory and cannot be empty.' },
+        { status: 400 }
+      );
+    }
+
+    if (!/^[a-zA-Z\s.'-]+$/.test(name)) {
+      return NextResponse.json(
+        { success: false, error: 'Full Name must contain valid character strings only.' },
         { status: 400 }
       );
     }

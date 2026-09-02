@@ -42,11 +42,116 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
 
   // Simple dynamic calculation logic for estimated leads
   const estimatedReach = Math.round(budget * 2.8);
-  const estimatedLeads = Math.round(budget * 0.008);
+  const [formError, setFormError] = useState('');
+
+  const handleNameKeyDown = (e) => {
+    if (e.key === ' ' && (!formData.name || formData.name.length === 0 || formData.name.endsWith(' '))) {
+      e.preventDefault();
+    }
+  };
+
+  const handlePhoneKeyDown = (e) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  const handleEmailKeyDown = (e) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  const handleBusinessKeyDown = (e) => {
+    if (e.key === ' ' && (!formData.businessName || formData.businessName.length === 0 || formData.businessName.endsWith(' '))) {
+      e.preventDefault();
+    }
+  };
+
+  const handleGoalsKeyDown = (e) => {
+    if (e.key === ' ' && (!formData.goals || formData.goals.length === 0)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleNameChange = (e) => {
+    let val = e.target.value.replace(/^\s+/, '').replace(/[^a-zA-Z\s.'-]/g, '').replace(/\s{2,}/g, ' ');
+    setFormData(prev => ({ ...prev, name: val }));
+    if (formError) setFormError('');
+  };
+
+  const handlePhoneChange = (e) => {
+    let val = e.target.value.replace(/\s+/g, '');
+    if (val.startsWith('+')) {
+      val = '+' + val.slice(1).replace(/\D/g, '');
+    } else {
+      val = val.replace(/\D/g, '');
+    }
+    if (val.length > 16) val = val.slice(0, 16);
+    setFormData(prev => ({ ...prev, phone: val }));
+    if (formError) setFormError('');
+  };
+
+  const handleEmailChange = (e) => {
+    const val = e.target.value.replace(/\s+/g, '');
+    setFormData(prev => ({ ...prev, email: val }));
+    if (formError) setFormError('');
+  };
+
+  const handleBusinessChange = (e) => {
+    let val = e.target.value.replace(/^\s+/, '').replace(/\s{2,}/g, ' ');
+    setFormData(prev => ({ ...prev, businessName: val }));
+    if (formError) setFormError('');
+  };
+
+  const handleGoalsChange = (e) => {
+    let val = e.target.value.replace(/^\s+/, '');
+    setFormData(prev => ({ ...prev, goals: val }));
+    if (formError) setFormError('');
+  };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const message = `*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Email:* ${formData.email}\n*Company:* ${formData.businessName}\n*Service:* ${formData.service}\n*Goals:* ${formData.goals}`;
+    setFormError('');
+
+    const trimmedName = formData.name.trim();
+    const trimmedPhone = formData.phone.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedBusiness = formData.businessName.trim();
+    const trimmedGoals = formData.goals.trim();
+
+    if (!trimmedName || trimmedName.length < 2) {
+      setFormError('Please enter a valid Name (minimum 2 letters, characters only).');
+      return;
+    }
+    if (!/^[a-zA-Z\s.'-]+$/.test(trimmedName)) {
+      setFormError('Name must only contain character strings.');
+      return;
+    }
+
+    const digitsOnly = trimmedPhone.replace(/\D/g, '');
+    if (!trimmedPhone || digitsOnly.length < 10) {
+      setFormError('Please enter a valid WhatsApp Number (minimum 10 digits).');
+      return;
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!trimmedEmail || !emailRegex.test(trimmedEmail)) {
+      setFormError('Please enter a valid Email Address (no spaces).');
+      return;
+    }
+
+    if (!trimmedBusiness) {
+      setFormError('Company / Business Name cannot be empty or just spaces.');
+      return;
+    }
+
+    if (!trimmedGoals) {
+      setFormError('Goals / Requirements cannot be empty or just spaces.');
+      return;
+    }
+
+    const message = `*Name:* ${trimmedName}\n*Phone:* ${trimmedPhone}\n*Email:* ${trimmedEmail}\n*Company:* ${trimmedBusiness}\n*Service:* ${formData.service}\n*Goals:* ${trimmedGoals}`;
     window.open(`https://api.whatsapp.com/send?phone=919361088012&text=${encodeURIComponent(message)}`, '_blank');
   };
 
@@ -143,6 +248,12 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
                   </p>
 
                   <form onSubmit={handleFormSubmit} className="space-y-4 font-body text-white">
+                    {formError && (
+                      <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-semibold">
+                        {formError}
+                      </div>
+                    )}
+
                     <div>
                       <label className="block text-xs font-bold uppercase text-slate-300 mb-1">Your Name *</label>
                       <input 
@@ -150,7 +261,8 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
                         required
                         placeholder="e.g. Anand Kumar"
                         value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        onKeyDown={handleNameKeyDown}
+                        onChange={handleNameChange}
                         className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8]"
                       />
                     </div>
@@ -163,7 +275,8 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
                           required
                           placeholder="e.g. +91 93610 88012"
                           value={formData.phone}
-                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                          onKeyDown={handlePhoneKeyDown}
+                          onChange={handlePhoneChange}
                           className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8]"
                         />
                       </div>
@@ -175,7 +288,8 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
                           required
                           placeholder="e.g. hello@company.com"
                           value={formData.email}
-                          onChange={(e) => setFormData({...formData, email: e.target.value})}
+                          onKeyDown={handleEmailKeyDown}
+                          onChange={handleEmailChange}
                           className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8]"
                         />
                       </div>
@@ -188,7 +302,8 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
                         required
                         placeholder="e.g. My Brand Pvt Ltd"
                         value={formData.businessName}
-                        onChange={(e) => setFormData({...formData, businessName: e.target.value})}
+                        onKeyDown={handleBusinessKeyDown}
+                        onChange={handleBusinessChange}
                         className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8]"
                       />
                     </div>
@@ -215,8 +330,9 @@ export default function AuditCalculator({ onOpenWhatsApp }) {
                         rows={3}
                         placeholder="e.g. Build an iOS/Android e-commerce app with WhatsApp integrations."
                         value={formData.goals}
-                        onChange={(e) => setFormData({...formData, goals: e.target.value})}
-                        className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8] resize-none"
+                        onKeyDown={handleGoalsKeyDown}
+                        onChange={handleGoalsChange}
+                        className="w-full px-4 py-3 bg-[#121726] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-[#2196E8] resize-none font-body"
                       />
                     </div>
 

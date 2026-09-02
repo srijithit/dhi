@@ -509,7 +509,15 @@ export default function AIChatBotModal({ isOpen, onClose, onOpenAudit }: AIChatB
                       type="text" 
                       placeholder="Ask about AI Automation, App/Web Dev..."
                       value={inputValue}
-                      onChange={(e) => setInputValue(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === ' ' && (e.currentTarget.selectionStart === 0 || e.currentTarget.value.length === 0)) {
+                          e.preventDefault();
+                        }
+                      }}
+                      onChange={(e) => {
+                        let val = e.target.value.replace(/^\s+/, '');
+                        setInputValue(val);
+                      }}
                       className="w-full pl-4 pr-10 py-3 rounded-2xl bg-slate-100 dark:bg-[#131928] border border-slate-200 dark:border-slate-800 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-[#2196E8] transition-colors placeholder:text-slate-400"
                     />
                     <button

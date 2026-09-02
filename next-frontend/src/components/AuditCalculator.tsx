@@ -47,11 +47,116 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
   }, [auditState]);
 
   const estimatedReach = Math.round(budget * 2.8);
-  const estimatedLeads = Math.round(budget * 0.008);
+  const [formError, setFormError] = useState('');
+
+  const handleNameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ' && (!formData.name || formData.name.length === 0 || formData.name.endsWith(' '))) {
+      e.preventDefault();
+    }
+  };
+
+  const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  const handleBusinessKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ' && (!formData.businessName || formData.businessName.length === 0 || formData.businessName.endsWith(' '))) {
+      e.preventDefault();
+    }
+  };
+
+  const handleGoalsKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === ' ' && (!formData.goals || formData.goals.length === 0)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/^\s+/, '').replace(/[^a-zA-Z\s.'-]/g, '').replace(/\s{2,}/g, ' ');
+    setFormData(prev => ({ ...prev, name: val }));
+    if (formError) setFormError('');
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/\s+/g, '');
+    if (val.startsWith('+')) {
+      val = '+' + val.slice(1).replace(/\D/g, '');
+    } else {
+      val = val.replace(/\D/g, '');
+    }
+    if (val.length > 16) val = val.slice(0, 16);
+    setFormData(prev => ({ ...prev, phone: val }));
+    if (formError) setFormError('');
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value.replace(/\s+/g, '');
+    setFormData(prev => ({ ...prev, email: val }));
+    if (formError) setFormError('');
+  };
+
+  const handleBusinessChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/^\s+/, '').replace(/\s{2,}/g, ' ');
+    setFormData(prev => ({ ...prev, businessName: val }));
+    if (formError) setFormError('');
+  };
+
+  const handleGoalsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    let val = e.target.value.replace(/^\s+/, '');
+    setFormData(prev => ({ ...prev, goals: val }));
+    if (formError) setFormError('');
+  };
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `Name: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nCompany: ${formData.businessName}\nService: ${formData.service}\nGoals: ${formData.goals}`;
+    setFormError('');
+
+    const trimmedName = formData.name.trim();
+    const trimmedPhone = formData.phone.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedBusiness = formData.businessName.trim();
+    const trimmedGoals = formData.goals.trim();
+
+    if (!trimmedName || trimmedName.length < 2) {
+      setFormError('Please enter a valid Name (minimum 2 letters, characters only).');
+      return;
+    }
+    if (!/^[a-zA-Z\s.'-]+$/.test(trimmedName)) {
+      setFormError('Name must only contain character strings.');
+      return;
+    }
+
+    const digitsOnly = trimmedPhone.replace(/\D/g, '');
+    if (!trimmedPhone || digitsOnly.length < 10) {
+      setFormError('Please enter a valid WhatsApp Number (minimum 10 integer digits, numbers only).');
+      return;
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!trimmedEmail || !emailRegex.test(trimmedEmail)) {
+      setFormError('Please enter a valid Email Address (no spaces).');
+      return;
+    }
+
+    if (!trimmedBusiness) {
+      setFormError('Company / Business Name cannot be empty or just spaces.');
+      return;
+    }
+
+    if (!trimmedGoals) {
+      setFormError('Goals / Requirements cannot be empty or just spaces.');
+      return;
+    }
+
+    const message = `Name: ${trimmedName}\nPhone: ${trimmedPhone}\nEmail: ${trimmedEmail}\nCompany: ${trimmedBusiness}\nService: ${formData.service}\nGoals: ${trimmedGoals}`;
     window.location.href = `https://api.whatsapp.com/send?phone=919361088012&text=${encodeURIComponent(message)}`;
   };
 
@@ -67,6 +172,12 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
           </p>
 
           <form onSubmit={handleFormSubmit} className="space-y-5 text-slate-900 dark:text-white">
+            {formError && (
+              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs font-semibold">
+                {formError}
+              </div>
+            )}
+
             <div>
               <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1.5 font-body">Your Name *</label>
               <input 
@@ -74,7 +185,8 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
                 required
                 placeholder="e.g. Anand Kumar"
                 value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                onKeyDown={handleNameKeyDown}
+                onChange={handleNameChange}
                 className="w-full px-5 py-4 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-2xl text-base focus:outline-none focus:border-[#2196E8]"
               />
             </div>
@@ -87,7 +199,8 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
                   required
                   placeholder="e.g. +91 93610 88012"
                   value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  onKeyDown={handlePhoneKeyDown}
+                  onChange={handlePhoneChange}
                   className="w-full px-5 py-4 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-2xl text-base focus:outline-none focus:border-[#2196E8]"
                 />
               </div>
@@ -99,7 +212,8 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
                   required
                   placeholder="e.g. hello@company.com"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onKeyDown={handleEmailKeyDown}
+                  onChange={handleEmailChange}
                   className="w-full px-5 py-4 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-2xl text-base focus:outline-none focus:border-[#2196E8]"
                 />
               </div>
@@ -112,7 +226,8 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
                 required
                 placeholder="e.g. My Brand Pvt Ltd"
                 value={formData.businessName}
-                onChange={(e) => setFormData({...formData, businessName: e.target.value})}
+                onKeyDown={handleBusinessKeyDown}
+                onChange={handleBusinessChange}
                 className="w-full px-5 py-4 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-2xl text-base focus:outline-none focus:border-[#2196E8]"
               />
             </div>
@@ -139,17 +254,18 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
                 rows={4}
                 placeholder="e.g. Build an iOS/Android e-commerce app with WhatsApp integrations."
                 value={formData.goals}
-                onChange={(e) => setFormData({...formData, goals: e.target.value})}
+                onKeyDown={handleGoalsKeyDown}
+                onChange={handleGoalsChange}
                 className="w-full px-5 py-4 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-2xl text-base focus:outline-none focus:border-[#2196E8] resize-none font-body"
               />
             </div>
 
             <button 
               type="submit" 
-              className="btn-primary w-full !py-4 sm:!py-5 mt-4 flex items-center justify-center gap-3 cursor-pointer !rounded-2xl sm:!rounded-3xl shadow-xl font-bold text-base sm:text-lg min-h-[56px] capitalize"
+              className="btn-primary w-full !py-4.5 mt-4 flex items-center justify-center gap-3 cursor-pointer !rounded-2xl shadow-xl font-bold text-base min-h-[56px] capitalize"
             >
-              <span>Submit</span>
-              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
+              <span>Submit &amp; Audit</span>
+              <ArrowRight className="w-5 h-5" />
             </button>
           </form>
         </div>
@@ -158,150 +274,148 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
   }
 
   return (
-    <section id="free-audit-form" className="py-8 md:py-12 bg-white dark:bg-[#000000] relative overflow-hidden transition-colors duration-300 border-t border-slate-200 dark:border-slate-900">
+    <div className="bg-white dark:bg-[#070b13] p-4 sm:p-10 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl relative overflow-hidden transition-all duration-300 min-h-[460px] flex flex-col justify-between">
       
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-[#2196E8]/5 to-[#4A72EB]/5 rounded-full blur-[160px] pointer-events-none" />
+      {/* Glow background */}
+      <div className="absolute top-0 right-0 w-80 h-80 bg-[#2196E8]/10 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 relative z-10 font-body">
-        
-        {/* Banner Card */}
-        <div className="glass-card p-4 sm:p-6 lg:p-8 border border-slate-200 dark:border-slate-800/80 bg-slate-50/50 dark:bg-gradient-to-br dark:from-[#0d1322] dark:to-[#12182b] relative overflow-hidden shadow-xl dark:shadow-2xl animate-fadeIn rounded-3xl">
+      <div className="relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
-            <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2196E8]/10 border border-[#2196E8]/30 text-xs font-semibold text-[#2196E8] mb-4 font-body">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Zero Cost • High Value</span>
-              </div>
+          {/* Left Column: Form & Inputs */}
+          <div className="lg:col-span-7">
+            {auditState === 'form' && (
+              <div className="space-y-3 animate-fadeIn text-left">
+                <h3 className="font-header text-xl sm:text-2xl lg:text-3xl text-slate-900 dark:text-white tracking-wide mb-1 leading-tight capitalize">
+                  Request Free Audit &amp; Roadmap
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 text-xs mb-3 leading-relaxed">
+                  Receive a detailed technical breakdown of your website, Google ranking opportunities, and competitor ad strategies.
+                </p>
 
-              <h2 className="font-header text-3xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-white tracking-wide mb-4 leading-none">
-                Ready to Grow Your Business <br />
-                <span className="text-[#2196E8]">In Coimbatore?</span>
-              </h2>
-
-              <p className="text-slate-650 dark:text-slate-355 text-xs sm:text-sm leading-relaxed mb-6 font-body max-w-xl">
-                Talk to our digital growth experts today. Get a free audit of your website, ads, or social media and a custom roadmap to scale your business faster.
-              </p>
-
-              <div className="flex items-center justify-center w-full pt-1">
-                <button 
-                  onClick={() => onOpenWhatsApp(budget, estimatedReach, estimatedLeads)}
-                  className="bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-3.5 px-8 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg cursor-pointer tracking-wider font-body text-xs sm:text-sm mx-auto"
-                >
-                  <MessageCircle className="w-4 h-4 shrink-0" />
-                  <span>WhatsApp Us Now</span>
-                </button>
-              </div>
-
-            </div>
-
-            {/* Right Card Form */}
-            <div className="lg:col-span-5 bg-white dark:bg-[#090d18] p-4 sm:p-6 lg:p-7 rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl min-h-[480px] flex flex-col justify-between max-w-full sm:max-w-xl mx-auto w-full font-body">
-              
-              {auditState === 'form' && (
-                <div className="space-y-3 animate-fadeIn text-left">
-                  <h3 className="font-header text-xl sm:text-2xl lg:text-3xl text-slate-900 dark:text-white tracking-wide mb-1 leading-tight capitalize">
-                    Request Free Audit &amp; Roadmap
-                  </h3>
-                  <p className="text-slate-600 dark:text-slate-300 text-xs mb-3 leading-relaxed">
-                    Receive a detailed technical breakdown of your website, Google ranking opportunities, and competitor ad strategies.
-                  </p>
-
-                  <form onSubmit={handleFormSubmit} className="space-y-3 text-slate-900 dark:text-white">
-                    <div>
-                      <label className="block text-xs font-bold capitalize text-slate-700 dark:text-slate-200 mb-0.5">Your Name *</label>
-                      <input 
-                        type="text" 
-                        required
-                        placeholder="e.g. Anand Kumar"
-                        value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-[#2196E8]"
-                      />
+                <form onSubmit={handleFormSubmit} className="space-y-3 text-slate-900 dark:text-white">
+                  {formError && (
+                    <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs font-semibold">
+                      {formError}
                     </div>
+                  )}
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-xs font-bold capitalize text-slate-700 dark:text-slate-200 mb-0.5">WhatsApp Number *</label>
-                        <input 
-                          type="tel" 
-                          required
-                          placeholder="e.g. +91 93610 88012"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                          className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-[#2196E8]"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold capitalize text-slate-700 dark:text-slate-200 mb-0.5">Email Address *</label>
-                        <input 
-                          type="email" 
-                          required
-                          placeholder="e.g. hello@company.com"
-                          value={formData.email}
-                          onChange={(e) => setFormData({...formData, email: e.target.value})}
-                          className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-[#2196E8]"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold capitalize text-slate-700 dark:text-slate-200 mb-0.5">Company / Business Name *</label>
-                      <input 
-                        type="text" 
-                        required
-                        placeholder="e.g. My Brand Pvt Ltd"
-                        value={formData.businessName}
-                        onChange={(e) => setFormData({...formData, businessName: e.target.value})}
-                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-[#2196E8]"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold capitalize text-slate-700 dark:text-slate-200 mb-0.5">Required Service *</label>
-                      <select 
-                        value={formData.service}
-                        onChange={(e) => setFormData({...formData, service: e.target.value})}
-                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-[#2196E8]"
-                      >
-                        <option value="Website Development">Website Development</option>
-                        <option value="Application Development">Application Development</option>
-                        <option value="AI Automation">AI Automation</option>
-                        <option value="Search Engine Optimization">Search Engine Optimization</option>
-                        <option value="Performance Marketing">Performance Marketing</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold capitalize text-slate-700 dark:text-slate-200 mb-0.5">Goals / Requirements *</label>
-                      <textarea 
-                        required
-                        rows={2.5}
-                        placeholder="e.g. Build an iOS/Android e-commerce app with WhatsApp integrations."
-                        value={formData.goals}
-                        onChange={(e) => setFormData({...formData, goals: e.target.value})}
-                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-[#2196E8] resize-none font-body"
-                      />
-                    </div>
-
-                    <button 
-                      type="submit" 
-                      className="btn-primary w-full !py-3 sm:!py-3.5 mt-2 flex items-center justify-center gap-2.5 cursor-pointer !rounded-xl shadow-lg font-bold text-sm sm:text-base min-h-[48px] capitalize"
-                    >
-                      <span>Submit</span>
-                      <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </button>
-                  </form>
-                </div>
-              )}
-
-              {auditState === 'scanning' && (
-                <div className="flex flex-col items-center justify-center py-16 text-center space-y-6 animate-pulse">
-                  <div className="w-16 h-16 rounded-full border-4 border-t-[#2196E8] border-slate-200 dark:border-slate-800 animate-spin" />
                   <div>
-                    <h4 className="font-header text-2xl text-slate-900 dark:text-white tracking-wide">
+                    <label className="block text-xs font-bold capitalize text-slate-700 dark:text-slate-200 mb-0.5">Your Name *</label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="e.g. Anand Kumar"
+                      value={formData.name}
+                      onKeyDown={handleNameKeyDown}
+                      onChange={handleNameChange}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-[#2196E8]"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold capitalize text-slate-700 dark:text-slate-200 mb-0.5">WhatsApp Number *</label>
+                      <input 
+                        type="tel" 
+                        required
+                        placeholder="e.g. +91 93610 88012"
+                        value={formData.phone}
+                        onKeyDown={handlePhoneKeyDown}
+                        onChange={handlePhoneChange}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-[#2196E8]"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold capitalize text-slate-700 dark:text-slate-200 mb-0.5">Email Address *</label>
+                      <input 
+                        type="email" 
+                        required
+                        placeholder="e.g. hello@company.com"
+                        value={formData.email}
+                        onKeyDown={handleEmailKeyDown}
+                        onChange={handleEmailChange}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-[#2196E8]"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold capitalize text-slate-700 dark:text-slate-200 mb-0.5">Company / Business Name *</label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="e.g. My Brand Pvt Ltd"
+                      value={formData.businessName}
+                      onKeyDown={handleBusinessKeyDown}
+                      onChange={handleBusinessChange}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-[#2196E8]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold capitalize text-slate-700 dark:text-slate-200 mb-0.5">Required Service *</label>
+                    <select 
+                      value={formData.service}
+                      onChange={(e) => setFormData({...formData, service: e.target.value})}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-[#2196E8]"
+                    >
+                      <option value="Website Development">Website Development</option>
+                      <option value="Application Development">Application Development</option>
+                      <option value="AI Automation">AI Automation</option>
+                      <option value="Search Engine Optimization">Search Engine Optimization</option>
+                      <option value="Performance Marketing">Performance Marketing</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold capitalize text-slate-700 dark:text-slate-200 mb-0.5">Goals / Requirements *</label>
+                    <textarea 
+                      required
+                      rows={2.5}
+                      placeholder="e.g. Build an iOS/Android e-commerce app with WhatsApp integrations."
+                      value={formData.goals}
+                      onKeyDown={handleGoalsKeyDown}
+                      onChange={handleGoalsChange}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-[#121726] border border-slate-250 dark:border-slate-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-[#2196E8] resize-none font-body"
+                    />
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    className="btn-primary w-full !py-3 sm:!py-3.5 mt-2 flex items-center justify-center gap-2.5 cursor-pointer !rounded-xl shadow-lg font-bold text-sm sm:text-base min-h-[48px] capitalize"
+                  >
+                    <span>Submit</span>
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {auditState === 'scanning' && (
+              <div className="flex flex-col items-center justify-center py-16 text-center space-y-6 animate-pulse">
+                <div className="w-16 h-16 rounded-full border-4 border-t-[#2196E8] border-slate-200 dark:border-slate-800 animate-spin" />
+                <div>
+                  <h4 className="font-header text-2xl text-slate-900 dark:text-white tracking-wide">
+                    Analyzing {formData.businessName || "Your Business"}
+                  </h4>
+                  <p className="text-xs text-[#2196E8] font-body mt-1 tracking-widest font-bold">
+                    Step {scanStep + 1} of 5
+                  </p>
+                </div>
+                <p className="text-slate-500 dark:text-slate-400 text-sm italic font-body max-w-xs transition-all duration-300">
+                  "{scanSteps[scanStep]}"
+                </p>
+              </div>
+            )}
+
+            {auditState === 'results' && (
+              <div className="space-y-6 animate-fadeIn font-body text-left">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-header text-3xl text-slate-900 dark:text-white tracking-wide">
+                    Your Audit Report
+                  </h3>
                       Analyzing {formData.businessName || "Your Business"}
                     </h4>
                     <p className="text-xs text-[#2196E8] font-body mt-1 tracking-widest font-bold">

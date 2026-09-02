@@ -22,20 +22,114 @@ export default function EmailModal({ isOpen, onClose, defaultService = '' }: Ema
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleNameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ' && (!formData.name || formData.name.length === 0 || formData.name.endsWith(' '))) {
+      e.preventDefault();
+    }
+  };
+
+  const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  const handleMessageKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === ' ' && (!formData.message || formData.message.length === 0)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/^\s+/, '').replace(/[^a-zA-Z\s.'-]/g, '').replace(/\s{2,}/g, ' ');
+    setFormData(prev => ({ ...prev, name: val }));
+    if (errorMsg) setErrorMsg('');
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value.replace(/\s+/g, '');
+    setFormData(prev => ({ ...prev, email: val }));
+    if (errorMsg) setErrorMsg('');
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/\s+/g, '');
+    if (val.startsWith('+')) {
+      val = '+' + val.slice(1).replace(/\D/g, '');
+    } else {
+      val = val.replace(/\D/g, '');
+    }
+    if (val.length > 16) val = val.slice(0, 16);
+    setFormData(prev => ({ ...prev, phone: val }));
+    if (errorMsg) setErrorMsg('');
+  };
+
+  const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    let val = e.target.value.replace(/^\s+/, '');
+    setFormData(prev => ({ ...prev, message: val }));
+    if (errorMsg) setErrorMsg('');
+  };
+
+  const handleServiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFormData(prev => ({ ...prev, service: e.target.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setErrorMsg('');
+
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedPhone = formData.phone.trim();
+    const trimmedMessage = formData.message.trim();
+
+    if (!trimmedName || trimmedName.length < 2) {
+      setErrorMsg('Please enter a valid Name (minimum 2 letters, characters only).');
+      return;
+    }
+    if (!/^[a-zA-Z\s.'-]+$/.test(trimmedName)) {
+      setErrorMsg('Name must only contain character strings.');
+      return;
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!trimmedEmail || !emailRegex.test(trimmedEmail)) {
+      setErrorMsg('Please enter a valid Email Address (no spaces).');
+      return;
+    }
+
+    if (trimmedPhone) {
+      const digitsOnly = trimmedPhone.replace(/\D/g, '');
+      if (digitsOnly.length < 10) {
+        setErrorMsg('Please enter a valid Phone Number (minimum 10 integer digits, numbers only).');
+        return;
+      }
+    }
+
+    if (!trimmedMessage || trimmedMessage.length < 5) {
+      setErrorMsg('Message / Requirements cannot be empty or just spaces (minimum 5 characters).');
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: trimmedName,
+          email: trimmedEmail,
+          phone: trimmedPhone,
+          service: formData.service,
+          message: trimmedMessage
+        }),
       });
 
       const data = await res.json();
@@ -52,7 +146,7 @@ export default function EmailModal({ isOpen, onClose, defaultService = '' }: Ema
       }
     } catch (err) {
       // Fallback redirect via mailto if network fails
-      const mailtoUrl = `mailto:dinesh@dhigrowth.com?subject=Inquiry%20from%20${encodeURIComponent(formData.name)}&body=Name:%20${encodeURIComponent(formData.name)}%0AEmail:%20${encodeURIComponent(formData.email)}%0APhone:%20${encodeURIComponent(formData.phone)}%0AService:%20${encodeURIComponent(formData.service)}%0AMessage:%20${encodeURIComponent(formData.message)}`;
+      const mailtoUrl = `mailto:dinesh@dhigrowth.com?subject=Inquiry%20from%20${encodeURIComponent(trimmedName)}&body=Name:%20${encodeURIComponent(trimmedName)}%0AEmail:%20${encodeURIComponent(trimmedEmail)}%0APhone:%20${encodeURIComponent(trimmedPhone)}%0AService:%20${encodeURIComponent(formData.service)}%0AMessage:%20${encodeURIComponent(trimmedMessage)}`;
       window.location.href = mailtoUrl;
       setSuccess(true);
       setTimeout(() => {
@@ -130,7 +224,8 @@ export default function EmailModal({ isOpen, onClose, defaultService = '' }: Ema
                   name="name"
                   required
                   value={formData.name}
-                  onChange={handleChange}
+                  onKeyDown={handleNameKeyDown}
+                  onChange={handleNameChange}
                   placeholder="e.g. Ramesh Kumar"
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#080b11] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-[#2196E8]"
                 />
@@ -146,7 +241,8 @@ export default function EmailModal({ isOpen, onClose, defaultService = '' }: Ema
                     name="email"
                     required
                     value={formData.email}
-                    onChange={handleChange}
+                    onKeyDown={handleEmailKeyDown}
+                    onChange={handleEmailChange}
                     placeholder="name@company.com"
                     className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#080b11] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-[#2196E8]"
                   />
@@ -160,7 +256,8 @@ export default function EmailModal({ isOpen, onClose, defaultService = '' }: Ema
                     type="tel"
                     name="phone"
                     value={formData.phone}
-                    onChange={handleChange}
+                    onKeyDown={handlePhoneKeyDown}
+                    onChange={handlePhoneChange}
                     placeholder="+91 98765 43210"
                     className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#080b11] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-[#2196E8]"
                   />
@@ -174,7 +271,7 @@ export default function EmailModal({ isOpen, onClose, defaultService = '' }: Ema
                 <select
                   name="service"
                   value={formData.service}
-                  onChange={handleChange}
+                  onChange={handleServiceChange}
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#080b11] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-[#2196E8]"
                 >
                   <option value="Website Development">Website Development</option>
@@ -195,7 +292,8 @@ export default function EmailModal({ isOpen, onClose, defaultService = '' }: Ema
                   required
                   rows={3}
                   value={formData.message}
-                  onChange={handleChange}
+                  onKeyDown={handleMessageKeyDown}
+                  onChange={handleMessageChange}
                   placeholder="Describe your project goals or custom requirements..."
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#080b11] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-[#2196E8] resize-none"
                 />

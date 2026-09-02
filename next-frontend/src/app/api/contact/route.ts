@@ -3,12 +3,24 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, company, service, message } = body;
+    const name = (body.name || '').trim();
+    const email = (body.email || '').trim();
+    const phone = (body.phone || '').trim();
+    const company = (body.company || '').trim();
+    const service = (body.service || '').trim();
+    const message = (body.message || '').trim();
 
-    // Input validation
+    // Input validation: Must not be empty or whitespace only
     if (!name || !email || !message) {
       return NextResponse.json(
-        { success: false, error: 'Name, email, and message are required fields.' },
+        { success: false, error: 'Name, email, and message cannot be empty or contain only spaces.' },
+        { status: 400 }
+      );
+    }
+
+    if (!/^[a-zA-Z\s.'-]+$/.test(name)) {
+      return NextResponse.json(
+        { success: false, error: 'Name must contain valid character strings only.' },
         { status: 400 }
       );
     }

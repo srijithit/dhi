@@ -126,7 +126,8 @@ export const caseStudies: CaseStudy[] = [
     "description": "Vectra Mechnovations needed a digital presence that could communicate its technical expertise, engineering capabilities, and professional approach to potential customers.",
     "image": "/images/case-studies/kiipl/brand1-product1.png",
     "slug": "vectra-mechnovations",
-    "featured": false
+    "featured": false,
+    "underConstruction": true
   },
   {
     "id": "sanikas-restaurant",
@@ -222,5 +223,23 @@ export const caseStudies: CaseStudy[] = [
     "slug": "ai-invoice-processing",
     "featured": false,
     "underConstruction": true
+  },
+  {
+    "id": "vasantabhavan",
+    "title": "Vasantabhavan",
+    "category": "F&B Hospitality",
+    "description": "Namma Veedu Vasanta Bhavan (VB World) is a legendary South Indian vegetarian restaurant chain serving over 50,000+ meals daily across 25+ global branches with modern online ordering, banquet reservations, and catering services.",
+    "image": "/images/case-studies/vasantabhavan/webBanner-1782291959297-578527377.webp",
+    "slug": "vasantabhavan",
+    "featured": true
+  },
+  {
+    "id": "infinite-structure",
+    "title": "Infinite Structure",
+    "category": "Civil & Industrial Infra",
+    "description": "Infinite Structure is an engineering and architectural leader specializing in deployable kinetic engineering, precision industrial roofing, PEB structures, and heavy civil construction.",
+    "image": "/images/case-studies/infinite-structure/0240.webp",
+    "slug": "infinite-structure",
+    "featured": true
   }
 ];
