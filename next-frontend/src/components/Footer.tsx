@@ -1,10 +1,11 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Zap, MapPin, Mail, Phone, Award, ShieldCheck, Globe, Star } from 'lucide-react';
 import { SERVICES_DATA } from '../data/servicesData';
+import LeadPopupModal from './LeadPopupModal';
 
 interface FooterProps {
   onSelectService?: (service: any) => void;
@@ -12,6 +13,7 @@ interface FooterProps {
 }
 
 export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
+  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const pathname = usePathname();
 
   const handleLinkClick = (href: string) => (e: React.MouseEvent) => {
@@ -30,12 +32,11 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
   };
 
   const handleAuditClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     if (onOpenAudit) {
-      e.preventDefault();
       onOpenAudit();
-    } else if (pathname === '/audit') {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      setIsLeadModalOpen(true);
     }
   };
 
@@ -54,6 +55,7 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
   };
 
   return (
+    <>
     <footer className="bg-slate-100 dark:bg-[#030508] border-t-2 border-slate-200 dark:border-slate-900 rounded-t-[48px] md:rounded-t-[80px] pt-12 pb-0 mt-6 md:mt-10 text-slate-650 dark:text-slate-400 font-body transition-colors duration-300 relative z-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-body">
         
@@ -258,5 +260,10 @@ export default function Footer({ onSelectService, onOpenAudit }: FooterProps) {
         </div>
       </motion.div>
     </footer>
+    <LeadPopupModal 
+      isOpen={isLeadModalOpen} 
+      onClose={() => setIsLeadModalOpen(false)} 
+    />
+    </>
   );
 }

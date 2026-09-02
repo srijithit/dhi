@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Zap, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import LeadPopupModal from '@/components/LeadPopupModal';
 
 interface NavbarProps {
   onOpenAudit?: () => void;
@@ -14,6 +15,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
+  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const pathname = usePathname();
   
   // Set theme to always use light theme
@@ -78,12 +80,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     if (onOpenAudit) {
       onOpenAudit();
     } else {
-      const el = document.getElementById('free-audit-form');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        window.location.href = '/audit';
-      }
+      setIsLeadModalOpen(true);
     }
   };
 
@@ -106,6 +103,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
   };
 
   return (
+    <>
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBgClass}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between relative z-10">
         
@@ -351,5 +349,12 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
         </div>
       )}
     </header>
+
+    {/* Lead Consultation Modal when clicking 'Book a Call' */}
+    <LeadPopupModal 
+      isOpen={isLeadModalOpen} 
+      onClose={() => setIsLeadModalOpen(false)} 
+    />
+    </>
   );
 }
