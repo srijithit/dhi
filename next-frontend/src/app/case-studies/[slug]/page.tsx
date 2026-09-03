@@ -569,7 +569,7 @@ export default function DynamicCaseStudyPage({
     'infragen': 'https://dhigrowth07.github.io/infragen-fe/',
     'verdurepax': 'https://www.verdurepax.com/',
     'befhue': 'https://befhue.com/',
-    'squirlio': 'https://squirlio.com/',
+    'squirlio': 'https://staging.squirlio.in/',
     'amaravathy-coir': 'https://amaravathycoir.com/',
     'amaravathy': 'https://amaravathycoir.com/',
     'keystone': 'https://kiipl.co.in/',
@@ -936,7 +936,7 @@ export default function DynamicCaseStudyPage({
       !u.includes('apps.apple.com') &&
       !u.includes('api.dhigrowth.com') &&
       !u.includes('staging-api')
-  ) || (study.slug === 'infragen' ? 'https://dhigrowth07.github.io/infragen-fe/' : '');
+  ) || (study.slug === 'infragen' ? 'https://dhigrowth07.github.io/infragen-fe/' : '') || liveWebsiteMap[study.slug] || '';
 
   const isMobileApp = Boolean(hasPlayStore || hasAppStore);
   const isWebOnly = !isMobileApp && Boolean(webLink);

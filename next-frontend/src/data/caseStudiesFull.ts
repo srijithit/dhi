@@ -491,7 +491,7 @@ export const detailedCaseStudies: CaseStudyDetail[] = [
     "results": [
       "A highly scalable, performant, and secure e-commerce application that reduces cart abandonment through fast-tracked checkout options. The platform provides a flawless, bug-free user journey from product discovery to payment, ensuring a premium brand experience that aligns perfectly with Squirlio's healthy snacking mission."
     ],
-    "link": "",
+    "link": "https://staging.squirlio.in/",
     "image": "/images/case-studies/squirlio/banner_1.jpeg"
   },
   {
