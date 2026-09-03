@@ -867,120 +867,81 @@ export default function CleanCulturePage() {
             </div>
 
             {/* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe */}
-            <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-10 md:px-14">
-              <motion.div
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.25}
-                onDragEnd={(_, info) => {
-                  if (info.offset.x < -35 || info.velocity.x < -250) {
-                    setHighlightIdx((prev) => (prev + 1) % 3);
-                  } else if (info.offset.x > 35 || info.velocity.x > 250) {
-                    setHighlightIdx((prev) => (prev - 1 + 3) % 3);
-                  }
-                }}
-                className="flex items-center justify-center gap-1.5 sm:gap-6 md:gap-8 py-4 cursor-grab active:cursor-grabbing select-none"
+            {/* Single 16:9 Widescreen Showcase Card */}
+            <div className="relative max-w-4xl mx-auto mb-8 px-4 sm:px-12">
+              <div
+                onMouseEnter={() => setIsHighlightHovered(true)}
+                onMouseLeave={() => setIsHighlightHovered(false)}
+                className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl p-1.5 sm:p-2.5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-500 z-20 cursor-pointer flex items-center justify-center overflow-hidden group"
               >
-                {/* Left Screen Card (Tilted Angle - 9:16) */}
-                <div
-                  onClick={() => setHighlightIdx((highlightIdx - 1 + 3) % 3)}
-                  className="relative w-[130px] xs:w-[155px] sm:w-[200px] md:w-[230px] aspect-[9/16] rounded-2xl sm:rounded-3xl p-1 sm:p-2 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-75 hover:opacity-100 flex items-center justify-center overflow-hidden shrink-0"
-                >
-                  <img
-                    src={highlightItems[(highlightIdx + 2) % 3].screen}
-                    alt="Previous Screen"
-                    draggable={false}
-                    className="w-full h-full aspect-[9/16] object-cover rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
-                  />
+                <img
+                  src={highlightItems[highlightIdx].screen}
+                  alt="Active Screen"
+                  draggable={false}
+                  className="w-full h-full aspect-[16/9] object-cover rounded-xl sm:rounded-2xl drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
+                />
+
+                {/* Hover Prompt Badge */}
+                <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex items-center space-x-1.5 bg-slate-900/85 text-white text-[10px] sm:text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-md border border-white/15 shadow-lg transition-all duration-300 pointer-events-none select-none ${isHighlightHovered ? 'opacity-0' : 'opacity-100 group-hover:opacity-0'}`}>
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>Hover for Live Preview</span>
                 </div>
 
-                {/* Center Main Screen Card (Active Blue Focus - 9:16 Portrait with Live Website Preview on Hover) */}
-                <div
-                  onMouseEnter={() => setIsHighlightHovered(true)}
-                  onMouseLeave={() => setIsHighlightHovered(false)}
-                  className="relative w-[190px] xs:w-[220px] sm:w-[270px] md:w-[310px] aspect-[9/16] rounded-2xl sm:rounded-3xl p-1.5 sm:p-2.5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group shrink-0"
-                >
-                  <img
-                    src={highlightItems[highlightIdx].screen}
-                    alt="Active Screen"
-                    draggable={false}
-                    className="w-full h-full aspect-[9/16] object-cover rounded-xl sm:rounded-2xl drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
-                  />
-
-                  {/* Hover Prompt Badge */}
-                  <div className={`absolute top-3 right-3 z-20 flex items-center space-x-1.5 bg-slate-900/85 text-white text-[10px] sm:text-[11px] font-medium px-2.5 py-1 rounded-full backdrop-blur-md border border-white/15 shadow-lg transition-all duration-300 pointer-events-none select-none ${isHighlightHovered ? 'opacity-0' : 'opacity-100 group-hover:opacity-0'}`}>
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Hover for Live Preview</span>
-                  </div>
-
-                  {/* Real Website Preview on Hover */}
-                  <div className={`absolute inset-0 z-30 transition-opacity duration-300 bg-slate-950 flex flex-col rounded-xl sm:rounded-2xl overflow-hidden ${isHighlightHovered ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'}`}>
-                    {/* Mini Browser Header */}
-                    <div className="bg-slate-900/95 px-3 py-2 flex items-center justify-between border-b border-white/10 shrink-0 select-none">
-                      <div className="flex items-center space-x-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-red-500/90 inline-block" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500/90 inline-block" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/90 inline-block" />
-                      </div>
-                      
-                      <div className="flex items-center space-x-1.5 bg-slate-800/90 text-slate-300 text-[10px] sm:text-[11px] font-mono px-2 py-0.5 rounded-md border border-white/10 max-w-[120px] sm:max-w-[150px] truncate">
-                        <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
-                        <span className="truncate">cleanculture.in</span>
-                      </div>
-
-                      <a
-                        href="http://cleanculture.in/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title="Open Live Website in New Tab"
-                        className="text-slate-400 hover:text-white transition p-1 hover:bg-white/10 rounded flex items-center gap-1 text-[11px] font-medium cursor-pointer"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <span className="hidden sm:inline">Open</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
+                {/* Real Website Preview on Hover */}
+                <div className={`absolute inset-0 z-30 transition-opacity duration-300 bg-slate-950 flex flex-col rounded-xl sm:rounded-2xl overflow-hidden ${isHighlightHovered ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'}`}>
+                  {/* Mini Browser Header */}
+                  <div className="bg-slate-900/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0 select-none">
+                    <div className="flex items-center space-x-2">
+                      <span className="w-3 h-3 rounded-full bg-red-500/90 inline-block" />
+                      <span className="w-3 h-3 rounded-full bg-amber-500/90 inline-block" />
+                      <span className="w-3 h-3 rounded-full bg-emerald-500/90 inline-block" />
+                    </div>
+                    
+                    <div className="flex items-center space-x-2 bg-slate-800/90 text-slate-300 text-xs font-mono px-3 py-1 rounded-md border border-white/10 max-w-[200px] sm:max-w-[300px] truncate">
+                      <Lock className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span className="truncate">cleanculture.in</span>
                     </div>
 
-                    {/* Live Interactive Iframe Preview */}
-                    <div className="relative w-full flex-1 bg-white overflow-hidden">
-                      <iframe
-                        src="http://cleanculture.in/"
-                        title="Clean Culture Live Website Preview"
-                        className="w-full h-full border-0 pointer-events-auto"
-                        loading="lazy"
-                        sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-                      />
-                    </div>
+                    <a
+                      href="http://cleanculture.in/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Open Live Website in New Tab"
+                      className="text-slate-400 hover:text-white transition p-1 hover:bg-white/10 rounded flex items-center gap-1.5 text-xs font-medium cursor-pointer"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <span>Open</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+
+                  {/* Live Interactive Iframe Preview */}
+                  <div className="relative w-full flex-1 bg-white overflow-hidden">
+                    <iframe
+                      src="http://cleanculture.in/"
+                      title="Clean Culture Live Website Preview"
+                      className="w-full h-full border-0 pointer-events-auto"
+                      loading="lazy"
+                      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                    />
                   </div>
                 </div>
+              </div>
 
-                {/* Right Screen Card (Tilted Angle - 9:16) */}
-                <div
-                  onClick={() => setHighlightIdx((highlightIdx + 1) % 3)}
-                  className="relative w-[130px] xs:w-[155px] sm:w-[200px] md:w-[230px] aspect-[9/16] rounded-2xl sm:rounded-3xl p-1 sm:p-2 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-75 hover:opacity-100 flex items-center justify-center overflow-hidden shrink-0"
-                >
-                  <img
-                    src={highlightItems[(highlightIdx + 1) % 3].screen}
-                    alt="Next Screen"
-                    draggable={false}
-                    className="w-full h-full aspect-[9/16] object-cover rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
-                  />
-                </div>
-              </motion.div>
-
+              {/* Navigation Arrows */}
               <button
                 onClick={() => setHighlightIdx((prev) => (prev - 1 + 3) % 3)}
                 aria-label="Previous highlight screen"
-                className="absolute -left-1 sm:-left-6 md:-left-10 lg:-left-12 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
+                className="absolute -left-2 sm:left-0 md:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
               >
-                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setHighlightIdx((prev) => (prev + 1) % 3)}
                 aria-label="Next highlight screen"
-                className="absolute -right-1 sm:-right-6 md:-right-10 lg:-right-12 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
+                className="absolute -right-2 sm:right-0 md:-right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
               >
-                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                <ChevronRight className="w-5 h-5" />
               </button>
 
               <div className="flex justify-center items-center gap-2 mt-4">
