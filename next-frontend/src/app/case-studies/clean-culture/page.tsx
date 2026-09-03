@@ -852,28 +852,13 @@ export default function CleanCulturePage() {
             </div>
 
             {/* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe */}
-            {/* Single 16:9 Widescreen Showcase Card */}
-            <div className="relative max-w-4xl mx-auto mb-8 px-4 sm:px-12">
+            {/* Showcase Card: Portrait on Mobile, 16:9 on Desktop - Permanent Live Browser Preview */}
+            <div className="relative max-w-sm sm:max-w-4xl mx-auto mb-8 px-4 sm:px-12">
               <div
-                onMouseEnter={() => setIsHighlightHovered(true)}
-                onMouseLeave={() => setIsHighlightHovered(false)}
-                className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl p-1.5 sm:p-2.5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-500 z-20 cursor-pointer flex items-center justify-center overflow-hidden group"
+                className="relative w-full aspect-[9/16] sm:aspect-[16/9] rounded-2xl sm:rounded-3xl p-1.5 sm:p-2.5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-500 z-20 flex items-center justify-center overflow-hidden"
               >
-                <img
-                  src={highlightItems[highlightIdx].screen}
-                  alt="Active Screen"
-                  draggable={false}
-                  className="w-full h-full aspect-[16/9] object-cover rounded-xl sm:rounded-2xl drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
-                />
-
-                {/* Hover Prompt Badge */}
-                <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex items-center space-x-1.5 bg-slate-900/85 text-white text-[10px] sm:text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-md border border-white/15 shadow-lg transition-all duration-300 pointer-events-none select-none ${isHighlightHovered ? 'opacity-0' : 'opacity-100 group-hover:opacity-0'}`}>
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Hover for Live Preview</span>
-                </div>
-
-                {/* Real Website Preview on Hover */}
-                <div className={`absolute inset-0 z-30 transition-opacity duration-300 bg-slate-950 flex flex-col rounded-xl sm:rounded-2xl overflow-hidden ${isHighlightHovered ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'}`}>
+                {/* Real Website Preview - Permanent Mini Browser Mockup */}
+                <div className="absolute inset-0 z-30 bg-slate-950 flex flex-col rounded-xl sm:rounded-2xl overflow-hidden pointer-events-auto">
                   {/* Mini Browser Header */}
                   <div className="bg-slate-900/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0 select-none">
                     <div className="flex items-center space-x-2">
@@ -912,62 +897,6 @@ export default function CleanCulturePage() {
                   </div>
                 </div>
               </div>
-
-              {/* Navigation Arrows */}
-              <button
-                onClick={() => setHighlightIdx((prev) => (prev - 1 + 3) % 3)}
-                aria-label="Previous highlight screen"
-                className="absolute -left-2 sm:left-0 md:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setHighlightIdx((prev) => (prev + 1) % 3)}
-                aria-label="Next highlight screen"
-                className="absolute -right-2 sm:right-0 md:-right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-
-              <div className="flex justify-center items-center gap-2 mt-4">
-                {[0, 1, 2].map((i) => (
-                  <button
-                    key={i}
-                    onClick={() => setHighlightIdx(i)}
-                    className={`transition-all duration-300 rounded-full cursor-pointer ${
-                      highlightIdx === i ? 'w-6 h-2 bg-[#2196E8]' : 'w-2 h-2 bg-slate-300'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* 3 Highlight Cards Below */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {highlightItems.map((item) => {
-                const isActive = highlightIdx === item.id;
-                return (
-                  <div
-                    key={item.id}
-                    onClick={() => setHighlightIdx(item.id)}
-                    className={`rounded-2xl p-6 sm:p-7 transition-all duration-300 cursor-pointer space-y-3 ${
-                      isActive
-                        ? 'border-2 border-[#2196E8] bg-white shadow-lg -translate-y-1'
-                        : 'border border-slate-200 bg-white hover:border-slate-300 shadow-xs'
-                    }`}
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
-                      {item.icon}
-                    </div>
-                    <h4 className="font-extrabold text-slate-900 text-base font-body leading-snug">
-                      {item.title}
-                    </h4>
-                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                );
-              })}
             </div>
           </div>
         </section>

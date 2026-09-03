@@ -1394,31 +1394,14 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            {/* Single 16:9 Widescreen Showcase Card */}
-            <div className="relative max-w-4xl mx-auto mb-10 px-4">
+            {/* Showcase Card: Portrait on Mobile, 16:9 on Desktop - Permanent Live Browser Preview */}
+            <div className="relative max-w-sm sm:max-w-4xl mx-auto mb-8 px-4 sm:px-12">
               <div
-                onMouseEnter={() => setIsHighlightHovered(true)}
-                onMouseLeave={() => setIsHighlightHovered(false)}
-                className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl p-1.5 sm:p-2.5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-500 z-20 cursor-pointer flex items-center justify-center overflow-hidden group"
+                className="relative w-full aspect-[9/16] sm:aspect-[16/9] rounded-2xl sm:rounded-3xl p-1.5 sm:p-2.5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-500 z-20 flex items-center justify-center overflow-hidden"
               >
-                <img
-                  src={highlightItems[highlightIdx].screen}
-                  alt="Active Screen"
-                  draggable={false}
-                  className="w-full h-full aspect-[16/9] object-cover rounded-xl sm:rounded-2xl drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
-                />
-
-                {/* Hover Prompt Badge */}
-                {externalVisitUrl && (
-                  <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex items-center space-x-1.5 bg-slate-900/85 text-white text-[10px] sm:text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-md border border-white/15 shadow-lg transition-all duration-300 pointer-events-none select-none ${isHighlightHovered ? 'opacity-0' : 'opacity-100 group-hover:opacity-0'}`}>
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Hover for Live Preview</span>
-                  </div>
-                )}
-
-                {/* Real Website Preview on Hover */}
+                {/* Real Website Preview - Permanent Mini Browser Mockup */}
                 {liveWebsiteUrl ? (
-                  <div className={`absolute inset-0 z-30 transition-opacity duration-300 bg-slate-950 flex flex-col rounded-xl sm:rounded-2xl overflow-hidden ${isHighlightHovered ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'}`}>
+                  <div className="absolute inset-0 z-30 bg-slate-950 flex flex-col rounded-xl sm:rounded-2xl overflow-hidden pointer-events-auto">
                     {/* Mini Browser Header */}
                     <div className="bg-slate-900/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0 select-none">
                       <div className="flex items-center space-x-2">
@@ -1457,7 +1440,7 @@ export default function DynamicCaseStudyPage({
                     </div>
                   </div>
                 ) : externalVisitUrl ? (
-                  <div className={`absolute inset-0 z-30 transition-opacity duration-300 bg-slate-950/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center rounded-xl sm:rounded-2xl select-none ${isHighlightHovered ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'}`}>
+                  <div className="absolute inset-0 z-30 bg-slate-950/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center rounded-xl sm:rounded-2xl select-none pointer-events-auto">
                     <div className="w-16 h-16 rounded-2xl bg-white p-2.5 flex items-center justify-center shadow-lg border border-slate-200 mb-3">
                       {customLogo ? (
                         <img src={customLogo} alt={study.title} className="w-full h-full object-contain" />
@@ -1478,36 +1461,15 @@ export default function DynamicCaseStudyPage({
                       <ExternalLink className="w-4 h-4" />
                     </a>
                   </div>
-                ) : null}
+                ) : (
+                  <img
+                    src={highlightItems[0]?.screen}
+                    alt="Active Screen"
+                    draggable={false}
+                    className="w-full h-full aspect-[9/16] sm:aspect-[16/9] object-cover rounded-xl sm:rounded-2xl drop-shadow-xl select-none"
+                  />
+                )}
               </div>
-            </div>
-
-            {/* 3 Highlight Cards Below */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {highlightItems.map((item) => {
-                const isActive = highlightIdx === item.id;
-                return (
-                  <div
-                    key={item.id}
-                    onClick={() => setHighlightIdx(item.id)}
-                    className={`rounded-2xl p-6 sm:p-7 transition-all duration-300 cursor-pointer space-y-3 ${
-                      isActive
-                        ? 'border-2 border-[#2196E8] bg-white shadow-lg -translate-y-1'
-                        : 'border border-slate-200 bg-white hover:border-slate-300 shadow-xs'
-                    }`}
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
-                      {item.icon}
-                    </div>
-                    <h4 className="font-extrabold text-slate-900 text-base font-body leading-snug">
-                      {item.title}
-                    </h4>
-                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                );
-              })}
             </div>
           </div>
         </section>

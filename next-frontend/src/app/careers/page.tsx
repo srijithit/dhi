@@ -685,18 +685,32 @@ ${trimmedName}`;
                     transition={{ duration: 0.3 }}
                     className="group bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#2196E8]/60 transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
                   >
-                    {/* Top Decorative accent */}
-                    <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#2196E8] to-[#4A72EB] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    {/* Clean Angled Watermark Stamp: NO VACANCIES AVAILABLE */}
+                    <div className="absolute inset-0 pointer-events-none z-20 flex items-center justify-center select-none overflow-hidden p-4">
+                      <div className="transform -rotate-12 border-2 border-dashed border-rose-500/50 rounded-2xl px-4 py-2 bg-rose-50/70 backdrop-blur-[1px] shadow-sm flex flex-col items-center justify-center text-center">
+                        <span className="text-rose-600 font-extrabold text-xs sm:text-sm tracking-[0.18em] uppercase font-mono">
+                          NO VACANCIES AVAILABLE
+                        </span>
+                        <span className="text-[10px] text-rose-500/80 font-semibold tracking-wider mt-0.5">
+                          Position Currently Filled
+                        </span>
+                      </div>
+                    </div>
 
-                    <div>
+                    <div className="relative z-10 opacity-90 group-hover:opacity-100 transition-opacity">
                       {/* Top Badges */}
                       <div className="flex items-center justify-between gap-2 mb-4">
                         <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#2196E8] text-xs font-bold">
                           {job.categoryLabel}
                         </span>
-                        <span className="text-xs font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-full">
-                          {job.type}
-                        </span>
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-full">
+                            {job.type}
+                          </span>
+                          <span className="text-[10px] font-bold text-rose-600 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full">
+                            Closed
+                          </span>
+                        </div>
                       </div>
 
                       {/* Job Title */}
@@ -740,7 +754,7 @@ ${trimmedName}`;
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="pt-4 border-t border-slate-100 flex items-center gap-2">
+                    <div className="pt-4 border-t border-slate-100/80 flex items-center gap-2 relative z-10">
                       <button
                         onClick={() => setSelectedJob(job)}
                         className="flex-1 py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors text-center cursor-pointer"
@@ -748,11 +762,11 @@ ${trimmedName}`;
                         View Details
                       </button>
                       <button
-                        onClick={() => setApplyModalJob(job)}
-                        className="flex-1 py-2.5 px-4 rounded-xl bg-[#2196E8] hover:bg-[#1b84cf] text-white font-bold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+                        disabled
+                        className="flex-1 py-2.5 px-4 rounded-xl bg-slate-100 text-slate-400 font-bold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-not-allowed border border-slate-200"
+                        title="Position currently filled"
                       >
-                        <span>Apply</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
+                        <span>Position Filled</span>
                       </button>
                     </div>
                   </motion.div>
