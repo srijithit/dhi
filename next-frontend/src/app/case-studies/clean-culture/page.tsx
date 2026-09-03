@@ -829,37 +829,24 @@ export default function CleanCulturePage() {
 
               {/* Right Column: 4 Cards (2x2 Grid) with Bright Blue Borders */}
               <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {productExpCards.map((card, idx) => {
-                  const isExpanded = expandedProductExp[idx];
-                  return (
-                    <div
-                      key={idx}
-                      className="bg-white rounded-2xl border-2 border-[#2196E8] p-6 shadow-xs hover:shadow-lg transition-all duration-300 space-y-3 flex flex-col justify-between"
-                    >
-                      <div className="space-y-3">
-                        <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
-                          {card.icon}
-                        </div>
-                        <h4 className="font-extrabold text-slate-900 text-base font-body leading-snug">
-                          {card.title}
-                        </h4>
-                        <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                          {isExpanded ? card.fullDesc : card.shortDesc}
-                        </p>
+                {productExpCards.map((card, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white rounded-2xl border-2 border-[#2196E8] p-6 shadow-xs hover:shadow-lg transition-all duration-300 space-y-3 flex flex-col justify-between"
+                  >
+                    <div className="space-y-3">
+                      <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+                        {card.icon}
                       </div>
-
-                      <div className="pt-1">
-                        <button
-                          onClick={() => toggleProductExp(idx)}
-                          className="inline-flex items-center gap-1 text-xs font-bold text-[#2196E8] hover:text-blue-700 transition cursor-pointer"
-                        >
-                          <span>{isExpanded ? 'Read Less' : 'Read More'}</span>
-                          {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                        </button>
-                      </div>
+                      <h4 className="font-extrabold text-slate-900 text-base font-body leading-snug">
+                        {card.title}
+                      </h4>
+                      <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                        {card.fullDesc}
+                      </p>
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
