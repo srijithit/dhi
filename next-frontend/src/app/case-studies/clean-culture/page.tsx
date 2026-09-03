@@ -140,6 +140,7 @@ export default function CleanCulturePage() {
   const [solutionIdx, setSolutionIdx] = useState(1); // default 02: 1-click direct reorder
   const [expandedProductExp, setExpandedProductExp] = useState<{ [key: number]: boolean }>({});
   const [highlightIdx, setHighlightIdx] = useState(0);
+  const [isHighlightHovered, setIsHighlightHovered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Auto-advance cover banner
@@ -148,13 +149,14 @@ export default function CleanCulturePage() {
     return () => clearInterval(timer);
   }, []);
 
-  // Auto-play for Highlights 3D Phone carousel
+  // Auto-play for Highlights 3D Phone carousel (pauses on hover)
   useEffect(() => {
+    if (isHighlightHovered) return;
     const timer = setInterval(() => {
       setHighlightIdx((prev) => (prev + 1) % 3);
-    }, 3500);
+    }, 4500);
     return () => clearInterval(timer);
-  }, []);
+  }, [isHighlightHovered]);
 
   const [solutionDirection, setSolutionDirection] = useState(1);
   const [solutionInView, setSolutionInView] = useState(false);
@@ -892,8 +894,10 @@ export default function CleanCulturePage() {
                   />
                 </div>
 
-                {/* Center Main Screen Card (Active Blue Focus - 1:1 Square) */}
+                {/* Center Main Screen Card (Active Blue Focus - 1:1 Square with Live Website Preview on Hover) */}
                 <div
+                  onMouseEnter={() => setIsHighlightHovered(true)}
+                  onMouseLeave={() => setIsHighlightHovered(false)}
                   className="relative w-[200px] xs:w-[240px] sm:w-[340px] md:w-[420px] aspect-square rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
                 >
                   <img
@@ -902,6 +906,52 @@ export default function CleanCulturePage() {
                     draggable={false}
                     className="w-full h-full aspect-square object-cover rounded-xl sm:rounded-2xl drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
                   />
+
+                  {/* Hover Prompt Badge */}
+                  <div className={`absolute top-3 right-3 z-20 flex items-center space-x-1.5 bg-slate-900/85 text-white text-[10px] sm:text-[11px] font-medium px-2.5 py-1 rounded-full backdrop-blur-md border border-white/15 shadow-lg transition-all duration-300 pointer-events-none select-none ${isHighlightHovered ? 'opacity-0' : 'opacity-100 group-hover:opacity-0'}`}>
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>Hover for Live Preview</span>
+                  </div>
+
+                  {/* Real Website Preview on Hover */}
+                  <div className={`absolute inset-0 z-30 transition-opacity duration-300 bg-slate-950 flex flex-col rounded-xl sm:rounded-2xl overflow-hidden ${isHighlightHovered ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'}`}>
+                    {/* Mini Browser Header */}
+                    <div className="bg-slate-900/95 px-3 py-2 flex items-center justify-between border-b border-white/10 shrink-0 select-none">
+                      <div className="flex items-center space-x-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-red-500/90 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500/90 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/90 inline-block" />
+                      </div>
+                      
+                      <div className="flex items-center space-x-1.5 bg-slate-800/90 text-slate-300 text-[10px] sm:text-[11px] font-mono px-2.5 py-0.5 rounded-md border border-white/10 max-w-[170px] sm:max-w-[220px] truncate">
+                        <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
+                        <span className="truncate">cleanculture.in</span>
+                      </div>
+
+                      <a
+                        href="http://cleanculture.in/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Open Live Website in New Tab"
+                        className="text-slate-400 hover:text-white transition p-1 hover:bg-white/10 rounded flex items-center gap-1 text-[11px] font-medium cursor-pointer"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span className="hidden sm:inline">Open</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+
+                    {/* Live Interactive Iframe Preview */}
+                    <div className="relative w-full flex-1 bg-white overflow-hidden">
+                      <iframe
+                        src="http://cleanculture.in/"
+                        title="Clean Culture Live Website Preview"
+                        className="w-[200%] h-[200%] origin-top-left transform scale-50 border-0 pointer-events-auto"
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                      />
+                    </div>
+                  </div>
                 </div>
 
                 {/* Right Screen Card (Tilted Angle) */}

@@ -33,6 +33,7 @@ import {
   ChevronUp,
   Globe,
   ExternalLink,
+  Lock,
   Hammer,
   Clock,
   ArrowRight,
@@ -149,6 +150,7 @@ export default function DynamicCaseStudyPage({
   const [videoMuted, setVideoMuted] = useState(true);
   const [solutionIdx, setSolutionIdx] = useState(0);
   const [highlightIdx, setHighlightIdx] = useState(0);
+  const [isHighlightHovered, setIsHighlightHovered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Auto-advance cover banner
@@ -157,13 +159,14 @@ export default function DynamicCaseStudyPage({
     return () => clearInterval(timer);
   }, []);
 
-  // Auto-play for Highlights 3D Phone carousel
+  // Auto-play for Highlights 3D Phone carousel (pauses on hover)
   useEffect(() => {
+    if (isHighlightHovered) return;
     const timer = setInterval(() => {
       setHighlightIdx((prev) => (prev + 1) % 3);
-    }, 3500);
+    }, 4500);
     return () => clearInterval(timer);
-  }, []);
+  }, [isHighlightHovered]);
 
   const [solutionDirection, setSolutionDirection] = useState(1);
   const [solutionInView, setSolutionInView] = useState(false);
@@ -557,6 +560,47 @@ export default function DynamicCaseStudyPage({
     'vectra-mechnovations': 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=80',
     'splendour-park': 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1600&q=80',
   };
+
+  // Real live client website mappings for instant live interactive preview on hover
+  const liveWebsiteMap: Record<string, string> = {
+    'clean-culture': 'http://cleanculture.in/',
+    'ruts-n-rides': 'https://rutsnrides.com/',
+    'ruts-n-rides-admin': 'https://rutsnrides.com/',
+    'infragen': 'https://dhigrowth07.github.io/infragen-fe/',
+    'verdurepax': 'https://www.verdurepax.com/',
+    'befhue': 'https://befhue.com/',
+    'squirlio': 'https://squirlio.com/',
+    'amaravathy-coir': 'https://amaravathycoir.com/',
+    'amaravathy': 'https://amaravathycoir.com/',
+    'keystone': 'https://kiipl.co.in/',
+    'kiipl': 'https://kiipl.co.in/',
+    'sanikas-restaurant': 'https://sanikasrestaurant.com/',
+    'sanikas': 'https://sanikasrestaurant.com/',
+    'nestpilot': 'https://nestpilot.in/',
+    'thoorigai': 'https://www.thoorigai.net/',
+    'gigabull': 'https://www.gigabull.in/',
+    'startten': 'https://startten.com/',
+    'vasantabhavan': 'https://www.vasantabhavan.in/',
+    'infinite-structure': 'https://infinitestructure.vercel.app/',
+    'akirva': 'https://play.google.com/store/apps/details?id=com.akirva.user.akirva_user',
+    'judah': 'https://play.google.com/store/apps/details?id=com.judah.fooddelivery&hl=en_IN',
+  };
+
+  const extractFirstHttpUrl = (text?: string): string | null => {
+    if (!text) return null;
+    const match = text.match(/https?:\/\/[^\s"'<>]+/);
+    return match ? match[0] : null;
+  };
+
+  const rawLiveUrl = liveWebsiteMap[study.slug] || extractFirstHttpUrl(study.link);
+  const isEmbeddableWebsite = Boolean(
+    rawLiveUrl &&
+    !rawLiveUrl.includes('play.google.com') &&
+    !rawLiveUrl.includes('apps.apple.com')
+  );
+  const liveWebsiteUrl = isEmbeddableWebsite ? rawLiveUrl : null;
+  const externalVisitUrl = rawLiveUrl;
+  const displayHost = rawLiveUrl ? rawLiveUrl.replace(/^https?:\/\/(www\.)?/, '').split('/')[0] : '';
 
   const heroImage = heroBannerMap[study.slug] || showcaseImageMap[study.slug]?.[0] || study.image || 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80';
 
@@ -1401,8 +1445,10 @@ export default function DynamicCaseStudyPage({
                   />
                 </div>
 
-                {/* Center Main Screen Card (1:1 Square Focus) */}
+                {/* Center Main Screen Card (1:1 Square Focus with Live Website Preview on Hover) */}
                 <div
+                  onMouseEnter={() => setIsHighlightHovered(true)}
+                  onMouseLeave={() => setIsHighlightHovered(false)}
                   className="relative w-[200px] xs:w-[240px] sm:w-[340px] md:w-[420px] aspect-square rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
                 >
                   <img
@@ -1411,6 +1457,78 @@ export default function DynamicCaseStudyPage({
                     draggable={false}
                     className="w-full h-full aspect-square object-cover rounded-xl sm:rounded-2xl drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
                   />
+
+                  {/* Hover Prompt Badge */}
+                  {externalVisitUrl && (
+                    <div className={`absolute top-3 right-3 z-20 flex items-center space-x-1.5 bg-slate-900/85 text-white text-[10px] sm:text-[11px] font-medium px-2.5 py-1 rounded-full backdrop-blur-md border border-white/15 shadow-lg transition-all duration-300 pointer-events-none select-none ${isHighlightHovered ? 'opacity-0' : 'opacity-100 group-hover:opacity-0'}`}>
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>Hover for Live Preview</span>
+                    </div>
+                  )}
+
+                  {/* Real Website Preview on Hover */}
+                  {liveWebsiteUrl ? (
+                    <div className={`absolute inset-0 z-30 transition-opacity duration-300 bg-slate-950 flex flex-col rounded-xl sm:rounded-2xl overflow-hidden ${isHighlightHovered ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'}`}>
+                      {/* Mini Browser Header */}
+                      <div className="bg-slate-900/95 px-3 py-2 flex items-center justify-between border-b border-white/10 shrink-0 select-none">
+                        <div className="flex items-center space-x-1.5">
+                          <span className="w-2.5 h-2.5 rounded-full bg-red-500/90 inline-block" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-amber-500/90 inline-block" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/90 inline-block" />
+                        </div>
+                        
+                        <div className="flex items-center space-x-1.5 bg-slate-800/90 text-slate-300 text-[10px] sm:text-[11px] font-mono px-2.5 py-0.5 rounded-md border border-white/10 max-w-[170px] sm:max-w-[220px] truncate">
+                          <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
+                          <span className="truncate">{displayHost}</span>
+                        </div>
+
+                        <a
+                          href={liveWebsiteUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="Open Live Website in New Tab"
+                          className="text-slate-400 hover:text-white transition p-1 hover:bg-white/10 rounded flex items-center gap-1 text-[11px] font-medium cursor-pointer"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <span className="hidden sm:inline">Open</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      </div>
+
+                      {/* Live Interactive Iframe Preview */}
+                      <div className="relative w-full flex-1 bg-white overflow-hidden">
+                        <iframe
+                          src={liveWebsiteUrl}
+                          title={`${study.title} Live Website Preview`}
+                          className="w-[200%] h-[200%] origin-top-left transform scale-50 border-0 pointer-events-auto"
+                          loading="lazy"
+                          sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                        />
+                      </div>
+                    </div>
+                  ) : externalVisitUrl ? (
+                    <div className={`absolute inset-0 z-30 transition-opacity duration-300 bg-slate-950/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center rounded-xl sm:rounded-2xl select-none ${isHighlightHovered ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'}`}>
+                      <div className="w-14 h-14 rounded-2xl bg-white p-2 flex items-center justify-center shadow-lg border border-slate-200 mb-3">
+                        {customLogo ? (
+                          <img src={customLogo} alt={study.title} className="w-full h-full object-contain" />
+                        ) : (
+                          <Globe className="w-8 h-8 text-[#2196E8]" />
+                        )}
+                      </div>
+                      <h4 className="text-white font-bold text-base sm:text-lg mb-1">{study.title}</h4>
+                      <p className="text-slate-300 text-xs mb-4 max-w-xs">Explore the live mobile application and digital platform.</p>
+                      <a
+                        href={externalVisitUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center space-x-2 bg-[#2196E8] hover:bg-blue-600 text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-xl shadow-lg transition cursor-pointer"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span>Visit Live Platform</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    </div>
+                  ) : null}
                 </div>
 
                 {/* Right Screen Card (Tilted Angle) */}
