@@ -497,7 +497,7 @@ export default function CleanCulturePage() {
 
               {/* Right Column: 3D iPhone Slideshow with Dark Pill Pagination, Hover Nav Arrows & Motion Drag Swipe */}
               <div className="lg:col-span-6 flex justify-center py-2">
-                <div className="relative w-[300px] sm:w-[380px] group">
+                <div className="relative w-full max-w-[340px] sm:max-w-[420px] aspect-square group">
                   <motion.div
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
@@ -509,7 +509,7 @@ export default function CleanCulturePage() {
                         setCurrentCoverSlide((prev) => (prev === 0 ? 2 : prev - 1));
                       }
                     }}
-                    className="relative w-full h-[420px] sm:h-[480px] flex items-center justify-center drop-shadow-2xl cursor-grab active:cursor-grabbing select-none"
+                    className="relative w-full h-full aspect-square rounded-3xl overflow-hidden flex items-center justify-center drop-shadow-2xl cursor-grab active:cursor-grabbing select-none bg-slate-100 border border-slate-200"
                   >
                     {['/images/cc_overview_slide1.png', '/images/cc_overview_slide2.png', '/images/cc_overview_slide3.png'].map((src, idx) => (
                       <img
@@ -517,7 +517,7 @@ export default function CleanCulturePage() {
                         src={src}
                         alt={`Clean Culture App Screen ${idx + 1}`}
                         draggable={false}
-                        className={`absolute inset-0 w-full h-full object-contain transition-all duration-700 pointer-events-none select-none ${
+                        className={`absolute inset-0 w-full h-full aspect-square object-cover rounded-3xl transition-all duration-700 pointer-events-none select-none ${
                           currentCoverSlide === idx ? 'opacity-100 scale-100 z-20' : 'opacity-0 scale-95 z-10'
                         }`}
                       />
@@ -785,12 +785,12 @@ export default function CleanCulturePage() {
                             {card.title}
                           </div>
                           
-                          <div className="w-full aspect-[16/10] h-[160px] sm:h-[185px] lg:h-[200px] relative overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 shadow-sm mt-1">
+                          <div className="w-full aspect-square relative overflow-hidden rounded-2xl border border-slate-100">
                             <img
                               src={card.img}
                               alt={card.title}
                               draggable={false}
-                              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105 select-none pointer-events-none"
+                              className="w-full h-full aspect-square object-cover transition-transform duration-700 hover:scale-105 select-none pointer-events-none"
                             />
                           </div>
                         </div>
@@ -820,11 +820,13 @@ export default function CleanCulturePage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               {/* Left Column: Coconut & Milk Bottles Photo */}
               <div className="lg:col-span-5 flex justify-center items-center">
-                <img
-                  src="/images/cc_image.png"
-                  alt="Clean Culture Fresh Coconuts & Milk"
-                  className="w-full max-w-sm h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700"
-                />
+                <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-200 bg-white group p-3 flex items-center justify-center">
+                  <img
+                    src="/images/cc_image.png"
+                    alt="Clean Culture Fresh Coconuts & Milk"
+                    className="w-full h-full aspect-square object-cover rounded-2xl drop-shadow-2xl hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
               </div>
 
               {/* Right Column: 4 Cards (2x2 Grid) with Bright Blue Borders */}
@@ -880,38 +882,38 @@ export default function CleanCulturePage() {
                 {/* Left Screen Card (Tilted Angle) */}
                 <div
                   onClick={() => setHighlightIdx((highlightIdx - 1 + 3) % 3)}
-                  className="relative w-[130px] xs:w-[155px] sm:w-56 md:w-64 h-[280px] xs:h-[330px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                  className="relative w-[140px] xs:w-[170px] sm:w-[260px] md:w-[320px] aspect-square rounded-2xl sm:rounded-3xl p-1 sm:p-2.5 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
                 >
                   <img
                     src={highlightItems[(highlightIdx + 2) % 3].screen}
                     alt="Previous Screen"
                     draggable={false}
-                    className="w-full h-full object-cover sm:object-contain object-top sm:object-center scale-[1.25] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full aspect-square object-cover rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
 
-                {/* Center Main Screen Card (Active Blue Focus - Zoomed In on Mobile, Pure Original on Desktop) */}
+                {/* Center Main Screen Card (Active Blue Focus - 1:1 Square) */}
                 <div
-                  className="relative w-[185px] xs:w-[220px] sm:w-64 md:w-72 h-[370px] xs:h-[430px] sm:h-[400px] md:h-[450px] rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
+                  className="relative w-[200px] xs:w-[240px] sm:w-[340px] md:w-[420px] aspect-square rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
                 >
                   <img
                     src={highlightItems[highlightIdx].screen}
                     alt="Active Screen"
                     draggable={false}
-                    className="w-full h-full object-cover sm:object-contain object-top sm:object-center scale-[1.3] sm:scale-100 drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full aspect-square object-cover rounded-xl sm:rounded-2xl drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
 
                 {/* Right Screen Card (Tilted Angle) */}
                 <div
                   onClick={() => setHighlightIdx((highlightIdx + 1) % 3)}
-                  className="relative w-[130px] xs:w-[155px] sm:w-56 md:w-64 h-[280px] xs:h-[330px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                  className="relative w-[140px] xs:w-[170px] sm:w-[260px] md:w-[320px] aspect-square rounded-2xl sm:rounded-3xl p-1 sm:p-2.5 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
                 >
                   <img
                     src={highlightItems[(highlightIdx + 1) % 3].screen}
                     alt="Next Screen"
                     draggable={false}
-                    className="w-full h-full object-cover sm:object-contain object-top sm:object-center scale-[1.25] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full aspect-square object-cover rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
               </motion.div>

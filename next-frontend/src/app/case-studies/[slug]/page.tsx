@@ -971,9 +971,9 @@ export default function DynamicCaseStudyPage({
                 </div>
               </div>
 
-              {/* Right Column: 3D iPhone Slideshow with Dark Pill Pagination, Hover Nav Arrows & Motion Drag Swipe */}
+              {/* Right Column: 3D Slideshow with Dark Pill Pagination, Hover Nav Arrows & Motion Drag Swipe */}
               <div className="lg:col-span-6 flex justify-center py-2">
-                <div className="relative w-[300px] sm:w-[380px] group">
+                <div className="relative w-full max-w-[340px] sm:max-w-[420px] aspect-square group">
                   <motion.div
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
@@ -985,7 +985,7 @@ export default function DynamicCaseStudyPage({
                         setCurrentCoverSlide((prev) => (prev === 0 ? projectImages.length - 1 : prev - 1));
                       }
                     }}
-                    className="relative w-full h-[420px] sm:h-[480px] flex items-center justify-center drop-shadow-2xl cursor-grab active:cursor-grabbing select-none"
+                    className="relative w-full h-full aspect-square rounded-3xl overflow-hidden flex items-center justify-center drop-shadow-2xl cursor-grab active:cursor-grabbing select-none bg-slate-100 border border-slate-200"
                   >
                     {projectImages.map((src, idx) => (
                       <img
@@ -993,7 +993,7 @@ export default function DynamicCaseStudyPage({
                         src={src}
                         alt={`${study.title} Screen ${idx + 1}`}
                         draggable={false}
-                        className={`absolute inset-0 w-full h-full object-contain rounded-2xl transition-all duration-700 pointer-events-none select-none ${
+                        className={`absolute inset-0 w-full h-full aspect-square object-cover rounded-3xl transition-all duration-700 pointer-events-none select-none ${
                           currentCoverSlide === idx ? 'opacity-100 scale-100 z-20' : 'opacity-0 scale-95 z-10'
                         }`}
                       />
@@ -1094,11 +1094,11 @@ export default function DynamicCaseStudyPage({
                     </div>
                   </div>
                 ) : (
-                  <div className="relative w-full max-w-md h-[320px] sm:h-[380px] rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-800 bg-[#0B1324] flex items-center justify-center group">
+                  <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-800 bg-[#0B1324] flex items-center justify-center group">
                     <img
                       src={showcaseImageMap[study.slug]?.[0] || study.image || '/images/cc_highlight_product.jpg'}
                       alt={`${study.title} Showcase`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full aspect-square object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent pointer-events-none" />
                     
@@ -1294,12 +1294,12 @@ export default function DynamicCaseStudyPage({
                             {card.title}
                           </div>
                           
-                          <div className="w-full aspect-[16/10] h-[160px] sm:h-[185px] lg:h-[200px] relative overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 shadow-sm mt-1">
+                          <div className="w-full aspect-square relative overflow-hidden rounded-2xl border border-slate-100">
                             <img
                               src={card.img}
                               alt={card.title}
                               draggable={false}
-                              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105 select-none pointer-events-none"
+                              className="w-full h-full aspect-square object-cover transition-transform duration-700 hover:scale-105 select-none pointer-events-none"
                             />
                           </div>
                         </div>
@@ -1329,11 +1329,11 @@ export default function DynamicCaseStudyPage({
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               {/* Left Side: Product Showcase Visual */}
               <div className="lg:col-span-5 flex justify-center">
-                <div className="relative w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-200 bg-white group p-4 flex items-center justify-center min-h-[360px]">
+                <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-200 bg-white group p-3 flex items-center justify-center">
                   <img
                     src={showcaseImageMap[study.slug]?.[1] || showcaseImageMap[study.slug]?.[0] || study.image || '/images/cc_highlight_product.jpg'}
                     alt={`${study.title} Showcase`}
-                    className="w-full h-auto max-h-[460px] object-contain rounded-2xl group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full aspect-square object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
               </div>
@@ -1391,38 +1391,38 @@ export default function DynamicCaseStudyPage({
                 {/* Left Screen Card (Tilted Angle) */}
                 <div
                   onClick={() => setHighlightIdx((highlightIdx - 1 + 3) % 3)}
-                  className="relative w-[130px] xs:w-[155px] sm:w-56 md:w-64 h-[280px] xs:h-[330px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                  className="relative w-[140px] xs:w-[170px] sm:w-[260px] md:w-[320px] aspect-square rounded-2xl sm:rounded-3xl p-1 sm:p-2.5 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
                 >
                   <img
                     src={highlightItems[(highlightIdx + 2) % 3].screen}
                     alt="Previous Screen"
                     draggable={false}
-                    className="w-full h-full object-cover sm:object-contain object-top sm:object-center scale-[1.25] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full aspect-square object-cover rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
 
-                {/* Center Main Screen Card (Active Blue Border Focus - Zoomed In on Mobile, Pure Original on Desktop) */}
+                {/* Center Main Screen Card (1:1 Square Focus) */}
                 <div
-                  className="relative w-[185px] xs:w-[220px] sm:w-64 md:w-72 h-[370px] xs:h-[430px] sm:h-[400px] md:h-[450px] rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
+                  className="relative w-[200px] xs:w-[240px] sm:w-[340px] md:w-[420px] aspect-square rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
                 >
                   <img
                     src={highlightItems[highlightIdx].screen}
                     alt="Active Screen"
                     draggable={false}
-                    className="w-full h-full object-cover sm:object-contain object-top sm:object-center scale-[1.3] sm:scale-100 drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full aspect-square object-cover rounded-xl sm:rounded-2xl drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
 
                 {/* Right Screen Card (Tilted Angle) */}
                 <div
                   onClick={() => setHighlightIdx((highlightIdx + 1) % 3)}
-                  className="relative w-[130px] xs:w-[155px] sm:w-56 md:w-64 h-[280px] xs:h-[330px] sm:h-[350px] md:h-[400px] rounded-2xl sm:rounded-3xl p-1 sm:p-3 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                  className="relative w-[140px] xs:w-[170px] sm:w-[260px] md:w-[320px] aspect-square rounded-2xl sm:rounded-3xl p-1 sm:p-2.5 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
                 >
                   <img
                     src={highlightItems[(highlightIdx + 1) % 3].screen}
                     alt="Next Screen"
                     draggable={false}
-                    className="w-full h-full object-cover sm:object-contain object-top sm:object-center scale-[1.25] sm:scale-100 drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full aspect-square object-cover rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
               </motion.div>
@@ -1640,11 +1640,11 @@ export default function DynamicCaseStudyPage({
                   ) : (
                     <div className="relative w-full rounded-2xl overflow-hidden shadow-md border border-slate-200 group bg-white p-6 flex flex-col items-center justify-center text-center space-y-4">
                       {showcaseImageMap[study.slug]?.[2] || (study.image && !study.image.includes('cc_')) ? (
-                        <div className="w-full relative rounded-xl overflow-hidden shadow-sm">
+                        <div className="w-full relative aspect-square max-w-sm rounded-2xl overflow-hidden shadow-sm">
                           <img
                             src={showcaseImageMap[study.slug]?.[2] || study.image}
                             alt={study.title}
-                            className="w-full h-48 object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
+                            className="w-full h-full aspect-square object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                           <div className="absolute bottom-3 left-3 flex items-center space-x-2">
