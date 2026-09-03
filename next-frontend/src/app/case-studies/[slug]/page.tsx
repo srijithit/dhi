@@ -159,15 +159,6 @@ export default function DynamicCaseStudyPage({
     return () => clearInterval(timer);
   }, []);
 
-  // Auto-play for Highlights 3D Phone carousel (pauses on hover)
-  useEffect(() => {
-    if (isHighlightHovered) return;
-    const timer = setInterval(() => {
-      setHighlightIdx((prev) => (prev + 1) % 3);
-    }, 4500);
-    return () => clearInterval(timer);
-  }, [isHighlightHovered]);
-
   const [solutionDirection, setSolutionDirection] = useState(1);
   const [solutionInView, setSolutionInView] = useState(false);
   const [solutionIsHovered, setSolutionIsHovered] = useState(false);
@@ -374,11 +365,12 @@ export default function DynamicCaseStudyPage({
   // Project Real Showcase Images Mapping (Extracted directly from client websites)
   const showcaseImageMap: Record<string, string[]> = {
     'squirlio': [
-      '/images/case-studies/squirlio/banner_1.jpeg',
       '/images/case-studies/squirlio/squirlio_product_1.png',
       '/images/case-studies/squirlio/squirlio_product_2.png',
       '/images/case-studies/squirlio/squirlio_product_3.png',
-      '/images/case-studies/squirlio/tab-view.png',
+      '/images/case-studies/squirlio/squirlio_product_4.png',
+      '/images/case-studies/squirlio/squirlio_product_5.png',
+      '/images/case-studies/squirlio/squirlio_product_6.png',
     ],
     'infragen': [
       '/images/case-studies/infragen/showcase_3.jpg',
@@ -1323,29 +1315,14 @@ export default function DynamicCaseStudyPage({
                           <div className="bg-[#4A72E8] rounded-full w-3 h-3 shrink-0 shadow-sm" />
                         </div>
 
-                        {/* Content Card Body */}
-                        <div className="flex flex-col gap-3.5 w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[390px] order-1 lg:order-2 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-xl">
-                          <div className="flex items-center justify-between">
-                            <div className="font-bold text-[54px] lg:text-[64px] leading-none text-[#4A72E8]/20 select-none font-mono">
-                              {card.num}
-                            </div>
-                            <div className="w-6 h-6 rounded-full border-2 border-blue-500 flex items-center justify-center p-0.5 shadow-xs">
-                              <div className="w-2.5 h-2.5 rounded-full bg-blue-500" />
-                            </div>
-                          </div>
-
-                          <div className="font-extrabold text-xl lg:text-2xl leading-tight text-slate-900 tracking-tight font-body">
-                            {card.title}
-                          </div>
-                          
-                          <div className="w-full aspect-square relative overflow-hidden rounded-2xl border border-slate-100">
-                            <img
-                              src={card.img}
-                              alt={card.title}
-                              draggable={false}
-                              className="w-full h-full aspect-square object-cover transition-transform duration-700 hover:scale-105 select-none pointer-events-none"
-                            />
-                          </div>
+                        {/* Content Card Body: Main Image Alone */}
+                        <div className="w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[400px] aspect-square order-1 lg:order-2 bg-white rounded-3xl p-3 sm:p-3.5 shadow-2xl border border-slate-200/90 overflow-hidden flex items-center justify-center">
+                          <img
+                            src={card.img}
+                            alt={card.title}
+                            draggable={false}
+                            className="w-full h-full aspect-square object-cover rounded-2xl shadow-sm transition-transform duration-700 hover:scale-105 select-none pointer-events-none"
+                          />
                         </div>
                       </motion.div>
                     );
@@ -1418,7 +1395,7 @@ export default function DynamicCaseStudyPage({
             </div>
 
             {/* Single 16:9 Widescreen Showcase Card */}
-            <div className="relative max-w-4xl mx-auto mb-8 px-4 sm:px-12">
+            <div className="relative max-w-4xl mx-auto mb-10 px-4">
               <div
                 onMouseEnter={() => setIsHighlightHovered(true)}
                 onMouseLeave={() => setIsHighlightHovered(false)}
@@ -1502,34 +1479,6 @@ export default function DynamicCaseStudyPage({
                     </a>
                   </div>
                 ) : null}
-              </div>
-
-              {/* Navigation Arrows */}
-              <button
-                onClick={() => setHighlightIdx((prev) => (prev - 1 + 3) % 3)}
-                aria-label="Previous highlight screen"
-                className="absolute -left-2 sm:left-0 md:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setHighlightIdx((prev) => (prev + 1) % 3)}
-                aria-label="Next highlight screen"
-                className="absolute -right-2 sm:right-0 md:-right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-
-              <div className="flex justify-center items-center gap-2 mt-4">
-                {[0, 1, 2].map((i) => (
-                  <button
-                    key={i}
-                    onClick={() => setHighlightIdx(i)}
-                    className={`transition-all duration-300 rounded-full cursor-pointer ${
-                      highlightIdx === i ? 'w-6 h-2 bg-[#2196E8]' : 'w-2 h-2 bg-slate-300'
-                    }`}
-                  />
-                ))}
               </div>
             </div>
 

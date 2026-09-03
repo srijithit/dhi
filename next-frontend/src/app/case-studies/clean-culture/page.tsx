@@ -772,29 +772,14 @@ export default function CleanCulturePage() {
                           <div className="bg-[#4A72E8] rounded-full w-3 h-3 shrink-0 shadow-sm" />
                         </div>
 
-                        {/* Content Card Body */}
-                        <div className="flex flex-col gap-3.5 w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[390px] order-1 lg:order-2 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-xl">
-                          <div className="flex items-center justify-between">
-                            <div className="font-bold text-[54px] lg:text-[64px] leading-none text-[#4A72E8]/20 select-none font-mono">
-                              {card.num}
-                            </div>
-                            <div className="w-6 h-6 rounded-full border-2 border-blue-500 flex items-center justify-center p-0.5 shadow-xs">
-                              <div className="w-2.5 h-2.5 rounded-full bg-blue-500" />
-                            </div>
-                          </div>
-
-                          <div className="font-extrabold text-xl lg:text-2xl leading-tight text-slate-900 tracking-tight font-body">
-                            {card.title}
-                          </div>
-                          
-                          <div className="w-full aspect-square relative overflow-hidden rounded-2xl border border-slate-100">
-                            <img
-                              src={card.img}
-                              alt={card.title}
-                              draggable={false}
-                              className="w-full h-full aspect-square object-cover transition-transform duration-700 hover:scale-105 select-none pointer-events-none"
-                            />
-                          </div>
+                        {/* Content Card Body: Main Image Alone */}
+                        <div className="w-full max-w-[320px] sm:max-w-[360px] xl:max-w-[400px] aspect-square order-1 lg:order-2 bg-white rounded-3xl p-3 sm:p-3.5 shadow-2xl border border-slate-200/90 overflow-hidden flex items-center justify-center">
+                          <img
+                            src={card.img}
+                            alt={card.title}
+                            draggable={false}
+                            className="w-full h-full aspect-square object-cover rounded-2xl shadow-sm transition-transform duration-700 hover:scale-105 select-none pointer-events-none"
+                          />
                         </div>
                       </motion.div>
                     );
