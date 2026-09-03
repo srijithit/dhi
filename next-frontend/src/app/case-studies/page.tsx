@@ -29,13 +29,13 @@ const CASE_STUDY_LOGOS: Record<string, string> = {
   'judah': '/images/case-studies/logos/judah.png',
   'startten': '/images/case-studies/logos/startten.png',
   'thoorigai': '/images/case-studies/logos/thoorigai.png',
-  'sales-app': '/images/under_construction_icon.jpg',
-  'vectra-mechnovations': '/images/under_construction_icon.jpg',
-  'splendour-park': '/images/under_construction_icon.jpg',
-  'bad-biscuit-detection': '/images/under_construction_icon.jpg',
-  'fabric-defect-detection': '/images/under_construction_icon.jpg',
-  'dhigrowth-ai-chatbot': '/images/under_construction_icon.jpg',
-  'ai-invoice-processing': '/images/under_construction_icon.jpg',
+  'sales-app': '/images/under_construction_banner.png',
+  'vectra-mechnovations': '/images/under_construction_banner.png',
+  'splendour-park': '/images/under_construction_banner.png',
+  'bad-biscuit-detection': '/images/under_construction_banner.png',
+  'fabric-defect-detection': '/images/under_construction_banner.png',
+  'dhigrowth-ai-chatbot': '/images/under_construction_banner.png',
+  'ai-invoice-processing': '/images/under_construction_banner.png',
   'vasantabhavan': '/images/case-studies/vasantabhavan/vb-card-logo-trans-1.1e-qnj4xkg1zo.webp',
   'infinite-structure': '/images/case-studies/infinite-structure/logo.webp',
 };
@@ -122,35 +122,46 @@ export default function CaseStudiesPage() {
                 >
                   {/* Image Container with Brand Logo Presentation */}
                   <div className="relative w-full h-64 overflow-hidden p-2.5">
-                    <div className="relative w-full h-full rounded-[22px] overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 flex items-center justify-center border border-slate-800/80 shadow-inner">
-                      {cardImage && !cardImage.includes('placeholder') && (
+                    {isUnderConstruction ? (
+                      <div className="relative w-full h-full rounded-[22px] overflow-hidden bg-slate-50 border border-slate-200/80 flex items-center justify-center shadow-inner">
                         <img
-                          src={cardImage}
-                          alt={study.title}
-                          className="absolute inset-0 object-cover w-full h-full opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-700 select-none"
+                          src="/images/under_construction_banner.png"
+                          alt="Under Construction"
+                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-all duration-700 select-none"
                           loading="lazy"
                         />
-                      )}
-                      
-                      {/* Dark Vignette Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-slate-950/30" />
-
-                      {/* Brand Official Logo Centered in High-Gloss Glass Emblem */}
-                      {brandLogo ? (
-                        <div className="relative z-10 w-28 h-28 sm:w-32 sm:h-32 rounded-2xl bg-white/95 backdrop-blur-md p-3 shadow-2xl border border-white/70 flex items-center justify-center transform group-hover:scale-110 transition-all duration-500 overflow-hidden">
+                      </div>
+                    ) : (
+                      <div className="relative w-full h-full rounded-[22px] overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 flex items-center justify-center border border-slate-800/80 shadow-inner">
+                        {cardImage && !cardImage.includes('placeholder') && (
                           <img
-                            src={brandLogo}
-                            alt={`${study.title} Logo`}
-                            className={`max-w-full max-h-full ${isUnderConstruction ? 'object-cover rounded-xl scale-105' : 'object-contain'} drop-shadow-sm select-none`}
+                            src={cardImage}
+                            alt={study.title}
+                            className="absolute inset-0 object-cover w-full h-full opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-700 select-none"
                             loading="lazy"
                           />
-                        </div>
-                      ) : (
-                        <div className="relative z-10 text-xl font-extrabold text-white font-body tracking-wider uppercase px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20">
-                          {study.title}
-                        </div>
-                      )}
-                    </div>
+                        )}
+                        
+                        {/* Dark Vignette Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-slate-950/30" />
+
+                        {/* Brand Official Logo Centered in High-Gloss Glass Emblem */}
+                        {brandLogo ? (
+                          <div className="relative z-10 w-28 h-28 sm:w-32 sm:h-32 rounded-2xl bg-white/95 backdrop-blur-md p-3 shadow-2xl border border-white/70 flex items-center justify-center transform group-hover:scale-110 transition-all duration-500 overflow-hidden">
+                            <img
+                              src={brandLogo}
+                              alt={`${study.title} Logo`}
+                              className="max-w-full max-h-full object-contain drop-shadow-sm select-none"
+                              loading="lazy"
+                            />
+                          </div>
+                        ) : (
+                          <div className="relative z-10 text-xl font-extrabold text-white font-body tracking-wider uppercase px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20">
+                            {study.title}
+                          </div>
+                        )}
+                      </div>
+                    )}
 
                     {/* Tag Badge (Capitalized Blue Pill) */}
                     <div className="absolute top-5 left-5 bg-slate-900/90 backdrop-blur-md text-white font-bold text-[11px] sm:text-xs px-3.5 py-1.5 rounded-full border border-white/20 tracking-wide shadow-md font-body z-20">

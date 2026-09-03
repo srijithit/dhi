@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sparkles, Briefcase, MapPin, Clock, ArrowRight, CheckCircle2, 
@@ -288,6 +288,17 @@ export default function CareersPage() {
   const [gmailComposeUrl, setGmailComposeUrl] = useState<string>('');
   const [mailtoUrl, setMailtoUrl] = useState<string>('');
 
+  // Lock body scroll whenever a modal is open to eliminate background scrolling
+  useEffect(() => {
+    if (applyModalJob || selectedJob) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [applyModalJob, selectedJob]);
+
   const filteredJobs = JOB_OPENINGS.filter(job => {
     const matchesCategory = selectedCategory === 'all' || job.category === selectedCategory;
     const matchesSearch = job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -463,11 +474,6 @@ export default function CareersPage() {
       return;
     }
 
-    if (!resumeBase64 || !resumeFile) {
-      setResumeError('Resume upload is mandatory. Please upload a PDF under 5MB.');
-      return;
-    }
-
     setIsSubmitting(true);
     const roleTitle = applyModalJob ? applyModalJob.title : "General Application";
 
@@ -487,7 +493,7 @@ My Details:
 Key Skills / Cover Note:
 ${trimmedNote}
 
-(Resume: ${resumeFile?.name || 'Resume.pdf'})
+[Note: Please find my PDF Resume attached to this email]
 
 Thank you!
 ${trimmedName}`;
@@ -509,9 +515,7 @@ ${trimmedName}`;
           experience: trimmedExp,
           linkedin: trimmedLinkedin,
           note: trimmedNote,
-          role: roleTitle,
-          resumeBase64: resumeBase64,
-          resumeFileName: resumeFile.name
+          role: roleTitle
         })
       });
 
@@ -879,20 +883,23 @@ ${trimmedName}`;
       {/* ── JOB DETAILS MODAL ── */}
       <AnimatePresence>
         {selectedJob && (
-          <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+          <div 
+            className="fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-6 overflow-hidden select-none"
+            onWheel={(e) => e.stopPropagation()}
+          >
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setSelectedJob(null)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm cursor-pointer"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm cursor-default"
             />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-3xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200 z-20 my-auto p-6 sm:p-10 max-h-[85vh] overflow-y-auto text-left font-body"
+              className="relative w-full max-w-3xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200 z-20 my-auto p-6 sm:p-10 max-h-[85vh] overflow-y-auto text-left font-body select-text"
+              onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setSelectedJob(null)}
@@ -996,20 +1003,23 @@ ${trimmedName}`;
       {/* ── APPLICATION MODAL ── */}
       <AnimatePresence>
         {applyModalJob && (
-          <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+          <div 
+            className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6 overflow-hidden select-none"
+            onWheel={(e) => e.stopPropagation()}
+          >
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={closeApplyModal}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm cursor-pointer"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm cursor-default"
             />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-lg bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200 z-20 my-auto p-6 sm:p-8 text-left font-body max-h-[90vh] overflow-y-auto"
+              className="relative w-full max-w-lg bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200 z-20 my-auto p-6 sm:p-8 text-left font-body max-h-[90vh] overflow-y-auto select-text"
+              onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={closeApplyModal}
@@ -1039,7 +1049,7 @@ ${trimmedName}`;
                       Application Sent!
                     </h4>
                     <p className="text-slate-600 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
-                      Thank you <strong className="text-slate-900">{applicantData.name}</strong>. Your job application for <strong className="text-[#2196E8]">{applyModalJob?.title}</strong> and PDF resume (<span className="text-slate-800 font-semibold">{resumeFile?.name}</span>) have been dispatched to <strong className="text-slate-900">Dhinesh@dhigrowth.com</strong> & <strong className="text-slate-900">dinesh@dhigrowth.com</strong>.
+                      Thank you <strong className="text-slate-900">{applicantData.name}</strong>. Your job application for <strong className="text-[#2196E8]">{applyModalJob?.title}</strong> is ready to send to <strong className="text-slate-900">Dhinesh@dhigrowth.com</strong> & <strong className="text-slate-900">dinesh@dhigrowth.com</strong>.
                     </p>
                   </div>
 
@@ -1055,7 +1065,7 @@ ${trimmedName}`;
                       </span>
                     </div>
                     <p className="text-[11px] text-slate-600 leading-relaxed">
-                      A draft has been prepared to send your application & attach your PDF resume directly to <strong className="text-slate-800">Dhinesh@dhigrowth.com</strong>:
+                      Your draft is prepared with all your application details pre-filled. Please attach your PDF resume directly in the email before sending:
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
                       {gmailComposeUrl && (
@@ -1090,34 +1100,41 @@ ${trimmedName}`;
                       </span>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-slate-700">
-                      <div>
+                      <div className="min-w-0">
                         <span className="text-slate-400 block text-[10px] font-bold">Applicant Name</span>
-                        <span className="font-semibold text-slate-900">{applicantData.name || "N/A"}</span>
+                        <span className="font-semibold text-slate-900 block truncate" title={applicantData.name || "N/A"}>
+                          {applicantData.name || "N/A"}
+                        </span>
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <span className="text-slate-400 block text-[10px] font-bold">Applied Position</span>
-                        <span className="font-semibold text-slate-900">{applyModalJob?.title}</span>
+                        <span className="font-semibold text-slate-900 block truncate" title={applyModalJob?.title || "N/A"}>
+                          {applyModalJob?.title}
+                        </span>
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <span className="text-slate-400 block text-[10px] font-bold">Email ID</span>
-                        <span className="font-semibold text-slate-900">{applicantData.email || "N/A"}</span>
+                        <span className="font-semibold text-slate-900 block truncate" title={applicantData.email || "N/A"}>
+                          {applicantData.email || "N/A"}
+                        </span>
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <span className="text-slate-400 block text-[10px] font-bold">Phone / WhatsApp</span>
-                        <span className="font-semibold text-slate-900">{applicantData.phone || "N/A"}</span>
+                        <span className="font-semibold text-slate-900 block truncate" title={applicantData.phone || "N/A"}>
+                          {applicantData.phone || "N/A"}
+                        </span>
                       </div>
                     </div>
-                    {resumeFile && (
-                      <div className="pt-2.5 border-t border-slate-200/80 flex items-center gap-2 text-slate-800">
-                        <div className="w-7 h-7 rounded-lg bg-blue-100 text-[#2196E8] flex items-center justify-center shrink-0">
-                          <FileText className="w-4 h-4" />
-                        </div>
-                        <div className="overflow-hidden flex-1">
-                          <p className="font-bold text-slate-900 truncate text-xs">{resumeFile.name}</p>
-                          <p className="text-[10px] text-emerald-600 font-medium">✓ PDF Ready & Attached ({(resumeFile.size / (1024 * 1024)).toFixed(2)} MB)</p>
-                        </div>
+                    {/* Resume Upload in Gmail Indicator */}
+                    <div className="pt-2.5 border-t border-slate-200/80 flex items-center gap-2.5 text-slate-800">
+                      <div className="w-7 h-7 rounded-lg bg-blue-100 text-[#2196E8] flex items-center justify-center shrink-0">
+                        <Mail className="w-4 h-4" />
                       </div>
-                    )}
+                      <div className="overflow-hidden flex-1">
+                        <p className="font-bold text-slate-900 text-xs">Upload Resume in Gmail</p>
+                        <p className="text-[10px] text-[#2196E8] font-medium">Attach your PDF Resume in the opened email draft before sending.</p>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Hiring Process Note */}
@@ -1147,7 +1164,7 @@ ${trimmedName}`;
                       Apply: {applyModalJob.title}
                     </h3>
                     <p className="text-slate-500 text-xs">
-                      Submit your application and resume.
+                      Submit your details below and attach your resume in Gmail.
                     </p>
                   </div>
 
@@ -1239,51 +1256,24 @@ ${trimmedName}`;
                       </div>
                     </div>
 
-                    {/* Upload Resume in PDF under 5MB (Mandatory) */}
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
-                        Upload Resume (PDF under 5 MB) <span className="text-rose-500">*</span>
-                      </label>
-                      {!resumeFile ? (
-                        <label className="border-2 border-dashed border-slate-300 hover:border-[#2196E8] bg-slate-50/70 hover:bg-blue-50/30 rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all group">
-                          <Upload className="w-6 h-6 text-[#2196E8] mb-1 group-hover:scale-110 transition-transform" />
-                          <span className="text-xs font-bold text-slate-700">Click to upload your Resume (PDF)</span>
-                          <span className="text-[10px] text-slate-400 mt-0.5">Maximum file size: 5 MB</span>
-                          <input
-                            type="file"
-                            accept=".pdf,application/pdf"
-                            required
-                            onChange={handleFileChange}
-                            className="hidden"
-                          />
-                        </label>
-                      ) : (
-                        <div className="p-3 bg-blue-50/60 border border-blue-200 rounded-2xl flex items-center justify-between">
-                          <div className="flex items-center gap-2.5 overflow-hidden">
-                            <div className="w-8 h-8 rounded-xl bg-[#2196E8] text-white flex items-center justify-center shrink-0">
-                              <FileText className="w-4 h-4" />
-                            </div>
-                            <div className="overflow-hidden">
-                              <p className="text-xs font-bold text-slate-900 truncate">{resumeFile.name}</p>
-                              <p className="text-[10px] text-slate-500">{(resumeFile.size / (1024 * 1024)).toFixed(2)} MB • PDF Ready</p>
-                            </div>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={removeResumeFile}
-                            className="p-1.5 rounded-lg bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-500 border border-slate-200 transition-colors cursor-pointer"
-                            title="Remove and choose another PDF"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
+                    {/* Upload Resume in Gmail Card */}
+                    <div className="p-3.5 bg-gradient-to-r from-blue-50/80 to-indigo-50/50 border border-blue-200/80 rounded-2xl flex items-start gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-blue-100 text-[#2196E8] flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                        <Mail className="w-5 h-5" />
+                      </div>
+                      <div className="space-y-0.5 text-left">
+                        <div className="flex items-center gap-2">
+                          <label className="block text-xs font-bold text-slate-800">
+                            Resume Attachment
+                          </label>
+                          <span className="text-[10px] font-bold text-[#2196E8] bg-white px-2 py-0.5 rounded-full border border-blue-200 shadow-2xs">
+                            Upload in Gmail
+                          </span>
                         </div>
-                      )}
-                      {resumeError && (
-                        <p className="text-[11px] text-rose-500 font-semibold mt-1 flex items-center gap-1">
-                          <AlertCircle className="w-3 h-3" />
-                          <span>{resumeError}</span>
+                        <p className="text-[11px] text-slate-600 leading-relaxed">
+                          Your pre-filled email draft will open automatically when you submit. Please attach your <strong>PDF Resume</strong> directly in Gmail before sending.
                         </p>
-                      )}
+                      </div>
                     </div>
 
                     {/* Key Skills / Cover Note (Mandatory) */}

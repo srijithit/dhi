@@ -105,7 +105,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Sales CRM App",
     "category": "Enterprise App",
     "description": "LeadNova CRM is a mobile-based customer relationship management application designed to help sales teams manage leads, follow-ups, activities, and the complete sales pipeline efficiently.",
-    "image": "/images/under_construction_banner.jpg",
+    "image": "/images/under_construction_banner.png",
     "slug": "sales-app",
     "featured": false,
     "underConstruction": true
@@ -124,7 +124,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Vectra Mechnovations",
     "category": "Industrial Engineering",
     "description": "Vectra Mechnovations needed a digital presence that could communicate its technical expertise, engineering capabilities, and professional approach to potential customers.",
-    "image": "/images/under_construction_banner.jpg",
+    "image": "/images/under_construction_banner.png",
     "slug": "vectra-mechnovations",
     "featured": false,
     "underConstruction": true
@@ -170,7 +170,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Splendour Park ERP",
     "category": "Internal System",
     "description": "Splendour Park is a multi-branch ERP system built for end-to-end management of bulk trading desks, retail counters, wholesale billing, and warehouse inventory.",
-    "image": "/images/under_construction_banner.jpg",
+    "image": "/images/under_construction_banner.png",
     "slug": "splendour-park",
     "featured": false,
     "underConstruction": true
@@ -189,7 +189,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Biscuit Defect AI",
     "category": "AI & Computer Vision",
     "description": "Real-time industrial automated high-speed visual inspection and defect rejection system for biscuit manufacturing lines.",
-    "image": "/images/under_construction_banner.jpg",
+    "image": "/images/under_construction_banner.png",
     "slug": "bad-biscuit-detection",
     "featured": false,
     "underConstruction": true
@@ -199,7 +199,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "Fabric Defect AI",
     "category": "AI & Computer Vision",
     "description": "Automated textile vision inspection system detecting fabric flaws, weave imperfections, and color variations in high-speed spinning mills.",
-    "image": "/images/under_construction_banner.jpg",
+    "image": "/images/under_construction_banner.png",
     "slug": "fabric-defect-detection",
     "featured": false,
     "underConstruction": true
@@ -209,7 +209,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "AI Chatbot Assistant",
     "category": "AI Automation",
     "description": "Next-generation RAG conversational AI assistant for 24/7 lead qualification, booking management, and customer support automation.",
-    "image": "/images/under_construction_banner.jpg",
+    "image": "/images/under_construction_banner.png",
     "slug": "dhigrowth-ai-chatbot",
     "featured": false,
     "underConstruction": true
@@ -219,7 +219,7 @@ export const caseStudies: CaseStudy[] = [
     "title": "AI Invoice Processing",
     "category": "AI & Document Intelligence",
     "description": "Intelligent OCR and multi-format document parser extracting line items, tax totals, and ledger entries directly into accounting databases.",
-    "image": "/images/under_construction_banner.jpg",
+    "image": "/images/under_construction_banner.png",
     "slug": "ai-invoice-processing",
     "featured": false,
     "underConstruction": true

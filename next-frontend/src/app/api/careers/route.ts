@@ -13,10 +13,10 @@ export async function POST(request: Request) {
     const resumeBase64 = body.resumeBase64;
     const resumeFileName = body.resumeFileName;
 
-    // Strict validation: all fields are mandatory and cannot be whitespace only
-    if (!name || !email || !phone || !experience || !linkedin || !note || !resumeBase64) {
+    // Strict validation: mandatory fields cannot be whitespace only
+    if (!name || !email || !phone || !experience || !linkedin || !note) {
       return NextResponse.json(
-        { success: false, error: 'All fields including Resume (PDF under 5MB) and LinkedIn URL are mandatory and cannot be empty.' },
+        { success: false, error: 'All fields including LinkedIn URL and Cover Note are mandatory and cannot be empty.' },
         { status: 400 }
       );
     }
@@ -78,8 +78,10 @@ export async function POST(request: Request) {
                 <td style="padding: 12px 8px; color: #334155;"><a href="${linkedin}" target="_blank" style="color: #2196E8; text-decoration: underline;">${linkedin}</a></td>
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9;">
-                <td style="padding: 12px 8px; font-weight: bold; color: #1e293b;">Attached Resume:</td>
-                <td style="padding: 12px 8px; color: #059669; font-weight: bold;">📎 ${resumeFileName || 'Resume.pdf'} (Attached below)</td>
+                <td style="padding: 12px 8px; font-weight: bold; color: #1e293b;">Resume:</td>
+                <td style="padding: 12px 8px; color: ${resumeFileName ? '#059669' : '#2563eb'}; font-weight: bold;">
+                  ${resumeFileName ? `📎 ${resumeFileName}` : '✉️ Attached via direct Gmail submission'}
+                </td>
               </tr>
             </table>
 
