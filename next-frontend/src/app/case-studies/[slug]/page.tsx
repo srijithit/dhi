@@ -95,6 +95,30 @@ export default function DynamicCaseStudyPage({
               {basicStudy.description}
             </p>
 
+            {/* Dedicated Under Construction Artwork Banner */}
+            <div className="relative w-full max-w-2xl rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-xl mb-8 bg-slate-950 group">
+              <img
+                src="/images/under_construction_banner.jpg"
+                alt="Case Study In Development"
+                className="w-full h-auto max-h-[340px] object-cover transition-transform duration-700 group-hover:scale-105 select-none"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent flex items-end p-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-white/95 p-1 shadow-lg border border-white/80 overflow-hidden flex items-center justify-center shrink-0">
+                    <img 
+                      src="/images/under_construction_icon.jpg" 
+                      alt="Under Construction Icon"
+                      className="w-full h-full object-cover rounded-lg select-none"
+                    />
+                  </div>
+                  <div className="text-left">
+                    <span className="text-xs font-bold text-amber-400 tracking-wider uppercase block font-body">Architecture In Progress</span>
+                    <span className="text-white font-bold text-sm sm:text-base font-body">{basicStudy.title} System Overview</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* In-Progress Documentation Note */}
             <div className="w-full max-w-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 mb-10 text-left">
               <div className="flex items-center gap-2.5 font-bold text-slate-900 dark:text-white text-sm mb-3">
@@ -196,7 +220,10 @@ export default function DynamicCaseStudyPage({
         videoRef.current.pause();
         setVideoPlaying(false);
       } else {
-        videoRef.current.play();
+        videoRef.current.play().catch((err) => {
+          console.warn("Video playback failed:", err);
+          setVideoPlaying(false);
+        });
         setVideoPlaying(true);
       }
     }

@@ -58,9 +58,9 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     { name: "Judah Food Logistics", slug: "judah" },
     { name: "VerdurePax Lifestyle", slug: "verdurepax" },
     { name: "Amaravathy Coir", slug: "amaravathy-coir" },
-    { name: "Vectra Mechnovations", slug: "vectra-mechnovations", underConstruction: true },
     { name: "Gigabull Luxury", slug: "gigabull" },
     { name: "Vasantabhavan", slug: "vasantabhavan" },
+    { name: "Vectra Mechnovations", slug: "vectra-mechnovations", underConstruction: true },
     { name: "Fabric Defect AI", slug: "fabric-defect-detection", underConstruction: true },
     { name: "AI Invoice Processing", slug: "ai-invoice-processing", underConstruction: true }
   ];

@@ -29,13 +29,13 @@ const CASE_STUDY_LOGOS: Record<string, string> = {
   'judah': '/images/case-studies/logos/judah.png',
   'startten': '/images/case-studies/logos/startten.png',
   'thoorigai': '/images/case-studies/logos/thoorigai.png',
-  'sales-app': '/images/case-studies/logos/clean_culture.png',
-  'vectra-mechnovations': '/images/case-studies/logos/kiipl.png',
-  'splendour-park': '/images/case-studies/logos/startten.ico',
-  'bad-biscuit-detection': '/images/case-studies/logos/infragen.png',
-  'fabric-defect-detection': '/images/case-studies/logos/infragen.png',
-  'dhigrowth-ai-chatbot': '/images/case-studies/logos/clean_culture.png',
-  'ai-invoice-processing': '/images/case-studies/logos/infragen.png',
+  'sales-app': '/images/under_construction_icon.jpg',
+  'vectra-mechnovations': '/images/under_construction_icon.jpg',
+  'splendour-park': '/images/under_construction_icon.jpg',
+  'bad-biscuit-detection': '/images/under_construction_icon.jpg',
+  'fabric-defect-detection': '/images/under_construction_icon.jpg',
+  'dhigrowth-ai-chatbot': '/images/under_construction_icon.jpg',
+  'ai-invoice-processing': '/images/under_construction_icon.jpg',
   'vasantabhavan': '/images/case-studies/vasantabhavan/vb-card-logo-trans-1.1e-qnj4xkg1zo.webp',
   'infinite-structure': '/images/case-studies/infinite-structure/logo.webp',
 };
@@ -48,6 +48,13 @@ export default function CaseStudiesPage() {
     if (!text) return '';
     return text.replace(/\b\w+/g, (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
   };
+
+  // Keep all live case studies at top, and push all under construction projects down to the bottom
+  const sortedCaseStudies = [...caseStudies].sort((a, b) => {
+    if (a.underConstruction && !b.underConstruction) return 1;
+    if (!a.underConstruction && b.underConstruction) return -1;
+    return 0;
+  });
 
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-[#2196E8] selection:text-white font-body">
@@ -89,8 +96,14 @@ export default function CaseStudiesPage() {
 
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-9">
-            {caseStudies.map((study) => {
-              const brandLogo = CASE_STUDY_LOGOS[study.slug || study.id];
+            {sortedCaseStudies.map((study) => {
+              const isUnderConstruction = Boolean(study.underConstruction);
+              const brandLogo = isUnderConstruction 
+                ? '/images/under_construction_icon.jpg' 
+                : CASE_STUDY_LOGOS[study.slug || study.id];
+              const cardImage = isUnderConstruction 
+                ? '/images/under_construction_banner.jpg' 
+                : study.image;
 
               const cardContent = (
                 <motion.div
@@ -110,11 +123,11 @@ export default function CaseStudiesPage() {
                   {/* Image Container with Brand Logo Presentation */}
                   <div className="relative w-full h-64 overflow-hidden p-2.5">
                     <div className="relative w-full h-full rounded-[22px] overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 flex items-center justify-center border border-slate-800/80 shadow-inner">
-                      {study.image && !study.image.includes('placeholder') && (
+                      {cardImage && !cardImage.includes('placeholder') && (
                         <img
-                          src={study.image}
+                          src={cardImage}
                           alt={study.title}
-                          className="absolute inset-0 object-cover w-full h-full opacity-35 group-hover:opacity-50 group-hover:scale-110 transition-all duration-700 blur-[0.5px] group-hover:blur-0 select-none"
+                          className="absolute inset-0 object-cover w-full h-full opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-700 select-none"
                           loading="lazy"
                         />
                       )}
@@ -124,11 +137,11 @@ export default function CaseStudiesPage() {
 
                       {/* Brand Official Logo Centered in High-Gloss Glass Emblem */}
                       {brandLogo ? (
-                        <div className="relative z-10 w-28 h-28 sm:w-32 sm:h-32 rounded-2xl bg-white/95 backdrop-blur-md p-3.5 shadow-2xl border border-white/70 flex items-center justify-center transform group-hover:scale-110 transition-all duration-500">
+                        <div className="relative z-10 w-28 h-28 sm:w-32 sm:h-32 rounded-2xl bg-white/95 backdrop-blur-md p-3 shadow-2xl border border-white/70 flex items-center justify-center transform group-hover:scale-110 transition-all duration-500 overflow-hidden">
                           <img
                             src={brandLogo}
                             alt={`${study.title} Logo`}
-                            className="max-w-full max-h-full object-contain drop-shadow-sm select-none"
+                            className={`max-w-full max-h-full ${isUnderConstruction ? 'object-cover rounded-xl scale-105' : 'object-contain'} drop-shadow-sm select-none`}
                             loading="lazy"
                           />
                         </div>

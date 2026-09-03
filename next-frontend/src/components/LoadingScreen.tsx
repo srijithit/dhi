@@ -27,24 +27,30 @@ export default function LoadingScreen() {
     // Always play video unmuted with sound
     if (videoRef.current) {
       videoRef.current.muted = false;
-      videoRef.current.play().catch(() => {
-        // Fallback: If browser blocks initial unmuted autoplay, play muted and unmute on first interaction
-        if (videoRef.current) {
-          videoRef.current.muted = true;
-          videoRef.current.play();
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Fallback: If browser blocks initial unmuted autoplay, play muted and unmute on first interaction
+          if (videoRef.current) {
+            videoRef.current.muted = true;
+            videoRef.current.play().catch(() => {
+              // If even muted autoplay fails, complete loading gracefully
+              handleComplete();
+            });
 
-          const unmuteOnInteraction = () => {
-            if (videoRef.current) {
-              videoRef.current.muted = false;
-            }
-            window.removeEventListener('click', unmuteOnInteraction);
-            window.removeEventListener('touchstart', unmuteOnInteraction);
-          };
+            const unmuteOnInteraction = () => {
+              if (videoRef.current) {
+                videoRef.current.muted = false;
+              }
+              window.removeEventListener('click', unmuteOnInteraction);
+              window.removeEventListener('touchstart', unmuteOnInteraction);
+            };
 
-          window.addEventListener('click', unmuteOnInteraction);
-          window.addEventListener('touchstart', unmuteOnInteraction);
-        }
-      });
+            window.addEventListener('click', unmuteOnInteraction);
+            window.addEventListener('touchstart', unmuteOnInteraction);
+          }
+        });
+      }
     }
 
     // Safety fallback timer (12s)
@@ -76,26 +82,29 @@ export default function LoadingScreen() {
           <div className="relative w-full h-full flex items-center justify-center bg-[#05070c] px-4 sm:px-6 md:px-0">
             {/* Ambient blurred backdrop video to fill portrait/mobile screens seamlessly */}
             <video
-              src="/intro_loading.mp4"
               autoPlay
               muted
               loop
               playsInline
+              onError={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }}
               className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-40 pointer-events-none scale-110"
               aria-hidden="true"
-            />
+            >
+              <source src="/intro_loading.mp4" type="video/mp4" />
+            </video>
 
             {/* Video Wrapper: Glass Border on Mobile, Seamless Fullscreen with No Border on Desktop */}
             <div className="relative z-10 w-full max-w-md sm:max-w-lg md:max-w-none md:w-full md:h-full flex items-center justify-center rounded-2xl sm:rounded-3xl md:rounded-none border border-white/20 md:border-0 bg-white/10 md:bg-transparent backdrop-blur-xl md:backdrop-blur-none p-1.5 sm:p-2 md:p-0 shadow-2xl md:shadow-none overflow-hidden transition-all duration-300">
               <video
                 ref={videoRef}
-                src="/intro_loading.mp4"
-                autoPlay
                 playsInline
                 preload="auto"
                 onEnded={handleComplete}
+                onError={handleComplete}
                 className="w-full h-auto max-h-[75vh] md:max-h-none md:h-full object-contain md:object-cover rounded-[14px] sm:rounded-[20px] md:rounded-none pointer-events-none"
-              />
+              >
+                <source src="/intro_loading.mp4" type="video/mp4" />
+              </video>
             </div>
 
             {/* Skip Intro Button */}

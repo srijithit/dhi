@@ -315,7 +315,10 @@ export default function CleanCulturePage() {
         videoRef.current.pause();
         setVideoPlaying(false);
       } else {
-        videoRef.current.play();
+        videoRef.current.play().catch((err) => {
+          console.warn("Video playback failed:", err);
+          setVideoPlaying(false);
+        });
         setVideoPlaying(true);
       }
     }

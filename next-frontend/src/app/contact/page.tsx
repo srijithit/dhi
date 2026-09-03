@@ -7,7 +7,7 @@ import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import EmailModal from '@/components/EmailModal';
 import { 
   MapPin, Mail, Phone, Clock, Sparkles, Send, 
-  CheckCircle2, ArrowRight, Loader2, FileText, Building2 
+  CheckCircle2, ArrowRight, Loader2, FileText, Building2, MessageSquare 
 } from 'lucide-react';
 import { SERVICES_DATA } from '@/data/servicesData';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,6 +27,7 @@ export default function ContactPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submittedWhatsappUrl, setSubmittedWhatsappUrl] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
@@ -154,8 +155,14 @@ export default function ContactPage() {
 
     setIsSubmitting(true);
 
+    const msg = encodeURIComponent(
+      `Hi DhiGrowth! I want to submit a project consultation inquiry.\nName: ${trimmedName}\nPhone: ${trimmedPhone}\nEmail: ${trimmedEmail}\nCompany: ${trimmedCompany}\nService: ${formData.service}\nGoals: ${trimmedMessage}`
+    );
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=919361088012&text=${msg}`;
+    setSubmittedWhatsappUrl(whatsappUrl);
+
     try {
-      const response = await fetch('/api/contact', {
+      fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -166,19 +173,22 @@ export default function ContactPage() {
           service: formData.service,
           message: trimmedMessage
         }),
-      });
+      }).catch(err => console.warn('Email logging note:', err));
 
-      const result = await response.json();
+      setIsSuccess(true);
 
-      if (result.success) {
-        setIsSuccess(true);
-      } else {
-        setErrorMsg(result.error || 'Failed to submit inquiry. Please try again.');
-      }
+      setTimeout(() => {
+        const win = window.open(whatsappUrl, '_blank');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+          window.location.href = whatsappUrl;
+        }
+      }, 700);
     } catch (err: any) {
       console.error('Contact inquiry error:', err);
-      // Graceful fallback
       setIsSuccess(true);
+      setTimeout(() => {
+        window.location.href = whatsappUrl;
+      }, 500);
     } finally {
       setIsSubmitting(false);
     }
@@ -193,6 +203,7 @@ export default function ContactPage() {
       service: SERVICES_DATA[0].name,
       message: ''
     });
+    setSubmittedWhatsappUrl('');
     setIsSuccess(false);
     setErrorMsg(null);
   };
@@ -270,13 +281,24 @@ export default function ContactPage() {
                         </h3>
 
                         <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-md mx-auto leading-relaxed">
-                          Thank you for reaching out for <strong className="text-[#2196E8]">{formData.service}</strong>. Our dedicated growth team will review your project requirements and contact you shortly.
+                          Thank you for reaching out for <strong className="text-[#2196E8]">{formData.service}</strong>. Redirecting you to WhatsApp for instant confirmation...
                         </p>
 
-                        <div className="pt-4">
+                        <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
+                          {submittedWhatsappUrl && (
+                            <a
+                              href={submittedWhatsappUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs tracking-wider transition-colors cursor-pointer inline-flex items-center gap-2 shadow-md"
+                            >
+                              <MessageSquare className="w-4 h-4" />
+                              <span>Open WhatsApp Directly</span>
+                            </a>
+                          )}
                           <button
                             onClick={handleReset}
-                            className="px-7 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold text-xs tracking-wider transition-colors cursor-pointer"
+                            className="px-6 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold text-xs tracking-wider transition-colors cursor-pointer"
                           >
                             Submit Another Inquiry
                           </button>
@@ -412,11 +434,11 @@ export default function ContactPage() {
                             {isSubmitting ? (
                               <>
                                 <Loader2 className="w-4 h-4 animate-spin" />
-                                <span>Submitting...</span>
+                                <span>Connecting to WhatsApp...</span>
                               </>
                             ) : (
                               <>
-                                <span>Submit</span>
+                                <span>Submit &amp; Chat on WhatsApp</span>
                                 <ArrowRight className="w-4 h-4" />
                               </>
                             )}

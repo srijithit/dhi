@@ -20,7 +20,10 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
         videoRef.current.pause();
         setIsPlaying(false);
       } else {
-        videoRef.current.play();
+        videoRef.current.play().catch((err) => {
+          console.warn("Video play failed:", err);
+          setIsPlaying(false);
+        });
         setIsPlaying(true);
       }
     }
@@ -159,7 +162,6 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
               <div className="relative aspect-[9/16] w-full bg-slate-950 overflow-hidden">
                 <video 
                   ref={videoRef}
-                  src="/videos/intro.mp4" 
                   autoPlay 
                   loop 
                   muted 
@@ -167,8 +169,11 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
                   controls={false}
                   controlsList="nodownload no-remote-playback noremoteplayback no-fullscreen"
                   disablePictureInPicture
+                  onError={() => setIsPlaying(false)}
                   className="w-full h-full object-cover pointer-events-none"
-                />
+                >
+                  <source src="/videos/intro.mp4" type="video/mp4" />
+                </video>
 
                 {/* Bottom Video Controls Overlay */}
                 <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent flex items-center justify-between z-20">
@@ -222,7 +227,6 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
             </button>
             <div className="relative w-full h-full bg-black">
               <video 
-                src="/videos/intro.mp4" 
                 autoPlay 
                 loop
                 playsInline
@@ -230,7 +234,9 @@ export default function Hero({ onOpenAudit, onExploreServices }: HeroProps) {
                 controlsList="nodownload no-remote-playback noremoteplayback no-fullscreen"
                 disablePictureInPicture
                 className="w-full h-full object-cover pointer-events-none"
-              />
+              >
+                <source src="/videos/intro.mp4" type="video/mp4" />
+              </video>
             </div>
           </div>
         </div>
