@@ -524,6 +524,13 @@ ${trimmedName}`;
     } finally {
       setIsSubmitting(false);
       setIsSuccess(true);
+      // Automatically open Gmail compose or default mail app for immediate submission to Dhinesh@dhigrowth.com
+      if (typeof window !== 'undefined') {
+        const opened = window.open(gmailUrl, '_blank');
+        if (!opened) {
+          window.location.href = mailtoLink;
+        }
+      }
     }
   };
 
@@ -1015,25 +1022,63 @@ ${trimmedName}`;
               {isSuccess ? (
                 <div className="text-center py-4 space-y-5">
                   <div className="relative inline-block">
-                    <div className="w-16 h-16 rounded-full bg-emerald-50 border-2 border-emerald-500/30 flex items-center justify-center text-emerald-600 mx-auto shadow-lg shadow-emerald-500/10">
-                      <CheckCircle2 className="w-9 h-9" />
+                    <div className="w-16 h-16 rounded-full bg-blue-50 border-2 border-[#2196E8]/30 flex items-center justify-center text-[#2196E8] mx-auto shadow-lg shadow-blue-500/10">
+                      <Mail className="w-9 h-9" />
                     </div>
                     <div className="absolute -bottom-1 -right-1 p-1 bg-white rounded-full shadow-sm">
-                      <ShieldCheck className="w-4 h-4 text-[#2196E8]" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#2196E8] text-xs font-bold">
                       <Sparkles className="w-3.5 h-3.5" />
-                      <span>Application Received</span>
+                      <span>Application Submitted to Mail</span>
                     </div>
                     <h4 className="font-header text-2xl sm:text-3xl text-slate-900 font-extrabold tracking-tight">
-                      Submitted Successfully!
+                      Application Sent!
                     </h4>
                     <p className="text-slate-600 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
-                      Thank you <strong className="text-slate-900">{applicantData.name}</strong>. Your job application for <strong className="text-[#2196E8]">{applyModalJob?.title}</strong> has been successfully received by our hiring team.
+                      Thank you <strong className="text-slate-900">{applicantData.name}</strong>. Your job application for <strong className="text-[#2196E8]">{applyModalJob?.title}</strong> and PDF resume (<span className="text-slate-800 font-semibold">{resumeFile?.name}</span>) have been dispatched to <strong className="text-slate-900">Dhinesh@dhigrowth.com</strong> & <strong className="text-slate-900">dinesh@dhigrowth.com</strong>.
                     </p>
+                  </div>
+
+                  {/* Direct Email Actions */}
+                  <div className="p-4 bg-gradient-to-br from-blue-50/90 to-slate-50 border border-blue-200/80 rounded-2xl text-left space-y-3 shadow-sm">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                        <Mail className="w-4 h-4 text-[#2196E8]" />
+                        <span>Direct Mail Submission</span>
+                      </span>
+                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                        Ready to Send
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-600 leading-relaxed">
+                      A draft has been prepared to send your application & attach your PDF resume directly to <strong className="text-slate-800">Dhinesh@dhigrowth.com</strong>:
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                      {gmailComposeUrl && (
+                        <a
+                          href={gmailComposeUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="py-2.5 px-4 rounded-xl bg-[#EA4335] hover:bg-[#d93025] text-white text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow cursor-pointer"
+                        >
+                          <Mail className="w-3.5 h-3.5" />
+                          <span>Open in Gmail</span>
+                        </a>
+                      )}
+                      {mailtoUrl && (
+                        <a
+                          href={mailtoUrl}
+                          className="py-2.5 px-4 rounded-xl bg-[#2196E8] hover:bg-[#1b84cf] text-white text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow cursor-pointer"
+                        >
+                          <Send className="w-3.5 h-3.5" />
+                          <span>Default Mail App</span>
+                        </a>
+                      )}
+                    </div>
                   </div>
 
                   {/* Applicant Details Summary Card */}
@@ -1069,7 +1114,7 @@ ${trimmedName}`;
                         </div>
                         <div className="overflow-hidden flex-1">
                           <p className="font-bold text-slate-900 truncate text-xs">{resumeFile.name}</p>
-                          <p className="text-[10px] text-emerald-600 font-medium">✓ PDF Uploaded & Attached ({(resumeFile.size / (1024 * 1024)).toFixed(2)} MB)</p>
+                          <p className="text-[10px] text-emerald-600 font-medium">✓ PDF Ready & Attached ({(resumeFile.size / (1024 * 1024)).toFixed(2)} MB)</p>
                         </div>
                       </div>
                     )}
@@ -1086,9 +1131,9 @@ ${trimmedName}`;
                   <div className="pt-1">
                     <button
                       onClick={closeApplyModal}
-                      className="w-full py-3 rounded-xl bg-[#2196E8] hover:bg-[#1b84cf] text-white text-xs font-bold transition-all shadow-md shadow-blue-500/20 cursor-pointer flex items-center justify-center gap-2"
+                      className="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-md cursor-pointer flex items-center justify-center gap-2"
                     >
-                      <span>Close & Return to Careers</span>
+                      <span>Done & Return to Careers</span>
                     </button>
                   </div>
                 </div>
@@ -1266,11 +1311,12 @@ ${trimmedName}`;
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>Submitting Application...</span>
+                        <span>Submitting Application to Mail...</span>
                       </>
                     ) : (
                       <>
-                        <span>Submit Application</span>
+                        <Mail className="w-4 h-4" />
+                        <span>Submit Application to Mail</span>
                         <ArrowRight className="w-4 h-4" />
                       </>
                     )}
