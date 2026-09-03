@@ -881,30 +881,30 @@ export default function CleanCulturePage() {
                 }}
                 className="flex items-center justify-center gap-1.5 sm:gap-6 md:gap-8 py-4 cursor-grab active:cursor-grabbing select-none"
               >
-                {/* Left Screen Card (Tilted Angle) */}
+                {/* Left Screen Card (Tilted Angle - 9:16) */}
                 <div
                   onClick={() => setHighlightIdx((highlightIdx - 1 + 3) % 3)}
-                  className="relative w-[140px] xs:w-[170px] sm:w-[260px] md:w-[320px] aspect-square rounded-2xl sm:rounded-3xl p-1 sm:p-2.5 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                  className="relative w-[130px] xs:w-[155px] sm:w-[200px] md:w-[230px] aspect-[9/16] rounded-2xl sm:rounded-3xl p-1 sm:p-2 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform -rotate-6 scale-90 hover:scale-95 opacity-75 hover:opacity-100 flex items-center justify-center overflow-hidden shrink-0"
                 >
                   <img
                     src={highlightItems[(highlightIdx + 2) % 3].screen}
                     alt="Previous Screen"
                     draggable={false}
-                    className="w-full h-full aspect-square object-cover rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full aspect-[9/16] object-cover rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
 
-                {/* Center Main Screen Card (Active Blue Focus - 1:1 Square with Live Website Preview on Hover) */}
+                {/* Center Main Screen Card (Active Blue Focus - 9:16 Portrait with Live Website Preview on Hover) */}
                 <div
                   onMouseEnter={() => setIsHighlightHovered(true)}
                   onMouseLeave={() => setIsHighlightHovered(false)}
-                  className="relative w-[200px] xs:w-[240px] sm:w-[340px] md:w-[420px] aspect-square rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group"
+                  className="relative w-[190px] xs:w-[220px] sm:w-[270px] md:w-[310px] aspect-[9/16] rounded-2xl sm:rounded-3xl p-1.5 sm:p-2.5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 flex items-center justify-center overflow-hidden group shrink-0"
                 >
                   <img
                     src={highlightItems[highlightIdx].screen}
                     alt="Active Screen"
                     draggable={false}
-                    className="w-full h-full aspect-square object-cover rounded-xl sm:rounded-2xl drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full aspect-[9/16] object-cover rounded-xl sm:rounded-2xl drop-shadow-xl transition-all duration-700 pointer-events-none select-none"
                   />
 
                   {/* Hover Prompt Badge */}
@@ -923,7 +923,7 @@ export default function CleanCulturePage() {
                         <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/90 inline-block" />
                       </div>
                       
-                      <div className="flex items-center space-x-1.5 bg-slate-800/90 text-slate-300 text-[10px] sm:text-[11px] font-mono px-2.5 py-0.5 rounded-md border border-white/10 max-w-[170px] sm:max-w-[220px] truncate">
+                      <div className="flex items-center space-x-1.5 bg-slate-800/90 text-slate-300 text-[10px] sm:text-[11px] font-mono px-2 py-0.5 rounded-md border border-white/10 max-w-[120px] sm:max-w-[150px] truncate">
                         <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
                         <span className="truncate">cleanculture.in</span>
                       </div>
@@ -946,7 +946,7 @@ export default function CleanCulturePage() {
                       <iframe
                         src="http://cleanculture.in/"
                         title="Clean Culture Live Website Preview"
-                        className="w-[200%] h-[200%] origin-top-left transform scale-50 border-0 pointer-events-auto"
+                        className="w-full h-full border-0 pointer-events-auto"
                         loading="lazy"
                         sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
                       />
@@ -954,16 +954,16 @@ export default function CleanCulturePage() {
                   </div>
                 </div>
 
-                {/* Right Screen Card (Tilted Angle) */}
+                {/* Right Screen Card (Tilted Angle - 9:16) */}
                 <div
                   onClick={() => setHighlightIdx((highlightIdx + 1) % 3)}
-                  className="relative w-[140px] xs:w-[170px] sm:w-[260px] md:w-[320px] aspect-square rounded-2xl sm:rounded-3xl p-1 sm:p-2.5 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-80 hover:opacity-100 flex items-center justify-center overflow-hidden"
+                  className="relative w-[130px] xs:w-[155px] sm:w-[200px] md:w-[230px] aspect-[9/16] rounded-2xl sm:rounded-3xl p-1 sm:p-2 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer transform rotate-6 scale-90 hover:scale-95 opacity-75 hover:opacity-100 flex items-center justify-center overflow-hidden shrink-0"
                 >
                   <img
                     src={highlightItems[(highlightIdx + 1) % 3].screen}
                     alt="Next Screen"
                     draggable={false}
-                    className="w-full h-full aspect-square object-cover rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    className="w-full h-full aspect-[9/16] object-cover rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
                   />
                 </div>
               </motion.div>
