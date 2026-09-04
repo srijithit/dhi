@@ -1452,137 +1452,249 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            {/* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait) */}
-            <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-12">
-              <motion.div
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.2}
-                onDragEnd={(_, info) => {
-                  if (info.offset.x < -40) {
-                    setHighlightIdx((prev) => (prev + 1) % 3);
-                  } else if (info.offset.x > 40) {
-                    setHighlightIdx((prev) => (prev - 1 + 3) % 3);
-                  }
-                }}
-                className="flex items-center justify-center gap-2 sm:gap-6 md:gap-8 py-4 cursor-grab active:cursor-grabbing select-none [perspective:1200px]"
-              >
-                {/* Left Screen Card (3D Perspective Tilted Angle - 9:16 Portrait) */}
-                <div
-                  onClick={() => setHighlightIdx((highlightIdx - 1 + 3) % 3)}
-                  className="relative w-[100px] xs:w-[130px] sm:w-[200px] md:w-[240px] aspect-[9/16] rounded-2xl sm:rounded-3xl p-1 sm:p-2 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer [transform:perspective(1200px)_rotateY(22deg)_scale(0.9)] hover:[transform:perspective(1200px)_rotateY(10deg)_scale(0.94)] opacity-75 hover:opacity-100 flex items-center justify-center overflow-hidden shrink-0"
+            {study.slug === 'infragen' ? (
+              /* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait - Infragen Only) */
+              <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-12">
+                <motion.div
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.2}
+                  onDragEnd={(_, info) => {
+                    if (info.offset.x < -40) {
+                      setHighlightIdx((prev) => (prev + 1) % 3);
+                    } else if (info.offset.x > 40) {
+                      setHighlightIdx((prev) => (prev - 1 + 3) % 3);
+                    }
+                  }}
+                  className="flex items-center justify-center gap-2 sm:gap-6 md:gap-8 py-4 cursor-grab active:cursor-grabbing select-none [perspective:1200px]"
                 >
-                  <img
-                    src={highlightItems[(highlightIdx + 2) % 3]?.screen || highlightItems[0]?.screen}
-                    alt="Previous Screen"
-                    draggable={false}
-                    className="w-full h-full aspect-[9/16] object-cover object-top rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
-                  />
-                </div>
-
-                {/* Center Main Screen Card (Active Blue Focus - 9:16 Portrait with Hover Scroll) */}
-                <div
-                  ref={showcaseContainerRef}
-                  onMouseEnter={updateScrollDistance}
-                  className="relative w-[165px] xs:w-[205px] sm:w-[280px] md:w-[325px] aspect-[9/16] rounded-2xl sm:rounded-3xl p-1 sm:p-2 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 [transform:perspective(1200px)_rotateY(0deg)_scale(1)] flex items-start justify-center overflow-hidden group shrink-0"
-                >
-                  <img
-                    ref={showcaseImgRef}
-                    src={highlightItems[highlightIdx]?.screen || highlightItems[0]?.screen}
-                    alt={highlightItems[highlightIdx]?.title || "Active Screen"}
-                    onLoad={updateScrollDistance}
-                    draggable={false}
-                    style={{
-                      '--scroll-offset': scrollDistance > 0 ? `-${scrollDistance}px` : '0px',
-                      transition: scrollDistance > 0
-                        ? `transform ${Math.max(4, Math.min(12, scrollDistance / 280))}s ease-in-out`
-                        : 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)',
-                    } as React.CSSProperties}
-                    className="w-full h-auto min-h-full object-cover object-top block select-none pointer-events-none rounded-xl sm:rounded-2xl drop-shadow-xl transform translate-y-0 group-hover:[transform:translateY(var(--scroll-offset))]"
-                  />
-
-                  {/* Subtle Hover to Scroll Hint Badge */}
-                  {scrollDistance > 0 && (
-                    <div
-                      className="absolute bottom-2.5 right-2.5 z-20 flex items-center space-x-1 bg-slate-900/90 text-white text-[9px] sm:text-[11px] font-medium px-2 py-1 rounded-full backdrop-blur-md border border-white/10 shadow-lg pointer-events-none transition-all duration-300 opacity-90 group-hover:opacity-0 group-hover:translate-y-2"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#2196E8] animate-pulse" />
-                      <span>Hover to scroll</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Right Screen Card (3D Perspective Tilted Angle - 9:16 Portrait) */}
-                <div
-                  onClick={() => setHighlightIdx((highlightIdx + 1) % 3)}
-                  className="relative w-[100px] xs:w-[130px] sm:w-[200px] md:w-[240px] aspect-[9/16] rounded-2xl sm:rounded-3xl p-1 sm:p-2 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer [transform:perspective(1200px)_rotateY(-22deg)_scale(0.9)] hover:[transform:perspective(1200px)_rotateY(-10deg)_scale(0.94)] opacity-75 hover:opacity-100 flex items-center justify-center overflow-hidden shrink-0"
-                >
-                  <img
-                    src={highlightItems[(highlightIdx + 1) % 3]?.screen || highlightItems[0]?.screen}
-                    alt="Next Screen"
-                    draggable={false}
-                    className="w-full h-full aspect-[9/16] object-cover object-top rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
-                  />
-                </div>
-              </motion.div>
-
-              {/* Navigation Arrows */}
-              <button
-                onClick={() => setHighlightIdx((prev) => (prev - 1 + 3) % 3)}
-                aria-label="Previous highlight screen"
-                className="absolute -left-1 sm:-left-4 md:-left-8 lg:-left-10 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-800 hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setHighlightIdx((prev) => (prev + 1) % 3)}
-                aria-label="Next highlight screen"
-                className="absolute -right-1 sm:-right-4 md:-right-8 lg:-right-10 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-800 hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-
-              {/* Pagination Dots */}
-              <div className="flex justify-center items-center gap-2 mt-4">
-                {[0, 1, 2].map((i) => (
-                  <button
-                    key={i}
-                    onClick={() => setHighlightIdx(i)}
-                    className={`transition-all duration-300 rounded-full cursor-pointer ${
-                      highlightIdx === i ? 'w-6 h-2 bg-[#2196E8]' : 'w-2 h-2 bg-slate-300'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* 3 Highlight Cards Below */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {highlightItems.map((item) => {
-                const isActive = highlightIdx === item.id;
-                return (
+                  {/* Left Screen Card (3D Perspective Tilted Angle - 9:16 Portrait) */}
                   <div
-                    key={item.id}
-                    onClick={() => setHighlightIdx(item.id)}
-                    className={`rounded-2xl p-6 sm:p-7 transition-all duration-300 cursor-pointer space-y-3 ${
-                      isActive
-                        ? 'border-2 border-[#2196E8] bg-white shadow-lg -translate-y-1'
-                        : 'border border-slate-200 bg-white hover:border-slate-300 shadow-xs'
-                    }`}
+                    onClick={() => setHighlightIdx((highlightIdx - 1 + 3) % 3)}
+                    className="relative w-[100px] xs:w-[130px] sm:w-[200px] md:w-[240px] aspect-[9/16] rounded-2xl sm:rounded-3xl p-1 sm:p-2 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer [transform:perspective(1200px)_rotateY(22deg)_scale(0.9)] hover:[transform:perspective(1200px)_rotateY(10deg)_scale(0.94)] opacity-75 hover:opacity-100 flex items-center justify-center overflow-hidden shrink-0"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
-                      {item.icon}
-                    </div>
-                    <h4 className="font-extrabold text-slate-900 text-base font-body leading-snug">
-                      {item.title}
-                    </h4>
-                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                      {item.desc}
-                    </p>
+                    <img
+                      src={highlightItems[(highlightIdx + 2) % 3]?.screen || highlightItems[0]?.screen}
+                      alt="Previous Screen"
+                      draggable={false}
+                      className="w-full h-full aspect-[9/16] object-cover object-top rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    />
                   </div>
-                );
-              })}
-            </div>
+
+                  {/* Center Main Screen Card (Active Blue Focus - 9:16 Portrait with Hover Scroll) */}
+                  <div
+                    ref={showcaseContainerRef}
+                    onMouseEnter={updateScrollDistance}
+                    className="relative w-[165px] xs:w-[205px] sm:w-[280px] md:w-[325px] aspect-[9/16] rounded-2xl sm:rounded-3xl p-1 sm:p-2 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 [transform:perspective(1200px)_rotateY(0deg)_scale(1)] flex items-start justify-center overflow-hidden group shrink-0"
+                  >
+                    <img
+                      ref={showcaseImgRef}
+                      src={highlightItems[highlightIdx]?.screen || highlightItems[0]?.screen}
+                      alt={highlightItems[highlightIdx]?.title || "Active Screen"}
+                      onLoad={updateScrollDistance}
+                      draggable={false}
+                      style={{
+                        '--scroll-offset': scrollDistance > 0 ? `-${scrollDistance}px` : '0px',
+                        transition: scrollDistance > 0
+                          ? `transform ${Math.max(4, Math.min(12, scrollDistance / 280))}s ease-in-out`
+                          : 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)',
+                      } as React.CSSProperties}
+                      className="w-full h-auto min-h-full object-cover object-top block select-none pointer-events-none rounded-xl sm:rounded-2xl drop-shadow-xl transform translate-y-0 group-hover:[transform:translateY(var(--scroll-offset))]"
+                    />
+
+                    {/* Subtle Hover to Scroll Hint Badge */}
+                    {scrollDistance > 0 && (
+                      <div
+                        className="absolute bottom-2.5 right-2.5 z-20 flex items-center space-x-1 bg-slate-900/90 text-white text-[9px] sm:text-[11px] font-medium px-2 py-1 rounded-full backdrop-blur-md border border-white/10 shadow-lg pointer-events-none transition-all duration-300 opacity-90 group-hover:opacity-0 group-hover:translate-y-2"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#2196E8] animate-pulse" />
+                        <span>Hover to scroll</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Right Screen Card (3D Perspective Tilted Angle - 9:16 Portrait) */}
+                  <div
+                    onClick={() => setHighlightIdx((highlightIdx + 1) % 3)}
+                    className="relative w-[100px] xs:w-[130px] sm:w-[200px] md:w-[240px] aspect-[9/16] rounded-2xl sm:rounded-3xl p-1 sm:p-2 bg-white shadow-xl border border-slate-200 transition-all duration-700 cursor-pointer [transform:perspective(1200px)_rotateY(-22deg)_scale(0.9)] hover:[transform:perspective(1200px)_rotateY(-10deg)_scale(0.94)] opacity-75 hover:opacity-100 flex items-center justify-center overflow-hidden shrink-0"
+                  >
+                    <img
+                      src={highlightItems[(highlightIdx + 1) % 3]?.screen || highlightItems[0]?.screen}
+                      alt="Next Screen"
+                      draggable={false}
+                      className="w-full h-full aspect-[9/16] object-cover object-top rounded-xl sm:rounded-2xl drop-shadow-md transition-all duration-700 pointer-events-none select-none"
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Navigation Arrows */}
+                <button
+                  onClick={() => setHighlightIdx((prev) => (prev - 1 + 3) % 3)}
+                  aria-label="Previous highlight screen"
+                  className="absolute -left-1 sm:-left-4 md:-left-8 lg:-left-10 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-800 hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => setHighlightIdx((prev) => (prev + 1) % 3)}
+                  aria-label="Next highlight screen"
+                  className="absolute -right-1 sm:-right-4 md:-right-8 lg:-right-10 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-800 hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+
+                {/* Pagination Dots */}
+                <div className="flex justify-center items-center gap-2 mt-4">
+                  {[0, 1, 2].map((i) => (
+                    <button
+                      key={i}
+                      onClick={() => setHighlightIdx(i)}
+                      className={`transition-all duration-300 rounded-full cursor-pointer ${
+                        highlightIdx === i ? 'w-6 h-2 bg-[#2196E8]' : 'w-2 h-2 bg-slate-300'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              /* Showcase Card: Portrait on Mobile, 16:9 on Desktop - Live Browser Mockup with Hover Scroll */
+              <div className="relative max-w-sm sm:max-w-4xl mx-auto mb-8 px-4 sm:px-12 group/mockup">
+                <div
+                  onMouseEnter={updateScrollDistance}
+                  className="relative w-full aspect-[9/16] sm:aspect-[16/9] rounded-2xl sm:rounded-3xl p-1.5 sm:p-2.5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-500 z-20 flex items-center justify-center overflow-hidden cursor-pointer"
+                >
+                  {/* Real Website Screenshot - Permanent Mini Browser Mockup */}
+                  <div className="absolute inset-0 z-30 bg-slate-950 flex flex-col rounded-xl sm:rounded-2xl overflow-hidden pointer-events-auto">
+                    {/* Mini Browser Header */}
+                    <div className="bg-slate-900/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0 select-none z-10">
+                      <div className="flex items-center space-x-2">
+                        <span className="w-3 h-3 rounded-full bg-red-500/90 inline-block" />
+                        <span className="w-3 h-3 rounded-full bg-amber-500/90 inline-block" />
+                        <span className="w-3 h-3 rounded-full bg-emerald-500/90 inline-block" />
+                      </div>
+                      
+                      <div className="flex items-center space-x-2 bg-slate-800/90 text-slate-300 text-xs font-mono px-3 py-1 rounded-md border border-white/10 max-w-[200px] sm:max-w-[300px] truncate">
+                        <Lock className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span className="truncate">
+                          {highlightIdx === 0 && displayHost
+                            ? displayHost
+                            : displayHost
+                            ? `${displayHost} / ${highlightItems[highlightIdx]?.title}`
+                            : highlightItems[highlightIdx]?.title}
+                        </span>
+                      </div>
+
+                      {liveWebsiteUrl ? (
+                        <a
+                          href={liveWebsiteUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="Open Live Website in New Tab"
+                          className="text-slate-400 hover:text-white transition p-1 hover:bg-white/10 rounded flex items-center gap-1.5 text-xs font-medium cursor-pointer"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <span>Open</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      ) : (
+                        <div className="w-12" />
+                      )}
+                    </div>
+
+                    {/* Window Content: Website Screenshot with Smooth Top-to-Bottom Scroll on Hover */}
+                    <div
+                      ref={showcaseContainerRef}
+                      onMouseEnter={updateScrollDistance}
+                      className="relative w-full flex-1 bg-white overflow-hidden flex items-start justify-center"
+                    >
+                      <img
+                        ref={showcaseImgRef}
+                        src={highlightItems[highlightIdx]?.screen || highlightItems[0]?.screen}
+                        alt={highlightItems[highlightIdx]?.title || "Active Screen"}
+                        onLoad={updateScrollDistance}
+                        draggable={false}
+                        style={{
+                          '--scroll-offset': scrollDistance > 0 ? `-${scrollDistance}px` : '0px',
+                          transition: scrollDistance > 0
+                            ? `transform ${Math.max(4, Math.min(12, scrollDistance / 280))}s ease-in-out`
+                            : 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)',
+                        } as React.CSSProperties}
+                        className="w-full h-auto object-top block select-none pointer-events-none transform translate-y-0 group-hover/mockup:[transform:translateY(var(--scroll-offset))]"
+                      />
+
+                      {/* Subtle Hover to Scroll Hint Badge */}
+                      {scrollDistance > 0 && (
+                        <div
+                          className="absolute bottom-3 right-3 z-20 flex items-center space-x-1.5 bg-slate-900/90 text-white text-[10px] sm:text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 shadow-lg pointer-events-none transition-all duration-300 opacity-90 group-hover/mockup:opacity-0 group-hover/mockup:translate-y-2"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#2196E8] animate-pulse" />
+                          <span>Hover to scroll</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Navigation Arrows */}
+                <button
+                  onClick={() => setHighlightIdx((prev) => (prev - 1 + 3) % 3)}
+                  aria-label="Previous highlight screen"
+                  className="absolute -left-2 sm:left-0 md:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => setHighlightIdx((prev) => (prev + 1) % 3)}
+                  aria-label="Next highlight screen"
+                  className="absolute -right-2 sm:right-0 md:-right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+
+                {/* Pagination Dots */}
+                <div className="flex justify-center items-center gap-2 mt-4">
+                  {[0, 1, 2].map((i) => (
+                    <button
+                      key={i}
+                      onClick={() => setHighlightIdx(i)}
+                      className={`transition-all duration-300 rounded-full cursor-pointer ${
+                        highlightIdx === i ? 'w-6 h-2 bg-[#2196E8]' : 'w-2 h-2 bg-slate-300'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* 3 Highlight Cards Below - Hidden for Infragen so only the 3D images appear */}
+            {study.slug !== 'infragen' && (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                {highlightItems.map((item) => {
+                  const isActive = highlightIdx === item.id;
+                  return (
+                    <div
+                      key={item.id}
+                      onClick={() => setHighlightIdx(item.id)}
+                      className={`rounded-2xl p-6 sm:p-7 transition-all duration-300 cursor-pointer space-y-3 ${
+                        isActive
+                          ? 'border-2 border-[#2196E8] bg-white shadow-lg -translate-y-1'
+                          : 'border border-slate-200 bg-white hover:border-slate-300 shadow-xs'
+                      }`}
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+                        {item.icon}
+                      </div>
+                      <h4 className="font-extrabold text-slate-900 text-base font-body leading-snug">
+                        {item.title}
+                      </h4>
+                      <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </section>
 
