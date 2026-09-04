@@ -538,6 +538,7 @@ export default function DynamicCaseStudyPage({
       '/images/case-studies/vasantabhavan/homecta-banner.2da0mntsel58o.webp',
       '/images/case-studies/vasantabhavan/journey_slide_1_1.3pe8iloal08fx.webp',
       '/images/case-studies/vasantabhavan/home-legacy-built-img6.0bktuehrp0uhn.webp',
+      '/images/case-studies/vasantabhavan/hero.webp',
     ],
     'infinite-structure': [
       '/images/case-studies/infinite-structure/0240.webp',
@@ -639,7 +640,7 @@ export default function DynamicCaseStudyPage({
       watermark: solutionTags[i].replace('&', 'AND'),
       title,
       desc,
-      img: showcaseImageMap[study.slug]?.[i] || ((study.image && study.image.startsWith('http')) ? study.image : '/images/cc_highlight_category.jpg'),
+      img: showcaseImageMap[study.slug]?.[i] || (showcaseImageMap[study.slug]?.length ? showcaseImageMap[study.slug][i % showcaseImageMap[study.slug].length] : (study.image || '/images/case-studies/logos/dhigrowth.png')),
     };
   });
 
