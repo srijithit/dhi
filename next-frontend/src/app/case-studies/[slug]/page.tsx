@@ -698,7 +698,33 @@ export default function DynamicCaseStudyPage({
       'infragen': '/images/case-studies/infragen/highlight_1.jpg',
       'ruts-n-rides': '/images/case-studies/ruts-n-rides/highlight_1.png',
       'verdurepax': '/images/case-studies/verdurepax/highlight_1.png',
+      'befhue': '/images/case-studies/befhue/highlight_1.png',
     };
+
+    if (study.slug === 'befhue') {
+      const befhueScreens = [
+        '/images/case-studies/befhue/highlight_1.png',
+        '/images/case-studies/befhue/highlight_2.png',
+        '/images/case-studies/befhue/highlight_3.png',
+      ];
+      const befhueTitles = [
+        'Creative Agency Digital Experience',
+        'Multi-Disciplinary Service Architecture',
+        'Brand Philosophy, Portfolio & Contact',
+      ];
+      const befhueDescs = [
+        'Immersive creative showcase reflecting BEFHUE’s creative DNA, blending high-impact visual design with modern interaction models.',
+        'Structured capability presentation spanning brand identity, UI/UX design, web development, motion graphics, and digital marketing.',
+        'Credibility-building storytelling combining client testimonials, agency mission, and strategic lead-generation conversion funnels.',
+      ];
+      return {
+        id: i,
+        icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+        title: befhueTitles[i],
+        desc: befhueDescs[i],
+        screen: befhueScreens[i],
+      };
+    }
 
     if (study.slug === 'verdurepax') {
       const verdureScreens = [
@@ -1529,7 +1555,7 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax') ? (
+            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue') ? (
               /* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait) */
               <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-12">
                 <motion.div
@@ -1743,8 +1769,8 @@ export default function DynamicCaseStudyPage({
               </div>
             )}
 
-            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides & VerdurePax so only the 3D images appear */}
-            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax') && (
+            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax & BEFHUE so only the 3D images appear */}
+            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue') && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {highlightItems.map((item) => {
                   const isActive = highlightIdx === item.id;
