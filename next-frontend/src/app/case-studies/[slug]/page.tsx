@@ -704,7 +704,33 @@ export default function DynamicCaseStudyPage({
       'amaravathy': '/images/case-studies/amaravathy/highlight_1.png',
       'gigabull': '/images/case-studies/gigabull/highlight_1.png',
       'thoorigai': '/images/case-studies/thoorigai/highlight_1.png',
+      'vasantabhavan': '/images/case-studies/vasantabhavan/highlight_1.png',
     };
+
+    if (study.slug === 'vasantabhavan') {
+      const vasantaScreens = [
+        '/images/case-studies/vasantabhavan/highlight_1.png',
+        '/images/case-studies/vasantabhavan/highlight_2.png',
+        '/images/case-studies/vasantabhavan/highlight_3.png',
+      ];
+      const vasantaTitles = [
+        'Global Hospitality & VB World Portal',
+        'Culinary Heritage, Story & Banquets',
+        '25+ Branch Network, Menus & Ordering',
+      ];
+      const vasantaDescs = [
+        'Contemporary multi-brand digital dining platform uniting traditional dining, modern bistro experiences, and online food ordering.',
+        'Rich brand storytelling honoring 60+ years of South Indian vegetarian culinary mastery, catering services, and banquet reservations.',
+        'Interactive global branch locator with dynamic menu exploration, online delivery integration via Swiggy & Zomato, and sub-second performance.',
+      ];
+      return {
+        id: i,
+        icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+        title: vasantaTitles[i],
+        desc: vasantaDescs[i],
+        screen: vasantaScreens[i],
+      };
+    }
 
     if (study.slug === 'thoorigai') {
       const thoorigaiScreens = [
@@ -1660,7 +1686,7 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai') ? (
+            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai' || study.slug === 'vasantabhavan') ? (
               /* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait) */
               <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-12">
                 <motion.div
@@ -1874,8 +1900,8 @@ export default function DynamicCaseStudyPage({
               </div>
             )}
 
-            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax, BEFHUE, Squirlio, Amaravathy Coir, Gigabull & Thoorigai so only the 3D images appear */}
-            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai') && (
+            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax, BEFHUE, Squirlio, Amaravathy Coir, Gigabull, Thoorigai & Vasantabhavan so only the 3D images appear */}
+            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai' || study.slug === 'vasantabhavan') && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {highlightItems.map((item) => {
                   const isActive = highlightIdx === item.id;
