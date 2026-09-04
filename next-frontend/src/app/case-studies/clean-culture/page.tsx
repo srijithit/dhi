@@ -852,7 +852,7 @@ export default function CleanCulturePage() {
             </div>
 
             {/* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe */}
-            {/* Showcase Card: Portrait on Mobile, 16:9 on Desktop - Permanent Live Browser Preview */}
+            {/* Showcase Card: Portrait on Mobile, 16:9 on Desktop - Live Browser Preview */}
             <div className="relative max-w-sm sm:max-w-4xl mx-auto mb-8 px-4 sm:px-12">
               <div
                 className="relative w-full aspect-[9/16] sm:aspect-[16/9] rounded-2xl sm:rounded-3xl p-1.5 sm:p-2.5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-500 z-20 flex items-center justify-center overflow-hidden"
@@ -869,7 +869,7 @@ export default function CleanCulturePage() {
                     
                     <div className="flex items-center space-x-2 bg-slate-800/90 text-slate-300 text-xs font-mono px-3 py-1 rounded-md border border-white/10 max-w-[200px] sm:max-w-[300px] truncate">
                       <Lock className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                      <span className="truncate">cleanculture.in</span>
+                      <span className="truncate">{highlightIdx === 0 ? "cleanculture.in" : `cleanculture.in / ${highlightItems[highlightIdx]?.title}`}</span>
                     </div>
 
                     <a
@@ -885,18 +885,84 @@ export default function CleanCulturePage() {
                     </a>
                   </div>
 
-                  {/* Live Interactive Iframe Preview */}
-                  <div className="relative w-full flex-1 bg-white overflow-hidden">
-                    <iframe
-                      src="http://cleanculture.in/"
-                      title="Clean Culture Live Website Preview"
-                      className="w-full h-full border-0 pointer-events-auto"
-                      loading="lazy"
-                      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-                    />
+                  {/* Window Content: Live Iframe for card 0, else screen image */}
+                  <div className="relative w-full flex-1 bg-white overflow-hidden flex items-center justify-center">
+                    {highlightIdx === 0 ? (
+                      <iframe
+                        src="http://cleanculture.in/"
+                        title="Clean Culture Live Website Preview"
+                        className="w-full h-full border-0 pointer-events-auto"
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                      />
+                    ) : (
+                      <img
+                        src={highlightItems[highlightIdx]?.screen || highlightItems[0]?.screen}
+                        alt={highlightItems[highlightIdx]?.title || "Active Screen"}
+                        draggable={false}
+                        className="w-full h-full object-cover select-none"
+                      />
+                    )}
                   </div>
                 </div>
               </div>
+
+              {/* Navigation Arrows */}
+              <button
+                onClick={() => setHighlightIdx((prev) => (prev - 1 + 3) % 3)}
+                aria-label="Previous highlight screen"
+                className="absolute -left-2 sm:left-0 md:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => setHighlightIdx((prev) => (prev + 1) % 3)}
+                aria-label="Next highlight screen"
+                className="absolute -right-2 sm:right-0 md:-right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0A0F17] hover:bg-[#2196E8] text-white flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer hover:scale-110 border border-white/10"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+
+              {/* Pagination Dots */}
+              <div className="flex justify-center items-center gap-2 mt-4">
+                {[0, 1, 2].map((i) => (
+                  <button
+                    key={i}
+                    onClick={() => setHighlightIdx(i)}
+                    className={`transition-all duration-300 rounded-full cursor-pointer ${
+                      highlightIdx === i ? 'w-6 h-2 bg-[#2196E8]' : 'w-2 h-2 bg-slate-300'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* 3 Highlight Cards Below */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {highlightItems.map((item) => {
+                const isActive = highlightIdx === item.id;
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => setHighlightIdx(item.id)}
+                    className={`rounded-2xl p-6 sm:p-7 transition-all duration-300 cursor-pointer space-y-3 ${
+                      isActive
+                        ? 'border-2 border-[#2196E8] bg-white shadow-lg -translate-y-1'
+                        : 'border border-slate-200 bg-white hover:border-slate-300 shadow-xs'
+                    }`}
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+                      {item.icon}
+                    </div>
+                    <h4 className="font-extrabold text-slate-900 text-base font-body leading-snug">
+                      {item.title}
+                    </h4>
+                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
