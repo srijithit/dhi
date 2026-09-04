@@ -696,7 +696,33 @@ export default function DynamicCaseStudyPage({
       'clean-culture': '/images/case-studies/clean-culture/fullpage.jpg',
       'squirlio': '/images/case-studies/squirlio/fullpage.jpg',
       'infragen': '/images/case-studies/infragen/highlight_1.jpg',
+      'ruts-n-rides': '/images/case-studies/ruts-n-rides/highlight_1.png',
     };
+
+    if (study.slug === 'ruts-n-rides') {
+      const rutsScreens = [
+        '/images/case-studies/ruts-n-rides/highlight_1.png',
+        '/images/case-studies/ruts-n-rides/highlight_2.png',
+        '/images/case-studies/ruts-n-rides/highlight_3.png',
+      ];
+      const rutsTitles = [
+        'Home & Off-Road Experience Platform',
+        'Story, Mission & Rider Gallery',
+        'Track Services & Facility Network',
+      ];
+      const rutsDescs = [
+        'Dynamic motorsport experience platform turning amateurs into athletes with real-time course bookings and moto academy tours.',
+        'High-octane visual storytelling featuring national champion Sathyraj Arumugam, customer testimonials, and community culture.',
+        'Comprehensive breakdown of training programs, track facilities, pit-stop café, accommodation, and motorsport career roles.',
+      ];
+      return {
+        id: i,
+        icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+        title: rutsTitles[i],
+        desc: rutsDescs[i],
+        screen: rutsScreens[i],
+      };
+    }
 
     if (study.slug === 'nestpilot') {
       const nestpilotScreens = [
@@ -1477,7 +1503,7 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            {(study.slug === 'infragen' || study.slug === 'nestpilot') ? (
+            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides') ? (
               /* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait) */
               <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-12">
                 <motion.div
@@ -1691,8 +1717,8 @@ export default function DynamicCaseStudyPage({
               </div>
             )}
 
-            {/* 3 Highlight Cards Below - Hidden for Infragen & Nestpilot so only the 3D images appear */}
-            {!(study.slug === 'infragen' || study.slug === 'nestpilot') && (
+            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot & Ruts N Rides so only the 3D images appear */}
+            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides') && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {highlightItems.map((item) => {
                   const isActive = highlightIdx === item.id;
