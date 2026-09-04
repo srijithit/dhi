@@ -694,12 +694,37 @@ export default function DynamicCaseStudyPage({
     const fullpageScreens: Record<string, string> = {
       'nestpilot': '/images/case-studies/nestpilot/highlight_1.png',
       'clean-culture': '/images/case-studies/clean-culture/fullpage.jpg',
-      'squirlio': '/images/case-studies/squirlio/fullpage.jpg',
+      'squirlio': '/images/case-studies/squirlio/highlight_1.png',
       'infragen': '/images/case-studies/infragen/highlight_1.jpg',
       'ruts-n-rides': '/images/case-studies/ruts-n-rides/highlight_1.png',
       'verdurepax': '/images/case-studies/verdurepax/highlight_1.png',
       'befhue': '/images/case-studies/befhue/highlight_1.png',
     };
+
+    if (study.slug === 'squirlio') {
+      const squirlioScreens = [
+        '/images/case-studies/squirlio/highlight_1.png',
+        '/images/case-studies/squirlio/highlight_2.png',
+        '/images/case-studies/squirlio/highlight_3.png',
+      ];
+      const squirlioTitles = [
+        'Interactive Nut & Snack Storefront',
+        'Curated Flavour & Product Catalogue',
+        'Ethical Sourcing, Process & Story',
+      ];
+      const squirlioDescs = [
+        'Vibrant direct-to-consumer digital storefront featuring smooth gamified mascot interactions, nutritional highlights, and 1-click reordering.',
+        'Structured healthy snack discovery featuring roasted, salted, caramel, and chocolate varieties with variant pricing and stock verification.',
+        'Transparent storytelling detailing ethically sourced raw cashews, small-batch roasting methods, clean processing, and freshness guarantee.',
+      ];
+      return {
+        id: i,
+        icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+        title: squirlioTitles[i],
+        desc: squirlioDescs[i],
+        screen: squirlioScreens[i],
+      };
+    }
 
     if (study.slug === 'befhue') {
       const befhueScreens = [
@@ -1555,7 +1580,7 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue') ? (
+            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio') ? (
               /* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait) */
               <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-12">
                 <motion.div
@@ -1769,8 +1794,8 @@ export default function DynamicCaseStudyPage({
               </div>
             )}
 
-            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax & BEFHUE so only the 3D images appear */}
-            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue') && (
+            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax, BEFHUE & Squirlio so only the 3D images appear */}
+            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio') && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {highlightItems.map((item) => {
                   const isActive = highlightIdx === item.id;
