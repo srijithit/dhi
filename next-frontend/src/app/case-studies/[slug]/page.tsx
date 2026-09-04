@@ -1477,8 +1477,8 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            {study.slug === 'infragen' ? (
-              /* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait - Infragen Only) */
+            {(study.slug === 'infragen' || study.slug === 'nestpilot') ? (
+              /* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait) */
               <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-12">
                 <motion.div
                   drag="x"
@@ -1691,8 +1691,8 @@ export default function DynamicCaseStudyPage({
               </div>
             )}
 
-            {/* 3 Highlight Cards Below - Hidden for Infragen so only the 3D images appear */}
-            {study.slug !== 'infragen' && (
+            {/* 3 Highlight Cards Below - Hidden for Infragen & Nestpilot so only the 3D images appear */}
+            {!(study.slug === 'infragen' || study.slug === 'nestpilot') && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {highlightItems.map((item) => {
                   const isActive = highlightIdx === item.id;
