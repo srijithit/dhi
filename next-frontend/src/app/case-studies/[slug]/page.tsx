@@ -697,7 +697,33 @@ export default function DynamicCaseStudyPage({
       'squirlio': '/images/case-studies/squirlio/fullpage.jpg',
       'infragen': '/images/case-studies/infragen/highlight_1.jpg',
       'ruts-n-rides': '/images/case-studies/ruts-n-rides/highlight_1.png',
+      'verdurepax': '/images/case-studies/verdurepax/highlight_1.png',
     };
+
+    if (study.slug === 'verdurepax') {
+      const verdureScreens = [
+        '/images/case-studies/verdurepax/highlight_1.png',
+        '/images/case-studies/verdurepax/highlight_2.png',
+        '/images/case-studies/verdurepax/highlight_3.png',
+      ];
+      const verdureTitles = [
+        'Curated D2C Gardening Storefront',
+        'Multi-Category Plants & Pots Catalogue',
+        'Plant Stands & Green Lifestyle Experience',
+      ];
+      const verdureDescs = [
+        'Vibrant, lifestyle-centric online storefront designed to inspire green spaces with curated home garden products and direct-to-consumer checkout.',
+        'Extensive gardening ecosystem organising plants, seeds, fertilizers, pots, and soil products into an intuitive discovery experience.',
+        'High-converting product showcase for decorative metal stands, marble finishes, terrace landscaping, and pan-India delivery.',
+      ];
+      return {
+        id: i,
+        icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+        title: verdureTitles[i],
+        desc: verdureDescs[i],
+        screen: verdureScreens[i],
+      };
+    }
 
     if (study.slug === 'ruts-n-rides') {
       const rutsScreens = [
@@ -1503,7 +1529,7 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides') ? (
+            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax') ? (
               /* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait) */
               <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-12">
                 <motion.div
@@ -1717,8 +1743,8 @@ export default function DynamicCaseStudyPage({
               </div>
             )}
 
-            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot & Ruts N Rides so only the 3D images appear */}
-            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides') && (
+            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides & VerdurePax so only the 3D images appear */}
+            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax') && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {highlightItems.map((item) => {
                   const isActive = highlightIdx === item.id;
