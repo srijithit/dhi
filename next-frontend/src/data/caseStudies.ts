@@ -163,7 +163,8 @@ export const caseStudies: CaseStudy[] = [
     "description": "STARTTEN is a next-generation digital platform built around an engaging time-based auction experience, designed to turn traditional auction mechanics into a fast, interactive, and accessible digital experience.",
     "image": "/images/case-studies/startten/showcase_1.png",
     "slug": "startten",
-    "featured": false
+    "featured": false,
+    "underConstruction": true
   },
   {
     "id": "splendour-park",

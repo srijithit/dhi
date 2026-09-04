@@ -70,7 +70,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     { name: "Ruts N Rides", slug: "ruts-n-rides" },
     { name: "Befhue Creative Agency", slug: "befhue" },
     { name: "Sanika's Cuisine", slug: "sanikas-restaurant" },
-    { name: "Startten Platform", slug: "startten" },
+    { name: "Startten Platform", slug: "startten", underConstruction: true },
     { name: "Infinite Structure", slug: "infinite-structure" },
     { name: "Biscuit Defect AI", slug: "bad-biscuit-detection", underConstruction: true },
     { name: "Sales CRM App", slug: "sales-app", underConstruction: true }

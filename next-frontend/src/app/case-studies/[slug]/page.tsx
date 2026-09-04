@@ -705,7 +705,33 @@ export default function DynamicCaseStudyPage({
       'gigabull': '/images/case-studies/gigabull/highlight_1.png',
       'thoorigai': '/images/case-studies/thoorigai/highlight_1.png',
       'vasantabhavan': '/images/case-studies/vasantabhavan/highlight_1.png',
+      'infinite-structure': '/images/case-studies/infinite-structure/highlight_1.png',
     };
+
+    if (study.slug === 'infinite-structure') {
+      const infiniteScreens = [
+        '/images/case-studies/infinite-structure/highlight_1.png',
+        '/images/case-studies/infinite-structure/highlight_2.png',
+        '/images/case-studies/infinite-structure/highlight_3.png',
+      ];
+      const infiniteTitles = [
+        'Cinematic Kinetic Engineering Platform',
+        'Precision PEB Structural Blueprint',
+        'Turnkey Industrial Civil Installations',
+      ];
+      const infiniteDescs = [
+        'High-performance digital flagship showcasing deployable kinetic roofing systems and heavy pre-engineered building architecture.',
+        'Interactive structural breakdown featuring primary frames, secondary members, wind tolerances, and thermal acoustics.',
+        'Comprehensive turnkey project showcases spanning heavy industrial warehouses, commercial hangars, and manufacturing plants.',
+      ];
+      return {
+        id: i,
+        icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+        title: infiniteTitles[i],
+        desc: infiniteDescs[i],
+        screen: infiniteScreens[i],
+      };
+    }
 
     if (study.slug === 'vasantabhavan') {
       const vasantaScreens = [
@@ -1686,7 +1712,7 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai' || study.slug === 'vasantabhavan') ? (
+            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai' || study.slug === 'vasantabhavan' || study.slug === 'infinite-structure') ? (
               /* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait) */
               <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-12">
                 <motion.div
@@ -1900,8 +1926,8 @@ export default function DynamicCaseStudyPage({
               </div>
             )}
 
-            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax, BEFHUE, Squirlio, Amaravathy Coir, Gigabull, Thoorigai & Vasantabhavan so only the 3D images appear */}
-            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai' || study.slug === 'vasantabhavan') && (
+            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax, BEFHUE, Squirlio, Amaravathy Coir, Gigabull, Thoorigai, Vasantabhavan & Infinite Structure so only the 3D images appear */}
+            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai' || study.slug === 'vasantabhavan' || study.slug === 'infinite-structure') && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {highlightItems.map((item) => {
                   const isActive = highlightIdx === item.id;
