@@ -692,11 +692,36 @@ export default function DynamicCaseStudyPage({
     );
     const customScreens = showcaseImageMap[study.slug];
     const fullpageScreens: Record<string, string> = {
-      'nestpilot': '/images/case-studies/nestpilot/fullpage.jpg',
+      'nestpilot': '/images/case-studies/nestpilot/highlight_1.png',
       'clean-culture': '/images/case-studies/clean-culture/fullpage.jpg',
       'squirlio': '/images/case-studies/squirlio/fullpage.jpg',
       'infragen': '/images/case-studies/infragen/highlight_1.jpg',
     };
+
+    if (study.slug === 'nestpilot') {
+      const nestpilotScreens = [
+        '/images/case-studies/nestpilot/highlight_1.png',
+        '/images/case-studies/nestpilot/highlight_2.png',
+        '/images/case-studies/nestpilot/highlight_3.png',
+      ];
+      const nestpilotTitles = [
+        'Landing Page & Automation Platform',
+        'Admin Dashboard & Revenue Analytics',
+        'Tenant Lifecycle & Room Management',
+      ];
+      const nestpilotDescs = [
+        'Modern, high-converting digital storefront designed to automate PG tenant onboarding, rent collection, and operations on autopilot.',
+        'Real-time overview of occupied rooms, vacant beds, collection status, pending dues, and revenue metrics.',
+        'Complete customer management directory with digital KYC, room and bed allocations, tariff history, and WhatsApp receipts.',
+      ];
+      return {
+        id: i,
+        icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+        title: nestpilotTitles[i],
+        desc: nestpilotDescs[i],
+        screen: nestpilotScreens[i],
+      };
+    }
 
     if (study.slug === 'infragen') {
       const infragenScreens = [
