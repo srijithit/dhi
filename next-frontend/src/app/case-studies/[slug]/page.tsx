@@ -701,7 +701,33 @@ export default function DynamicCaseStudyPage({
       'befhue': '/images/case-studies/befhue/highlight_1.png',
       'amaravathy-coir': '/images/case-studies/amaravathy/highlight_1.png',
       'amaravathy': '/images/case-studies/amaravathy/highlight_1.png',
+      'gigabull': '/images/case-studies/gigabull/highlight_1.png',
     };
+
+    if (study.slug === 'gigabull') {
+      const gigabullScreens = [
+        '/images/case-studies/gigabull/highlight_1.png',
+        '/images/case-studies/gigabull/highlight_2.png',
+        '/images/case-studies/gigabull/highlight_3.png',
+      ];
+      const gigabullTitles = [
+        'Luxury Leather Storefront & Brand Identity',
+        'Handcrafted Men & Women Leather Collection',
+        'Artisanal Craftsmanship & Product Specifications',
+      ];
+      const gigabullDescs = [
+        'Polished direct-to-consumer digital storefront showcasing high-grade leather goods with high-contrast luxury aesthetics and seamless shopping.',
+        'Structured product catalog presenting wallets, belts, and accessories with detailed material classifications, pricing, and variant selection.',
+        'Immersive product narrative highlighting traditional hand-painting techniques, durable stitching, premium hardware, and global standards.',
+      ];
+      return {
+        id: i,
+        icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+        title: gigabullTitles[i],
+        desc: gigabullDescs[i],
+        screen: gigabullScreens[i],
+      };
+    }
 
     if (study.slug === 'amaravathy-coir' || study.slug === 'amaravathy') {
       const amaravathyScreens = [
@@ -1607,7 +1633,7 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy') ? (
+            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull') ? (
               /* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait) */
               <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-12">
                 <motion.div
@@ -1821,8 +1847,8 @@ export default function DynamicCaseStudyPage({
               </div>
             )}
 
-            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax, BEFHUE, Squirlio & Amaravathy Coir so only the 3D images appear */}
-            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy') && (
+            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax, BEFHUE, Squirlio, Amaravathy Coir & Gigabull so only the 3D images appear */}
+            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull') && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {highlightItems.map((item) => {
                   const isActive = highlightIdx === item.id;
