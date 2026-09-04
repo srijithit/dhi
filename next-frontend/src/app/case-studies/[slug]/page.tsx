@@ -399,11 +399,11 @@ export default function DynamicCaseStudyPage({
       '/images/case-studies/squirlio/squirlio_product_6.png',
     ],
     'infragen': [
-      '/images/case-studies/infragen/showcase_3.jpg',
+      '/images/case-studies/infragen/highlight_1.jpg',
+      '/images/case-studies/infragen/highlight_2.jpg',
+      '/images/case-studies/infragen/highlight_3.jpg',
       '/images/case-studies/infragen/showcase_4.jpg',
       '/images/case-studies/infragen/showcase_5.jpg',
-      '/images/case-studies/infragen/showcase_6.jpg',
-      '/images/case-studies/infragen/property.jpg',
     ],
     'verdurepax': [
       '/images/case-studies/verdurepax/showcase_1.png',
@@ -695,7 +695,34 @@ export default function DynamicCaseStudyPage({
       'nestpilot': '/images/case-studies/nestpilot/fullpage.jpg',
       'clean-culture': '/images/case-studies/clean-culture/fullpage.jpg',
       'squirlio': '/images/case-studies/squirlio/fullpage.jpg',
+      'infragen': '/images/case-studies/infragen/highlight_1.jpg',
     };
+
+    if (study.slug === 'infragen') {
+      const infragenScreens = [
+        '/images/case-studies/infragen/highlight_1.jpg',
+        '/images/case-studies/infragen/highlight_2.jpg',
+        '/images/case-studies/infragen/highlight_3.jpg',
+      ];
+      const infragenTitles = [
+        'Home & Core Experience',
+        'Company Profile & About',
+        'Real Estate & Property Services',
+      ];
+      const infragenDescs = [
+        'High-converting digital presence engineered for buyers, NRI investors, and property management in Coimbatore.',
+        'Brand storytelling, leadership vision, transparent processes, and credibility-building company portfolio.',
+        'Comprehensive catalog of land, residential, asset management, and end-to-end real estate solutions.',
+      ];
+      return {
+        id: i,
+        icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+        title: infragenTitles[i],
+        desc: infragenDescs[i],
+        screen: infragenScreens[i],
+      };
+    }
+
     return {
       id: i,
       icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
