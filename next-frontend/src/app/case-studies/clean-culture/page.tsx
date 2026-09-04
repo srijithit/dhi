@@ -143,6 +143,32 @@ export default function CleanCulturePage() {
   const [isHighlightHovered, setIsHighlightHovered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Showcase image top-to-bottom scroll on hover refs & state
+  const showcaseContainerRef = useRef<HTMLDivElement>(null);
+  const showcaseImgRef = useRef<HTMLImageElement>(null);
+  const [scrollDistance, setScrollDistance] = useState(0);
+  const [isCardHovered, setIsCardHovered] = useState(false);
+
+  const updateScrollDistance = () => {
+    if (showcaseContainerRef.current && showcaseImgRef.current) {
+      const containerHeight = showcaseContainerRef.current.clientHeight;
+      const imgHeight = showcaseImgRef.current.clientHeight;
+      const diff = imgHeight - containerHeight;
+      setScrollDistance(diff > 5 ? diff : 0);
+    }
+  };
+
+  useEffect(() => {
+    setIsCardHovered(false);
+    const timer = setTimeout(updateScrollDistance, 150);
+    return () => clearTimeout(timer);
+  }, [highlightIdx]);
+
+  useEffect(() => {
+    window.addEventListener('resize', updateScrollDistance);
+    return () => window.removeEventListener('resize', updateScrollDistance);
+  }, []);
+
   // Auto-advance cover banner
   useEffect(() => {
     const timer = setInterval(() => setCurrentCoverSlide((p) => (p + 1) % 3), 4500);
@@ -852,15 +878,16 @@ export default function CleanCulturePage() {
             </div>
 
             {/* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe */}
-            {/* Showcase Card: Portrait on Mobile, 16:9 on Desktop - Live Browser Preview */}
-            <div className="relative max-w-sm sm:max-w-4xl mx-auto mb-8 px-4 sm:px-12">
+            {/* Showcase Card: Portrait on Mobile, 16:9 on Desktop - Live Browser Mockup with Hover Scroll */}
+            <div className="relative max-w-sm sm:max-w-4xl mx-auto mb-8 px-4 sm:px-12 group/mockup">
               <div
-                className="relative w-full aspect-[9/16] sm:aspect-[16/9] rounded-2xl sm:rounded-3xl p-1.5 sm:p-2.5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-500 z-20 flex items-center justify-center overflow-hidden"
+                onMouseEnter={updateScrollDistance}
+                className="relative w-full aspect-[9/16] sm:aspect-[16/9] rounded-2xl sm:rounded-3xl p-1.5 sm:p-2.5 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-500 z-20 flex items-center justify-center overflow-hidden cursor-pointer"
               >
-                {/* Real Website Preview - Permanent Mini Browser Mockup */}
+                {/* Real Website Screenshot - Permanent Mini Browser Mockup */}
                 <div className="absolute inset-0 z-30 bg-slate-950 flex flex-col rounded-xl sm:rounded-2xl overflow-hidden pointer-events-auto">
                   {/* Mini Browser Header */}
-                  <div className="bg-slate-900/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0 select-none">
+                  <div className="bg-slate-900/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0 select-none z-10">
                     <div className="flex items-center space-x-2">
                       <span className="w-3 h-3 rounded-full bg-red-500/90 inline-block" />
                       <span className="w-3 h-3 rounded-full bg-amber-500/90 inline-block" />
@@ -885,23 +912,35 @@ export default function CleanCulturePage() {
                     </a>
                   </div>
 
-                  {/* Window Content: Live Iframe for card 0, else screen image */}
-                  <div className="relative w-full flex-1 bg-white overflow-hidden flex items-center justify-center">
-                    {highlightIdx === 0 ? (
-                      <iframe
-                        src="http://cleanculture.in/"
-                        title="Clean Culture Live Website Preview"
-                        className="w-full h-full border-0 pointer-events-auto"
-                        loading="lazy"
-                        sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-                      />
-                    ) : (
-                      <img
-                        src={highlightItems[highlightIdx]?.screen || highlightItems[0]?.screen}
-                        alt={highlightItems[highlightIdx]?.title || "Active Screen"}
-                        draggable={false}
-                        className="w-full h-full object-cover select-none"
-                      />
+                  {/* Window Content: Website Screenshot with Smooth Top-to-Bottom Scroll on Hover */}
+                  <div
+                    ref={showcaseContainerRef}
+                    onMouseEnter={updateScrollDistance}
+                    className="relative w-full flex-1 bg-white overflow-hidden flex items-start justify-center"
+                  >
+                    <img
+                      ref={showcaseImgRef}
+                      src={highlightItems[highlightIdx]?.screen || highlightItems[0]?.screen}
+                      alt={highlightItems[highlightIdx]?.title || "Active Screen"}
+                      onLoad={updateScrollDistance}
+                      draggable={false}
+                      style={{
+                        '--scroll-offset': scrollDistance > 0 ? `-${scrollDistance}px` : '0px',
+                        transition: scrollDistance > 0
+                          ? `transform ${Math.max(4, Math.min(12, scrollDistance / 280))}s ease-in-out`
+                          : 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)',
+                      } as React.CSSProperties}
+                      className="w-full h-auto object-top block select-none pointer-events-none transform translate-y-0 group-hover/mockup:[transform:translateY(var(--scroll-offset))]"
+                    />
+
+                    {/* Subtle Hover to Scroll Hint Badge */}
+                    {scrollDistance > 0 && (
+                      <div
+                        className="absolute bottom-3 right-3 z-20 flex items-center space-x-1.5 bg-slate-900/90 text-white text-[10px] sm:text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 shadow-lg pointer-events-none transition-all duration-300 opacity-90 group-hover/mockup:opacity-0 group-hover/mockup:translate-y-2"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#2196E8] animate-pulse" />
+                        <span>Hover to scroll</span>
+                      </div>
                     )}
                   </div>
                 </div>
