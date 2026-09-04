@@ -699,7 +699,34 @@ export default function DynamicCaseStudyPage({
       'ruts-n-rides': '/images/case-studies/ruts-n-rides/highlight_1.png',
       'verdurepax': '/images/case-studies/verdurepax/highlight_1.png',
       'befhue': '/images/case-studies/befhue/highlight_1.png',
+      'amaravathy-coir': '/images/case-studies/amaravathy/highlight_1.png',
+      'amaravathy': '/images/case-studies/amaravathy/highlight_1.png',
     };
+
+    if (study.slug === 'amaravathy-coir' || study.slug === 'amaravathy') {
+      const amaravathyScreens = [
+        '/images/case-studies/amaravathy/highlight_1.png',
+        '/images/case-studies/amaravathy/highlight_2.png',
+        '/images/case-studies/amaravathy/highlight_3.png',
+      ];
+      const amaravathyTitles = [
+        'Global Coir Manufacturing & Export Portal',
+        'Sustainable Coir Fibre & Geotextile Products',
+        'Eco-Friendly Dyeing, ZLD & Infrastructure',
+      ];
+      const amaravathyDescs = [
+        'High-credibility B2B digital gateway engineered for domestic and global distributors, bulk buyers, and international supply contracts.',
+        'Structured industrial catalogue showcasing premium coir fibre, curled coir, yarn-dyed mats, and natural geotextiles with technical specs.',
+        'Measurable sustainability narrative detailing the Zero Liquid Discharge (ZLD) Effluent Treatment Plant and eco-friendly manufacturing scale.',
+      ];
+      return {
+        id: i,
+        icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+        title: amaravathyTitles[i],
+        desc: amaravathyDescs[i],
+        screen: amaravathyScreens[i],
+      };
+    }
 
     if (study.slug === 'squirlio') {
       const squirlioScreens = [
@@ -1580,7 +1607,7 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio') ? (
+            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy') ? (
               /* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait) */
               <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-12">
                 <motion.div
@@ -1794,8 +1821,8 @@ export default function DynamicCaseStudyPage({
               </div>
             )}
 
-            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax, BEFHUE & Squirlio so only the 3D images appear */}
-            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio') && (
+            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax, BEFHUE, Squirlio & Amaravathy Coir so only the 3D images appear */}
+            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy') && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {highlightItems.map((item) => {
                   const isActive = highlightIdx === item.id;
