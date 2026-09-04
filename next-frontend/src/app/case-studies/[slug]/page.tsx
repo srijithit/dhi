@@ -707,12 +707,12 @@ export default function DynamicCaseStudyPage({
       const nestpilotTitles = [
         'Landing Page & Automation Platform',
         'Admin Dashboard & Revenue Analytics',
-        'Tenant Lifecycle & Room Management',
+        'Rooms & Bed Allocation Management',
       ];
       const nestpilotDescs = [
         'Modern, high-converting digital storefront designed to automate PG tenant onboarding, rent collection, and operations on autopilot.',
         'Real-time overview of occupied rooms, vacant beds, collection status, pending dues, and revenue metrics.',
-        'Complete customer management directory with digital KYC, room and bed allocations, tariff history, and WhatsApp receipts.',
+        'Interactive PG block management, room allocations, real-time bed availability tracking, and flexible tariff presets.',
       ];
       return {
         id: i,
