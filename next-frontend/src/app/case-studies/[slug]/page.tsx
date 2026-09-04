@@ -702,7 +702,33 @@ export default function DynamicCaseStudyPage({
       'amaravathy-coir': '/images/case-studies/amaravathy/highlight_1.png',
       'amaravathy': '/images/case-studies/amaravathy/highlight_1.png',
       'gigabull': '/images/case-studies/gigabull/highlight_1.png',
+      'thoorigai': '/images/case-studies/thoorigai/highlight_1.png',
     };
+
+    if (study.slug === 'thoorigai') {
+      const thoorigaiScreens = [
+        '/images/case-studies/thoorigai/highlight_1.png',
+        '/images/case-studies/thoorigai/highlight_2.png',
+        '/images/case-studies/thoorigai/highlight_3.png',
+      ];
+      const thoorigaiTitles = [
+        'Modern Event Discovery & Booking Portal',
+        'Curated Event Packages & Category Showcases',
+        'Streamlined Event Details & Seamless Booking',
+      ];
+      const thoorigaiDescs = [
+        'Intuitive digital platform connecting event enthusiasts with curated gatherings, celebrations, and interactive booking flows.',
+        'Structured event packages showcasing entertainment, catering, venue planning, and flexible pricing tiers.',
+        'High-converting event details interface featuring schedules, amenities, ticket tiers, and instant reservation confirmation.',
+      ];
+      return {
+        id: i,
+        icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+        title: thoorigaiTitles[i],
+        desc: thoorigaiDescs[i],
+        screen: thoorigaiScreens[i],
+      };
+    }
 
     if (study.slug === 'gigabull') {
       const gigabullScreens = [
@@ -1633,7 +1659,7 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull') ? (
+            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai') ? (
               /* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait) */
               <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-12">
                 <motion.div
@@ -1847,8 +1873,8 @@ export default function DynamicCaseStudyPage({
               </div>
             )}
 
-            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax, BEFHUE, Squirlio, Amaravathy Coir & Gigabull so only the 3D images appear */}
-            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull') && (
+            {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax, BEFHUE, Squirlio, Amaravathy Coir, Gigabull & Thoorigai so only the 3D images appear */}
+            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai') && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {highlightItems.map((item) => {
                   const isActive = highlightIdx === item.id;
