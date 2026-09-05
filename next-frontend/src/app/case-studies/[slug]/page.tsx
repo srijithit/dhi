@@ -1403,7 +1403,7 @@ export default function DynamicCaseStudyPage({
                         src={src}
                         alt={`${study.title} Screen ${idx + 1}`}
                         draggable={false}
-                        className={`absolute inset-0 w-full h-full aspect-square object-cover rounded-3xl transition-all duration-700 pointer-events-none select-none ${
+                        className={`absolute inset-0 w-full h-full aspect-square object-contain bg-white rounded-3xl transition-all duration-700 pointer-events-none select-none ${
                           currentCoverSlide === idx ? 'opacity-100 scale-100 z-20' : 'opacity-0 scale-95 z-10'
                         }`}
                       />
@@ -1692,7 +1692,7 @@ export default function DynamicCaseStudyPage({
                             src={card.img}
                             alt={card.title}
                             draggable={false}
-                            className="w-full h-full aspect-square object-cover rounded-2xl shadow-sm transition-transform duration-700 hover:scale-105 select-none pointer-events-none"
+                            className="w-full h-full aspect-square object-contain rounded-2xl shadow-sm transition-transform duration-700 hover:scale-105 select-none pointer-events-none"
                           />
                         </div>
                       </motion.div>
@@ -1748,7 +1748,7 @@ export default function DynamicCaseStudyPage({
                     <img
                       src={showcaseImageMap[study.slug]?.[0] || study.image || '/images/cc_highlight_product.jpg'}
                       alt={`${study.title} Showcase`}
-                      className="w-full h-full aspect-square object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full aspect-square object-contain rounded-2xl group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
                 </div>
