@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Mail, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { submitToGoogleSheets } from '@/utils/googleSheets';
 
 interface EmailModalProps {
   isOpen: boolean;
@@ -120,16 +121,22 @@ export default function EmailModal({ isOpen, onClose, defaultService = '' }: Ema
     setLoading(true);
 
     try {
+      const leadPayload = {
+        name: trimmedName,
+        email: trimmedEmail,
+        phone: trimmedPhone,
+        company: 'N/A',
+        service: formData.service,
+        message: trimmedMessage,
+      };
+
+      // Direct client sync to Google Sheets
+      submitToGoogleSheets(leadPayload).catch((err) => console.warn('Client sheet sync:', err));
+
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: trimmedName,
-          email: trimmedEmail,
-          phone: trimmedPhone,
-          service: formData.service,
-          message: trimmedMessage
-        }),
+        body: JSON.stringify(leadPayload),
       });
 
       const data = await res.json();
@@ -145,8 +152,8 @@ export default function EmailModal({ isOpen, onClose, defaultService = '' }: Ema
         setErrorMsg(data.error || 'Failed to submit inquiry.');
       }
     } catch (err) {
-      // Fallback redirect via mailto if network fails
-      const mailtoUrl = `mailto:dinesh@dhigrowth.com?subject=Inquiry%20from%20${encodeURIComponent(trimmedName)}&body=Name:%20${encodeURIComponent(trimmedName)}%0AEmail:%20${encodeURIComponent(trimmedEmail)}%0APhone:%20${encodeURIComponent(trimmedPhone)}%0AService:%20${encodeURIComponent(formData.service)}%0AMessage:%20${encodeURIComponent(trimmedMessage)}`;
+      // Fallback redirect via mailto with CC to team
+      const mailtoUrl = `mailto:dhinesh@dhigrowth.com?cc=pranitha@dhigrowth.com,mathanraj@dhigrowth.com&subject=Inquiry%20from%20${encodeURIComponent(trimmedName)}&body=Name:%20${encodeURIComponent(trimmedName)}%0AEmail:%20${encodeURIComponent(trimmedEmail)}%0APhone:%20${encodeURIComponent(trimmedPhone)}%0AService:%20${encodeURIComponent(formData.service)}%0AMessage:%20${encodeURIComponent(trimmedMessage)}`;
       window.location.href = mailtoUrl;
       setSuccess(true);
       setTimeout(() => {

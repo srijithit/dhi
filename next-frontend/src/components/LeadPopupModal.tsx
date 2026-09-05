@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Sparkles, CheckCircle2, Loader2, ArrowRight } from 'lucide-react';
+import { submitToGoogleSheets } from '@/utils/googleSheets';
 
 interface LeadPopupModalProps {
   isOpen?: boolean;
@@ -136,19 +137,25 @@ export default function LeadPopupModal({
 
     setIsSubmitting(true);
 
+    const leadPayload = {
+      name: trimmedName,
+      email: trimmedEmail,
+      phone: trimmedPhone,
+      company: 'N/A',
+      service: 'AI & Digital Audit Consultation',
+      message: trimmedMessage || 'Requested proposal from Lead Popup Modal.',
+    };
+
     try {
-      // Optional background notification
-      fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: trimmedName,
-          email: trimmedEmail,
-          phone: trimmedPhone,
-          service: 'AI & Digital Audit Consultation',
-          message: trimmedMessage || 'Requested proposal from Lead Popup Modal.'
-        })
-      }).catch((err) => console.warn('Background sync note:', err));
+      // Sync to Google Sheets and dispatch notification email in parallel
+      await Promise.allSettled([
+        submitToGoogleSheets(leadPayload),
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(leadPayload),
+        }),
+      ]);
 
       setIsSubmitting(false);
       setIsSuccess(true);

@@ -80,8 +80,8 @@ export default function DynamicCaseStudyPage({
 
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-6">
-              <Hammer className="w-4 h-4 animate-bounce" />
-              <span>Case Study Under Construction</span>
+              <Clock className="w-4 h-4" />
+              <span>Case Study Coming Soon</span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4 max-w-2xl font-header">
@@ -153,11 +153,12 @@ export default function DynamicCaseStudyPage({
   const [isHighlightHovered, setIsHighlightHovered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Showcase image top-to-bottom scroll on hover refs & state
+  // Showcase image top-to-bottom scroll on hover/tap refs & state
   const showcaseContainerRef = useRef<HTMLDivElement>(null);
   const showcaseImgRef = useRef<HTMLImageElement>(null);
   const [scrollDistance, setScrollDistance] = useState(0);
   const [isCardHovered, setIsCardHovered] = useState(false);
+  const [isTappedToScroll, setIsTappedToScroll] = useState(false);
 
   const updateScrollDistance = () => {
     if (showcaseContainerRef.current && showcaseImgRef.current) {
@@ -170,6 +171,7 @@ export default function DynamicCaseStudyPage({
 
   useEffect(() => {
     setIsCardHovered(false);
+    setIsTappedToScroll(false);
     const timer = setTimeout(updateScrollDistance, 150);
     return () => clearTimeout(timer);
   }, [highlightIdx]);
@@ -179,11 +181,11 @@ export default function DynamicCaseStudyPage({
     return () => window.removeEventListener('resize', updateScrollDistance);
   }, []);
 
-  // Auto-advance cover banner
   useEffect(() => {
-    const timer = setInterval(() => setCurrentCoverSlide((p) => (p + 1) % 3), 4500);
+    const total = showcaseImageMap[study.slug]?.length || 3;
+    const timer = setInterval(() => setCurrentCoverSlide((p) => (p + 1) % total), 4500);
     return () => clearInterval(timer);
-  }, []);
+  }, [study.slug]);
 
   const [solutionDirection, setSolutionDirection] = useState(1);
   const [solutionInView, setSolutionInView] = useState(false);
@@ -399,11 +401,11 @@ export default function DynamicCaseStudyPage({
       '/images/case-studies/squirlio/squirlio_product_6.png',
     ],
     'infragen': [
-      '/images/case-studies/infragen/highlight_1.jpg',
-      '/images/case-studies/infragen/highlight_2.jpg',
-      '/images/case-studies/infragen/highlight_3.jpg',
-      '/images/case-studies/infragen/showcase_4.jpg',
-      '/images/case-studies/infragen/showcase_5.jpg',
+      '/images/case-studies/infragen/carousel-villa-1.webp',
+      '/images/case-studies/infragen/carousel-villa-2.webp',
+      '/images/case-studies/infragen/carousel-villa-3.webp',
+      '/images/case-studies/infragen/carousel-villa-4.webp',
+      '/images/case-studies/infragen/carousel-villa-5.webp',
     ],
     'verdurepax': [
       '/images/case-studies/verdurepax/showcase_1.png',
@@ -706,7 +708,61 @@ export default function DynamicCaseStudyPage({
       'thoorigai': '/images/case-studies/thoorigai/highlight_1.png',
       'vasantabhavan': '/images/case-studies/vasantabhavan/highlight_1.png',
       'infinite-structure': '/images/case-studies/infinite-structure/highlight_1.png',
+      'sanikas-restaurant': '/images/case-studies/sanikas-restaurant/highlight_1.png',
+      'sanikas': '/images/case-studies/sanikas-restaurant/highlight_1.png',
+      'keystone': '/images/case-studies/keystone/highlight_1.png',
+      'kiipl': '/images/case-studies/keystone/highlight_1.png',
     };
+
+    if (study.slug === 'keystone' || study.slug === 'kiipl') {
+      const keystoneScreens = [
+        '/images/case-studies/keystone/highlight_1.png',
+        '/images/case-studies/keystone/highlight_2.png',
+        '/images/case-studies/keystone/highlight_3.png',
+      ];
+      const keystoneTitles = [
+        'Industrial Automation Flagship Platform',
+        'Company Heritage, Infrastructure & Mission',
+        'End-to-End Engineering & Systems Services',
+      ];
+      const keystoneDescs = [
+        'Enterprise industrial automation portal featuring distributor catalogs, core industry solutions, client trust proof, and engineering inquiry funnels.',
+        'Brand storytelling highlighting 11+ years of engineering excellence, manufacturing capabilities, precision standards, and corporate vision.',
+        'Comprehensive service architecture covering control panel assembly, cable management, field device sensors, and turnkey OEM engineering.',
+      ];
+      return {
+        id: i,
+        icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+        title: keystoneTitles[i],
+        desc: keystoneDescs[i],
+        screen: keystoneScreens[i],
+      };
+    }
+
+    if (study.slug === 'sanikas-restaurant' || study.slug === 'sanikas') {
+      const sanikasScreens = [
+        '/images/case-studies/sanikas-restaurant/highlight_1.png',
+        '/images/case-studies/sanikas-restaurant/highlight_2.png',
+        '/images/case-studies/sanikas-restaurant/highlight_3.png',
+      ];
+      const sanikasTitles = [
+        'Sanika’s Indian Cuisine Digital Flagship',
+        'Turnkey Event Catering Reservation Engine',
+        'Curated Spirits, Wine & Bar Drinks Showcase',
+      ];
+      const sanikasDescs = [
+        'Sensory-rich digital dining portal featuring chef signatures, interactive food menus, genuine guest reviews, and online order integration.',
+        'Comprehensive event catering inquiry and reservation workflow tailored for weddings, corporate gatherings, and private parties.',
+        'Complete bar experience presentation organizing craft beers, vintage wines, premium whiskeys, and artisanal cocktails.',
+      ];
+      return {
+        id: i,
+        icon: i === 0 ? <Zap className="w-5 h-5 text-[#2196E8]" /> : i === 1 ? <MapPin className="w-5 h-5 text-[#2196E8]" /> : <Database className="w-5 h-5 text-[#2196E8]" />,
+        title: sanikasTitles[i],
+        desc: sanikasDescs[i],
+        screen: sanikasScreens[i],
+      };
+    }
 
     if (study.slug === 'infinite-structure') {
       const infiniteScreens = [
@@ -740,14 +796,14 @@ export default function DynamicCaseStudyPage({
         '/images/case-studies/vasantabhavan/highlight_3.png',
       ];
       const vasantaTitles = [
-        'Global Hospitality & VB World Portal',
-        'Culinary Heritage, Story & Banquets',
-        '25+ Branch Network, Menus & Ordering',
+        'Serving Traditions, Crafting What\'s Next',
+        'Hospitality Legacy Since 1974 & Leadership',
+        'Three Brands, One Passion & Culinary Portfolio',
       ];
       const vasantaDescs = [
-        'Contemporary multi-brand digital dining platform uniting traditional dining, modern bistro experiences, and online food ordering.',
-        'Rich brand storytelling honoring 60+ years of South Indian vegetarian culinary mastery, catering services, and banquet reservations.',
-        'Interactive global branch locator with dynamic menu exploration, online delivery integration via Swiggy & Zomato, and sub-second performance.',
+        'Contemporary multi-brand digital dining platform uniting traditional South Indian flavors, modern bistro experiences, and online reservations.',
+        'Inspiring heritage chronicle celebrating 50+ years of culinary mastery, generational leadership vision, core principles, and global reach.',
+        'Multi-concept brand showcase highlighting Vasantha Bhavan dining, VB World global vegetarian cuisine, and Cones & Brew artisanal café.',
       ];
       return {
         id: i,
@@ -766,13 +822,13 @@ export default function DynamicCaseStudyPage({
       ];
       const thoorigaiTitles = [
         'Modern Event Discovery & Booking Portal',
-        'Curated Event Packages & Category Showcases',
-        'Streamlined Event Details & Seamless Booking',
+        'Personalized Experiences, Milestones & Team',
+        'Contact Our Team & Event Planning Inquiries',
       ];
       const thoorigaiDescs = [
         'Intuitive digital platform connecting event enthusiasts with curated gatherings, celebrations, and interactive booking flows.',
-        'Structured event packages showcasing entertainment, catering, venue planning, and flexible pricing tiers.',
-        'High-converting event details interface featuring schedules, amenities, ticket tiers, and instant reservation confirmation.',
+        'Story-driven company showcase highlighting the founder vision, dedicated team milestones, past celebration gallery, and core principles.',
+        'Direct inquiry gateway and comprehensive event FAQ assisting clients with bespoke packages, scheduling, and instant consultation.',
       ];
       return {
         id: i,
@@ -1353,35 +1409,7 @@ export default function DynamicCaseStudyPage({
                       />
                     ))}
 
-                    {/* Left & Right Slider Arrow Buttons (Visible on Hover) */}
-                    <button
-                      onClick={() => setCurrentCoverSlide((prev) => (prev === 0 ? 2 : prev - 1))}
-                      title="Previous Slide"
-                      className="absolute -left-5 sm:-left-7 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-[#1E293B]/90 hover:bg-[#2196E8] text-white flex items-center justify-center border border-white/20 shadow-xl backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 cursor-pointer"
-                    >
-                      <ChevronLeft className="w-5 h-5" />
-                    </button>
 
-                    <button
-                      onClick={() => setCurrentCoverSlide((prev) => (prev === 2 ? 0 : prev + 1))}
-                      title="Next Slide"
-                      className="absolute -right-5 sm:-right-7 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-[#1E293B]/90 hover:bg-[#2196E8] text-white flex items-center justify-center border border-white/20 shadow-xl backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 cursor-pointer"
-                    >
-                      <ChevronRight className="w-5 h-5" />
-                    </button>
-
-                    {/* Dark Pill Pagination */}
-                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-2 bg-slate-900/90 px-3.5 py-1.5 rounded-full backdrop-blur-md border border-white/10 shadow-xl">
-                      {[0, 1, 2].map((idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => setCurrentCoverSlide(idx)}
-                          className={`transition-all duration-300 rounded-full cursor-pointer ${
-                            currentCoverSlide === idx ? 'w-5 h-2 bg-emerald-400' : 'w-2 h-2 bg-slate-500'
-                          }`}
-                        />
-                      ))}
-                    </div>
                   </motion.div>
                 </div>
               </div>
@@ -1406,95 +1434,21 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              {/* Left Column: Custom Video/Demo Player for Clean Culture, or Visual Mockup for other studies */}
-              <div className="lg:col-span-5 flex justify-center">
-                {study.slug === 'clean-culture' ? (
-                  <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-800 bg-[#0B1324] group">
-                    <div className="relative w-full h-[320px] sm:h-[380px] bg-slate-950 flex items-center justify-center overflow-hidden">
-                      <video
-                        ref={videoRef}
-                        loop
-                        muted={videoMuted}
-                        autoPlay
-                        playsInline
-                        className="w-full h-full object-cover"
-                      >
-                        <source src="/videos/clean_culture_overview.mp4" type="video/mp4" />
-                      </video>
-
-                      {/* Bottom Video Controls Bar */}
-                      <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 pt-6 z-20 flex flex-col gap-2">
-                        <div className="w-full bg-slate-700/80 h-1.5 rounded-full overflow-hidden flex cursor-pointer">
-                          <div className="bg-[#2196E8] w-2/3 h-full rounded-full" />
-                        </div>
-                        <div className="flex items-center justify-between text-xs text-slate-300 font-mono">
-                          <div className="flex items-center gap-3">
-                            <button onClick={togglePlay} className="hover:text-white transition cursor-pointer">
-                              {videoPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current" />}
-                            </button>
-                            <span>0:00 / 0:05</span>
-                          </div>
-                          <div className="flex items-center gap-3">
-                            <button onClick={toggleMute} className="hover:text-white transition cursor-pointer">
-                              {videoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                            </button>
-                            <button onClick={toggleFullscreen} className="hover:text-white transition cursor-pointer">
-                              <Maximize2 className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-800 bg-[#0B1324] flex items-center justify-center group">
-                    <img
-                      src={showcaseImageMap[study.slug]?.[0] || study.image || '/images/cc_highlight_product.jpg'}
-                      alt={`${study.title} Showcase`}
-                      className="w-full h-full aspect-square object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent pointer-events-none" />
-                    
-                    {/* Bottom Floating Info Pill */}
-                    <div className="absolute bottom-4 inset-x-4 flex items-center justify-between p-3 rounded-xl bg-slate-900/85 backdrop-blur-md border border-white/10 shadow-lg">
-                      <div className="flex items-center space-x-2.5">
-                        {customLogo ? (
-                          <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center shrink-0 border border-slate-200">
-                            <img src={customLogo} alt={study.title} className="w-full h-full object-contain" />
-                          </div>
-                        ) : (
-                          <div className="w-8 h-8 rounded-lg bg-[#2196E8] text-white font-bold text-xs flex items-center justify-center shrink-0">
-                            {study.title.charAt(0)}
-                          </div>
-                        )}
-                        <div>
-                          <h4 className="text-xs sm:text-sm font-bold text-white font-body leading-tight">{study.title}</h4>
-                          <p className="text-[10px] text-slate-400 font-mono tracking-wider uppercase leading-none">{study.category} • Core Architecture</p>
-                        </div>
-                      </div>
-                      <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-[10px] font-mono font-bold">
-                        Verified
-                      </span>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Right Column: 6 Checkmark Cards */}
-              <div className="lg:col-span-7 space-y-6">
-                <p className="text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
+            {study.slug === 'infragen' ? (
+              /* Infragen Clean No-Image Full-Width Layout */
+              <div className="max-w-4xl mx-auto space-y-8">
+                <p className="text-slate-300 text-base sm:text-lg leading-relaxed font-normal text-center max-w-3xl mx-auto">
                   Engineering the {study.title} platform required building a high-concurrency architecture capable of handling complex state management, real-time validation, and automated backend calculation workflows.
                 </p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
                   {challengeCards.map((item, idx) => (
                     <div
                       key={idx}
-                      className="p-4 rounded-xl bg-[#0C1527]/90 border border-slate-800/90 flex items-center space-x-3.5 shadow-sm hover:border-[#2196E8]/40 transition group"
+                      className="p-5 rounded-2xl bg-[#0C1527]/90 border border-slate-800/90 flex items-center space-x-3.5 shadow-sm hover:border-[#2196E8]/40 transition group"
                     >
-                      <div className="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center shrink-0">
-                        <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3]" />
+                      <div className="w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center shrink-0">
+                        <Check className="w-4 h-4 text-emerald-400 stroke-[3]" />
                       </div>
                       <span className="text-xs sm:text-sm font-semibold text-slate-200 group-hover:text-white transition leading-snug">
                         {item.title}
@@ -1503,7 +1457,106 @@ export default function DynamicCaseStudyPage({
                   ))}
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                {/* Left Column: Custom Video/Demo Player for Clean Culture, or Visual Mockup for other studies */}
+                <div className="lg:col-span-5 flex justify-center">
+                  {study.slug === 'clean-culture' ? (
+                    <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-800 bg-[#0B1324] group">
+                      <div className="relative w-full h-[320px] sm:h-[380px] bg-slate-950 flex items-center justify-center overflow-hidden">
+                        <video
+                          ref={videoRef}
+                          loop
+                          muted={videoMuted}
+                          autoPlay
+                          playsInline
+                          className="w-full h-full object-cover"
+                        >
+                          <source src="/videos/clean_culture_overview.mp4" type="video/mp4" />
+                        </video>
+
+                        {/* Bottom Video Controls Bar */}
+                        <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 pt-6 z-20 flex flex-col gap-2">
+                          <div className="w-full bg-slate-700/80 h-1.5 rounded-full overflow-hidden flex cursor-pointer">
+                            <div className="bg-[#2196E8] w-2/3 h-full rounded-full" />
+                          </div>
+                          <div className="flex items-center justify-between text-xs text-slate-300 font-mono">
+                            <div className="flex items-center gap-3">
+                              <button onClick={togglePlay} className="hover:text-white transition cursor-pointer">
+                                {videoPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current" />}
+                              </button>
+                              <span>0:00 / 0:05</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                              <button onClick={toggleMute} className="hover:text-white transition cursor-pointer">
+                                {videoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                              </button>
+                              <button onClick={toggleFullscreen} className="hover:text-white transition cursor-pointer">
+                                <Maximize2 className="w-4 h-4" />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-800 bg-[#0B1324] flex items-center justify-center group">
+                      <img
+                        src={showcaseImageMap[study.slug]?.[0] || study.image || '/images/cc_highlight_product.jpg'}
+                        alt={`${study.title} Showcase`}
+                        className="w-full h-full aspect-square object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent pointer-events-none" />
+                      
+                      {/* Bottom Floating Info Pill */}
+                      <div className="absolute bottom-4 inset-x-4 flex items-center justify-between p-3 rounded-xl bg-slate-900/85 backdrop-blur-md border border-white/10 shadow-lg">
+                        <div className="flex items-center space-x-2.5">
+                          {customLogo ? (
+                            <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center shrink-0 border border-slate-200">
+                              <img src={customLogo} alt={study.title} className="w-full h-full object-contain" />
+                            </div>
+                          ) : (
+                            <div className="w-8 h-8 rounded-lg bg-[#2196E8] text-white font-bold text-xs flex items-center justify-center shrink-0">
+                              {study.title.charAt(0)}
+                            </div>
+                          )}
+                          <div>
+                            <h4 className="text-xs sm:text-sm font-bold text-white font-body leading-tight">{study.title}</h4>
+                            <p className="text-[10px] text-slate-400 font-mono tracking-wider uppercase leading-none">{study.category} • Core Architecture</p>
+                          </div>
+                        </div>
+                        <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-[10px] font-mono font-bold">
+                          Verified
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Right Column: 6 Checkmark Cards */}
+                <div className="lg:col-span-7 space-y-6">
+                  <p className="text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
+                    Engineering the {study.title} platform required building a high-concurrency architecture capable of handling complex state management, real-time validation, and automated backend calculation workflows.
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+                    {challengeCards.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="p-4 rounded-xl bg-[#0C1527]/90 border border-slate-800/90 flex items-center space-x-3.5 shadow-sm hover:border-[#2196E8]/40 transition group"
+                      >
+                        <div className="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center shrink-0">
+                          <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3]" />
+                        </div>
+                        <span className="text-xs sm:text-sm font-semibold text-slate-200 group-hover:text-white transition leading-snug">
+                          {item.title}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
@@ -1665,30 +1718,19 @@ export default function DynamicCaseStudyPage({
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              {/* Left Side: Product Showcase Visual */}
-              <div className="lg:col-span-5 flex justify-center">
-                <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-200 bg-white group p-3 flex items-center justify-center">
-                  <img
-                    src={showcaseImageMap[study.slug]?.[1] || showcaseImageMap[study.slug]?.[0] || study.image || '/images/cc_highlight_product.jpg'}
-                    alt={`${study.title} Showcase`}
-                    className="w-full h-full aspect-square object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-              </div>
-
-              {/* Right Side: 2x2 Grid with Blue Border Cards */}
-              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {study.slug === 'infragen' ? (
+              /* Infragen Clean No-Image Centered 2x2 Grid */
+              <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {productExpCards.map((card, idx) => (
                   <div
                     key={idx}
-                    className="rounded-2xl border-2 border-[#2196E8] p-6 bg-white shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between space-y-4"
+                    className="rounded-2xl border-2 border-[#2196E8] p-6 sm:p-7 bg-white shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between space-y-4"
                   >
                     <div className="space-y-3">
                       <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
                         {card.icon}
                       </div>
-                      <h4 className="font-extrabold text-slate-900 text-base font-body leading-snug">
+                      <h4 className="font-extrabold text-slate-900 text-base sm:text-lg font-body leading-snug">
                         {card.title}
                       </h4>
                       <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
@@ -1698,7 +1740,42 @@ export default function DynamicCaseStudyPage({
                   </div>
                 ))}
               </div>
-            </div>
+            ) : (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                {/* Left Side: Product Showcase Visual */}
+                <div className="lg:col-span-5 flex justify-center">
+                  <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-200 bg-white group p-3 flex items-center justify-center">
+                    <img
+                      src={showcaseImageMap[study.slug]?.[0] || study.image || '/images/cc_highlight_product.jpg'}
+                      alt={`${study.title} Showcase`}
+                      className="w-full h-full aspect-square object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                </div>
+
+                {/* Right Side: 2x2 Grid with Blue Border Cards */}
+                <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {productExpCards.map((card, idx) => (
+                    <div
+                      key={idx}
+                      className="rounded-2xl border-2 border-[#2196E8] p-6 bg-white shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between space-y-4"
+                    >
+                      <div className="space-y-3">
+                        <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+                          {card.icon}
+                        </div>
+                        <h4 className="font-extrabold text-slate-900 text-base font-body leading-snug">
+                          {card.title}
+                        </h4>
+                        <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                          {card.desc}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
@@ -1712,7 +1789,7 @@ export default function DynamicCaseStudyPage({
               </h2>
             </div>
 
-            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai' || study.slug === 'vasantabhavan' || study.slug === 'infinite-structure') ? (
+            {(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai' || study.slug === 'vasantabhavan' || study.slug === 'infinite-structure' || study.slug === 'sanikas-restaurant' || study.slug === 'sanikas' || study.slug === 'keystone' || study.slug === 'kiipl') ? (
               /* 3D Perspective Phone Showcase with Motion Drag & Touch Swipe (9:16 Portrait) */
               <div className="relative max-w-5xl mx-auto mb-8 px-2 sm:px-12">
                 <motion.div
@@ -1741,10 +1818,14 @@ export default function DynamicCaseStudyPage({
                     />
                   </div>
 
-                  {/* Center Main Screen Card (Active Blue Focus - 9:16 Portrait with Hover Scroll) */}
+                  {/* Center Main Screen Card (Active Blue Focus - 9:16 Portrait with Hover/Tap Scroll) */}
                   <div
                     ref={showcaseContainerRef}
                     onMouseEnter={updateScrollDistance}
+                    onClick={() => {
+                      updateScrollDistance();
+                      setIsTappedToScroll((prev) => !prev);
+                    }}
                     className="relative w-[165px] xs:w-[205px] sm:w-[280px] md:w-[325px] aspect-[9/16] rounded-2xl sm:rounded-3xl p-1 sm:p-2 bg-white shadow-2xl border-2 border-[#2196E8] transition-all duration-700 z-20 cursor-pointer scale-100 [transform:perspective(1200px)_rotateY(0deg)_scale(1)] flex items-start justify-center overflow-hidden group shrink-0"
                   >
                     <img
@@ -1755,6 +1836,7 @@ export default function DynamicCaseStudyPage({
                       draggable={false}
                       style={{
                         '--scroll-offset': scrollDistance > 0 ? `-${scrollDistance}px` : '0px',
+                        transform: isTappedToScroll && scrollDistance > 0 ? `translateY(-${scrollDistance}px)` : undefined,
                         transition: scrollDistance > 0
                           ? `transform ${Math.max(4, Math.min(12, scrollDistance / 280))}s ease-in-out`
                           : 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)',
@@ -1762,13 +1844,16 @@ export default function DynamicCaseStudyPage({
                       className="w-full h-auto min-h-full object-cover object-top block select-none pointer-events-none rounded-xl sm:rounded-2xl drop-shadow-xl transform translate-y-0 group-hover:[transform:translateY(var(--scroll-offset))]"
                     />
 
-                    {/* Subtle Hover to Scroll Hint Badge */}
+                    {/* Subtle Hover / Tap to Scroll Hint Badge */}
                     {scrollDistance > 0 && (
                       <div
-                        className="absolute bottom-2.5 right-2.5 z-20 flex items-center space-x-1 bg-slate-900/90 text-white text-[9px] sm:text-[11px] font-medium px-2 py-1 rounded-full backdrop-blur-md border border-white/10 shadow-lg pointer-events-none transition-all duration-300 opacity-90 group-hover:opacity-0 group-hover:translate-y-2"
+                        className={`absolute bottom-2.5 right-2.5 z-20 flex items-center space-x-1 bg-slate-900/90 text-white text-[9px] sm:text-[11px] font-medium px-2 py-1 rounded-full backdrop-blur-md border border-white/10 shadow-lg pointer-events-none transition-all duration-300 ${
+                          isTappedToScroll ? 'opacity-90' : 'opacity-90 sm:group-hover:opacity-0 sm:group-hover:translate-y-2'
+                        }`}
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-[#2196E8] animate-pulse" />
-                        <span>Hover to scroll</span>
+                        <span className="hidden sm:inline">Hover to scroll</span>
+                        <span className="sm:hidden">{isTappedToScroll ? 'Tap to reset' : 'Tap to scroll'}</span>
                       </div>
                     )}
                   </div>
@@ -1861,11 +1946,15 @@ export default function DynamicCaseStudyPage({
                       )}
                     </div>
 
-                    {/* Window Content: Website Screenshot with Smooth Top-to-Bottom Scroll on Hover */}
+                    {/* Window Content: Website Screenshot with Smooth Top-to-Bottom Scroll on Hover/Tap */}
                     <div
                       ref={showcaseContainerRef}
                       onMouseEnter={updateScrollDistance}
-                      className="relative w-full flex-1 bg-white overflow-hidden flex items-start justify-center"
+                      onClick={() => {
+                        updateScrollDistance();
+                        setIsTappedToScroll((prev) => !prev);
+                      }}
+                      className="relative w-full flex-1 bg-white overflow-hidden flex items-start justify-center cursor-pointer"
                     >
                       <img
                         ref={showcaseImgRef}
@@ -1875,6 +1964,7 @@ export default function DynamicCaseStudyPage({
                         draggable={false}
                         style={{
                           '--scroll-offset': scrollDistance > 0 ? `-${scrollDistance}px` : '0px',
+                          transform: isTappedToScroll && scrollDistance > 0 ? `translateY(-${scrollDistance}px)` : undefined,
                           transition: scrollDistance > 0
                             ? `transform ${Math.max(4, Math.min(12, scrollDistance / 280))}s ease-in-out`
                             : 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)',
@@ -1882,13 +1972,16 @@ export default function DynamicCaseStudyPage({
                         className="w-full h-auto object-top block select-none pointer-events-none transform translate-y-0 group-hover/mockup:[transform:translateY(var(--scroll-offset))]"
                       />
 
-                      {/* Subtle Hover to Scroll Hint Badge */}
+                      {/* Subtle Hover / Tap to Scroll Hint Badge */}
                       {scrollDistance > 0 && (
                         <div
-                          className="absolute bottom-3 right-3 z-20 flex items-center space-x-1.5 bg-slate-900/90 text-white text-[10px] sm:text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 shadow-lg pointer-events-none transition-all duration-300 opacity-90 group-hover/mockup:opacity-0 group-hover/mockup:translate-y-2"
+                          className={`absolute bottom-3 right-3 z-20 flex items-center space-x-1.5 bg-slate-900/90 text-white text-[10px] sm:text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 shadow-lg pointer-events-none transition-all duration-300 ${
+                            isTappedToScroll ? 'opacity-90' : 'opacity-90 sm:group-hover/mockup:opacity-0 sm:group-hover/mockup:translate-y-2'
+                          }`}
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-[#2196E8] animate-pulse" />
-                          <span>Hover to scroll</span>
+                          <span className="hidden sm:inline">Hover to scroll</span>
+                          <span className="sm:hidden">{isTappedToScroll ? 'Tap to reset' : 'Tap to scroll'}</span>
                         </div>
                       )}
                     </div>
@@ -1927,7 +2020,7 @@ export default function DynamicCaseStudyPage({
             )}
 
             {/* 3 Highlight Cards Below - Hidden for Infragen, Nestpilot, Ruts N Rides, VerdurePax, BEFHUE, Squirlio, Amaravathy Coir, Gigabull, Thoorigai, Vasantabhavan & Infinite Structure so only the 3D images appear */}
-            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai' || study.slug === 'vasantabhavan' || study.slug === 'infinite-structure') && (
+            {!(study.slug === 'infragen' || study.slug === 'nestpilot' || study.slug === 'ruts-n-rides' || study.slug === 'verdurepax' || study.slug === 'befhue' || study.slug === 'squirlio' || study.slug === 'amaravathy-coir' || study.slug === 'amaravathy' || study.slug === 'gigabull' || study.slug === 'thoorigai' || study.slug === 'vasantabhavan' || study.slug === 'infinite-structure' || study.slug === 'sanikas-restaurant' || study.slug === 'sanikas' || study.slug === 'keystone' || study.slug === 'kiipl') && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {highlightItems.map((item) => {
                   const isActive = highlightIdx === item.id;
@@ -2112,7 +2205,7 @@ export default function DynamicCaseStudyPage({
                     </div>
                   ) : (
                     <div className="relative w-full rounded-2xl overflow-hidden shadow-md border border-slate-200 group bg-white p-6 flex flex-col items-center justify-center text-center space-y-4">
-                      {showcaseImageMap[study.slug]?.[2] || (study.image && !study.image.includes('cc_')) ? (
+                      {study.slug !== 'infragen' && (showcaseImageMap[study.slug]?.[2] || (study.image && !study.image.includes('cc_'))) ? (
                         <div className="w-full relative aspect-square max-w-sm rounded-2xl overflow-hidden shadow-sm">
                           <img
                             src={showcaseImageMap[study.slug]?.[2] || study.image}

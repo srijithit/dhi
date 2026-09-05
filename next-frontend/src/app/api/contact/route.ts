@@ -25,7 +25,33 @@ export async function POST(request: Request) {
       );
     }
 
-    // Configure Transporter (supports environment variables or fallback SMTP settings)
+    const GOOGLE_SHEETS_WEBAPP_URL =
+      process.env.GOOGLE_SHEETS_WEBAPP_URL ||
+      'https://script.google.com/macros/s/AKfycbwEmhM2qRndFKOdT5MGgR6hqHkK_XXGVmAc4ezw6q-dnDR2L3oCd4lJpnEKVrEVSnzhjg/exec';
+
+    // 1. Sync submission to Google Spreadsheet
+    try {
+      await fetch(GOOGLE_SHEETS_WEBAPP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+          name,
+          phone: phone || 'N/A',
+          email,
+          company: company || 'N/A',
+          service: service || 'General Inquiry',
+          message,
+          to: 'dhinesh@dhigrowth.com',
+          cc: 'pranitha@dhigrowth.com, mathanraj@dhigrowth.com',
+        }),
+        redirect: 'follow',
+      });
+    } catch (sheetError) {
+      console.warn('Google Sheets sync warning:', sheetError);
+    }
+
+    // 2. Configure Transporter (supports environment variables or fallback SMTP settings)
     const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com';
     const smtpPort = parseInt(process.env.SMTP_PORT || '587');
     const smtpUser = process.env.SMTP_USER || '';
@@ -78,14 +104,15 @@ export async function POST(request: Request) {
               <p style="margin: 0; color: #334155; line-height: 1.6; white-space: pre-wrap;">${message}</p>
             </div>
             <p style="color: #94a3b8; font-size: 12px; margin-top: 25px; text-align: center;">
-              Sent automatically by DhiGrowth Web Platform • Contact: dinesh@dhigrowth.com
+              Sent automatically by DhiGrowth Web Platform • CC: pranitha@dhigrowth.com, mathanraj@dhigrowth.com
             </p>
           </div>
         `;
 
         await transporter.sendMail({
           from: `"DhiGrowth Contact Form" <${smtpUser}>`,
-          to: 'dinesh@dhigrowth.com',
+          to: 'dhinesh@dhigrowth.com',
+          cc: ['pranitha@dhigrowth.com', 'mathanraj@dhigrowth.com'],
           replyTo: email,
           subject: `New Inquiry from ${name} — ${service || 'General Inquiry'}`,
           html: htmlContent,

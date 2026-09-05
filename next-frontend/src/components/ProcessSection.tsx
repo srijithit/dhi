@@ -12,29 +12,25 @@ export default function ProcessSection() {
       num: 1,
       title: "1. Discover",
       desc: "We learn about your business, goals, and competition to build a tailored growth plan.",
-      // Step 1: Corporate conference room discovery discussion with laptop
-      image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&auto=format&fit=crop&q=80"
+      image: "/images/process/step_1_discover.png"
     },
     {
       num: 2,
       title: "2. Strategise",
       desc: "Our team crafts a data-backed strategy aligned to your industry and audience.",
-      // Step 2: Wall-mounted analytics strategy dashboard with team analyzing growth charts
-      image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1200&auto=format&fit=crop&q=80"
+      image: "/images/process/step_2_strategise.png"
     },
     {
       num: 3,
       title: "3. Execute",
       desc: "From development to campaigns — we build, launch, and manage with precision.",
-      // Step 3: Software developers working at multi-monitor code workstation
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&auto=format&fit=crop&q=80"
+      image: "/images/process/step_3_execute.png"
     },
     {
       num: 4,
       title: "4. Grow",
       desc: "We monitor, optimise, and scale — continuously improving your results month after month.",
-      // Step 4: Exponential business growth analytics monitor presentation with executive
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80"
+      image: "/images/process/step_4_grow.png"
     }
   ];
 
@@ -152,7 +148,7 @@ export default function ProcessSection() {
             })}
           </div>
 
-          {/* Right Column (7 Cols): Showcase Image Card matching exact video frames */}
+          {/* Right Column (7 Cols): Showcase Image Card */}
           <div className="lg:col-span-7 flex justify-center lg:justify-end w-full">
             <AnimatePresence mode="wait">
               <motion.div
@@ -160,13 +156,13 @@ export default function ProcessSection() {
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="relative w-full max-w-[650px] aspect-[4/3] sm:h-[450px] lg:h-[490px] rounded-[28px] sm:rounded-[36px] overflow-hidden shadow-2xl border border-slate-200/80 dark:border-slate-800/80 bg-slate-900 group"
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="relative w-full max-w-[650px] aspect-[16/10] rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-[#0c111d] flex items-center justify-center p-2 sm:p-3 group"
               >
                 <img
                   src={steps[activeStep].image}
                   alt={steps[activeStep].title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-contain rounded-[18px] sm:rounded-[26px] transition-transform duration-700 group-hover:scale-[1.02]"
                 />
               </motion.div>
             </AnimatePresence>

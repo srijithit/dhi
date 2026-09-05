@@ -143,11 +143,12 @@ export default function CleanCulturePage() {
   const [isHighlightHovered, setIsHighlightHovered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Showcase image top-to-bottom scroll on hover refs & state
+  // Showcase image top-to-bottom scroll on hover/tap refs & state
   const showcaseContainerRef = useRef<HTMLDivElement>(null);
   const showcaseImgRef = useRef<HTMLImageElement>(null);
   const [scrollDistance, setScrollDistance] = useState(0);
   const [isCardHovered, setIsCardHovered] = useState(false);
+  const [isTappedToScroll, setIsTappedToScroll] = useState(false);
 
   const updateScrollDistance = () => {
     if (showcaseContainerRef.current && showcaseImgRef.current) {
@@ -160,6 +161,7 @@ export default function CleanCulturePage() {
 
   useEffect(() => {
     setIsCardHovered(false);
+    setIsTappedToScroll(false);
     const timer = setTimeout(updateScrollDistance, 150);
     return () => clearTimeout(timer);
   }, [highlightIdx]);
@@ -551,35 +553,7 @@ export default function CleanCulturePage() {
                       />
                     ))}
 
-                    {/* Left & Right Slider Arrow Buttons (Visible on Hover) */}
-                    <button
-                      onClick={() => setCurrentCoverSlide((prev) => (prev === 0 ? 2 : prev - 1))}
-                      title="Previous Slide"
-                      className="absolute -left-5 sm:-left-7 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-[#1E293B]/90 hover:bg-[#2196E8] text-white flex items-center justify-center border border-white/20 shadow-xl backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 cursor-pointer"
-                    >
-                      <ChevronLeft className="w-5 h-5" />
-                    </button>
 
-                    <button
-                      onClick={() => setCurrentCoverSlide((prev) => (prev === 2 ? 0 : prev + 1))}
-                      title="Next Slide"
-                      className="absolute -right-5 sm:-right-7 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-[#1E293B]/90 hover:bg-[#2196E8] text-white flex items-center justify-center border border-white/20 shadow-xl backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 cursor-pointer"
-                    >
-                      <ChevronRight className="w-5 h-5" />
-                    </button>
-
-                    {/* Dark Pill Pagination */}
-                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-2 bg-slate-900/90 px-3.5 py-1.5 rounded-full backdrop-blur-md border border-white/10 shadow-xl">
-                      {[0, 1, 2].map((idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => setCurrentCoverSlide(idx)}
-                          className={`transition-all duration-300 rounded-full cursor-pointer ${
-                            currentCoverSlide === idx ? 'w-5 h-2 bg-emerald-400' : 'w-2 h-2 bg-slate-500'
-                          }`}
-                        />
-                      ))}
-                    </div>
                   </motion.div>
                 </div>
               </div>
@@ -912,11 +886,15 @@ export default function CleanCulturePage() {
                     </a>
                   </div>
 
-                  {/* Window Content: Website Screenshot with Smooth Top-to-Bottom Scroll on Hover */}
+                  {/* Window Content: Website Screenshot with Smooth Top-to-Bottom Scroll on Hover/Tap */}
                   <div
                     ref={showcaseContainerRef}
                     onMouseEnter={updateScrollDistance}
-                    className="relative w-full flex-1 bg-white overflow-hidden flex items-start justify-center"
+                    onClick={() => {
+                      updateScrollDistance();
+                      setIsTappedToScroll((prev) => !prev);
+                    }}
+                    className="relative w-full flex-1 bg-white overflow-hidden flex items-start justify-center cursor-pointer"
                   >
                     <img
                       ref={showcaseImgRef}
@@ -926,6 +904,7 @@ export default function CleanCulturePage() {
                       draggable={false}
                       style={{
                         '--scroll-offset': scrollDistance > 0 ? `-${scrollDistance}px` : '0px',
+                        transform: isTappedToScroll && scrollDistance > 0 ? `translateY(-${scrollDistance}px)` : undefined,
                         transition: scrollDistance > 0
                           ? `transform ${Math.max(4, Math.min(12, scrollDistance / 280))}s ease-in-out`
                           : 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)',
@@ -933,13 +912,16 @@ export default function CleanCulturePage() {
                       className="w-full h-auto object-top block select-none pointer-events-none transform translate-y-0 group-hover/mockup:[transform:translateY(var(--scroll-offset))]"
                     />
 
-                    {/* Subtle Hover to Scroll Hint Badge */}
+                    {/* Subtle Hover / Tap to Scroll Hint Badge */}
                     {scrollDistance > 0 && (
                       <div
-                        className="absolute bottom-3 right-3 z-20 flex items-center space-x-1.5 bg-slate-900/90 text-white text-[10px] sm:text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 shadow-lg pointer-events-none transition-all duration-300 opacity-90 group-hover/mockup:opacity-0 group-hover/mockup:translate-y-2"
+                        className={`absolute bottom-3 right-3 z-20 flex items-center space-x-1.5 bg-slate-900/90 text-white text-[10px] sm:text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 shadow-lg pointer-events-none transition-all duration-300 ${
+                          isTappedToScroll ? 'opacity-90' : 'opacity-90 sm:group-hover/mockup:opacity-0 sm:group-hover/mockup:translate-y-2'
+                        }`}
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-[#2196E8] animate-pulse" />
-                        <span>Hover to scroll</span>
+                        <span className="hidden sm:inline">Hover to scroll</span>
+                        <span className="sm:hidden">{isTappedToScroll ? 'Tap to reset' : 'Tap to scroll'}</span>
                       </div>
                     )}
                   </div>

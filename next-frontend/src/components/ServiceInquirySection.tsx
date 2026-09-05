@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle2, ArrowRight, Loader2, Sparkles, Building2, User, Phone, Mail, FileText, MessageSquare } from 'lucide-react';
 import { SERVICES_DATA } from '@/data/servicesData';
+import { submitToGoogleSheets } from '@/utils/googleSheets';
 
 interface ServiceInquirySectionProps {
   currentServiceName: string;
@@ -141,18 +142,23 @@ export default function ServiceInquirySection({ currentServiceName }: ServiceInq
     setSubmittedWhatsappUrl(whatsappUrl);
 
     try {
-      fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: trimmedName,
-          phone: trimmedPhone,
-          email: trimmedEmail,
-          company: trimmedCompany,
-          service: formData.service,
-          message: trimmedMessage
+      const leadPayload = {
+        name: trimmedName,
+        phone: trimmedPhone,
+        email: trimmedEmail,
+        company: trimmedCompany,
+        service: formData.service,
+        message: trimmedMessage,
+      };
+
+      await Promise.allSettled([
+        submitToGoogleSheets(leadPayload),
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(leadPayload),
         }),
-      }).catch(err => console.warn('Email logging note:', err));
+      ]);
 
       setIsSuccess(true);
 

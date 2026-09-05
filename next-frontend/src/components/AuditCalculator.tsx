@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { PhoneCall, MessageCircle, Calculator, ArrowRight, Sparkles, RefreshCw, AlertTriangle } from 'lucide-react';
+import { submitToGoogleSheets } from '@/utils/googleSheets';
 
 interface AuditCalculatorProps {
   onOpenWhatsApp: (budget: number, reach: number, leads: number) => void;
@@ -157,8 +158,29 @@ export default function AuditCalculator({ onOpenWhatsApp, onlyForm = false }: Au
       return;
     }
 
+    const leadPayload = {
+      name: trimmedName,
+      phone: trimmedPhone,
+      email: trimmedEmail,
+      company: trimmedBusiness,
+      service: formData.service,
+      message: `Audit Goals: ${trimmedGoals}`,
+    };
+
     const message = `Name: ${trimmedName}\nPhone: ${trimmedPhone}\nEmail: ${trimmedEmail}\nCompany: ${trimmedBusiness}\nService: ${formData.service}\nGoals: ${trimmedGoals}`;
-    window.location.href = `https://api.whatsapp.com/send?phone=919361088012&text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=919361088012&text=${encodeURIComponent(message)}`;
+
+    // Sync to Google Sheets and /api/contact
+    Promise.allSettled([
+      submitToGoogleSheets(leadPayload),
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(leadPayload),
+      }),
+    ]).finally(() => {
+      window.location.href = whatsappUrl;
+    });
   };
 
   if (onlyForm) {

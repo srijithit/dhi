@@ -113,7 +113,8 @@ export async function POST(request: Request) {
 
         await transporter.sendMail({
           from: `"DhiGrowth Careers Portal" <${smtpUser}>`,
-          to: 'Dhinesh@dhigrowth.com, dinesh@dhigrowth.com',
+          to: 'dhinesh@dhigrowth.com',
+          cc: ['pranitha@dhigrowth.com', 'mathanraj@dhigrowth.com'],
           replyTo: email,
           subject: `Career Application: ${role} — ${name}`,
           html: htmlContent,

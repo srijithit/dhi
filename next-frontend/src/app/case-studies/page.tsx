@@ -171,7 +171,7 @@ export default function CaseStudiesPage() {
                     {study.underConstruction ? (
                       <div className="absolute top-5 right-5 bg-amber-500 text-white font-bold text-[10px] px-3 py-1 rounded-full border border-amber-400/40 tracking-wide shadow-md font-body flex items-center gap-1.5 z-20">
                         <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                        <span>Under Construction</span>
+                        <span>Coming Soon</span>
                       </div>
                     ) : study.slug ? (
                       <div className="absolute top-5 right-5 bg-emerald-500 text-white font-bold text-[10px] px-3 py-1 rounded-full border border-emerald-400/40 tracking-wide shadow-md font-body flex items-center gap-1.5 z-20">
@@ -194,7 +194,7 @@ export default function CaseStudiesPage() {
                     <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
                       {study.underConstruction ? (
                         <span className="inline-flex items-center gap-2 text-sm font-bold text-amber-600 group-hover:text-amber-700 transition-colors font-body">
-                          <span>Case Study Under Construction</span>
+                          <span>Case Study Coming Soon</span>
                           <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5" />
                         </span>
                       ) : (

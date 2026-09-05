@@ -42,39 +42,63 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
     { name: 'Contact', path: '/contact' },
   ];
 
-  const col1 = [
+  const [caseStudyTab, setCaseStudyTab] = useState<'completed' | 'ongoing'>('completed');
+
+  interface ProjectLink {
+    name: string;
+    slug: string;
+    underConstruction?: boolean;
+  }
+
+  const completedProjects: ProjectLink[] = [
     { name: "Infragen Realtors", slug: "infragen" },
     { name: "NestPilot PG SaaS", slug: "nestpilot" },
     { name: "Ruts N Rides Operations", slug: "ruts-n-rides-admin" },
     { name: "Squirlio Snacks", slug: "squirlio" },
     { name: "Keystone Enterprise", slug: "keystone" },
     { name: "Thoorigai Events", slug: "thoorigai" },
-    { name: "Splendour Park ERP", slug: "splendour-park", underConstruction: true },
-    { name: "AI Chatbot Assistant", slug: "dhigrowth-ai-chatbot", underConstruction: true }
-  ];
-
-  const col2 = [
     { name: "Akirva Mobility", slug: "akirva" },
     { name: "Judah Food Logistics", slug: "judah" },
     { name: "VerdurePax Lifestyle", slug: "verdurepax" },
     { name: "Amaravathy Coir", slug: "amaravathy-coir" },
     { name: "Gigabull Luxury", slug: "gigabull" },
     { name: "Vasantabhavan", slug: "vasantabhavan" },
-    { name: "Vectra Mechnovations", slug: "vectra-mechnovations", underConstruction: true },
-    { name: "Fabric Defect AI", slug: "fabric-defect-detection", underConstruction: true },
-    { name: "AI Invoice Processing", slug: "ai-invoice-processing", underConstruction: true }
-  ];
-
-  const col3 = [
     { name: "Clean Culture", slug: "clean-culture" },
     { name: "Ruts N Rides", slug: "ruts-n-rides" },
     { name: "Befhue Creative Agency", slug: "befhue" },
     { name: "Sanika's Cuisine", slug: "sanikas-restaurant" },
+    { name: "Infinite Structure", slug: "infinite-structure" }
+  ];
+
+  const ongoingProjects: ProjectLink[] = [
     { name: "Startten Platform", slug: "startten", underConstruction: true },
-    { name: "Infinite Structure", slug: "infinite-structure" },
+    { name: "Splendour Park ERP", slug: "splendour-park", underConstruction: true },
+    { name: "AI Chatbot Assistant", slug: "dhigrowth-ai-chatbot", underConstruction: true },
+    { name: "Vectra Mechnovations", slug: "vectra-mechnovations", underConstruction: true },
+    { name: "Fabric Defect AI", slug: "fabric-defect-detection", underConstruction: true },
+    { name: "AI Invoice Processing", slug: "ai-invoice-processing", underConstruction: true },
     { name: "Biscuit Defect AI", slug: "bad-biscuit-detection", underConstruction: true },
     { name: "Sales CRM App", slug: "sales-app", underConstruction: true }
   ];
+
+  const allProjects = [...completedProjects, ...ongoingProjects];
+
+  const getColumns = () => {
+    if (caseStudyTab === 'ongoing') {
+      return [
+        ongoingProjects.slice(0, 3),
+        ongoingProjects.slice(3, 6),
+        ongoingProjects.slice(6)
+      ];
+    }
+    return [
+      completedProjects.slice(0, 6),
+      completedProjects.slice(6, 12),
+      completedProjects.slice(12)
+    ];
+  };
+
+  const [col1, col2, col3] = getColumns();
 
   const handleApplyClick = () => {
     if (onOpenAudit) {
@@ -146,7 +170,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute right-[-300px] top-[100%] mt-3 w-[880px] bg-white text-slate-900 border border-slate-150 rounded-[28px] shadow-2xl p-8 z-50"
+                        className="absolute right-[-320px] top-[100%] mt-3 w-[920px] bg-white text-slate-900 border border-slate-150 rounded-[28px] shadow-2xl p-8 z-50"
                       >
                         {/* Header */}
                         <div className="flex justify-between items-center">
@@ -163,17 +187,46 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                           <Link 
                             href="/case-studies"
                             onClick={() => setDropdownOpen(false)}
-                            className="border border-[#2196E8]/20 bg-[#2196E8]/5 hover:bg-[#2196E8]/10 text-[#2196E8] px-3.5 py-1 rounded-full text-xs font-bold font-body transition-colors"
+                            className="border border-[#2196E8]/20 bg-[#2196E8]/5 hover:bg-[#2196E8]/10 text-[#2196E8] px-3.5 py-1.5 rounded-full text-xs font-bold font-body transition-colors shrink-0"
                           >
-                            {col1.length + col2.length + col3.length} Projects
+                            View All {allProjects.length} Projects →
                           </Link>
                         </div>
 
-                        {/* Divider */}
-                        <div className="w-full h-px bg-slate-100 my-4" />
+                        {/* Filter Tabs Bar */}
+                        <div className="flex items-center justify-between mt-4 pb-3 border-b border-slate-100">
+                          <div className="flex items-center gap-1.5 bg-slate-100/90 p-1 rounded-xl">
+                            <button
+                              onClick={() => setCaseStudyTab('completed')}
+                              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold font-body transition-all duration-200 cursor-pointer ${
+                                caseStudyTab === 'completed'
+                                  ? 'bg-white text-[#2196E8] shadow-sm border border-slate-200/60'
+                                  : 'text-slate-600 hover:text-slate-900'
+                              }`}
+                            >
+                              Completed Projects ({completedProjects.length})
+                            </button>
+                            <button
+                              onClick={() => setCaseStudyTab('ongoing')}
+                              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold font-body transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                                caseStudyTab === 'ongoing'
+                                  ? 'bg-white text-amber-600 shadow-sm border border-slate-200/60'
+                                  : 'text-slate-600 hover:text-slate-900'
+                              }`}
+                            >
+                              <span>Ongoing Projects ({ongoingProjects.length})</span>
+                              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                            </button>
+                          </div>
+
+                          <span className="text-[11.5px] font-medium text-slate-400 font-body">
+                            {caseStudyTab === 'completed' && `Showing ${completedProjects.length} launched platforms`}
+                            {caseStudyTab === 'ongoing' && `Showing ${ongoingProjects.length} projects under development`}
+                          </span>
+                        </div>
 
                         {/* Grid */}
-                        <div className="grid grid-cols-3 gap-x-8 gap-y-3.5 text-left pt-2">
+                        <div className="grid grid-cols-3 gap-x-7 gap-y-3.5 text-left pt-2">
                           {/* Column 1 */}
                           <div className="space-y-2.5">
                             {col1.map((project, idx) => (
@@ -185,8 +238,8 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                               >
                                 <span className="truncate">{project.name}</span>
                                 {project.underConstruction && (
-                                  <span className="text-[9px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-300/80 px-1.5 py-0.5 rounded shrink-0">
-                                    Under Construction
+                                  <span className="text-[9px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-300/80 px-2 py-0.5 rounded shrink-0">
+                                    Coming Soon
                                   </span>
                                 )}
                               </Link>
@@ -204,15 +257,15 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                               >
                                 <span className="truncate">{project.name}</span>
                                 {project.underConstruction && (
-                                  <span className="text-[9px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-300/80 px-1.5 py-0.5 rounded shrink-0">
-                                    Under Construction
+                                  <span className="text-[9px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-300/80 px-2 py-0.5 rounded shrink-0">
+                                    Coming Soon
                                   </span>
                                 )}
                               </Link>
                             ))}
                           </div>
 
-                          {/* Column 3 */}
+                          {/* Column 3: Coming Soon Projects */}
                           <div className="space-y-2.5">
                             {col3.map((project, idx) => (
                               <Link
@@ -223,8 +276,8 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                               >
                                 <span className="truncate">{project.name}</span>
                                 {project.underConstruction && (
-                                  <span className="text-[9px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-300/80 px-1.5 py-0.5 rounded shrink-0">
-                                    Under Construction
+                                  <span className="text-[9px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-300/80 px-2 py-0.5 rounded shrink-0">
+                                    Coming Soon
                                   </span>
                                 )}
                               </Link>
@@ -299,11 +352,11 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                           }}
                           className="text-sm font-bold text-[#2196E8] hover:underline block py-1"
                         >
-                          View All {col1.length + col2.length + col3.length} Projects →
+                          View All {allProjects.length} Projects →
                         </Link>
                         
                         <div className="grid grid-cols-2 gap-2 text-xs text-slate-500 pr-2">
-                          {[...col1, ...col2, ...col3].map((p, idx) => (
+                          {allProjects.map((p, idx) => (
                             <Link
                               key={idx}
                               href={`/case-studies/${p.slug}`}

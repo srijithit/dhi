@@ -12,7 +12,7 @@ export default function WhyChooseUs() {
       number: "01",
       title: "One agency, every solution",
       desc: "From branding and web architecture to performance ad funnels — we handle everything under one roof.",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&auto=format&fit=crop&q=80"
+      image: "/images/why-us/edge_1_agency.jpg"
     },
     {
       badge: "02 • Future Ready",
@@ -20,7 +20,7 @@ export default function WhyChooseUs() {
       number: "02",
       title: "AI-powered innovation",
       desc: "We integrate custom AI automations into your workflow before competitors even consider it.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&auto=format&fit=crop&q=80"
+      image: "/images/why-us/edge_2_ai.jpg"
     },
     {
       badge: "03 • Transparent Data",
@@ -28,7 +28,7 @@ export default function WhyChooseUs() {
       number: "03",
       title: "Transparent reporting",
       desc: "Live dashboards and granular monthly ROAS reports — you always know where every rupee goes.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&auto=format&fit=crop&q=80"
+      image: "/images/why-us/edge_3_reporting.jpg"
     },
     {
       badge: "04 • Local Insight",
@@ -36,7 +36,7 @@ export default function WhyChooseUs() {
       number: "04",
       title: "Market-focused strategy",
       desc: "We understand the local market, culture, and high-intent buyer psychology better than any remote agency.",
-      image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&auto=format&fit=crop&q=80"
+      image: "/images/why-us/edge_4_market.jpg"
     },
     {
       badge: "05 • Accountability",
@@ -44,7 +44,7 @@ export default function WhyChooseUs() {
       number: "05",
       title: "End-to-end ownership",
       desc: "From initial roadmap to rapid execution and continuous optimization — we own the entire growth journey.",
-      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&auto=format&fit=crop&q=80"
+      image: "/images/why-us/edge_5_ownership.jpg"
     }
   ];
 
